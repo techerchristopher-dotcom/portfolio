@@ -107,10 +107,11 @@ section { padding: 100px 60px; }
 .features li { display:flex; align-items:flex-start; gap:10px; color:var(--grey); font-size:.9rem; line-height:1.5; }
 .features li::before { content:"→"; color:var(--accent); font-weight:700; flex-shrink:0; margin-top:1px; }
 .stack-tag { border-radius:6px; color:var(--light-blue); }
-.proj-links { display:flex; gap:12px; flex-wrap:wrap; }
-.proj-link { display:inline-flex; align-items:center; gap:7px; text-decoration:none; padding:10px 22px; border-radius:50px; font-size:.87rem; font-weight:700; transition:all .3s; }
-.proj-link.primary { background:linear-gradient(135deg,var(--blue),var(--accent)); color:#fff; box-shadow:0 6px 24px rgba(65,168,240,0.3); }
-.proj-link.ghost { background:transparent; color:var(--accent); border:1.5px solid rgba(65,168,240,0.4); }
+.proj-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 18px; }
+.proj-link { display: inline-flex; align-items: center; justify-content: center; gap: 7px; text-decoration: none; padding: 10px 22px; min-height: 44px; border-radius: 50px; font-size: .87rem; font-weight: 700; transition: all .3s; white-space: nowrap; line-height: 1; }
+.proj-link.primary { background: linear-gradient(135deg,var(--blue),var(--accent)); color: #fff; box-shadow: 0 6px 24px rgba(65,168,240,0.3); }
+.proj-link.ghost { background: transparent; color: var(--accent); border: 1.5px solid rgba(65,168,240,0.4); }
+.proj-link:hover { transform: translateY(-2px); }
 .small-projects { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:20px; }
 .small-card { border-radius:18px; padding:24px; transition:all .3s; }
 .small-card .card-top { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
@@ -278,7 +279,7 @@ footer p { color:var(--grey); font-size:.85rem; }
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(5, 12, 22, 0.88);
+  background: rgba(5, 12, 22, 0.90);
   backdrop-filter: blur(12px);
   display: none;
   align-items: center;
@@ -292,7 +293,7 @@ footer p { color:var(--grey); font-size:.85rem; }
 
 .image-lightbox img {
   max-width: min(94vw, 980px);
-  max-height: 90vh;
+  max-height: 88vh;
   object-fit: contain;
   border-radius: 24px;
   box-shadow: 0 40px 100px rgba(0,0,0,.65);
@@ -320,6 +321,56 @@ footer p { color:var(--grey); font-size:.85rem; }
   background: rgba(255,255,255,.16);
 }
 
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: 46px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255,255,255,.16);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.lightbox-prev {
+  left: 28px;
+}
+
+.lightbox-next {
+  right: 28px;
+}
+
+.lightbox-counter {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #fff;
+  font-size: .88rem;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+}
+
 @keyframes lightboxZoom {
   from {
     transform: scale(.92);
@@ -338,8 +389,8 @@ footer p { color:var(--grey); font-size:.85rem; }
 
   .image-lightbox img {
     max-width: 94vw;
-    max-height: 86vh;
-    border-radius: 24px;
+    max-height: 82vh;
+    border-radius: 22px;
   }
 
   .lightbox-close {
@@ -349,9 +400,52 @@ footer p { color:var(--grey); font-size:.85rem; }
     height: 46px;
     font-size: 30px;
   }
+
+  .lightbox-nav {
+    width: 46px;
+    height: 46px;
+    font-size: 34px;
+  }
+
+  .lightbox-prev {
+    left: 12px;
+  }
+
+  .lightbox-next {
+    right: 12px;
+  }
+
+  .lightbox-counter {
+    bottom: 14px;
+    font-size: .8rem;
+  }
 }
 
 @media(max-width:900px) { nav { padding:16px 24px; } nav ul { display:none; } section { padding:70px 24px; } #hero { padding:100px 24px 60px; } .hero-content,.about-grid,.automation-grid,.contact-inner { grid-template-columns:1fr; gap:40px; } .hero-card,.values,.results-grid { grid-template-columns:1fr 1fr; } .skills-grid,.small-projects { grid-template-columns:1fr; } .project-inner { flex-direction:column !important; } .project-visuals { min-height:300px; } .project-info { padding:28px 24px; } .phone-frame-img { width:100px; } footer { flex-direction:column; gap:8px; text-align:center; } }
+
+@media(max-width:900px) {
+  .proj-links {
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .proj-link {
+    flex: 1 1 auto;
+    min-width: 135px;
+    padding: 12px 18px;
+  }
+}
+
+@media(max-width:520px) {
+  .proj-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .proj-link {
+    width: 100%;
+  }
+}
 </style>
 </head>
 <body>
@@ -366,7 +460,10 @@ footer p { color:var(--grey); font-size:.85rem; }
 <footer><div class="logo">Christopher TECHER</div><p>Fullstack Developer · IA · Automatisation · Product Builder</p><p>Remote · France / International</p></footer>
 <div id="imageLightbox" class="image-lightbox" aria-hidden="true">
   <button class="lightbox-close" type="button" aria-label="Fermer l'image">×</button>
+  <button class="lightbox-nav lightbox-prev" type="button" aria-label="Image précédente">‹</button>
   <img id="lightboxImage" src="" alt="">
+  <button class="lightbox-nav lightbox-next" type="button" aria-label="Image suivante">›</button>
+  <div id="lightboxCounter" class="lightbox-counter"></div>
 </div>
 <script>
 const container=document.getElementById('particles');for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.width=p.style.height=(Math.random()*2+1)+'px';p.style.animationDuration=(Math.random()*20+15)+'s';p.style.animationDelay=(Math.random()*20)+'s';container.appendChild(p);}const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));window.addEventListener('scroll',()=>{const nav=document.querySelector('nav');nav.style.background=window.scrollY>50?'rgba(13,27,42,0.97)':'rgba(13,27,42,0.85)';});
@@ -374,37 +471,115 @@ const container=document.getElementById('particles');for(let i=0;i<35;i++){const
 const lightbox = document.getElementById('imageLightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const lightboxClose = document.querySelector('.lightbox-close');
+const lightboxPrev = document.querySelector('.lightbox-prev');
+const lightboxNext = document.querySelector('.lightbox-next');
+const lightboxCounter = document.getElementById('lightboxCounter');
 
-document.querySelectorAll('.phone-showcase img, .rentanoo-showcase img').forEach((img) => {
-  img.addEventListener('click', () => {
-    lightboxImage.src = img.src;
-    lightboxImage.alt = img.alt || 'Aperçu image projet';
-    lightbox.classList.add('active');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  });
-});
+let currentGallery = [];
+let currentIndex = 0;
+
+function getImageData(img) {
+  return {
+    src: img.getAttribute('src'),
+    alt: img.getAttribute('alt') || 'Aperçu image projet'
+  };
+}
+
+function openLightbox(galleryImages, index) {
+  currentGallery = Array.from(galleryImages).map(getImageData);
+  currentIndex = index;
+  updateLightboxImage();
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightboxImage() {
+  if (!currentGallery.length) return;
+
+  const current = currentGallery[currentIndex];
+  lightboxImage.src = current.src;
+  lightboxImage.alt = current.alt;
+
+  if (lightboxCounter) {
+    lightboxCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+  }
+
+  const shouldShowNav = currentGallery.length > 1;
+  if (lightboxPrev) lightboxPrev.style.display = shouldShowNav ? 'flex' : 'none';
+  if (lightboxNext) lightboxNext.style.display = shouldShowNav ? 'flex' : 'none';
+}
+
+function showPreviousImage() {
+  if (!currentGallery.length) return;
+  currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+  updateLightboxImage();
+}
+
+function showNextImage() {
+  if (!currentGallery.length) return;
+  currentIndex = (currentIndex + 1) % currentGallery.length;
+  updateLightboxImage();
+}
 
 function closeLightbox() {
   lightbox.classList.remove('active');
   lightbox.setAttribute('aria-hidden', 'true');
   lightboxImage.src = '';
+  currentGallery = [];
+  currentIndex = 0;
   document.body.style.overflow = '';
 }
 
-lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox && lightboxImage && lightboxClose) {
+  document.querySelectorAll('.phone-showcase, .rentanoo-showcase').forEach((gallery) => {
+    const galleryImages = gallery.querySelectorAll('img');
 
-lightbox.addEventListener('click', (event) => {
-  if (event.target === lightbox) {
-    closeLightbox();
-  }
-});
+    galleryImages.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        openLightbox(galleryImages, index);
+      });
+    });
+  });
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && lightbox.classList.contains('active')) {
-    closeLightbox();
+  lightboxClose.addEventListener('click', closeLightbox);
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (event) => {
+      event.stopPropagation();
+      showPreviousImage();
+    });
   }
-});
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', (event) => {
+      event.stopPropagation();
+      showNextImage();
+    });
+  }
+
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('active')) return;
+
+    if (event.key === 'Escape') {
+      closeLightbox();
+    }
+
+    if (event.key === 'ArrowLeft') {
+      showPreviousImage();
+    }
+
+    if (event.key === 'ArrowRight') {
+      showNextImage();
+    }
+  });
+}
 </script>
 </body>
 </html>
