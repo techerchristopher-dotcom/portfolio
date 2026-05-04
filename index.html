@@ -204,6 +204,74 @@ footer p { color:var(--grey); font-size:.85rem; }
   .phone-showcase img:nth-child(3) {
     transform: translateX(105px) rotate(7deg) scale(.78);
   }
+
+  .rentanoo-showcase {
+    height: 360px;
+  }
+
+  .rentanoo-showcase img {
+    width: 82%;
+    max-width: 360px;
+  }
+
+  .rentanoo-showcase img:nth-child(1) {
+    transform: translateX(-58px) rotateY(10deg) scale(.78);
+  }
+
+  .rentanoo-showcase img:nth-child(2) {
+    transform: translateX(0) scale(.94);
+  }
+
+  .rentanoo-showcase img:nth-child(3) {
+    transform: translateX(58px) rotateY(-10deg) scale(.78);
+  }
+}
+
+.rentanoo-showcase {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.rentanoo-showcase img {
+  position: absolute;
+  width: 78%;
+  max-width: 520px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 1px solid rgba(65,168,240,0.22);
+  box-shadow: 0 28px 70px rgba(0,0,0,.58);
+  transition: transform .35s ease, filter .35s ease, opacity .35s ease;
+  cursor: pointer;
+}
+
+.rentanoo-showcase img:nth-child(1) {
+  transform: translateX(-95px) rotateY(12deg) scale(.82);
+  z-index: 1;
+  opacity: .72;
+}
+
+.rentanoo-showcase img:nth-child(2) {
+  transform: translateX(0) scale(1);
+  z-index: 3;
+  opacity: 1;
+}
+
+.rentanoo-showcase img:nth-child(3) {
+  transform: translateX(95px) rotateY(-12deg) scale(.82);
+  z-index: 2;
+  opacity: .72;
+}
+
+.rentanoo-showcase img:hover {
+  z-index: 5;
+  opacity: 1;
+  filter: brightness(1.08);
+  transform: translateX(0) scale(1.04);
 }
 
 .image-lightbox {
@@ -223,10 +291,10 @@ footer p { color:var(--grey); font-size:.85rem; }
 }
 
 .image-lightbox img {
-  max-width: min(92vw, 520px);
+  max-width: min(94vw, 980px);
   max-height: 90vh;
   object-fit: contain;
-  border-radius: 32px;
+  border-radius: 24px;
   box-shadow: 0 40px 100px rgba(0,0,0,.65);
   animation: lightboxZoom .22s ease-out;
 }
@@ -291,7 +359,7 @@ footer p { color:var(--grey); font-size:.85rem; }
 <section id="hero"><div class="hero-bg"></div><div class="particles" id="particles"></div><div class="hero-content"><div class="hero-text"><div class="badge"><span></span> Disponible · Remote & International</div><h1>Christopher<br><span>TECHER</span></h1><p class="subtitle">Fullstack Developer TypeScript · Builder d'applications réelles · Expert en automatisation IA</p><p class="tagline">Je code. J'automatise. Je livre en production.</p><div class="hero-btns"><a href="#projects" class="btn-primary">🚀 Voir mes projets</a><a href="#contact" class="btn-secondary">💬 Me contacter</a></div></div><div class="hero-card fade-in"><div class="stat-item"><span class="num">15+</span><span class="label">ans de business development</span></div><div class="stat-item"><span class="num">300K€</span><span class="label">CA généré en 4 mois</span></div><div class="stat-item"><span class="num">+70%</span><span class="label">gain productivité via IA</span></div><div class="stat-item"><span class="num">4+</span><span class="label">apps déployées en prod</span></div><div class="tech-strip"><span class="tech-tag">React</span><span class="tech-tag">Next.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Supabase</span><span class="tech-tag">N8N</span><span class="tech-tag">GPT</span><span class="tech-tag">Stripe</span><span class="tech-tag">MAKE</span></div></div></div></section>
 <section id="about"><div class="section-inner"><div class="about-grid fade-in"><div class="about-text"><p class="section-label">À propos</p><h2 class="section-title">Business developer devenu <span style="color:var(--accent)">builder</span></h2><p>Après <span class="highlight">15 ans à créer, structurer et faire croître des entreprises</span>, j'ai décidé de coder moi-même les outils que je voulais voir exister.</p><p>Ce qui me différencie : je <span class="accent-text">comprends le business autant que le code</span>.</p><p>Mes apps tournent en production. Mes workflows N8N et MAKE remplacent l'équivalent de 2 ETP.</p></div><div class="values"><div class="value-card"><div class="icon">⚡</div><h4>Fullstack Réel</h4><p>Du frontend React au backend Node.js/Supabase.</p></div><div class="value-card"><div class="icon">🤖</div><h4>IA Appliquée</h4><p>GPT-Vision, agents IA, RAG, prompt engineering.</p></div><div class="value-card"><div class="icon">🔄</div><h4>Automatisation</h4><p>N8N, MAKE, Airtable et webhooks.</p></div><div class="value-card"><div class="icon">💼</div><h4>Vision Business</h4><p>15 ans d'entrepreneuriat.</p></div></div></div></div></section>
 <section id="skills"><div class="section-inner"><p class="section-label">Compétences</p><h2 class="section-title">Stack technique</h2><p class="section-desc">Un écosystème complet : frontend, backend, IA, automatisation et cloud.</p><div class="skills-grid"><div class="skill-card fade-in"><div class="card-icon">🖥️</div><h3>Frontend</h3><div class="skill-tags"><span class="skill-tag">React</span><span class="skill-tag">Next.js</span><span class="skill-tag">React Native</span><span class="skill-tag">Expo</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Tailwind CSS</span></div></div><div class="skill-card fade-in"><div class="card-icon">⚙️</div><h3>Backend & BDD</h3><div class="skill-tags"><span class="skill-tag">Node.js</span><span class="skill-tag">Express</span><span class="skill-tag">Supabase</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">pgvector</span></div></div><div class="skill-card fade-in"><div class="card-icon">🤖</div><h3>IA & Automatisation</h3><div class="skill-tags"><span class="skill-tag">OpenAI API</span><span class="skill-tag">Claude API</span><span class="skill-tag">RAG</span><span class="skill-tag">N8N</span><span class="skill-tag">MAKE</span><span class="skill-tag">Airtable</span></div></div></div></div></section>
-<section id="projects"><div class="section-inner"><p class="section-label">Projets</p><h2 class="section-title">Applications en production</h2><p class="section-desc">Des projets réels, avec du code réel, déployés en production.</p><div class="project-card fade-in"><div class="project-inner"><div class="project-visuals"><div class="phone-showcase"><img src="tukme-1.png" alt="Tukme écran destination"><img src="tukme-3.png" alt="Tukme commander une course"><img src="tukme-5.png" alt="Tukme chauffeur trouvé"></div></div><div class="project-info"><div class="proj-badge">🚕 Application Mobile · Fintech</div><h2>Tukme</h2><p class="proj-desc">Application VTC mobile complète pour commander un tuk-tuk depuis son smartphone — géolocalisation, itinéraire, recherche chauffeur, réservation et paiement.</p><ul class="features"><li>Géolocalisation et carte interactive</li><li>Parcours client complet : destination → tarif → commande</li><li>Paiement Stripe avec Edge Functions</li><li>Gestion chauffeur & passager en temps réel</li></ul><div class="proj-stack"><span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">Supabase</span><span class="stack-tag">Stripe</span><span class="stack-tag">TypeScript</span></div><div class="proj-links"><a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="proj-link primary">⭐ GitHub</a></div></div></div></div><div class="project-card reverse fade-in"><div class="project-inner"><div class="project-visuals"><div style="font-size:4rem">🛵</div></div><div class="project-info"><div class="proj-badge">🛵 Marketplace Web · Location</div><h2>Rentanoo</h2><p class="proj-desc">Plateforme de location de véhicules entre particuliers et pros sur Nosy Be.</p><ul class="features"><li>Marketplace full-stack avec réservation</li><li>Paiement Stripe + messagerie temps réel</li><li>Workflows N8N et dashboard propriétaire</li></ul><div class="proj-stack"><span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">Supabase</span><span class="stack-tag">Stripe</span></div><div class="proj-links"><a href="https://rentanoo.com" target="_blank" class="proj-link primary">🌐 Site live</a><a href="https://github.com/techerchristopher-dotcom/rentanoo-nosy-be-clean" target="_blank" class="proj-link ghost">⭐ GitHub</a></div></div></div></div><div class="small-projects"><div class="small-card fade-in"><div class="card-top"><span class="card-icon">✨</span><h3>Astra App</h3></div><p>MVP d'application horoscope IA francophone.</p><a href="https://github.com/techerchristopher-dotcom/astra-app" target="_blank" class="proj-link ghost">GitHub →</a></div><div class="small-card fade-in"><div class="card-top"><span class="card-icon">🧠</span><h3>TSplus RAG Supabase</h3></div><p>Recherche sémantique avec RAG et pgvector.</p><a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="proj-link ghost">GitHub →</a></div><div class="small-card fade-in"><div class="card-top"><span class="card-icon">🤖</span><h3>Agent Rebecca</h3></div><p>Agent IA d'analyse de CV en production.</p><a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="proj-link ghost">LinkedIn →</a></div></div></div></section>
+<section id="projects"><div class="section-inner"><p class="section-label">Projets</p><h2 class="section-title">Applications en production</h2><p class="section-desc">Des projets réels, avec du code réel, déployés en production.</p><div class="project-card fade-in"><div class="project-inner"><div class="project-visuals"><div class="phone-showcase"><img src="tukme-1.png" alt="Tukme écran destination"><img src="tukme-3.png" alt="Tukme commander une course"><img src="tukme-5.png" alt="Tukme chauffeur trouvé"></div></div><div class="project-info"><div class="proj-badge">🚕 Application Mobile · Fintech</div><h2>Tukme</h2><p class="proj-desc">Application VTC mobile complète pour commander un tuk-tuk depuis son smartphone — géolocalisation, itinéraire, recherche chauffeur, réservation et paiement.</p><ul class="features"><li>Géolocalisation et carte interactive</li><li>Parcours client complet : destination → tarif → commande</li><li>Paiement Stripe avec Edge Functions</li><li>Gestion chauffeur & passager en temps réel</li></ul><div class="proj-stack"><span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">Supabase</span><span class="stack-tag">Stripe</span><span class="stack-tag">TypeScript</span></div><div class="proj-links"><a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="proj-link primary">⭐ GitHub</a></div></div></div></div><div class="project-card reverse fade-in"><div class="project-inner"><div class="project-visuals"><div class="rentanoo-showcase"><img src="rentanoo-1.png" alt="Rentanoo page véhicule"><img src="rentanoo-2.png" alt="Rentanoo réservation véhicule"><img src="rentanoo-3.png" alt="Rentanoo détail location scooter"></div></div><div class="project-info"><div class="proj-badge">🛵 Marketplace Web · Location</div><h2>Rentanoo</h2><p class="proj-desc">Plateforme web de location de véhicules pensée pour Nosy Be : annonces, photos, prix par jour, réservation en ligne, espace utilisateur et parcours loueur.</p><ul class="features"><li>Catalogue véhicules avec photos et tarifs</li><li>Page détail avec galerie et réservation</li><li>Espace utilisateur et parcours propriétaire</li><li>Paiement Stripe et automatisations N8N</li></ul><div class="proj-stack"><span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">Supabase</span><span class="stack-tag">Stripe</span><span class="stack-tag">N8N</span></div><div class="proj-links"><a href="https://rentanoo.com" target="_blank" class="proj-link primary">🌐 Site live</a><a href="https://github.com/techerchristopher-dotcom/rentanoo-nosy-be-clean" target="_blank" class="proj-link ghost">⭐ GitHub</a></div></div></div></div><div class="small-projects"><div class="small-card fade-in"><div class="card-top"><span class="card-icon">✨</span><h3>Astra App</h3></div><p>MVP d'application horoscope IA francophone.</p><a href="https://github.com/techerchristopher-dotcom/astra-app" target="_blank" class="proj-link ghost">GitHub →</a></div><div class="small-card fade-in"><div class="card-top"><span class="card-icon">🧠</span><h3>TSplus RAG Supabase</h3></div><p>Recherche sémantique avec RAG et pgvector.</p><a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="proj-link ghost">GitHub →</a></div><div class="small-card fade-in"><div class="card-top"><span class="card-icon">🤖</span><h3>Agent Rebecca</h3></div><p>Agent IA d'analyse de CV en production.</p><a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="proj-link ghost">LinkedIn →</a></div></div></div></section>
 <section id="automation"><div class="section-inner"><div class="automation-grid fade-in"><div class="automation-text"><p class="section-label">Automatisation & IA</p><h2 class="section-title">Des systèmes qui travaillent <span style="color:var(--accent)">à ta place</span></h2><p>Je construis des pipelines qui automatisent des processus entiers.</p><div class="results-grid"><div class="result-card"><span class="result-num">+60%</span><span class="result-label">réactivité candidats</span></div><div class="result-card"><span class="result-num">-40%</span><span class="result-label">délai de traitement</span></div><div class="result-card"><span class="result-num">1200</span><span class="result-label">entreprises/semaine</span></div><div class="result-card"><span class="result-num">2 ETP</span><span class="result-label">remplacés</span></div></div></div><div class="workflow-card"><h4>🤖 Pipeline Agent IA Rebecca</h4><p class="wf-desc">Analyse automatique de candidatures en production.</p><div class="wf-steps"><div class="wf-step">📄 Réception CV</div><div class="wf-arrow">↓</div><div class="wf-step">🧠 Analyse GPT-Vision</div><div class="wf-arrow">↓</div><div class="wf-step">📊 Classification IA</div><div class="wf-arrow">↓</div><div class="wf-step">✅ Injection Airtable</div></div></div></div></div></section>
 <section id="experience"><div class="section-inner"><p class="section-label">Parcours</p><h2 class="section-title">Expérience professionnelle</h2><div class="timeline fade-in"><div class="timeline-item"><div class="period">2025</div><h3>Responsable Commercial</h3><div class="company">CEFORA</div><ul><li>Management d'une équipe de 7 commerciaux</li><li>Déploiement de systèmes IA</li></ul><span class="result-pill">✓ +60% réactivité · -40% délai</span></div><div class="timeline-item"><div class="period">2024</div><h3>Responsable Commercial & Chef de Produit</h3><div class="company">Gamme SUNTORY — Mayotte</div><ul><li>Stratégie commerciale et digitalisation</li><li>Cartographie de 600+ prospects</li></ul><span class="result-pill">✓ 300 000€ CA en 4 mois</span></div><div class="timeline-item"><div class="period">2017 – 2021</div><h3>Chef d'Entreprise</h3><div class="company">BIG ASSISTANCE MULTIMEDIA</div><ul><li>Création et pilotage d'une société IT</li></ul></div></div></div></section>
 <section id="contact"><div class="section-inner"><p class="section-label">Contact</p><h2 class="section-title">Travaillons ensemble</h2><p class="section-desc">Remote · France & International.</p><div class="contact-inner fade-in"><div class="contact-links"><a href="mailto:techerchristopher@gmail.com" class="contact-link"><span>✉️</span><div><div class="link-label">Email</div><div class="link-value">techerchristopher@gmail.com</div></div><span class="link-arrow">→</span></a><a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="contact-link"><span>💼</span><div><div class="link-label">LinkedIn</div><div class="link-value">linkedin.com/in/christopher-techer</div></div><span class="link-arrow">→</span></a><a href="https://github.com/techerchristopher-dotcom" target="_blank" class="contact-link"><span>⭐</span><div><div class="link-label">GitHub</div><div class="link-value">github.com/techerchristopher-dotcom</div></div><span class="link-arrow">→</span></a></div></div></div></section>
@@ -307,10 +375,10 @@ const lightbox = document.getElementById('imageLightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const lightboxClose = document.querySelector('.lightbox-close');
 
-document.querySelectorAll('.phone-showcase img').forEach((img) => {
+document.querySelectorAll('.phone-showcase img, .rentanoo-showcase img').forEach((img) => {
   img.addEventListener('click', () => {
     lightboxImage.src = img.src;
-    lightboxImage.alt = img.alt || 'Aperçu image Tukme';
+    lightboxImage.alt = img.alt || 'Aperçu image projet';
     lightbox.classList.add('active');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
