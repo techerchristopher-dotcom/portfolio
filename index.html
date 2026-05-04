@@ -164,6 +164,11 @@ footer p { color:var(--grey); font-size:.85rem; }
   border-radius: 36px;
   filter: drop-shadow(0 28px 55px rgba(0,0,0,.65));
   transition: .35s;
+  cursor: pointer;
+}
+
+.phone-showcase img:hover {
+  filter: drop-shadow(0 32px 65px rgba(0,0,0,.75)) brightness(1.08);
 }
 
 .phone-showcase img:nth-child(1) {
@@ -201,6 +206,83 @@ footer p { color:var(--grey); font-size:.85rem; }
   }
 }
 
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 12, 22, 0.88);
+  backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.image-lightbox.active {
+  display: flex;
+}
+
+.image-lightbox img {
+  max-width: min(92vw, 520px);
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 32px;
+  box-shadow: 0 40px 100px rgba(0,0,0,.65);
+  animation: lightboxZoom .22s ease-out;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10000;
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,.16);
+}
+
+@keyframes lightboxZoom {
+  from {
+    transform: scale(.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media(max-width:900px) {
+  .image-lightbox {
+    padding: 18px;
+  }
+
+  .image-lightbox img {
+    max-width: 94vw;
+    max-height: 86vh;
+    border-radius: 24px;
+  }
+
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
+    width: 46px;
+    height: 46px;
+    font-size: 30px;
+  }
+}
+
 @media(max-width:900px) { nav { padding:16px 24px; } nav ul { display:none; } section { padding:70px 24px; } #hero { padding:100px 24px 60px; } .hero-content,.about-grid,.automation-grid,.contact-inner { grid-template-columns:1fr; gap:40px; } .hero-card,.values,.results-grid { grid-template-columns:1fr 1fr; } .skills-grid,.small-projects { grid-template-columns:1fr; } .project-inner { flex-direction:column !important; } .project-visuals { min-height:300px; } .project-info { padding:28px 24px; } .phone-frame-img { width:100px; } footer { flex-direction:column; gap:8px; text-align:center; } }
 </style>
 </head>
@@ -214,8 +296,47 @@ footer p { color:var(--grey); font-size:.85rem; }
 <section id="experience"><div class="section-inner"><p class="section-label">Parcours</p><h2 class="section-title">Expérience professionnelle</h2><div class="timeline fade-in"><div class="timeline-item"><div class="period">2025</div><h3>Responsable Commercial</h3><div class="company">CEFORA</div><ul><li>Management d'une équipe de 7 commerciaux</li><li>Déploiement de systèmes IA</li></ul><span class="result-pill">✓ +60% réactivité · -40% délai</span></div><div class="timeline-item"><div class="period">2024</div><h3>Responsable Commercial & Chef de Produit</h3><div class="company">Gamme SUNTORY — Mayotte</div><ul><li>Stratégie commerciale et digitalisation</li><li>Cartographie de 600+ prospects</li></ul><span class="result-pill">✓ 300 000€ CA en 4 mois</span></div><div class="timeline-item"><div class="period">2017 – 2021</div><h3>Chef d'Entreprise</h3><div class="company">BIG ASSISTANCE MULTIMEDIA</div><ul><li>Création et pilotage d'une société IT</li></ul></div></div></div></section>
 <section id="contact"><div class="section-inner"><p class="section-label">Contact</p><h2 class="section-title">Travaillons ensemble</h2><p class="section-desc">Remote · France & International.</p><div class="contact-inner fade-in"><div class="contact-links"><a href="mailto:techerchristopher@gmail.com" class="contact-link"><span>✉️</span><div><div class="link-label">Email</div><div class="link-value">techerchristopher@gmail.com</div></div><span class="link-arrow">→</span></a><a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="contact-link"><span>💼</span><div><div class="link-label">LinkedIn</div><div class="link-value">linkedin.com/in/christopher-techer</div></div><span class="link-arrow">→</span></a><a href="https://github.com/techerchristopher-dotcom" target="_blank" class="contact-link"><span>⭐</span><div><div class="link-label">GitHub</div><div class="link-value">github.com/techerchristopher-dotcom</div></div><span class="link-arrow">→</span></a></div></div></div></section>
 <footer><div class="logo">Christopher TECHER</div><p>Fullstack Developer · IA · Automatisation · Product Builder</p><p>Remote · France / International</p></footer>
+<div id="imageLightbox" class="image-lightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Fermer l'image">×</button>
+  <img id="lightboxImage" src="" alt="">
+</div>
 <script>
 const container=document.getElementById('particles');for(let i=0;i<35;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.width=p.style.height=(Math.random()*2+1)+'px';p.style.animationDuration=(Math.random()*20+15)+'s';p.style.animationDelay=(Math.random()*20)+'s';container.appendChild(p);}const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));window.addEventListener('scroll',()=>{const nav=document.querySelector('nav');nav.style.background=window.scrollY>50?'rgba(13,27,42,0.97)':'rgba(13,27,42,0.85)';});
+
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxClose = document.querySelector('.lightbox-close');
+
+document.querySelectorAll('.phone-showcase img').forEach((img) => {
+  img.addEventListener('click', () => {
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt || 'Aperçu image Tukme';
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImage.src = '';
+  document.body.style.overflow = '';
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox) {
+    closeLightbox();
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && lightbox.classList.contains('active')) {
+    closeLightbox();
+  }
+});
 </script>
 </body>
 </html>
