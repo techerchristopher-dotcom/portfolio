@@ -219,47 +219,82 @@ section { padding: 100px 60px; }
   display:flex; align-items:center; justify-content:center;
   overflow:hidden; padding:30px;
 }
-.phone-mockup {
-  position:relative; display:flex; gap:0;
-  align-items:flex-end; justify-content:center;
+.phone-showcase {
+  position:relative; width:100%; height:520px;
+  display:flex; align-items:center; justify-content:center;
 }
-.phone-frame-img {
-  width:185px; flex-shrink:0;
-  filter:drop-shadow(0 24px 48px rgba(0,0,0,0.6));
-  transition:transform .35s ease;
+.phone-showcase img {
+  position:absolute; width:210px; border-radius:36px;
+  filter:drop-shadow(0 28px 55px rgba(0,0,0,.65));
+  transition:.35s; cursor:pointer;
 }
-.phone-frame-img:nth-child(1) { transform:translateY(24px) rotate(-6deg) scale(.87); z-index:1; }
-.phone-frame-img:nth-child(2) { transform:translateY(0) rotate(0deg) scale(1); z-index:3; }
-.phone-frame-img:nth-child(3) { transform:translateY(24px) rotate(6deg) scale(.87); z-index:1; }
-.phone-mockup:hover .phone-frame-img:nth-child(1) { transform:translateY(14px) rotate(-9deg) scale(.85); }
-.phone-mockup:hover .phone-frame-img:nth-child(3) { transform:translateY(14px) rotate(9deg) scale(.85); }
-.browser-mockup {
-  width:100%; max-width:520px;
-  background:#1a2535; border-radius:14px;
-  border:1px solid rgba(255,255,255,0.1);
-  box-shadow:0 30px 80px rgba(0,0,0,0.5);
-  overflow:hidden;
+.phone-showcase img:hover {
+  filter:drop-shadow(0 32px 65px rgba(0,0,0,.75)) brightness(1.08);
 }
-.browser-bar {
-  height:40px; background:#252f3e;
-  display:flex; align-items:center; gap:8px; padding:0 14px;
+.phone-showcase img:nth-child(1) { transform:translateX(-170px) rotate(-8deg) scale(.82); z-index:1; opacity:.9; }
+.phone-showcase img:nth-child(2) { transform:translateX(0) scale(1.03); z-index:3; }
+.phone-showcase img:nth-child(3) { transform:translateX(170px) rotate(8deg) scale(.82); z-index:1; opacity:.9; }
+
+.rentanoo-showcase {
+  position:relative; width:100%; height:440px;
+  display:flex; align-items:center; justify-content:center;
+  perspective:1200px;
 }
-.browser-dot { width:11px; height:11px; border-radius:50%; }
-.browser-dot:nth-child(1) { background:#FF5F56; }
-.browser-dot:nth-child(2) { background:#FFBD2E; }
-.browser-dot:nth-child(3) { background:#27C93F; }
-.browser-url {
-  flex:1; margin:0 12px; background:#1a2535;
-  border-radius:6px; height:24px; line-height:24px;
-  padding:0 10px; font-size:.7rem; color:var(--grey);
+.rentanoo-showcase img {
+  position:absolute; width:78%; max-width:520px; border-radius:18px;
+  object-fit:cover; border:1px solid rgba(65,168,240,0.22);
+  box-shadow:0 28px 70px rgba(0,0,0,.58);
+  transition:transform .35s ease, filter .35s ease, opacity .35s ease;
+  cursor:pointer;
 }
-.browser-mockup img { width:100%; display:block; object-fit:cover; max-height:340px; }
-.browser-slider { position:relative; overflow:hidden; }
-.browser-slide { display:none; width:100%; overflow:hidden; }
-.browser-slide.active { display:block; }
-.slider-dots { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:6px; }
-.dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer; transition:.2s; }
-.dot.active { background:var(--accent); width:20px; border-radius:4px; }
+.rentanoo-showcase img:nth-child(1) { transform:translateX(-95px) rotateY(12deg) scale(.82); z-index:1; opacity:.72; }
+.rentanoo-showcase img:nth-child(2) { transform:translateX(0) scale(1); z-index:3; opacity:1; }
+.rentanoo-showcase img:nth-child(3) { transform:translateX(95px) rotateY(-12deg) scale(.82); z-index:2; opacity:.72; }
+.rentanoo-showcase img:hover { z-index:5; opacity:1; filter:brightness(1.08); transform:translateX(0) scale(1.04); }
+
+.image-lightbox {
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(5,12,22,0.90); backdrop-filter:blur(12px);
+  display:none; align-items:center; justify-content:center;
+  padding:32px;
+}
+.image-lightbox.active { display:flex; }
+.image-lightbox img {
+  max-width:min(94vw,980px); max-height:88vh; object-fit:contain;
+  border-radius:24px; box-shadow:0 40px 100px rgba(0,0,0,.65);
+  animation:lightboxZoom .22s ease-out;
+}
+.lightbox-close {
+  position:fixed; top:24px; right:28px; width:52px; height:52px;
+  border:1px solid rgba(255,255,255,.18); border-radius:50%;
+  background:rgba(255,255,255,.08); color:#fff; font-size:34px;
+  line-height:1; cursor:pointer; z-index:10000; backdrop-filter:blur(10px);
+}
+.lightbox-close:hover { background:rgba(255,255,255,.16); }
+.lightbox-nav {
+  position:fixed; top:50%; transform:translateY(-50%);
+  width:58px; height:58px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08);
+  color:#fff; font-size:46px; line-height:1; cursor:pointer; z-index:10000;
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:blur(10px);
+  transition:background .2s ease, transform .2s ease;
+}
+.lightbox-nav:hover { background:rgba(255,255,255,.16); transform:translateY(-50%) scale(1.05); }
+.lightbox-prev { left:28px; }
+.lightbox-next { right:28px; }
+.lightbox-counter {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  padding:8px 14px; border-radius:999px;
+  background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.14);
+  color:#fff; font-size:.88rem; font-weight:700;
+  backdrop-filter:blur(10px); z-index:10000;
+}
+@keyframes lightboxZoom {
+  from { transform:scale(.92); opacity:0; }
+  to { transform:scale(1); opacity:1; }
+}
+
 .project-info { flex:1; padding:44px 48px; display:flex; flex-direction:column; justify-content:center; }
 .project-info .proj-badge {
   display:inline-flex; align-items:center; gap:8px;
@@ -407,7 +442,22 @@ footer p { color:var(--grey); font-size:.85rem; }
   .project-inner { flex-direction:column !important; }
   .project-visuals { min-height:300px; }
   .project-info { padding:28px 24px; }
-  .phone-frame-img { width:100px; }
+  .phone-showcase { height:430px; }
+  .phone-showcase img { width:155px; }
+  .phone-showcase img:nth-child(1) { transform:translateX(-105px) rotate(-7deg) scale(.78); }
+  .phone-showcase img:nth-child(3) { transform:translateX(105px) rotate(7deg) scale(.78); }
+  .rentanoo-showcase { height:360px; }
+  .rentanoo-showcase img { width:82%; max-width:360px; }
+  .rentanoo-showcase img:nth-child(1) { transform:translateX(-58px) rotateY(10deg) scale(.78); }
+  .rentanoo-showcase img:nth-child(2) { transform:translateX(0) scale(.94); }
+  .rentanoo-showcase img:nth-child(3) { transform:translateX(58px) rotateY(-10deg) scale(.78); }
+  .image-lightbox { padding:18px; }
+  .image-lightbox img { max-width:94vw; max-height:82vh; border-radius:22px; }
+  .lightbox-close { top:16px; right:16px; width:46px; height:46px; font-size:30px; }
+  .lightbox-nav { width:46px; height:46px; font-size:34px; }
+  .lightbox-prev { left:12px; }
+  .lightbox-next { right:12px; }
+  .lightbox-counter { bottom:14px; font-size:.8rem; }
   .small-projects { grid-template-columns:1fr; }
   .automation-grid { grid-template-columns:1fr; }
   .results-grid { grid-template-columns:1fr 1fr; }
@@ -598,10 +648,10 @@ footer p { color:var(--grey); font-size:.85rem; }
     <div class="project-card fade-in">
       <div class="project-inner">
         <div class="project-visuals" style="background:linear-gradient(135deg,#0a1929,#1a3a5c);">
-          <div class="phone-mockup">
-            <img class="phone-frame-img" src="tukme-1.png" alt="Tukme — destination">
-            <img class="phone-frame-img" src="tukme-3.png" alt="Tukme — commander une course">
-            <img class="phone-frame-img" src="tukme-5.png" alt="Tukme — chauffeur trouvé">
+          <div class="phone-showcase">
+            <img src="tukme-1.png" alt="Tukme — destination">
+            <img src="tukme-3.png" alt="Tukme — commander une course">
+            <img src="tukme-5.png" alt="Tukme — chauffeur trouvé">
           </div>
         </div>
         <div class="project-info">
@@ -614,7 +664,7 @@ footer p { color:var(--grey); font-size:.85rem; }
             <li data-i18n="tukme_f3">Gestion chauffeur &amp; passager avec synchronisation temps réel</li>
             <li data-i18n="tukme_f4">Push notifications Expo · Panel admin Next.js</li>
           </ul>
-          <div class="proj-stack">
+          <div class="proj-stack" translate="no">
             <span class="stack-tag">React Native</span><span class="stack-tag">Expo</span>
             <span class="stack-tag">Next.js</span><span class="stack-tag">Supabase</span>
             <span class="stack-tag">Stripe</span><span class="stack-tag">TypeScript</span>
@@ -631,150 +681,10 @@ footer p { color:var(--grey); font-size:.85rem; }
     <div class="project-card reverse fade-in">
       <div class="project-inner" style="flex-direction:row-reverse;">
         <div class="project-visuals" style="background:linear-gradient(135deg,#1a2535,#0d1b2a);">
-          <div class="browser-mockup">
-            <div class="browser-bar">
-              <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
-              <div class="browser-url">rentanoo.com</div>
-            </div>
-            <div class="browser-slider" id="rentanoo-slider">
-              <!-- Slide 1 -->
-              <div class="browser-slide active" style="background:linear-gradient(180deg,#0D1B2A,#1a2535);display:flex;flex-direction:column;height:300px;">
-                <div style="background:linear-gradient(135deg,#1F4E79,#2E75B6);padding:20px 24px 18px;">
-                  <div style="font-size:1.1rem;font-weight:800;color:white;margin-bottom:5px;">Rentanoo 🛵</div>
-                  <div style="font-size:.78rem;color:rgba(255,255,255,.8);margin-bottom:14px;" data-i18n="mock_tagline">Location de véhicules entre particuliers — Nosy Be</div>
-                  <div style="display:flex;gap:8px;">
-                    <div style="background:white;border-radius:7px;padding:7px 14px;font-size:.7rem;color:#1F4E79;font-weight:700;cursor:pointer;" data-i18n="mock_find">Trouver un véhicule →</div>
-                    <div style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:7px;padding:7px 14px;font-size:.7rem;color:white;" data-i18n="mock_offer">Proposer le mien</div>
-                  </div>
-                </div>
-                <div style="padding:14px 24px;">
-                  <div style="font-size:.72rem;font-weight:700;color:white;margin-bottom:10px;" data-i18n="mock_available_now">Disponibles maintenant</div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-                    <div style="background:rgba(65,168,240,.1);border:1px solid rgba(65,168,240,.2);border-radius:10px;padding:10px;text-align:center;">
-                      <div style="font-size:1.4rem;">🛵</div>
-                      <div style="font-size:.62rem;color:white;font-weight:600;margin-top:3px;" data-i18n="mock_scooter">Scooter</div>
-                      <div style="font-size:.62rem;color:#41A8F0;">15€/j</div>
-                    </div>
-                    <div style="background:rgba(65,168,240,.1);border:1px solid rgba(65,168,240,.2);border-radius:10px;padding:10px;text-align:center;">
-                      <div style="font-size:1.4rem;">🚗</div>
-                      <div style="font-size:.62rem;color:white;font-weight:600;margin-top:3px;" data-i18n="mock_car">Voiture</div>
-                      <div style="font-size:.62rem;color:#41A8F0;">45€/j</div>
-                    </div>
-                    <div style="background:rgba(65,168,240,.1);border:1px solid rgba(65,168,240,.2);border-radius:10px;padding:10px;text-align:center;">
-                      <div style="font-size:1.4rem;">🛺</div>
-                      <div style="font-size:.62rem;color:white;font-weight:600;margin-top:3px;" data-i18n="mock_tuktuk">Tuk-tuk</div>
-                      <div style="font-size:.62rem;color:#41A8F0;">20€/j</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Slide 2 -->
-              <div class="browser-slide" style="background:#1a2535;padding:16px 24px;height:300px;overflow:hidden;">
-                <div style="font-size:.75rem;font-weight:700;color:white;margin-bottom:12px;" data-i18n="mock_vehicles">12 véhicules disponibles · Nosy Be</div>
-                <div style="display:flex;flex-direction:column;gap:10px;">
-                  <div style="background:rgba(65,168,240,.08);border:1px solid rgba(65,168,240,.2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:center;">
-                    <div style="width:58px;height:48px;background:linear-gradient(135deg,#2E75B6,#1F4E79);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🛵</div>
-                    <div style="flex:1;">
-                      <div style="font-size:.68rem;font-weight:700;color:white;">Yamaha NMAX 155</div>
-                      <div style="font-size:.58rem;color:rgba(255,255,255,.6);">Semi-auto · 2023 · Casque inclus</div>
-                      <div style="display:flex;align-items:center;gap:6px;margin-top:3px;"><span style="font-size:.55rem;color:#22C55E;">⭐ 4.8</span><span style="font-size:.55rem;color:rgba(255,255,255,.5);">· 23 avis</span></div>
-                    </div>
-                    <div style="text-align:right;flex-shrink:0;">
-                      <div style="font-size:.75rem;font-weight:800;color:#41A8F0;">18€/j</div>
-                      <div style="background:linear-gradient(135deg,#2E75B6,#41A8F0);border-radius:5px;padding:4px 9px;font-size:.55rem;font-weight:700;color:white;margin-top:5px;" data-i18n="mock_book_btn">Réserver</div>
-                    </div>
-                  </div>
-                  <div style="background:rgba(65,168,240,.08);border:1px solid rgba(65,168,240,.2);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:center;">
-                    <div style="width:58px;height:48px;background:linear-gradient(135deg,#1a4a2e,#0f3020);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🚗</div>
-                    <div style="flex:1;">
-                      <div style="font-size:.68rem;font-weight:700;color:white;">Toyota Yaris 4x4</div>
-                      <div style="font-size:.58rem;color:rgba(255,255,255,.6);">Automatique · Climatisé · GPS</div>
-                      <div style="display:flex;align-items:center;gap:6px;margin-top:3px;"><span style="font-size:.55rem;color:#22C55E;">⭐ 4.9</span><span style="font-size:.55rem;color:rgba(255,255,255,.5);">· 41 avis</span></div>
-                    </div>
-                    <div style="text-align:right;flex-shrink:0;">
-                      <div style="font-size:.75rem;font-weight:800;color:#41A8F0;">48€/j</div>
-                      <div style="background:linear-gradient(135deg,#2E75B6,#41A8F0);border-radius:5px;padding:4px 9px;font-size:.55rem;font-weight:700;color:white;margin-top:5px;" data-i18n="mock_book_btn">Réserver</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Slide 3 -->
-              <div class="browser-slide" style="background:#1a2535;padding:16px 24px;height:300px;display:flex;gap:20px;overflow:hidden;">
-                <div style="flex:1;">
-                  <div style="background:linear-gradient(135deg,#1F4E79,#2E75B6);border-radius:12px;height:110px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin-bottom:10px;">🛵</div>
-                  <div style="font-size:.75rem;font-weight:700;color:white;">Yamaha NMAX 155</div>
-                  <div style="font-size:.62rem;color:rgba(255,255,255,.6);margin-top:3px;">Nosy Be · Hellville</div>
-                  <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;">
-                    <div style="background:rgba(34,197,94,.15);border-radius:5px;padding:3px 7px;font-size:.53rem;color:#22C55E;" data-i18n="mock_available_tag">✓ Disponible</div>
-                    <div style="background:rgba(65,168,240,.15);border-radius:5px;padding:3px 7px;font-size:.53rem;color:#41A8F0;">18€/jour</div>
-                  </div>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;gap:7px;">
-                  <div style="font-size:.7rem;font-weight:700;color:white;" data-i18n="mock_book_vehicle">Réserver ce véhicule</div>
-                  <div style="background:rgba(65,168,240,.1);border:1px solid rgba(65,168,240,.25);border-radius:8px;padding:7px;">
-                    <div style="font-size:.52rem;color:rgba(255,255,255,.6);margin-bottom:2px;" data-i18n="mock_departure">Départ</div>
-                    <div style="font-size:.63rem;color:white;">📅 12 mai 2026</div>
-                  </div>
-                  <div style="background:rgba(65,168,240,.1);border:1px solid rgba(65,168,240,.25);border-radius:8px;padding:7px;">
-                    <div style="font-size:.52rem;color:rgba(255,255,255,.6);margin-bottom:2px;" data-i18n="mock_return">Retour</div>
-                    <div style="font-size:.63rem;color:white;">📅 15 mai 2026</div>
-                  </div>
-                  <div style="background:rgba(255,255,255,.04);border-radius:8px;padding:7px;border-top:1px dashed rgba(65,168,240,.25);">
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                      <span style="font-size:.58rem;color:rgba(255,255,255,.65);">3 × 18€</span>
-                      <span style="font-size:.7rem;font-weight:700;color:#41A8F0;">54€</span>
-                    </div>
-                  </div>
-                  <div style="background:linear-gradient(135deg,#2E75B6,#41A8F0);border-radius:8px;padding:8px;text-align:center;font-size:.63rem;font-weight:700;color:white;" data-i18n="mock_pay">💳 Payer avec Stripe</div>
-                </div>
-              </div>
-              <!-- Slide 4 -->
-              <div class="browser-slide" style="background:#0D1B2A;padding:16px 24px;height:300px;overflow:hidden;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                  <div style="font-size:.78rem;font-weight:700;color:white;" data-i18n="mock_dashboard">Dashboard propriétaire</div>
-                  <div style="font-size:.63rem;color:#41A8F0;">Mai 2026</div>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
-                  <div style="background:rgba(65,168,240,.12);border:1px solid rgba(65,168,240,.2);border-radius:10px;padding:9px;text-align:center;">
-                    <div style="font-size:.9rem;font-weight:800;color:#41A8F0;">2 340€</div>
-                    <div style="font-size:.48rem;color:rgba(255,255,255,.6);margin-top:2px;" data-i18n="mock_this_month">Ce mois</div>
-                  </div>
-                  <div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:9px;text-align:center;">
-                    <div style="font-size:.9rem;font-weight:800;color:#22C55E;">18</div>
-                    <div style="font-size:.48rem;color:rgba(255,255,255,.6);margin-top:2px;" data-i18n="mock_bookings">Réservations</div>
-                  </div>
-                  <div style="background:rgba(255,189,46,.12);border:1px solid rgba(255,189,46,.2);border-radius:10px;padding:9px;text-align:center;">
-                    <div style="font-size:.9rem;font-weight:800;color:#FFBD2E;">4.9⭐</div>
-                    <div style="font-size:.48rem;color:rgba(255,255,255,.6);margin-top:2px;" data-i18n="mock_rating">Note</div>
-                  </div>
-                </div>
-                <div style="font-size:.68rem;font-weight:700;color:white;margin-bottom:8px;" data-i18n="mock_active_bookings">Réservations actives</div>
-                <div style="display:flex;flex-direction:column;gap:6px;">
-                  <div style="display:flex;align-items:center;gap:8px;background:rgba(65,168,240,.08);border-radius:8px;padding:8px;">
-                    <span style="font-size:.85rem;">🛵</span>
-                    <div style="flex:1;">
-                      <div style="font-size:.58rem;color:white;font-weight:600;">Jean-Marie P. · NMAX 155</div>
-                      <div style="font-size:.5rem;color:rgba(255,255,255,.5);">12–15 mai · 54€</div>
-                    </div>
-                    <div style="background:rgba(34,197,94,.2);border-radius:4px;padding:2px 7px;font-size:.48rem;color:#22C55E;" data-i18n="mock_active">Actif</div>
-                  </div>
-                  <div style="display:flex;align-items:center;gap:8px;background:rgba(65,168,240,.08);border-radius:8px;padding:8px;">
-                    <span style="font-size:.85rem;">🚗</span>
-                    <div style="flex:1;">
-                      <div style="font-size:.58rem;color:white;font-weight:600;">Marie T. · Toyota Yaris</div>
-                      <div style="font-size:.5rem;color:rgba(255,255,255,.5);">14–18 mai · 192€</div>
-                    </div>
-                    <div style="background:rgba(255,189,46,.2);border-radius:4px;padding:2px 7px;font-size:.48rem;color:#FFBD2E;" data-i18n="mock_upcoming">À venir</div>
-                  </div>
-                </div>
-              </div>
-              <div class="slider-dots">
-                <div class="dot active" onclick="goSlide('rentanoo-slider',0)"></div>
-                <div class="dot" onclick="goSlide('rentanoo-slider',1)"></div>
-                <div class="dot" onclick="goSlide('rentanoo-slider',2)"></div>
-                <div class="dot" onclick="goSlide('rentanoo-slider',3)"></div>
-              </div>
-            </div>
+          <div class="rentanoo-showcase">
+            <img src="rentanoo-1.png" alt="Rentanoo — page véhicule">
+            <img src="rentanoo-2.png" alt="Rentanoo — réservation">
+            <img src="rentanoo-3.png" alt="Rentanoo — détail location scooter">
           </div>
         </div>
         <div class="project-info">
@@ -787,8 +697,7 @@ footer p { color:var(--grey); font-size:.85rem; }
             <li data-i18n="rentanoo_f3">3 workflows N8N : formulaires client, états des lieux PDF automatiques, notifications</li>
             <li data-i18n="rentanoo_f4">Dashboard propriétaire et backoffice admin</li>
           </ul>
-          <div class="proj-stack">
-            <span class="stack-tag">React</span><span class="stack-tag">TypeScript</span>
+          <div class="proj-stack" translate="no">
             <span class="stack-tag">Node.js</span><span class="stack-tag">Supabase</span>
             <span class="stack-tag">Stripe</span><span class="stack-tag">N8N</span>
             <span class="stack-tag">Tailwind</span>
@@ -990,6 +899,14 @@ footer p { color:var(--grey); font-size:.85rem; }
   <p data-i18n="footer_desc">Fullstack Developer · IA · Automatisation · Product Builder</p>
   <p style="color:var(--blue);font-size:.8rem;">Remote · France / International</p>
 </footer>
+
+<div id="imageLightbox" class="image-lightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Fermer l'image">×</button>
+  <button class="lightbox-nav lightbox-prev" type="button" aria-label="Image précédente">‹</button>
+  <img id="lightboxImage" src="" alt="">
+  <button class="lightbox-nav lightbox-next" type="button" aria-label="Image suivante">›</button>
+  <div id="lightboxCounter" class="lightbox-counter"></div>
+</div>
 
 <script>
 // ── TRANSLATIONS ────────────────────────────────
@@ -1245,16 +1162,102 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 
-// ── SLIDER ─────────────────────────────────────
-function goSlide(sliderId, idx){
-  const slider=document.getElementById(sliderId);
-  const slides=slider.querySelectorAll('.browser-slide');
-  const dots=slider.querySelectorAll('.dot');
-  slides.forEach((slide,i)=>{slide.classList.toggle('active',i===idx);});
-  dots.forEach((dot,i)=>{dot.classList.toggle('active',i===idx);});
+// ── IMAGE LIGHTBOX (Tukme + Rentanoo galleries) ──
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxClose = document.querySelector('.lightbox-close');
+const lightboxPrev = document.querySelector('.lightbox-prev');
+const lightboxNext = document.querySelector('.lightbox-next');
+const lightboxCounter = document.getElementById('lightboxCounter');
+
+let currentGallery = [];
+let currentIndex = 0;
+
+function getImageData(img) {
+  return {
+    src: img.getAttribute('src'),
+    alt: img.getAttribute('alt') || 'Aperçu image projet'
+  };
 }
-let rentanooIdx=0;
-setInterval(()=>{ rentanooIdx=(rentanooIdx+1)%4; goSlide('rentanoo-slider',rentanooIdx); },3500);
+
+function openLightbox(galleryImages, index) {
+  currentGallery = Array.from(galleryImages).map(getImageData);
+  currentIndex = index;
+  updateLightboxImage();
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightboxImage() {
+  if (!currentGallery.length) return;
+  const current = currentGallery[currentIndex];
+  lightboxImage.src = current.src;
+  lightboxImage.alt = current.alt;
+  if (lightboxCounter) {
+    lightboxCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+  }
+  const shouldShowNav = currentGallery.length > 1;
+  if (lightboxPrev) lightboxPrev.style.display = shouldShowNav ? 'flex' : 'none';
+  if (lightboxNext) lightboxNext.style.display = shouldShowNav ? 'flex' : 'none';
+}
+
+function showPreviousImage() {
+  if (!currentGallery.length) return;
+  currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+  updateLightboxImage();
+}
+
+function showNextImage() {
+  if (!currentGallery.length) return;
+  currentIndex = (currentIndex + 1) % currentGallery.length;
+  updateLightboxImage();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImage.src = '';
+  currentGallery = [];
+  currentIndex = 0;
+  document.body.style.overflow = '';
+}
+
+if (lightbox && lightboxImage && lightboxClose) {
+  document.querySelectorAll('.phone-showcase, .rentanoo-showcase').forEach((gallery) => {
+    const galleryImages = gallery.querySelectorAll('img');
+    galleryImages.forEach((img, index) => {
+      img.addEventListener('click', () => openLightbox(galleryImages, index));
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (event) => {
+      event.stopPropagation();
+      showPreviousImage();
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', (event) => {
+      event.stopPropagation();
+      showNextImage();
+    });
+  }
+
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') showPreviousImage();
+    if (event.key === 'ArrowRight') showNextImage();
+  });
+}
 
 // ── NAV SCROLL EFFECT ──────────────────────────
 window.addEventListener('scroll',()=>{
