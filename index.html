@@ -463,13 +463,36 @@ footer p { color:var(--grey); font-size:.85rem; }
   .results-grid { grid-template-columns:1fr 1fr; }
   footer { flex-direction:column; gap:8px; text-align:center; }
 }
+
+@keyframes float-photo {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+.hero-photo-wrapper { display:flex; flex-direction:column; align-items:center; gap:28px; }
+.hero-photo {
+  width:280px; height:280px; border-radius:50%; object-fit:cover;
+  border:3px solid rgba(255,255,255,0.15);
+  box-shadow:0 0 40px rgba(99,102,241,0.3), 0 20px 60px rgba(0,0,0,0.4);
+  animation:float-photo 6s ease-in-out infinite;
+}
+.about-title-row { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.about-avatar { width:60px; height:60px; border-radius:50%; object-fit:cover; border:2px solid rgba(65,168,240,0.4); }
+.logo-group { display:flex; align-items:center; gap:10px; }
+.nav-avatar  { width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid rgba(65,168,240,0.35); }
+@media(max-width:768px) {
+  .hero-photo { width:180px; height:180px; }
+  .hero-photo-wrapper { order:-1; }
+}
 </style>
 </head>
 <body>
 
 <!-- ── NAV ──────────────────────────────────── -->
 <nav>
-  <div class="logo">CT/</div>
+  <div class="logo-group">
+    <img src="assets/profile.png" alt="Christopher TECHER" class="nav-avatar">
+    <div class="logo">CT/</div>
+  </div>
   <ul>
     <li><a href="#about" data-i18n="nav_about">Profil</a></li>
     <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
@@ -500,7 +523,9 @@ footer p { color:var(--grey); font-size:.85rem; }
       </div>
     </div>
 
-    <div class="hero-card fade-in">
+    <div class="hero-photo-wrapper fade-in">
+      <img src="assets/profile.png" alt="Christopher TECHER" class="hero-photo">
+      <div class="hero-card">
       <div class="stat-item">
         <span class="num">15+</span>
         <span class="label" data-i18n="stat1">ans de business development</span>
@@ -527,6 +552,7 @@ footer p { color:var(--grey); font-size:.85rem; }
         <span class="tech-tag">Stripe</span>
         <span class="tech-tag">MAKE</span>
       </div>
+      </div>
     </div>
   </div>
 </section>
@@ -537,7 +563,10 @@ footer p { color:var(--grey); font-size:.85rem; }
     <div class="about-grid fade-in">
       <div class="about-text">
         <p class="section-label" data-i18n="about_label">À propos</p>
-        <h2 class="section-title" data-i18n-html="about_title_html">Business developer devenu <span style="color:var(--accent)">builder</span></h2>
+        <div class="about-title-row">
+          <img src="assets/profile.png" alt="Christopher TECHER" class="about-avatar">
+          <h2 class="section-title" data-i18n-html="about_title_html">Business developer devenu <span style="color:var(--accent)">builder</span></h2>
+        </div>
         <p data-i18n-html="about_p1">Après <span class="highlight">15 ans à créer, structurer et faire croître des entreprises</span>, j'ai décidé de coder moi-même les outils que je voulais voir exister. Autodidacte, j'ai appris le développement Fullstack TypeScript et l'ingénierie IA pour passer de l'idée au produit en production.</p>
         <p data-i18n-html="about_p2">Ce qui me différencie : je <span class="accent-text">comprends le business autant que le code</span>. Je ne construis pas juste des applications — je construis des systèmes qui génèrent de la valeur réelle, automatisent des tâches chronophages, et scalent.</p>
         <p data-i18n="about_p3">Mes apps tournent en production. Mes workflows N8N et MAKE remplacent l'équivalent de 2 ETP. Mon agent IA "Rebecca" analyse des centaines de CV automatiquement.</p>
