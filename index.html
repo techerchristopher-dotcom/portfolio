@@ -400,7 +400,18 @@ section { padding: 100px 60px; }
 
 /* ─── CONTACT ─────────────────────────────────── */
 #contact { background:var(--dark); }
-.contact-inner { display:block; max-width:560px; }
+.contact-inner {
+  display:grid; grid-template-columns: minmax(0, 560px) 1fr;
+  gap:64px; align-items:center;
+}
+.contact-photo-wrapper { display:flex; justify-content:center; align-items:center; }
+.contact-photo {
+  width:100%; max-width:360px; aspect-ratio:1;
+  border-radius:50%; object-fit:cover;
+  border:3px solid rgba(255,255,255,0.15);
+  box-shadow:0 0 40px rgba(99,102,241,0.3), 0 20px 60px rgba(0,0,0,0.4);
+  animation:float-photo 6s ease-in-out infinite;
+}
 .contact-links { display:flex; flex-direction:column; gap:16px; margin-top:32px; }
 .contact-link {
   display:flex; align-items:center; gap:16px;
@@ -482,6 +493,9 @@ footer p { color:var(--grey); font-size:.85rem; }
 @media(max-width:768px) {
   .hero-photo { width:180px; height:180px; }
   .hero-photo-wrapper { order:-1; }
+  .contact-inner { grid-template-columns:1fr; gap:32px; }
+  .contact-photo { max-width:240px; }
+  .contact-photo-wrapper { order:-1; }
 }
 </style>
 </head>
@@ -917,6 +931,9 @@ footer p { color:var(--grey); font-size:.85rem; }
             <span class="link-arrow">→</span>
           </a>
         </div>
+      </div>
+      <div class="contact-photo-wrapper">
+        <img src="assets/profile.png" alt="Christopher TECHER" class="contact-photo">
       </div>
     </div>
   </div>
