@@ -135,13 +135,14 @@ section { padding: 90px 60px; }
 
 /* ─── SCREENSHOTS ─── */
 #screenshots { background: var(--dark2); }
-.screenshots-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px; }
-.screenshot-item { position:relative; border-radius:16px; overflow:hidden; cursor:pointer; }
+.screenshots-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:40px; }
+.screenshot-item { position:relative; border-radius:16px; overflow:hidden; cursor:pointer; aspect-ratio:16/10; }
 .screenshot-img {
   width:100%; height:100%; object-fit:cover;
   transition: transform .3s, filter .3s;
   border:1px solid rgba(65,168,240,0.15);
   border-radius:16px;
+  display:block;
 }
 .screenshot-item:hover .screenshot-img { transform:scale(1.03); filter:brightness(1.06); }
 .placeholder-img {
@@ -316,44 +317,22 @@ footer a:hover { text-decoration:underline; }
     <p class="section-desc">Aperçu des principales pages et fonctionnalités de Rentanoo.</p>
 
     <div class="screenshots-grid fade-in">
-      <!-- 📸 PLACEHOLDER screenshot 1 — nommer: rentanoo-screen-1.jpg -->
       <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 1<br>rentanoo-screen-1.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
+        <img src="./screenshots/rentanoo-screen-1.jpg" alt="Rentanoo — Catalogue des véhicules disponibles à Nosy Be" class="screenshot-img">
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 2 — nommer: rentanoo-screen-2.jpg -->
       <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 2<br>rentanoo-screen-2.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
+        <img src="./screenshots/rentanoo-screen-2.jpg" alt="Rentanoo — Modal de confirmation de réservation avec détail des frais et caution" class="screenshot-img">
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 3 — nommer: rentanoo-screen-3.jpg -->
       <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 3<br>rentanoo-screen-3.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
+        <img src="./screenshots/rentanoo-screen-3.jpg" alt="Rentanoo — Messagerie temps réel entre locataire et propriétaire" class="screenshot-img">
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 4 — nommer: rentanoo-screen-4.jpg -->
       <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 4<br>rentanoo-screen-4.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
+        <img src="./screenshots/rentanoo-screen-4.jpg" alt="Rentanoo — Email de confirmation de demande de réservation automatique" class="screenshot-img">
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 5 — nommer: rentanoo-screen-5.jpg -->
       <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 5<br>rentanoo-screen-5.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
-      </div>
-      <!-- 📸 PLACEHOLDER screenshot 6 — nommer: rentanoo-screen-6.jpg -->
-      <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 6<br>rentanoo-screen-6.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
+        <img src="./screenshots/rentanoo-screen-5.jpg" alt="Rentanoo — Dashboard propriétaire avec gestion des réservations et statuts" class="screenshot-img">
       </div>
     </div>
-    <p class="screenshots-note">💡 Images à insérer : remplace les placeholders par des balises &lt;img src="./screenshots/rentanoo-screen-N.jpg"&gt;</p>
   </div>
 </section>
 
