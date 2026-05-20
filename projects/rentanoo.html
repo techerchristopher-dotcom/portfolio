@@ -205,7 +205,7 @@ footer a:hover { text-decoration:underline; }
     <div class="proj-badge-hero">🛵 Marketplace Web · Location</div>
     <h1><span>Rentanoo</span></h1>
     <p class="hero-tagline">
-      Plateforme de location de véhicules entre particuliers et pros sur Nosy Be — réservations en ligne, paiement Stripe, messagerie temps réel et états des lieux automatisés via N8N.
+      Les loueurs de Nosy Be perdaient des clients faute de paiement en ligne et de caution — Rentanoo résout ça. Une marketplace complète : visibilité en ligne, réservation CB, caution bancaire et état des lieux digitalisé.
     </p>
     <div class="hero-btns">
       <a href="https://rentanoo.com" target="_blank" class="btn-primary">🌐 Voir le site live</a>
@@ -222,19 +222,19 @@ footer a:hover { text-decoration:underline; }
         <p class="section-label">À propos du projet</p>
         <h2 class="section-title">La marketplace de location pour Nosy Be</h2>
 
-        <!-- 📝 PLACEHOLDER : remplace ce paragraphe par une description plus détaillée -->
-        <p>Rentanoo est une marketplace web full-stack permettant la location de scooters, voitures et tuk-tuks entre particuliers et professionnels sur l'île de Nosy Be, à Madagascar.</p>
+        <p>À Nosy Be, la location de véhicules entre particuliers fonctionnait entièrement <strong>au cash et à la confiance</strong>. Résultat : pas de caution, pas de paiement CB, clients perdus et litiges non couverts en cas de sinistre. Les loueurs n'avaient aucune visibilité en ligne et aucun outil pour gérer leur activité.</p>
 
-        <!-- 📝 PLACEHOLDER : ajoute ici le contexte, la problématique résolue, les choix techniques, défis rencontrés -->
-        <p>[ Description détaillée à compléter — contexte, problème résolu, choix techniques, flux de réservation, gestion des états des lieux, défis rencontrés. ]</p>
+        <p>Rentanoo répond à ces trois problèmes : une <strong>plateforme marketplace</strong> qui donne aux loueurs une vitrine en ligne professionnelle, un système de <strong>réservation et paiement CB via Stripe</strong> (avec caution bancaire bloquée), et un <strong>état des lieux digitalisé</strong> (photos + signature) généré en PDF automatiquement via N8N. Le modèle économique repose sur une commission de 15% côté locataire et 15% côté loueur.</p>
+
+        <p>Les deux défis techniques principaux : l'intégration de <strong>Stripe Checkout + Webhooks</strong> pour la gestion des cautions et remboursements, et la <strong>digitalisation de l'état des lieux</strong> départ/retour via capture photo et signature électronique, exporté en PDF horodaté.</p>
 
         <ul class="features-list">
-          <li>Marketplace full-stack avec système de réservation complet (calendrier, disponibilités, tarification)</li>
-          <li>Paiement Stripe Checkout + Webhooks avec gestion des remboursements</li>
-          <li>Messagerie en temps réel via Supabase Realtime entre locataires et propriétaires</li>
-          <li>3 workflows N8N : formulaires client automatisés, génération PDF d'états des lieux, notifications email</li>
-          <li>Dashboard propriétaire pour la gestion du parc véhicules et des réservations</li>
-          <li>Backoffice admin pour la modération et la supervision de la plateforme</li>
+          <li>Marketplace full-stack : mise en ligne des véhicules, calendrier de disponibilités, réservation en ligne</li>
+          <li>Paiement CB + caution bancaire via Stripe Checkout et Webhooks</li>
+          <li>État des lieux digitalisé : photos + signature électronique → PDF automatique via N8N</li>
+          <li>Messagerie temps réel entre locataires et propriétaires (Supabase Realtime)</li>
+          <li>Dashboard propriétaire : gestion du parc, suivi des réservations, revenus</li>
+          <li>Backoffice admin pour la modération de la plateforme</li>
         </ul>
       </div>
       <div class="stats-mini">
@@ -243,16 +243,16 @@ footer a:hover { text-decoration:underline; }
           <span class="lbl">Déployé sur rentanoo.com</span>
         </div>
         <div class="stat-card">
+          <span class="num">15%</span>
+          <span class="lbl">commission · côté locataire & loueur</span>
+        </div>
+        <div class="stat-card">
           <span class="num">3</span>
           <span class="lbl">workflows N8N en production</span>
         </div>
         <div class="stat-card">
-          <span class="num">RT</span>
-          <span class="lbl">Messagerie temps réel</span>
-        </div>
-        <div class="stat-card">
-          <span class="num">Auto</span>
-          <span class="lbl">États des lieux PDF automatiques</span>
+          <span class="num">PDF</span>
+          <span class="lbl">États des lieux auto · photos + signature</span>
         </div>
       </div>
     </div>
@@ -264,15 +264,21 @@ footer a:hover { text-decoration:underline; }
   <div class="section-inner">
     <p class="section-label">Stack technique</p>
     <h2 class="section-title">Technologies utilisées</h2>
-    <p class="section-desc" style="margin-bottom:36px;">Architecture full-stack web avec backend Node.js, Supabase en base de données et Stripe pour les paiements. N8N orchestre l'automatisation des processus métier.</p>
+    <p class="section-desc" style="margin-bottom:36px;">React + TypeScript côté client, Node.js + Express côté serveur, Supabase comme base de données et Stripe pour les paiements et cautions. N8N orchestre l'automatisation des états des lieux et notifications.</p>
     <div class="stack-grid fade-in">
       <div class="stack-card">
         <div class="stack-card-icon">🖥️</div>
         <h3>Front-end</h3>
         <div class="tags">
+          <span class="tag">React 18</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Vite</span>
           <span class="tag">Tailwind CSS</span>
-          <!-- 📝 PLACEHOLDER : ajoute ici le framework JS front utilisé si applicable -->
-          <span class="tag">[ Framework front — à compléter ]</span>
+          <span class="tag">Shadcn UI</span>
+          <span class="tag">React Router</span>
+          <span class="tag">TanStack Query</span>
+          <span class="tag">React Hook Form</span>
+          <span class="tag">Zod</span>
         </div>
       </div>
       <div class="stack-card">
@@ -280,10 +286,11 @@ footer a:hover { text-decoration:underline; }
         <h3>Back-end & Base de données</h3>
         <div class="tags">
           <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">TypeScript</span>
           <span class="tag">Supabase</span>
           <span class="tag">PostgreSQL</span>
           <span class="tag">Supabase Realtime</span>
-          <span class="tag">JWT</span>
         </div>
       </div>
       <div class="stack-card">
@@ -293,7 +300,8 @@ footer a:hover { text-decoration:underline; }
           <span class="tag">Stripe Checkout</span>
           <span class="tag">Stripe Webhooks</span>
           <span class="tag">N8N</span>
-          <span class="tag">iLovePDF API</span>
+          <span class="tag">jsPDF</span>
+          <span class="tag">html2canvas</span>
         </div>
       </div>
     </div>
