@@ -203,10 +203,10 @@ footer a:hover { text-decoration:underline; }
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-inner fade-in">
-    <div class="proj-badge-hero">🚕 Application Mobile · Fintech</div>
-    <h1><span>Tukme</span></h1>
+    <div class="proj-badge-hero">🚕 Application Mobile · React Native · iOS/Android</div>
+    <h1>Les touristes payaient <span>le double</span> leur course de tuk-tuk à Nosy Be.</h1>
     <p class="hero-tagline">
-      Application VTC mobile complète pour commander un tuk-tuk — géolocalisation temps réel, paiement Stripe in-app, panel admin web. Projet full-scale conçu et développé de A à Z.
+      Tukme fixe ça : tarifs transparents affichés avant la commande, suivi GPS du chauffeur en temps réel, paiement Stripe intégré — et tout ça fonctionne même avec une connexion réseau aléatoire.
     </p>
     <div class="hero-btns">
       <a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="btn-primary">⭐ Voir sur GitHub</a>
@@ -220,38 +220,39 @@ footer a:hover { text-decoration:underline; }
     <div class="about-content fade-in">
       <div class="about-text">
         <p class="section-label">À propos du projet</p>
-        <h2 class="section-title">L'application VTC pensée pour Nosy Be</h2>
+        <h2 class="section-title">Transparence des prix, digitalisée</h2>
 
-        <!-- 📝 PLACEHOLDER : remplace ce paragraphe par une description plus détaillée du projet -->
-        <p>Tukme est une application mobile de réservation de tuk-tuks développée avec <strong>React Native + Expo</strong> pour l'application passager, et <strong>Next.js</strong> pour le panel d'administration web.</p>
+        <p>À Nosy Be, le prix d'une course en tuk-tuk peut varier du <strong>simple au triple</strong> selon l'expérience du touriste. Pas de compteur, pas de tarif affiché, pas de reçu — chaque trajet est une négociation. Tukme met fin à ça : le touriste voit le prix exact avant de confirmer, comme Uber.</p>
 
-        <!-- 📝 PLACEHOLDER : ajoute ici le contexte, la problématique résolue, les décisions architecturales -->
-        <p>[ Description détaillée à compléter — contexte, problème résolu, choix techniques, défis rencontrés. ]</p>
+        <p>L'enjeu côté chauffeur était tout aussi fort : <strong>digitaliser une profession habituée au cash et au bouche-à-oreille</strong>, pour capter une clientèle touristique de plus en plus connectée et exigeante. L'application gère l'intégralité du flux — commande, mise en relation, paiement, notation.</p>
+
+        <p>Le défi technique principal : <strong>le réseau à Nosy Be est capricieux</strong>. J'ai conçu l'app en mode offline-friendly — mise en cache des données carte, file d'attente des actions en attente de reconnexion — pour que l'expérience ne se dégrade pas quand le signal coupe. Le suivi GPS temps réel du chauffeur via <strong>Google Maps + Supabase Realtime</strong> a également nécessité une optimisation fine pour éviter la sur-consommation de données mobiles.</p>
 
         <ul class="features-list">
-          <li>Géolocalisation et carte interactive temps réel (Google Maps / Routes API)</li>
-          <li>Paiement Stripe PaymentSheet avec Edge Functions Deno hébergées sur Supabase</li>
-          <li>Gestion chauffeur &amp; passager avec synchronisation temps réel via Supabase Realtime</li>
-          <li>Push notifications Expo pour alertes de course</li>
-          <li>Panel admin Next.js pour la gestion des courses et des utilisateurs</li>
+          <li>Tarif affiché avant confirmation — zéro surprise pour le touriste</li>
+          <li>Suivi GPS du chauffeur en temps réel (Google Maps + Supabase Realtime)</li>
+          <li>Paiement Stripe PaymentSheet via Edge Functions Deno sur Supabase</li>
+          <li>Mode offline-friendly : l'app fonctionne même avec un réseau instable</li>
+          <li>Push notifications Expo pour alertes de course côté chauffeur</li>
+          <li>Panel admin Next.js pour gestion des courses, chauffeurs et utilisateurs</li>
         </ul>
       </div>
       <div class="stats-mini">
         <div class="stat-card">
-          <span class="num">A→Z</span>
-          <span class="lbl">Projet full-scale conçu seul</span>
+          <span class="num">3</span>
+          <span class="lbl">apps : passager, chauffeur, admin</span>
         </div>
         <div class="stat-card">
-          <span class="num">3</span>
-          <span class="lbl">interfaces : passager, chauffeur, admin</span>
+          <span class="num">iOS</span>
+          <span class="lbl">En review Apple App Store</span>
         </div>
         <div class="stat-card">
           <span class="num">RT</span>
-          <span class="lbl">Synchronisation temps réel</span>
+          <span class="lbl">Suivi GPS temps réel</span>
         </div>
         <div class="stat-card">
-          <span class="num">Prod</span>
-          <span class="lbl">Déployé en production</span>
+          <span class="num">Offline</span>
+          <span class="lbl">Fonctionne sans réseau stable</span>
         </div>
       </div>
     </div>
@@ -263,7 +264,7 @@ footer a:hover { text-decoration:underline; }
   <div class="section-inner">
     <p class="section-label">Stack technique</p>
     <h2 class="section-title">Technologies utilisées</h2>
-    <p class="section-desc" style="margin-bottom:36px;">Architecture mobile-first avec backend serverless, paiement intégré et synchronisation temps réel.</p>
+    <p class="section-desc" style="margin-bottom:36px;">Architecture mobile-first — application React Native offline-friendly, backend serverless Supabase, paiement Stripe intégré et synchronisation GPS temps réel.</p>
     <div class="stack-grid fade-in">
       <div class="stack-card">
         <div class="stack-card-icon">🖥️</div>
@@ -306,47 +307,41 @@ footer a:hover { text-decoration:underline; }
   <div class="section-inner">
     <p class="section-label">Captures d'écran</p>
     <h2 class="section-title">L'application en images</h2>
-    <p class="section-desc">Aperçu des principales interfaces de l'application.</p>
+    <p class="section-desc">Aperçu des principales interfaces — commande, suivi GPS, paiement, panel admin.</p>
 
     <div class="screenshots-grid fade-in">
-      <!-- 📸 PLACEHOLDER screenshot 1 — nommer: tukme-screen-1.jpg -->
       <div class="screenshot-item">
         <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 1<br>tukme-screen-1.jpg<br><small>Déposer dans projects/screenshots/</small></span>
+          <span class="placeholder-label">📸 Écran d'accueil<br><small>tukme-screen-1.jpg</small></span>
         </div>
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 2 — nommer: tukme-screen-2.jpg -->
       <div class="screenshot-item">
         <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 2<br>tukme-screen-2.jpg<br><small>Déposer dans projects/screenshots/</small></span>
+          <span class="placeholder-label">📸 Suivi GPS temps réel<br><small>tukme-screen-2.jpg</small></span>
         </div>
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 3 — nommer: tukme-screen-3.jpg -->
       <div class="screenshot-item">
         <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 3<br>tukme-screen-3.jpg<br><small>Déposer dans projects/screenshots/</small></span>
+          <span class="placeholder-label">📸 Confirmation de course & tarif<br><small>tukme-screen-3.jpg</small></span>
         </div>
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 4 — nommer: tukme-screen-4.jpg -->
       <div class="screenshot-item">
         <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 4<br>tukme-screen-4.jpg<br><small>Déposer dans projects/screenshots/</small></span>
+          <span class="placeholder-label">📸 Paiement Stripe<br><small>tukme-screen-4.jpg</small></span>
         </div>
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 5 — nommer: tukme-screen-5.jpg -->
       <div class="screenshot-item">
         <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 5<br>tukme-screen-5.jpg<br><small>Déposer dans projects/screenshots/</small></span>
+          <span class="placeholder-label">📸 App chauffeur<br><small>tukme-screen-5.jpg</small></span>
         </div>
       </div>
-      <!-- 📸 PLACEHOLDER screenshot 6 — nommer: tukme-screen-6.jpg -->
       <div class="screenshot-item">
         <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 6<br>tukme-screen-6.jpg<br><small>Déposer dans projects/screenshots/</small></span>
+          <span class="placeholder-label">📸 Panel admin<br><small>tukme-screen-6.jpg</small></span>
         </div>
       </div>
     </div>
-    <p class="screenshots-note">💡 Images à insérer : remplace les placeholders par des balises &lt;img src="./screenshots/tukme-screen-N.jpg"&gt;</p>
+    <p class="screenshots-note">📱 Screenshots à venir — lancer l'app via Expo Go pour les capturer</p>
   </div>
 </section>
 
