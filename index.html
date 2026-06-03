@@ -316,6 +316,9 @@ section { padding: 100px 60px; }
   border-radius:6px; padding:4px 10px; font-size:.75rem;
   color:var(--light-blue); font-weight:600;
 }
+.stack-group { display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin-bottom:8px; }
+.stack-group:last-child { margin-bottom:0; }
+.stack-label { font-size:.68rem; font-weight:700; color:var(--accent); letter-spacing:.5px; text-transform:uppercase; min-width:40px; flex-shrink:0; }
 .proj-links { display:flex; gap:12px; flex-wrap:wrap; }
 .proj-link {
   display:inline-flex; align-items:center; gap:7px;
@@ -706,13 +709,22 @@ footer p { color:var(--grey); font-size:.85rem; }
             <li data-i18n="tukme_f4">Push notifications Expo · Panel admin Next.js</li>
           </ul>
           <div class="proj-stack" translate="no">
-            <span class="stack-tag">React Native</span><span class="stack-tag">Expo</span>
-            <span class="stack-tag">Next.js</span><span class="stack-tag">Supabase</span>
-            <span class="stack-tag">Stripe</span><span class="stack-tag">TypeScript</span>
-            <span class="stack-tag">Google Maps API</span>
+            <div class="stack-group">
+              <span class="stack-label">Front</span>
+              <span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">TypeScript</span>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">Back</span>
+              <span class="stack-tag">Supabase</span><span class="stack-tag">Next.js</span>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">APIs</span>
+              <span class="stack-tag">Stripe</span><span class="stack-tag">Google Maps API</span>
+            </div>
           </div>
           <div class="proj-links">
             <a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="proj-link primary">⭐ GitHub</a>
+            <a href="projects/tukme.html" class="proj-link ghost" data-i18n="proj_view">📄 Voir le projet →</a>
           </div>
         </div>
       </div>
@@ -738,9 +750,18 @@ footer p { color:var(--grey); font-size:.85rem; }
             <li data-i18n="rentanoo_f3">Gestion de flotte · maintenance · reporting</li>
           </ul>
           <div class="proj-stack" translate="no">
-            <span class="stack-tag">React</span><span class="stack-tag">Vite</span>
-            <span class="stack-tag">Express</span><span class="stack-tag">Supabase</span>
-            <span class="stack-tag">Stripe</span><span class="stack-tag">N8N</span>
+            <div class="stack-group">
+              <span class="stack-label">Front</span>
+              <span class="stack-tag">React</span><span class="stack-tag">Vite</span>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">Back</span>
+              <span class="stack-tag">Express</span><span class="stack-tag">Supabase</span>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">APIs</span>
+              <span class="stack-tag">Stripe</span><span class="stack-tag">N8N</span>
+            </div>
           </div>
           <div class="proj-links">
             <a href="rentanoo.html" class="proj-link primary" data-i18n="rentanoo_case">📖 Étude de cas →</a>
@@ -760,9 +781,19 @@ footer p { color:var(--grey); font-size:.85rem; }
         </div>
         <p data-i18n="astra_desc">MVP d'application horoscope IA francophone pilotée par l'API Claude (Anthropic). React + Vite.</p>
         <div class="proj-stack" style="margin-bottom:16px">
-          <span class="stack-tag">React</span><span class="stack-tag">Vite</span><span class="stack-tag">Claude API</span>
+          <div class="stack-group">
+            <span class="stack-label">Front</span>
+            <span class="stack-tag">React</span><span class="stack-tag">Vite</span>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">APIs</span>
+            <span class="stack-tag">Claude API</span>
+          </div>
         </div>
-        <a href="https://github.com/techerchristopher-dotcom/astra-app" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">GitHub →</a>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="https://github.com/techerchristopher-dotcom/astra-app" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">GitHub →</a>
+          <a href="projects/astra-app.html" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;" data-i18n="proj_view_short">📄 Voir →</a>
+        </div>
       </div>
       <div class="small-card fade-in">
         <div class="card-top">
@@ -771,9 +802,19 @@ footer p { color:var(--grey); font-size:.85rem; }
         </div>
         <p data-i18n="rag_desc">Application de vectorisation et recherche sémantique sur documents avec architecture RAG et pgvector.</p>
         <div class="proj-stack" style="margin-bottom:16px">
-          <span class="stack-tag">TypeScript</span><span class="stack-tag">pgvector</span><span class="stack-tag">RAG</span>
+          <div class="stack-group">
+            <span class="stack-label">Back</span>
+            <span class="stack-tag">TypeScript</span><span class="stack-tag">pgvector</span>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">Archi</span>
+            <span class="stack-tag">RAG</span>
+          </div>
         </div>
-        <a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">GitHub →</a>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">GitHub →</a>
+          <a href="projects/tsplus-rag.html" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;" data-i18n="proj_view_short">📄 Voir →</a>
+        </div>
       </div>
       <div class="small-card fade-in">
         <div class="card-top">
@@ -782,9 +823,23 @@ footer p { color:var(--grey); font-size:.85rem; }
         </div>
         <p data-i18n="rebecca_desc">Agent IA d'analyse de CV : PDF → GPT-Vision → extraction données → Airtable. Déployé en production.</p>
         <div class="proj-stack" style="margin-bottom:16px">
-          <span class="stack-tag">MAKE</span><span class="stack-tag">GPT-Vision</span><span class="stack-tag">Airtable</span>
+          <div class="stack-group">
+            <span class="stack-label">Auto</span>
+            <span class="stack-tag">MAKE</span>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">IA</span>
+            <span class="stack-tag">GPT-Vision</span>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">Data</span>
+            <span class="stack-tag">Airtable</span>
+          </div>
         </div>
-        <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">LinkedIn →</a>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">LinkedIn →</a>
+          <a href="projects/agent-rebecca.html" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;" data-i18n="proj_view_short">📄 Voir →</a>
+        </div>
       </div>
     </div>
   </div>
@@ -985,6 +1040,7 @@ const T = {
     // PROJECTS
     proj_label:'Projets', proj_title:'Applications en production',
     proj_desc:'Des projets réels, avec du code réel, déployés en production. Pas des tutoriels.',
+    proj_view:'📄 Voir le projet →', proj_view_short:'📄 Voir →',
     tukme_badge:'🚕 Application Mobile · Fintech',
     tukme_desc:"Application VTC mobile complète pour commander un tuk-tuk depuis son smartphone — géolocalisation temps réel, paiement Stripe in-app, panel admin web. Projet full-scale de A à Z.",
     tukme_f1:'Géolocalisation et carte interactive (Google Maps / Routes API)',
@@ -1083,6 +1139,7 @@ const T = {
     // PROJECTS
     proj_label:'Projects', proj_title:'Production apps',
     proj_desc:'Real projects, with real code, deployed in production. Not tutorials.',
+    proj_view:'📄 View project →', proj_view_short:'📄 View →',
     tukme_badge:'🚕 Mobile App · Fintech',
     tukme_desc:'Complete mobile ride-hailing app to book a tuk-tuk from your smartphone — real-time geolocation, in-app Stripe payments, web admin panel. Full-scale project from A to Z.',
     tukme_f1:'Real-time geolocation and interactive map (Google Maps / Routes API)',
