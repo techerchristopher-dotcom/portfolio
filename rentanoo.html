@@ -355,111 +355,297 @@ section { padding: 88px 40px; position:relative; }
   line-height:1.6; font-style:italic;
 }
 
-/* PROBLEM */
+/* PROBLEM — avant / après */
 #problem { background:var(--dark); }
+.problem-intro {
+  max-width:520px; font-size:.95rem; color:var(--grey);
+  margin:-8px 0 28px; line-height:1.55;
+}
 .problem-split {
-  display:grid; grid-template-columns:1fr auto 1fr; gap:24px;
-  align-items:stretch; margin-bottom:32px;
+  display:grid; grid-template-columns:1fr auto 1fr; gap:20px;
+  align-items:stretch; margin-bottom:28px;
 }
 .problem-col {
-  background:var(--card-bg); border-radius:24px; padding:32px;
-  border:1px solid rgba(65,168,240,0.12);
+  position:relative; overflow:hidden;
+  background:linear-gradient(165deg, rgba(30,60,100,0.45), rgba(13,27,42,0.9));
+  border-radius:24px; padding:26px 22px 22px;
+  border:1px solid rgba(65,168,240,0.14);
+  opacity:0; transform:translateY(16px);
+  transition:opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s;
 }
-.problem-col.before { border-color:rgba(239,68,68,0.2); }
-.problem-col.after { border-color:rgba(34,197,94,0.25); background:rgba(34,197,94,0.06); }
+.problem-split.visible .problem-col { opacity:1; transform:translateY(0); }
+.problem-split.visible .problem-col.before { transition-delay:.05s; }
+.problem-split.visible .problem-col.after { transition-delay:.2s; }
+.problem-col::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+}
+.problem-col.before {
+  border-color:rgba(239,68,68,0.28);
+  background:linear-gradient(165deg, rgba(60,30,40,0.35), rgba(13,27,42,0.92));
+}
+.problem-col.before::before {
+  background:linear-gradient(90deg, #f87171, transparent 80%);
+}
+.problem-col.after {
+  border-color:rgba(34,197,94,0.35);
+  background:linear-gradient(165deg, rgba(20,50,45,0.4), rgba(13,27,42,0.9));
+}
+.problem-col.after::before {
+  background:linear-gradient(90deg, var(--green), transparent 80%);
+}
+.problem-col-head { margin-bottom:18px; }
 .problem-col h3 {
-  font-size:1rem; font-weight:800; margin-bottom:24px;
-  letter-spacing:1px; text-transform:uppercase;
+  font-size:.95rem; font-weight:800; letter-spacing:1.5px;
+  text-transform:uppercase; margin-bottom:6px;
 }
 .problem-col.before h3 { color:#f87171; }
 .problem-col.after h3 { color:var(--green); }
-.problem-items { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.problem-col-sub {
+  font-size:.78rem; color:var(--grey); line-height:1.4;
+}
+.problem-items { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .problem-item {
-  background:rgba(0,0,0,0.25); border-radius:14px; padding:20px 14px;
-  text-align:center; border:1px solid rgba(255,255,255,0.06);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  background:rgba(0,0,0,0.28); border-radius:14px; padding:16px 12px;
+  border:1px dashed rgba(239,68,68,0.25);
+  text-align:center;
+  opacity:0; transform:scale(0.96);
+  transition:opacity .4s ease, transform .4s ease, border-color .25s;
 }
-.problem-item .icon { font-size:1.8rem; margin-bottom:8px; }
-.problem-item span { font-size:.82rem; font-weight:600; color:var(--white); }
-.problem-after-card {
-  text-align:center; padding:40px 24px;
-  background:linear-gradient(135deg, rgba(65,168,240,0.15), rgba(34,197,94,0.1));
-  border-radius:16px; border:1px solid rgba(65,168,240,0.3);
+.problem-split.visible .problem-item {
+  opacity:1; transform:scale(1);
 }
-.problem-after-card p { color:var(--light-blue); font-weight:600; font-size:.95rem; }
-.problem-arrow {
+.problem-split.visible .problem-item:nth-child(1) { transition-delay:.12s; }
+.problem-split.visible .problem-item:nth-child(2) { transition-delay:.18s; }
+.problem-split.visible .problem-item:nth-child(3) { transition-delay:.24s; }
+.problem-split.visible .problem-item:nth-child(4) { transition-delay:.3s; }
+.problem-item-icon {
+  width:44px; height:44px; border-radius:12px;
+  background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3);
   display:flex; align-items:center; justify-content:center;
-  font-size:2rem; color:var(--accent); font-weight:300;
 }
-.problem-impact {
-  text-align:center; font-size:1.15rem; font-weight:700;
-  color:var(--white); line-height:1.6;
+.problem-item-icon svg {
+  width:22px; height:22px; stroke:#fca5a5;
+  fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round;
 }
-.problem-impact span { color:var(--accent); }
+.problem-item span { font-size:.8rem; font-weight:600; color:var(--white); }
+.problem-bridge {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:8px; padding:0 4px;
+  opacity:0; transition:opacity .4s ease .15s;
+}
+.problem-split.visible .problem-bridge { opacity:1; }
+.problem-bridge-circle {
+  width:48px; height:48px; border-radius:50%;
+  background:rgba(65,168,240,0.12); border:2px solid rgba(65,168,240,0.4);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px rgba(65,168,240,0.15);
+}
+.problem-bridge-circle svg {
+  width:22px; height:22px; stroke:var(--accent);
+  fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+}
+.problem-bridge-label {
+  font-size:.65rem; font-weight:700; color:var(--grey);
+  text-transform:uppercase; letter-spacing:1px; text-align:center;
+  max-width:72px; line-height:1.3;
+}
+.problem-after-card {
+  text-align:center; padding:36px 20px 32px;
+  background:linear-gradient(145deg, rgba(65,168,240,0.12), rgba(34,197,94,0.14));
+  border-radius:18px; border:1px solid rgba(34,197,94,0.35);
+  box-shadow:0 16px 40px rgba(34,197,94,0.08);
+}
+.problem-after-card .rentanoo-logo--md { width:min(220px, 90%); margin:0 auto 14px; }
+.problem-after-card p {
+  color:var(--light-blue); font-weight:700; font-size:1rem;
+  letter-spacing:.2px;
+}
+.problem-benefits {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+}
+.problem-benefit {
+  text-align:center; padding:18px 14px;
+  background:rgba(65,168,240,0.08); border-radius:16px;
+  border:1px solid rgba(65,168,240,0.18);
+  opacity:0; transform:translateY(10px);
+  transition:opacity .45s ease, transform .45s ease, border-color .25s;
+}
+.problem-benefits.visible .problem-benefit { opacity:1; transform:translateY(0); }
+.problem-benefits.visible .problem-benefit:nth-child(1) { transition-delay:.08s; }
+.problem-benefits.visible .problem-benefit:nth-child(2) { transition-delay:.14s; }
+.problem-benefits.visible .problem-benefit:nth-child(3) { transition-delay:.2s; }
+.problem-benefit:hover { border-color:rgba(65,168,240,0.4); }
+.problem-benefit strong {
+  display:block; font-size:.95rem; font-weight:800; color:var(--accent);
+  margin-bottom:4px; line-height:1.35;
+}
+.problem-benefit span {
+  font-size:.78rem; color:var(--grey); line-height:1.4;
+}
 
 /* PILLARS */
 #pillars { background:var(--dark2); }
+.pillars-intro {
+  max-width:560px; font-size:.95rem; color:var(--grey);
+  margin:-8px 0 28px; line-height:1.55;
+}
 .pillars-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  align-items:stretch;
 }
 .pillar-card {
-  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
-  border-radius:24px; padding:28px;
-  transition: all .35s;
+  --pillar-accent: var(--accent);
+  position:relative; display:flex; flex-direction:column;
+  background:linear-gradient(165deg, rgba(30,60,100,0.55), rgba(13,27,42,0.85));
+  border:1px solid rgba(65,168,240,0.18);
+  border-radius:24px; padding:26px 24px 22px;
+  overflow:hidden;
+  transition:border-color .35s, transform .35s, box-shadow .35s;
 }
+.pillar-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--pillar-accent), transparent 85%);
+}
+.pillar-card::after {
+  content:''; position:absolute; top:-40px; right:-40px;
+  width:120px; height:120px; border-radius:50%;
+  background:radial-gradient(circle, rgba(65,168,240,0.12), transparent 70%);
+  pointer-events:none;
+}
+.pillar-card--01 { --pillar-accent: #41A8F0; }
+.pillar-card--02 { --pillar-accent: #6BB8FF; }
+.pillar-card--03 { --pillar-accent: #2EC4A8; }
 .pillar-card:hover {
-  border-color:var(--accent); transform:translateY(-4px);
-  box-shadow:0 20px 50px rgba(65,168,240,0.12);
+  border-color:var(--pillar-accent); transform:translateY(-5px);
+  box-shadow:0 22px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(65,168,240,0.08);
 }
-.pillar-num {
-  font-size:.7rem; font-weight:800; color:var(--accent);
-  letter-spacing:2px; margin-bottom:12px;
+.pillar-head {
+  display:flex; align-items:flex-start; gap:14px; margin-bottom:16px;
 }
-.pillar-card h3 { font-size:1.15rem; font-weight:800; margin-bottom:8px; }
-.pillar-objective {
-  font-size:.85rem; color:var(--accent); font-weight:600;
-  margin-bottom:18px; padding-bottom:14px;
-  border-bottom:1px solid rgba(65,168,240,0.15);
-}
-.pillar-features { list-style:none; }
-.pillar-features li {
-  font-size:.88rem; color:var(--grey); padding:6px 0;
-  padding-left:18px; position:relative;
-}
-.pillar-features li::before {
-  content:''; position:absolute; left:0; top:12px;
-  width:6px; height:6px; border-radius:50%; background:var(--accent);
-}
-
-/* BOOKING FLOW */
-#flow { background:var(--dark); overflow:hidden; }
-.booking-flow {
-  display:flex; flex-wrap:wrap; justify-content:center; gap:0;
-  position:relative; padding:20px 0;
-}
-.flow-step {
-  display:flex; flex-direction:column; align-items:center;
-  width:100px; opacity:0; transform:translateY(12px);
-  transition: opacity .4s ease, transform .4s ease;
-}
-.booking-flow.visible .flow-step {
-  opacity:1; transform:translateY(0);
-}
-.flow-step .flow-icon {
-  width:48px; height:48px; border-radius:14px;
-  background:rgba(65,168,240,0.12); border:1px solid rgba(65,168,240,0.3);
+.pillar-icon {
+  flex-shrink:0; width:52px; height:52px; border-radius:16px;
+  background:rgba(65,168,240,0.1); border:2px solid rgba(65,168,240,0.28);
   display:flex; align-items:center; justify-content:center;
-  font-size:1.2rem; margin-bottom:8px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
 }
-.flow-step span {
-  font-size:.68rem; font-weight:600; color:var(--light-blue);
-  text-align:center; line-height:1.3; max-width:90px;
+.pillar-icon svg {
+  width:26px; height:26px; stroke:var(--light-blue);
+  fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round;
 }
-.flow-connector {
-  width:24px; height:2px; background:linear-gradient(90deg, var(--accent), rgba(65,168,240,0.2));
-  align-self:center; margin-top:-28px; flex-shrink:0;
-  opacity:0; transition: opacity .3s ease .2s;
+.pillar-card--03 .pillar-icon { border-color:rgba(46,196,168,0.35); background:rgba(46,196,168,0.1); }
+.pillar-card--03 .pillar-icon svg { stroke:#7EE8D0; }
+.pillar-head-text { min-width:0; }
+.pillar-num {
+  display:block; font-size:.68rem; font-weight:800; color:var(--pillar-accent);
+  letter-spacing:2px; margin-bottom:4px;
 }
-.booking-flow.visible .flow-connector { opacity:1; }
+.pillar-card h3 {
+  font-size:1.12rem; font-weight:800; line-height:1.25;
+}
+.pillar-objective {
+  font-size:.82rem; color:var(--light-blue); font-weight:600;
+  margin-bottom:16px; padding:10px 12px; line-height:1.45;
+  background:rgba(65,168,240,0.08); border-radius:12px;
+  border-left:3px solid var(--pillar-accent);
+}
+.pillar-features {
+  list-style:none; margin-top:auto; display:flex; flex-direction:column; gap:6px;
+}
+.pillar-features li {
+  font-size:.84rem; color:var(--white); font-weight:500;
+  padding:9px 10px 9px 36px; position:relative;
+  background:rgba(255,255,255,0.03); border-radius:10px;
+  border:1px solid rgba(65,168,240,0.08);
+  transition:background .2s, border-color .2s;
+}
+.pillar-card:hover .pillar-features li { border-color:rgba(65,168,240,0.14); }
+.pillar-features li::before {
+  content:''; position:absolute; left:10px; top:50%;
+  transform:translateY(-50%);
+  width:18px; height:18px; border-radius:6px;
+  background:var(--pillar-accent);
+  opacity:.9;
+}
+.pillar-features li::after {
+  content:''; position:absolute; left:15px; top:50%;
+  width:8px; height:5px; margin-top:1px;
+  border-left:2px solid var(--dark); border-bottom:2px solid var(--dark);
+  transform:translateY(-50%) rotate(-45deg);
+}
+.pillars-grid .pillar-card {
+  opacity:0; transform:translateY(18px);
+  transition:opacity .5s ease, transform .5s ease, border-color .35s, box-shadow .35s;
+}
+.pillars-grid.visible .pillar-card { opacity:1; transform:translateY(0); }
+.pillars-grid.visible .pillar-card:nth-child(1) { transition-delay:.06s; }
+.pillars-grid.visible .pillar-card:nth-child(2) { transition-delay:.14s; }
+.pillars-grid.visible .pillar-card:nth-child(3) { transition-delay:.22s; }
+
+/* BOOKING FLOW — journey timeline */
+#flow { background:var(--dark); overflow:hidden; }
+.journey-track {
+  position:relative; padding:8px 0 16px;
+}
+.journey-hint {
+  display:none; text-align:center; font-size:.72rem; color:var(--grey);
+  margin-bottom:16px; letter-spacing:.3px;
+}
+@media (min-width: 901px) {
+  .journey-hint { display:block; }
+}
+.journey-scroll {
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  padding:32px 12px 20px;
+  mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.journey-steps {
+  list-style:none; margin:0; padding:0 20px;
+  display:flex; align-items:flex-start; gap:8px;
+  min-width:min-content; position:relative;
+}
+.journey-steps::before {
+  content:''; position:absolute; top:28px; left:48px; right:48px;
+  height:2px; z-index:0;
+  background:linear-gradient(90deg, var(--accent) 0%, rgba(65,168,240,0.25) 100%);
+  opacity:.85;
+}
+.journey-step {
+  flex:0 0 108px; display:flex; flex-direction:column; align-items:center;
+  position:relative; z-index:1;
+  opacity:0; transform:translateY(14px);
+  transition:opacity .45s ease, transform .45s ease;
+}
+.journey-track.visible .journey-step { opacity:1; transform:translateY(0); }
+.journey-node {
+  width:56px; height:56px; border-radius:16px;
+  background:linear-gradient(145deg, rgba(30,60,100,0.9), rgba(13,27,42,0.95));
+  border:2px solid rgba(65,168,240,0.35);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:12px; position:relative;
+  box-shadow:0 10px 28px rgba(0,0,0,0.35);
+  transition:border-color .25s, box-shadow .25s;
+}
+.journey-step:hover .journey-node {
+  border-color:var(--accent);
+  box-shadow:0 12px 32px rgba(65,168,240,0.2);
+}
+.journey-num {
+  position:absolute; top:-8px; right:-8px;
+  font-size:.58rem; font-weight:800; letter-spacing:.02em;
+  color:var(--dark); background:var(--accent);
+  width:20px; height:20px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:2px solid var(--dark);
+}
+.journey-node svg {
+  width:24px; height:24px; stroke:var(--light-blue);
+  fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round;
+}
+.journey-label {
+  font-size:.7rem; font-weight:600; color:var(--light-blue);
+  text-align:center; line-height:1.35; max-width:100px; margin:0;
+}
 
 /* PROOF */
 #proof { background:var(--dark2); }
@@ -651,18 +837,29 @@ footer a { color:var(--accent); text-decoration:none; }
   }
   .assets-grid { grid-template-columns:1fr; }
   .asset-preview, .asset-placeholder { height:220px; min-height:220px; }
-  .problem-split { grid-template-columns:1fr; }
-  .problem-arrow { transform:rotate(90deg); padding:8px 0; }
+  .problem-split { grid-template-columns:1fr; gap:16px; }
+  .problem-bridge { flex-direction:row; padding:4px 0; }
+  .problem-bridge-circle { transform:rotate(90deg); }
+  .problem-bridge-label { max-width:none; }
+  .problem-benefits { grid-template-columns:1fr; }
   .pillars-grid, .proof-grid, .lessons-grid { grid-template-columns:1fr; }
   .why-grid { grid-template-columns:1fr; }
   .impact-split { grid-template-columns:1fr; }
-  .booking-flow { flex-direction:column; align-items:center; gap:4px; }
-  .flow-connector {
-    width:2px; height:16px; margin:0;
+  .journey-scroll { mask-image:none; padding:16px 8px; overflow-x:visible; }
+  .journey-steps {
+    flex-direction:column; align-items:stretch; min-width:0;
+    padding:0 0 0 12px; gap:0;
+  }
+  .journey-steps::before {
+    top:0; bottom:0; left:27px; right:auto; width:2px; height:auto;
     background:linear-gradient(180deg, var(--accent), rgba(65,168,240,0.2));
   }
-  .flow-step { width:auto; flex-direction:row; gap:12px; width:100%; max-width:280px; }
-  .flow-step span { text-align:left; max-width:none; }
+  .journey-step {
+    flex:0 0 auto; flex-direction:row; align-items:center; gap:16px;
+    width:100%; max-width:340px; padding:10px 0;
+  }
+  .journey-node { margin-bottom:0; flex-shrink:0; }
+  .journey-label { text-align:left; max-width:none; font-size:.82rem; }
 }
 
 @media (max-width: 600px) {
@@ -672,7 +869,8 @@ footer a { color:var(--accent); text-decoration:none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-in, .flow-step, .timeline-step { transition:none; }
+  .fade-in, .journey-step, .timeline-step, .pillars-grid .pillar-card,
+  .problem-col, .problem-item, .problem-benefit, .problem-bridge { transition:none; }
   .hero-meta .dot { animation:none; }
   html { scroll-behavior:auto; }
 }
@@ -801,19 +999,51 @@ footer a { color:var(--accent); text-decoration:none; }
   <div class="section-inner">
     <p class="section-label fade-in" data-i18n="problem_label">Diagnostic</p>
     <h2 class="section-title fade-in" data-i18n="problem_title">Le problème</h2>
-    <div class="problem-split fade-in">
+    <p class="problem-intro fade-in" data-i18n="problem_desc">Les agences jonglent entre outils déconnectés — sans vision globale sur les réservations ni la rentabilité.</p>
+    <div class="problem-split fade-in" id="problemSplit">
       <div class="problem-col before">
-        <h3 data-i18n="problem_before">Avant</h3>
+        <div class="problem-col-head">
+          <h3 data-i18n="problem_before">Avant</h3>
+          <p class="problem-col-sub" data-i18n="problem_before_sub">Outils éparpillés, données non synchronisées.</p>
+        </div>
         <div class="problem-items">
-          <div class="problem-item"><div class="icon">💬</div><span>WhatsApp</span></div>
-          <div class="problem-item"><div class="icon">📞</div><span data-i18n="problem_phone">Téléphone</span></div>
-          <div class="problem-item"><div class="icon">📊</div><span>Excel</span></div>
-          <div class="problem-item"><div class="icon">📄</div><span data-i18n="problem_paper">Papier</span></div>
+          <div class="problem-item">
+            <div class="problem-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span>WhatsApp</span>
+          </div>
+          <div class="problem-item">
+            <div class="problem-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span data-i18n="problem_phone">Téléphone</span>
+          </div>
+          <div class="problem-item">
+            <div class="problem-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+            </div>
+            <span>Excel</span>
+          </div>
+          <div class="problem-item">
+            <div class="problem-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+            </div>
+            <span data-i18n="problem_paper">Papier</span>
+          </div>
         </div>
       </div>
-      <div class="problem-arrow" aria-hidden="true">→</div>
+      <div class="problem-bridge">
+        <div class="problem-bridge-circle" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+        <span class="problem-bridge-label" data-i18n="problem_bridge">Vers une solution unifiée</span>
+      </div>
       <div class="problem-col after">
-        <h3 data-i18n="problem_after">Après</h3>
+        <div class="problem-col-head">
+          <h3 data-i18n="problem_after">Après</h3>
+          <p class="problem-col-sub" data-i18n="problem_after_sub">Tout centralisé dans une seule application.</p>
+        </div>
         <div class="problem-after-card">
           <div class="rentanoo-logo-wrap rentanoo-logo-wrap--center">
             <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--md">
@@ -822,11 +1052,20 @@ footer a { color:var(--accent); text-decoration:none; }
         </div>
       </div>
     </div>
-    <p class="problem-impact fade-in">
-      <span data-i18n="impact_line1">Moins d'administratif.</span>
-      <span data-i18n="impact_line2"> Moins d'erreurs.</span><br>
-      <span data-i18n="impact_line3">Plus de visibilité sur la rentabilité.</span>
-    </p>
+    <div class="problem-benefits fade-in" id="problemBenefits">
+      <div class="problem-benefit">
+        <strong data-i18n="impact_line1">Moins d'administratif.</strong>
+        <span data-i18n="impact_b1">Processus automatisés, moins de ressaisie.</span>
+      </div>
+      <div class="problem-benefit">
+        <strong data-i18n="impact_line2_short">Moins d'erreurs.</strong>
+        <span data-i18n="impact_b2">Une source de vérité pour chaque réservation.</span>
+      </div>
+      <div class="problem-benefit">
+        <strong data-i18n="impact_line3">Plus de visibilité sur la rentabilité.</strong>
+        <span data-i18n="impact_b3">Pilotage flotte et marges en temps réel.</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -835,10 +1074,18 @@ footer a { color:var(--accent); text-decoration:none; }
   <div class="section-inner">
     <p class="section-label fade-in" data-i18n="pillars_label">Produit</p>
     <h2 class="section-title fade-in" data-i18n="pillars_title">Les 3 piliers</h2>
-    <div class="pillars-grid fade-in">
-      <div class="pillar-card">
-        <div class="pillar-num" data-i18n="pillar1_num">PILIER 01</div>
-        <h3 data-i18n="pillar1_title">Réservation en ligne</h3>
+    <p class="pillars-intro fade-in" data-i18n="pillars_desc">Trois modules qui couvrent tout le cycle — de la vente en ligne au pilotage de la flotte.</p>
+    <div class="pillars-grid fade-in" id="pillarsGrid">
+      <article class="pillar-card pillar-card--01">
+        <div class="pillar-head">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01"/></svg>
+          </div>
+          <div class="pillar-head-text">
+            <span class="pillar-num" data-i18n="pillar1_num">PILIER 01</span>
+            <h3 data-i18n="pillar1_title">Réservation en ligne</h3>
+          </div>
+        </div>
         <p class="pillar-objective" data-i18n="pillar1_obj">Objectif : Vendre 24h/24.</p>
         <ul class="pillar-features">
           <li data-i18n="pillar1_f1">Catalogue</li>
@@ -846,22 +1093,36 @@ footer a { color:var(--accent); text-decoration:none; }
           <li data-i18n="pillar1_f3">Réservation</li>
           <li data-i18n="pillar1_f4">Paiement Stripe</li>
         </ul>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-num" data-i18n="pillar2_num">PILIER 02</div>
-        <h3 data-i18n="pillar2_title">CRM &amp; Exploitation</h3>
+      </article>
+      <article class="pillar-card pillar-card--02">
+        <div class="pillar-head">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>
+          </div>
+          <div class="pillar-head-text">
+            <span class="pillar-num" data-i18n="pillar2_num">PILIER 02</span>
+            <h3 data-i18n="pillar2_title">CRM &amp; Exploitation</h3>
+          </div>
+        </div>
         <p class="pillar-objective" data-i18n="pillar2_obj">Objectif : Piloter l'agence.</p>
         <ul class="pillar-features">
-          <li>CRM</li>
+          <li data-i18n="pillar2_f1">CRM</li>
           <li data-i18n="pillar2_f2">Planning</li>
           <li data-i18n="pillar2_f3">Cautions</li>
           <li data-i18n="pillar2_f4">Paiements</li>
           <li data-i18n="pillar2_f5">États des lieux digitalisés</li>
         </ul>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-num" data-i18n="pillar3_num">PILIER 03</div>
-        <h3 data-i18n="pillar3_title">Gestion de flotte</h3>
+      </article>
+      <article class="pillar-card pillar-card--03">
+        <div class="pillar-head">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3H5v3c0 .6.4 1 1 1h2"/><path d="M7 11h10"/><path d="M7 7l1.5-3h7L17 7"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
+          </div>
+          <div class="pillar-head-text">
+            <span class="pillar-num" data-i18n="pillar3_num">PILIER 03</span>
+            <h3 data-i18n="pillar3_title">Gestion de flotte</h3>
+          </div>
+        </div>
         <p class="pillar-objective" data-i18n="pillar3_obj">Objectif : Connaître le coût réel de chaque véhicule.</p>
         <ul class="pillar-features">
           <li data-i18n="pillar3_f1">Maintenance</li>
@@ -869,7 +1130,7 @@ footer a { color:var(--accent); text-decoration:none; }
           <li data-i18n="pillar3_f3">Stock pièces</li>
           <li data-i18n="pillar3_f4">Rapports</li>
         </ul>
-      </div>
+      </article>
     </div>
   </div>
 </section>
@@ -992,26 +1253,52 @@ footer a { color:var(--accent); text-decoration:none; }
     <p class="section-label fade-in" data-i18n="flow_label">Parcours</p>
     <h2 class="section-title fade-in" data-i18n="flow_title">Le parcours complet d'une réservation</h2>
     <p class="section-desc fade-in" data-i18n="flow_desc">Du client au reporting — le produit en un coup d'œil.</p>
-    <div class="booking-flow fade-in" id="bookingFlow">
-      <div class="flow-step" style="transition-delay:.05s"><div class="flow-icon">👤</div><span data-i18n="flow_s1">Client</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.1s"><div class="flow-icon">🔍</div><span data-i18n="flow_s2">Recherche véhicule</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.15s"><div class="flow-icon">📅</div><span data-i18n="flow_s3">Réservation</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.2s"><div class="flow-icon">💳</div><span data-i18n="flow_s4">Paiement Stripe</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.25s"><div class="flow-icon">📋</div><span data-i18n="flow_s5">Planning agence</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.3s"><div class="flow-icon">📱</div><span data-i18n="flow_s6">EDL départ</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.35s"><div class="flow-icon">🚗</div><span data-i18n="flow_s7">Location</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.4s"><div class="flow-icon">📲</div><span data-i18n="flow_s8">EDL retour</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.45s"><div class="flow-icon">🔧</div><span data-i18n="flow_s9">Maintenance éventuelle</span></div>
-      <div class="flow-connector"></div>
-      <div class="flow-step" style="transition-delay:.5s"><div class="flow-icon">📊</div><span data-i18n="flow_s10">Reporting flotte</span></div>
+    <div class="journey-track fade-in" id="bookingFlow">
+      <p class="journey-hint" data-i18n="journey_hint">Faites défiler pour voir tout le parcours →</p>
+      <div class="journey-scroll">
+        <ol class="journey-steps">
+          <li class="journey-step" style="transition-delay:.04s">
+            <div class="journey-node"><span class="journey-num">1</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s1">Client</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.08s">
+            <div class="journey-node"><span class="journey-num">2</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s2">Recherche véhicule</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.12s">
+            <div class="journey-node"><span class="journey-num">3</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s3">Réservation</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.16s">
+            <div class="journey-node"><span class="journey-num">4</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s4">Paiement Stripe</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.2s">
+            <div class="journey-node"><span class="journey-num">5</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s5">Planning agence</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.24s">
+            <div class="journey-node"><span class="journey-num">6</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s6">EDL départ</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.28s">
+            <div class="journey-node"><span class="journey-num">7</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3H5v3c0 .6.4 1 1 1h2"/><path d="M7 11h10"/><path d="M7 7l1.5-3h7L17 7"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s7">Location</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.32s">
+            <div class="journey-node"><span class="journey-num">8</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 6h6M9 10h6"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s8">EDL retour</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.36s">
+            <div class="journey-node"><span class="journey-num">9</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s9">Maintenance éventuelle</p>
+          </li>
+          <li class="journey-step" style="transition-delay:.4s">
+            <div class="journey-node"><span class="journey-num">10</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16v-4M12 16V8M17 16v-6"/></svg></div>
+            <p class="journey-label" data-i18n="flow_s10">Reporting flotte</p>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
@@ -1254,18 +1541,29 @@ const T = {
     why_p5:"J'ai donc créé Rentanoo pour centraliser l'ensemble des opérations dans une seule plateforme.",
     why_quote:"Un Product Builder qui a vu le terrain avant d'écrire la première ligne de code.",
     problem_label:'Diagnostic', problem_title:'Le problème',
-    problem_before:'Avant', problem_after:'Après', problem_phone:'Téléphone', problem_paper:'Papier',
+    problem_desc:'Les agences jonglent entre outils déconnectés — sans vision globale sur les réservations ni la rentabilité.',
+    problem_before:'Avant', problem_after:'Après',
+    problem_before_sub:'Outils éparpillés, données non synchronisées.',
+    problem_after_sub:'Tout centralisé dans une seule application.',
+    problem_bridge:'Vers une solution unifiée',
+    problem_phone:'Téléphone', problem_paper:'Papier',
     problem_one_platform:'Une seule plateforme.',
-    impact_line1:"Moins d'administratif.", impact_line2:' Moins d\'erreurs.', impact_line3:'Plus de visibilité sur la rentabilité.',
+    impact_line1:"Moins d'administratif.", impact_line2_short:"Moins d'erreurs.",
+    impact_line3:'Plus de visibilité sur la rentabilité.',
+    impact_b1:'Processus automatisés, moins de ressaisie.',
+    impact_b2:'Une source de vérité pour chaque réservation.',
+    impact_b3:'Pilotage flotte et marges en temps réel.',
     pillars_label:'Produit', pillars_title:'Les 3 piliers',
+    pillars_desc:'Trois modules qui couvrent tout le cycle — de la vente en ligne au pilotage de la flotte.',
     pillar1_num:'PILIER 01', pillar1_title:'Réservation en ligne', pillar1_obj:'Objectif : Vendre 24h/24.',
     pillar1_f1:'Catalogue', pillar1_f2:'Disponibilités', pillar1_f3:'Réservation', pillar1_f4:'Paiement Stripe',
     pillar2_num:'PILIER 02', pillar2_title:'CRM & Exploitation', pillar2_obj:"Objectif : Piloter l'agence.",
-    pillar2_f2:'Planning', pillar2_f3:'Cautions', pillar2_f4:'Paiements', pillar2_f5:'États des lieux digitalisés',
+    pillar2_f1:'CRM', pillar2_f2:'Planning', pillar2_f3:'Cautions', pillar2_f4:'Paiements', pillar2_f5:'États des lieux digitalisés',
     pillar3_num:'PILIER 03', pillar3_title:'Gestion de flotte', pillar3_obj:'Objectif : Connaître le coût réel de chaque véhicule.',
     pillar3_f1:'Maintenance', pillar3_f2:'Réparations', pillar3_f3:'Stock pièces', pillar3_f4:'Rapports',
     flow_label:'Parcours', flow_title:"Le parcours complet d'une réservation",
     flow_desc:'Du client au reporting — le produit en un coup d\'œil.',
+    journey_hint:'Faites défiler pour voir tout le parcours →',
     flow_s1:'Client', flow_s2:'Recherche véhicule', flow_s3:'Réservation', flow_s4:'Paiement Stripe',
     flow_s5:'Planning agence', flow_s6:'EDL départ', flow_s7:'Location', flow_s8:'EDL retour',
     flow_s9:'Maintenance éventuelle', flow_s10:'Reporting flotte',
@@ -1329,18 +1627,29 @@ const T = {
     why_p5:'I built Rentanoo to centralize all operations on one platform.',
     why_quote:'A Product Builder who understood the field before writing the first line of code.',
     problem_label:'Diagnosis', problem_title:'The problem',
-    problem_before:'Before', problem_after:'After', problem_phone:'Phone', problem_paper:'Paper',
+    problem_desc:'Agencies juggle disconnected tools — with no unified view of bookings or profitability.',
+    problem_before:'Before', problem_after:'After',
+    problem_before_sub:'Scattered tools, unsynchronized data.',
+    problem_after_sub:'Everything centralized in one application.',
+    problem_bridge:'Toward one unified solution',
+    problem_phone:'Phone', problem_paper:'Paper',
     problem_one_platform:'One single platform.',
-    impact_line1:'Less admin.', impact_line2:' Fewer errors.', impact_line3:'More visibility on profitability.',
+    impact_line1:'Less admin.', impact_line2_short:'Fewer errors.',
+    impact_line3:'More visibility on profitability.',
+    impact_b1:'Automated workflows, less re-entry.',
+    impact_b2:'One source of truth per booking.',
+    impact_b3:'Real-time fleet and margin insights.',
     pillars_label:'Product', pillars_title:'The 3 pillars',
+    pillars_desc:'Three modules covering the full cycle — from online sales to fleet operations.',
     pillar1_num:'PILLAR 01', pillar1_title:'Online booking', pillar1_obj:'Goal: Sell 24/7.',
     pillar1_f1:'Catalog', pillar1_f2:'Availability', pillar1_f3:'Booking', pillar1_f4:'Stripe payment',
     pillar2_num:'PILLAR 02', pillar2_title:'CRM & Operations', pillar2_obj:'Goal: Run the agency.',
-    pillar2_f2:'Scheduling', pillar2_f3:'Deposits', pillar2_f4:'Payments', pillar2_f5:'Digital condition reports',
+    pillar2_f1:'CRM', pillar2_f2:'Scheduling', pillar2_f3:'Deposits', pillar2_f4:'Payments', pillar2_f5:'Digital condition reports',
     pillar3_num:'PILLAR 03', pillar3_title:'Fleet management', pillar3_obj:'Goal: Know the true cost per vehicle.',
     pillar3_f1:'Maintenance', pillar3_f2:'Repairs', pillar3_f3:'Parts inventory', pillar3_f4:'Reports',
     flow_label:'Journey', flow_title:'The full booking journey',
     flow_desc:'From customer to fleet reporting — the product at a glance.',
+    journey_hint:'Scroll to see the full journey →',
     flow_s1:'Customer', flow_s2:'Vehicle search', flow_s3:'Booking', flow_s4:'Stripe payment',
     flow_s5:'Agency schedule', flow_s6:'Check-out EDL', flow_s7:'Rental', flow_s8:'Check-in EDL',
     flow_s9:'Maintenance if needed', flow_s10:'Fleet reporting',
@@ -1416,8 +1725,14 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 const flowEl = document.getElementById('bookingFlow');
+const pillarsEl = document.getElementById('pillarsGrid');
+const problemSplitEl = document.getElementById('problemSplit');
+const problemBenefitsEl = document.getElementById('problemBenefits');
 const timelineEl = document.getElementById('productTimeline');
 if (flowEl) observer.observe(flowEl);
+if (pillarsEl) observer.observe(pillarsEl);
+if (problemSplitEl) observer.observe(problemSplitEl);
+if (problemBenefitsEl) observer.observe(problemBenefitsEl);
 if (timelineEl) {
   const tlObs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
