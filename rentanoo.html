@@ -76,22 +76,21 @@ nav {
 }
 .nav-rentanoo-brand:hover { transform:translateY(-1px); opacity:.95; }
 .rentanoo-logo-wrap {
-  display:inline-flex; align-items:center; justify-content:center;
-  background:#fff; border-radius:12px;
-  padding:8px 16px;
-  box-shadow:0 4px 24px rgba(0,0,0,0.2);
+  display:inline-block; line-height:0;
+  background:transparent; padding:0; box-shadow:none; border-radius:0;
 }
-.rentanoo-logo-wrap--center { display:flex; margin-left:auto; margin-right:auto; }
+.rentanoo-logo-wrap--center { display:block; text-align:center; }
 .rentanoo-logo {
-  display:block; width:auto; object-fit:contain;
+  display:block; height:auto; width:auto; max-width:100%;
+  object-fit:contain;
+  border-radius:8px;
 }
-.rentanoo-logo--sm { height:22px; max-width:120px; }
-.rentanoo-logo--md { height:36px; max-width:180px; }
-.rentanoo-logo--hero { height:56px; max-width:260px; }
-.nav-rentanoo-brand .rentanoo-logo-wrap { padding:6px 12px; border-radius:10px; }
-.hero-brand { margin:0 0 12px; line-height:1; }
-.hero-brand .rentanoo-logo-wrap { padding:14px 26px; border-radius:14px; }
-.problem-after-card .rentanoo-logo-wrap { margin-bottom:14px; padding:12px 22px; }
+.rentanoo-logo--sm { width:110px; }
+.rentanoo-logo--md { width:200px; margin:0 auto 12px; }
+.rentanoo-logo--hero { width:min(280px, 88vw); }
+.hero-brand { margin:0 0 14px; line-height:0; }
+.problem-after-card { padding:32px 24px 36px; }
+.problem-after-card .rentanoo-logo--md { width:min(220px, 90%); }
 .lang-btn {
   display:flex; align-items:center; gap:6px;
   background: rgba(65,168,240,0.1);
@@ -619,7 +618,6 @@ footer {
 }
 footer a { color:var(--accent); text-decoration:none; }
 .footer-rentanoo { display:inline-flex; text-decoration:none; }
-.footer-rentanoo .rentanoo-logo-wrap { padding:8px 14px; }
 
 /* LIGHTBOX */
 .image-lightbox {
@@ -688,7 +686,7 @@ footer a { color:var(--accent); text-decoration:none; }
     <span class="nav-sep" aria-hidden="true">·</span>
     <a href="https://rentanoo.com" target="_blank" rel="noopener" class="nav-rentanoo-brand" title="Rentanoo">
       <span class="rentanoo-logo-wrap">
-        <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--sm" width="120" height="22">
+        <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--sm">
       </span>
     </a>
     <div class="breadcrumb">
@@ -717,7 +715,7 @@ footer a { color:var(--accent); text-decoration:none; }
     </div>
     <h1 class="hero-brand">
       <span class="rentanoo-logo-wrap">
-        <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--hero" width="260" height="56">
+        <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--hero">
       </span>
     </h1>
     <p class="hero-sub" data-i18n="hero_sub">Le système d'exploitation des agences de location de véhicules.</p>
@@ -818,7 +816,7 @@ footer a { color:var(--accent); text-decoration:none; }
         <h3 data-i18n="problem_after">Après</h3>
         <div class="problem-after-card">
           <div class="rentanoo-logo-wrap rentanoo-logo-wrap--center">
-            <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--md" width="180" height="36">
+            <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--md">
           </div>
           <p data-i18n="problem_one_platform">Une seule plateforme.</p>
         </div>
