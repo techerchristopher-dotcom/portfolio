@@ -23,18 +23,21 @@ Déposer les PNG dans ce dossier avec ces noms exacts :
 | `05-digital-edl-mobile.png` | État des lieux mobile (départ ou retour) | CRM & Exploitation |
 | `06-fleet-maintenance.png` | Maintenance, stock ou rapport flotte | Gestion de flotte |
 
-Après ajout, régénérer les variantes :
+**Important :** il suffit d’uploader le fichier de base (ex. `04-agency-planning.png`).  
+La page charge automatiquement ce fichier ; les variantes `-display` et `-thumb` sont optionnelles.
+
+Les placeholders disparaissent dès que `04-agency-planning.png`, `05-digital-edl-mobile.png` ou `06-fleet-maintenance.png` est présent dans ce dossier.
+
+Variantes optionnelles (macOS) :
 
 ```bash
 cd assets/rentanoo
 for name in 04-agency-planning 05-digital-edl-mobile 06-fleet-maintenance; do
-  sips -Z 1400 "${name}.png" --out "${name}.png"
+  [ -f "${name}.png" ] || continue
   sips -Z 900 "${name}.png" --out "${name}-display.png"
   sips -Z 480 "${name}.png" --out "${name}-thumb.png"
 done
 ```
-
-Les placeholders de la page disparaîtront automatiquement si les fichiers `-display.png` existent.
 
 ## Conseils capture
 

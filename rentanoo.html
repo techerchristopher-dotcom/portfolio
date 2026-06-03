@@ -899,13 +899,14 @@ footer a { color:var(--accent); text-decoration:none; }
               <div class="browser-url">back-office · planning</div>
             </div>
             <img
-              src="assets/rentanoo/04-agency-planning-display.png"
+              class="asset-img"
+              data-asset-id="04-agency-planning"
+              src="assets/rentanoo/04-agency-planning.png"
               data-full="assets/rentanoo/04-agency-planning.png"
               alt="Planning agence"
               width="900" height="563"
               loading="lazy"
               data-lightbox
-              onerror="this.closest('.asset-slot').classList.add('is-placeholder')"
             >
           </div>
           <div class="asset-placeholder">
@@ -929,13 +930,14 @@ footer a { color:var(--accent); text-decoration:none; }
               <div class="browser-url">mobile · EDL</div>
             </div>
             <img
-              src="assets/rentanoo/05-digital-edl-mobile-display.png"
+              class="asset-img"
+              data-asset-id="05-digital-edl-mobile"
+              src="assets/rentanoo/05-digital-edl-mobile.png"
               data-full="assets/rentanoo/05-digital-edl-mobile.png"
               alt="État des lieux digital"
               width="900" height="563"
               loading="lazy"
               data-lightbox
-              onerror="this.closest('.asset-slot').classList.add('is-placeholder')"
             >
           </div>
           <div class="asset-placeholder">
@@ -959,13 +961,14 @@ footer a { color:var(--accent); text-decoration:none; }
               <div class="browser-url">flotte · maintenance</div>
             </div>
             <img
-              src="assets/rentanoo/06-fleet-maintenance-display.png"
+              class="asset-img"
+              data-asset-id="06-fleet-maintenance"
+              src="assets/rentanoo/06-fleet-maintenance.png"
               data-full="assets/rentanoo/06-fleet-maintenance.png"
               alt="Gestion de flotte"
               width="900" height="563"
               loading="lazy"
               data-lightbox
-              onerror="this.closest('.asset-slot').classList.add('is-placeholder')"
             >
           </div>
           <div class="asset-placeholder">
@@ -1465,11 +1468,39 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') openLightboxAt(lightboxIndex - 1);
 });
 
-document.querySelectorAll('.asset-slot img').forEach(img => {
-  const markPlaceholder = () => img.closest('.asset-slot')?.classList.add('is-placeholder');
-  img.addEventListener('error', markPlaceholder, { once: true });
-  if (img.complete && !img.naturalWidth) markPlaceholder();
-});
+/* Optional assets: try -display.png, then base .png; placeholder only if both missing */
+function resolveAssetImage(img) {
+  const slot = img.closest('.asset-slot');
+  if (!slot) return;
+  const id = img.dataset.assetId || slot.dataset.asset;
+  if (!id) return;
+
+  const candidates = [
+    `assets/rentanoo/${id}-display.png`,
+    `assets/rentanoo/${id}.png`,
+    `assets/rentanoo/${id}-thumb.png`
+  ];
+
+  let index = 0;
+  const tryLoad = () => {
+    if (index >= candidates.length) {
+      slot.classList.add('is-placeholder');
+      return;
+    }
+    const url = candidates[index++];
+    const probe = new Image();
+    probe.onload = () => {
+      img.src = url;
+      img.dataset.full = `assets/rentanoo/${id}.png`;
+      slot.classList.remove('is-placeholder');
+    };
+    probe.onerror = tryLoad;
+    probe.src = url;
+  };
+  tryLoad();
+}
+
+document.querySelectorAll('.asset-slot .asset-img').forEach(resolveAssetImage);
 
 try {
   const saved = localStorage.getItem('ct-lang');
