@@ -723,28 +723,28 @@ footer p { color:var(--grey); font-size:.85rem; }
       <div class="project-inner" style="flex-direction:row-reverse;">
         <div class="project-visuals" style="background:linear-gradient(135deg,#1a2535,#0d1b2a);">
           <div class="rentanoo-showcase">
-            <img src="rentanoo-1.png" alt="Rentanoo — page véhicule">
-            <img src="rentanoo-2.png" alt="Rentanoo — réservation">
-            <img src="rentanoo-3.png" alt="Rentanoo — détail location scooter">
+            <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — catalogue et recherche">
+            <img src="assets/rentanoo/02-booking-confirmation-display.png" alt="Rentanoo — confirmation réservation">
+            <img src="assets/rentanoo/03-vehicle-detail-display.png" alt="Rentanoo — fiche véhicule">
           </div>
         </div>
         <div class="project-info">
-          <div class="proj-badge" data-i18n="rentanoo_badge">🛵 Marketplace Web · Location</div>
+          <div class="proj-badge" data-i18n="rentanoo_badge">SaaS vertical · Product Builder</div>
           <h2>Rentanoo</h2>
-          <p class="proj-desc" data-i18n="rentanoo_desc">Plateforme de location de véhicules entre particuliers et pros sur Nosy Be — réservations, paiement Stripe, messagerie temps réel et états des lieux automatisés via N8N.</p>
+          <p class="proj-desc" data-i18n="rentanoo_desc">Le système d'exploitation des agences de location de véhicules — SaaS métier conçu et développé de bout en bout.</p>
           <ul class="features">
-            <li data-i18n="rentanoo_f1">Marketplace full-stack avec système de réservation complet</li>
-            <li data-i18n="rentanoo_f2">Paiement Stripe (Checkout + Webhooks) + messagerie Supabase Realtime</li>
-            <li data-i18n="rentanoo_f3">3 workflows N8N : formulaires client, états des lieux PDF automatiques, notifications</li>
-            <li data-i18n="rentanoo_f4">Dashboard propriétaire et backoffice admin</li>
+            <li data-i18n="rentanoo_f1">Réservation en ligne 24/7 · Stripe</li>
+            <li data-i18n="rentanoo_f2">CRM, planning et états des lieux digitalisés</li>
+            <li data-i18n="rentanoo_f3">Gestion de flotte · maintenance · reporting</li>
           </ul>
           <div class="proj-stack" translate="no">
-            <span class="stack-tag">Node.js</span><span class="stack-tag">Supabase</span>
+            <span class="stack-tag">React</span><span class="stack-tag">Vite</span>
+            <span class="stack-tag">Express</span><span class="stack-tag">Supabase</span>
             <span class="stack-tag">Stripe</span><span class="stack-tag">N8N</span>
-            <span class="stack-tag">Tailwind</span>
           </div>
           <div class="proj-links">
-            <a href="https://rentanoo.com" target="_blank" class="proj-link primary" data-i18n="rentanoo_live">🌐 Site live</a>
+            <a href="rentanoo.html" class="proj-link primary" data-i18n="rentanoo_case">📖 Étude de cas →</a>
+            <a href="https://rentanoo.com" target="_blank" class="proj-link ghost" data-i18n="rentanoo_live">🌐 Site live</a>
             <a href="https://github.com/techerchristopher-dotcom/rentanoo-nosy-be-clean" target="_blank" class="proj-link ghost">⭐ GitHub</a>
           </div>
         </div>
@@ -991,12 +991,12 @@ const T = {
     tukme_f2:'Paiement Stripe PaymentSheet avec Edge Functions Deno',
     tukme_f3:'Gestion chauffeur & passager avec synchronisation temps réel',
     tukme_f4:'Push notifications Expo · Panel admin Next.js',
-    rentanoo_badge:'🛵 Marketplace Web · Location',
-    rentanoo_desc:"Plateforme de location de véhicules entre particuliers et pros sur Nosy Be — réservations, paiement Stripe, messagerie temps réel et états des lieux automatisés via N8N.",
-    rentanoo_f1:'Marketplace full-stack avec système de réservation complet',
-    rentanoo_f2:'Paiement Stripe (Checkout + Webhooks) + messagerie Supabase Realtime',
-    rentanoo_f3:'3 workflows N8N : formulaires client, états des lieux PDF automatiques, notifications',
-    rentanoo_f4:'Dashboard propriétaire et backoffice admin',
+    rentanoo_badge:'SaaS vertical · Product Builder',
+    rentanoo_desc:"Le système d'exploitation des agences de location de véhicules — SaaS métier conçu et développé de bout en bout.",
+    rentanoo_f1:'Réservation en ligne 24/7 · Stripe',
+    rentanoo_f2:'CRM, planning et états des lieux digitalisés',
+    rentanoo_f3:'Gestion de flotte · maintenance · reporting',
+    rentanoo_case:'📖 Étude de cas →',
     rentanoo_live:'🌐 Site live',
     astra_desc:"MVP d'application horoscope IA francophone pilotée par l'API Claude (Anthropic). React + Vite.",
     rag_desc:"Application de vectorisation et recherche sémantique sur documents avec architecture RAG et pgvector.",
@@ -1089,12 +1089,12 @@ const T = {
     tukme_f2:'Stripe PaymentSheet with Deno Edge Functions',
     tukme_f3:'Driver & passenger management with real-time sync',
     tukme_f4:'Expo push notifications · Next.js admin panel',
-    rentanoo_badge:'🛵 Web Marketplace · Rental',
-    rentanoo_desc:'Vehicle rental platform between individuals and pros in Nosy Be — bookings, Stripe payments, real-time messaging and automated condition reports via N8N.',
-    rentanoo_f1:'Full-stack marketplace with complete booking system',
-    rentanoo_f2:'Stripe payments (Checkout + Webhooks) + Supabase Realtime messaging',
-    rentanoo_f3:'3 N8N workflows: client forms, automatic PDF condition reports, notifications',
-    rentanoo_f4:'Owner dashboard and admin backoffice',
+    rentanoo_badge:'Vertical SaaS · Product Builder',
+    rentanoo_desc:'The operating system for vehicle rental agencies — end-to-end business SaaS designed and built by Christopher.',
+    rentanoo_f1:'24/7 online booking · Stripe',
+    rentanoo_f2:'CRM, scheduling and digital condition reports',
+    rentanoo_f3:'Fleet management · maintenance · reporting',
+    rentanoo_case:'📖 Case study →',
     rentanoo_live:'🌐 Live site',
     astra_desc:'French-language AI horoscope MVP powered by the Claude API (Anthropic). React + Vite.',
     rag_desc:'Document vectorization and semantic search app with RAG architecture and pgvector.',
