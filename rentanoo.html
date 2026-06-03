@@ -178,61 +178,54 @@ section { padding: 88px 40px; position:relative; }
   color:var(--light-blue); font-weight:600;
 }
 
-/* HERO MOCKUP — real product screenshots */
+/* HERO MOCKUP — clean screenshot previews */
 .hero-mockup {
-  position:relative; width:100%; max-width:1100px; margin:0 auto;
-  display:grid; grid-template-columns:1fr 1.2fr 1fr;
-  gap:18px; align-items:end;
+  position:relative; width:100%; max-width:1080px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1.18fr 1fr;
+  gap:20px; align-items:end;
 }
 .hero-mockup-caption {
-  text-align:center; margin-top:14px; font-size:.78rem; color:var(--grey);
+  text-align:center; margin-top:16px; font-size:.78rem; color:var(--grey);
   letter-spacing:.3px;
 }
-.browser-frame {
-  background:#0a1220; border:1px solid rgba(65,168,240,0.22);
-  border-radius:14px; overflow:hidden;
-  box-shadow: 0 28px 70px rgba(0,0,0,0.45);
-  transition: transform .35s ease, border-color .35s, box-shadow .35s;
+.hero-screen {
+  display:flex; flex-direction:column; gap:10px;
+  transition:transform .35s ease;
 }
-.browser-frame:hover {
-  border-color:rgba(65,168,240,0.5);
-  transform:translateY(-4px);
-  box-shadow: 0 32px 80px rgba(65,168,240,0.15);
+.hero-screen:hover { transform:translateY(-4px); }
+.hero-screen.featured { z-index:2; }
+.hero-screen-label {
+  font-size:.68rem; font-weight:800; letter-spacing:1.2px;
+  text-transform:uppercase; color:var(--accent);
+  text-align:center; line-height:1.3;
 }
-.browser-frame.featured {
-  transform:scale(1.04); z-index:2;
+.hero-screen-preview {
+  height:280px; min-height:280px;
+  background:#060d14;
+  background-image:radial-gradient(ellipse 100% 70% at 50% 0%, rgba(46,117,182,0.14), transparent 60%);
+  border:1px solid rgba(65,168,240,0.18);
+  border-radius:16px;
+  padding:14px 12px;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; cursor:zoom-in;
+  box-shadow:0 24px 60px rgba(0,0,0,0.4);
+  transition:border-color .35s, box-shadow .35s;
+}
+.hero-screen.featured .hero-screen-preview {
+  height:320px; min-height:320px;
+  border-color:rgba(65,168,240,0.4);
+  box-shadow:0 32px 72px rgba(65,168,240,0.12);
+}
+.hero-screen:hover .hero-screen-preview {
   border-color:rgba(65,168,240,0.45);
 }
-.browser-frame.featured:hover { transform:scale(1.04) translateY(-4px); }
-.browser-chrome {
-  display:flex; align-items:center; gap:8px;
-  padding:10px 12px; background:rgba(0,0,0,0.45);
-  border-bottom:1px solid rgba(255,255,255,0.06);
+.hero-screen-preview img {
+  max-width:100%; max-height:100%; width:auto; height:auto;
+  object-fit:contain; object-position:center top;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 12px 36px rgba(0,0,0,0.45);
 }
-.browser-dots { display:flex; gap:5px; }
-.browser-dots span {
-  width:9px; height:9px; border-radius:50%;
-  background:rgba(255,255,255,0.12);
-}
-.browser-dots span:nth-child(1) { background:#ff5f57; opacity:.85; }
-.browser-dots span:nth-child(2) { background:#febc2e; opacity:.85; }
-.browser-dots span:nth-child(3) { background:#28c840; opacity:.85; }
-.browser-url {
-  flex:1; font-size:.62rem; color:var(--grey);
-  background:rgba(255,255,255,0.05); border-radius:6px;
-  padding:5px 10px; text-align:center;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-.browser-label {
-  font-size:.62rem; font-weight:700; color:var(--accent);
-  letter-spacing:.4px; text-transform:uppercase;
-  padding:8px 12px 0;
-}
-.browser-frame img {
-  width:100%; display:block; cursor:pointer;
-  aspect-ratio:16/10; object-fit:cover; object-position:top center;
-}
-.browser-frame img[data-lightbox] { cursor:zoom-in; }
 
 /* PRODUCT ASSETS GALLERY */
 #product-assets { background:var(--dark); }
@@ -627,8 +620,11 @@ footer a { color:var(--accent); text-decoration:none; }
   .breadcrumb { display:none; }
   section { padding:72px 24px; }
   #hero { padding:100px 24px 60px; }
-  .hero-mockup { grid-template-columns:1fr; gap:14px; }
-  .browser-frame.featured { transform:none; order:-1; }
+  .hero-mockup { grid-template-columns:1fr; gap:18px; align-items:stretch; }
+  .hero-screen.featured { order:-1; }
+  .hero-screen-preview, .hero-screen.featured .hero-screen-preview {
+    height:240px; min-height:240px;
+  }
   .assets-grid { grid-template-columns:1fr; }
   .asset-preview, .asset-placeholder { height:220px; min-height:220px; }
   .problem-split { grid-template-columns:1fr; }
@@ -705,53 +701,41 @@ footer a { color:var(--accent); text-decoration:none; }
     </div>
 
     <div class="hero-mockup" id="heroMockup">
-      <div class="browser-frame">
-        <div class="browser-label" data-i18n="asset1_label">Recherche &amp; catalogue</div>
-        <div class="browser-chrome">
-          <div class="browser-dots"><span></span><span></span><span></span></div>
-          <div class="browser-url">rentanoo.com</div>
+      <div class="hero-screen">
+        <span class="hero-screen-label" data-i18n="asset1_label">Recherche &amp; catalogue</span>
+        <div class="hero-screen-preview">
+          <img
+            src="assets/rentanoo/01-catalog-search-display.png"
+            data-full="assets/rentanoo/01-catalog-search.png"
+            alt="Rentanoo — accueil et recherche de disponibilités"
+            loading="eager"
+            data-lightbox
+          >
         </div>
-        <img
-          src="assets/rentanoo/01-catalog-search-display.png"
-          data-full="assets/rentanoo/01-catalog-search.png"
-          alt="Rentanoo — accueil et recherche de disponibilités"
-          width="900" height="563"
-          loading="eager"
-          data-lightbox
-          data-caption-key="asset1_caption"
-        >
       </div>
-      <div class="browser-frame featured">
-        <div class="browser-label" data-i18n="asset2_label">Confirmation réservation</div>
-        <div class="browser-chrome">
-          <div class="browser-dots"><span></span><span></span><span></span></div>
-          <div class="browser-url">rentanoo.com · réservation</div>
+      <div class="hero-screen featured">
+        <span class="hero-screen-label" data-i18n="asset2_label">Confirmation réservation</span>
+        <div class="hero-screen-preview">
+          <img
+            src="assets/rentanoo/02-booking-confirmation-display.png"
+            data-full="assets/rentanoo/02-booking-confirmation.png"
+            alt="Rentanoo — confirmation de réservation et tarification"
+            loading="eager"
+            data-lightbox
+          >
         </div>
-        <img
-          src="assets/rentanoo/02-booking-confirmation-display.png"
-          data-full="assets/rentanoo/02-booking-confirmation.png"
-          alt="Rentanoo — confirmation de réservation et tarification"
-          width="900" height="563"
-          loading="eager"
-          data-lightbox
-          data-caption-key="asset2_caption"
-        >
       </div>
-      <div class="browser-frame">
-        <div class="browser-label" data-i18n="asset3_label">Fiche véhicule</div>
-        <div class="browser-chrome">
-          <div class="browser-dots"><span></span><span></span><span></span></div>
-          <div class="browser-url">rentanoo.com · véhicule</div>
+      <div class="hero-screen">
+        <span class="hero-screen-label" data-i18n="asset3_label">Fiche véhicule</span>
+        <div class="hero-screen-preview">
+          <img
+            src="assets/rentanoo/03-vehicle-detail-display.png"
+            data-full="assets/rentanoo/03-vehicle-detail.png"
+            alt="Rentanoo — fiche véhicule et réservation"
+            loading="eager"
+            data-lightbox
+          >
         </div>
-        <img
-          src="assets/rentanoo/03-vehicle-detail-display.png"
-          data-full="assets/rentanoo/03-vehicle-detail.png"
-          alt="Rentanoo — fiche véhicule et réservation"
-          width="900" height="563"
-          loading="eager"
-          data-lightbox
-          data-caption-key="asset3_caption"
-        >
       </div>
     </div>
     <p class="hero-mockup-caption" data-i18n="hero_mockup_caption">Captures réelles de l'application en production — clic pour agrandir</p>
