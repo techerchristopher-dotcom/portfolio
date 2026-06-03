@@ -236,39 +236,78 @@ section { padding: 88px 40px; position:relative; }
 
 /* PRODUCT ASSETS GALLERY */
 #product-assets { background:var(--dark); }
+.assets-showcase { display:flex; flex-direction:column; gap:44px; }
+.assets-row-label {
+  font-size:.72rem; font-weight:800; letter-spacing:2.5px;
+  color:var(--accent); text-transform:uppercase; margin-bottom:18px;
+}
 .assets-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
 }
 .asset-card {
-  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
+  display:flex; flex-direction:column;
+  background:var(--card-bg); border:1px solid rgba(65,168,240,0.12);
   border-radius:20px; overflow:hidden;
-  transition: border-color .3s, transform .3s;
+  transition: border-color .35s, transform .35s, box-shadow .35s;
 }
-.asset-card:hover { border-color:rgba(65,168,240,0.4); transform:translateY(-3px); }
-.asset-card .browser-frame {
-  border:none; border-radius:0; box-shadow:none;
+.asset-card:hover {
+  border-color:rgba(65,168,240,0.38);
+  transform:translateY(-4px);
+  box-shadow:0 24px 56px rgba(0,0,0,0.35);
 }
-.asset-card .browser-frame:hover { transform:none; box-shadow:none; }
-.asset-card .browser-chrome { padding:8px 10px; }
-.asset-card img { aspect-ratio:16/10; }
-.asset-meta { padding:16px 18px 20px; }
+.asset-preview {
+  position:relative; height:260px; min-height:260px;
+  background:#060d14;
+  background-image:radial-gradient(ellipse 90% 80% at 50% 0%, rgba(46,117,182,0.12), transparent 65%);
+  display:flex; align-items:center; justify-content:center;
+  padding:18px 14px; cursor:zoom-in; overflow:hidden;
+}
+.asset-preview img {
+  max-width:100%; max-height:100%; width:auto; height:auto;
+  object-fit:contain; object-position:center top;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  transition:transform .4s ease, box-shadow .4s ease;
+}
+.asset-card:hover .asset-preview img {
+  transform:scale(1.02);
+  box-shadow:0 24px 60px rgba(65,168,240,0.12);
+}
+.asset-zoom {
+  position:absolute; bottom:14px; right:14px;
+  font-size:.68rem; font-weight:700; letter-spacing:.3px;
+  padding:6px 12px; border-radius:50px;
+  background:rgba(13,27,42,0.92); border:1px solid rgba(65,168,240,0.35);
+  color:var(--light-blue); opacity:0; transition:opacity .25s;
+  pointer-events:none;
+}
+.asset-card:hover .asset-zoom { opacity:1; }
+.asset-meta {
+  padding:18px 20px 22px; flex:1;
+  border-top:1px solid rgba(65,168,240,0.08);
+  background:rgba(0,0,0,0.15);
+}
 .asset-meta .asset-pillar {
-  font-size:.68rem; font-weight:800; letter-spacing:1.5px;
-  color:var(--accent); text-transform:uppercase; margin-bottom:6px;
+  font-size:.65rem; font-weight:800; letter-spacing:1.5px;
+  color:var(--accent); text-transform:uppercase; margin-bottom:8px;
 }
-.asset-meta h3 { font-size:.95rem; font-weight:700; margin-bottom:4px; }
-.asset-meta p { font-size:.8rem; color:var(--grey); line-height:1.45; }
-.asset-slot { position:relative; min-height:180px; background:rgba(0,0,0,0.25); }
-.asset-slot.is-placeholder .asset-shot { display:none; }
+.asset-meta h3 { font-size:1rem; font-weight:700; margin-bottom:6px; line-height:1.25; }
+.asset-meta p { font-size:.82rem; color:var(--grey); line-height:1.5; }
+.asset-slot { display:block; }
+.asset-slot.is-placeholder .asset-preview { display:none; }
 .asset-placeholder {
-  display:none; flex-direction:column; align-items:center; justify-content:center;
-  gap:10px; min-height:200px; padding:24px; text-align:center;
-  border:2px dashed rgba(65,168,240,0.25); margin:12px; border-radius:12px;
+  display:none; height:260px; min-height:260px;
+  flex-direction:column; align-items:center; justify-content:center;
+  gap:8px; padding:28px 20px; text-align:center;
+  background:rgba(0,0,0,0.2);
+  border-bottom:1px solid rgba(65,168,240,0.08);
 }
 .asset-slot.is-placeholder .asset-placeholder { display:flex; }
-.asset-placeholder .ph-icon { font-size:2rem; opacity:.6; }
-.asset-placeholder strong { font-size:.82rem; color:var(--light-blue); }
-.asset-placeholder span { font-size:.72rem; color:var(--grey); max-width:220px; line-height:1.4; }
+.asset-placeholder .ph-icon { font-size:1.75rem; opacity:.45; margin-bottom:4px; }
+.asset-placeholder strong { font-size:.8rem; color:var(--grey); font-weight:600; }
+.asset-placeholder span { font-size:.7rem; color:rgba(139,154,176,0.75); max-width:200px; line-height:1.4; }
+.asset-placeholder code { font-size:.65rem; color:var(--accent); }
 .assets-legend {
   margin-top:28px; padding:16px 20px;
   background:rgba(65,168,240,0.06); border:1px solid rgba(65,168,240,0.15);
@@ -591,6 +630,7 @@ footer a { color:var(--accent); text-decoration:none; }
   .hero-mockup { grid-template-columns:1fr; gap:14px; }
   .browser-frame.featured { transform:none; order:-1; }
   .assets-grid { grid-template-columns:1fr; }
+  .asset-preview, .asset-placeholder { height:220px; min-height:220px; }
   .problem-split { grid-template-columns:1fr; }
   .problem-arrow { transform:rotate(90deg); padding:8px 0; }
   .pillars-grid, .proof-grid, .lessons-grid { grid-template-columns:1fr; }
@@ -821,168 +861,105 @@ footer a { color:var(--accent); text-decoration:none; }
     <h2 class="section-title fade-in" data-i18n="assets_title">L'application en captures réelles</h2>
     <p class="section-desc fade-in" data-i18n-html="assets_desc">Chaque écran correspond à un module métier du SaaS. Les placeholders se remplacent dès que les fichiers sont ajoutés dans <code>assets/rentanoo/</code>.</p>
 
-    <div class="assets-grid fade-in">
-      <article class="asset-card">
-        <div class="browser-frame">
-          <div class="browser-chrome">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">rentanoo.com</div>
-          </div>
-          <img
-            class="asset-shot"
-            src="assets/rentanoo/01-catalog-search-thumb.png"
-            data-full="assets/rentanoo/01-catalog-search.png"
-            alt="Catalogue et recherche"
-            width="480" height="300"
-            loading="lazy"
-            data-lightbox
-          >
-        </div>
-        <div class="asset-meta">
-          <div class="asset-pillar" data-i18n="pillar1_num">PILIER 01</div>
-          <h3 data-i18n="asset1_title">Recherche &amp; catalogue</h3>
-          <p data-i18n="asset1_desc">Parcours public : dates, disponibilités, entrée dans le tunnel de réservation.</p>
-        </div>
-      </article>
-
-      <article class="asset-card">
-        <div class="browser-frame">
-          <div class="browser-chrome">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">réservation</div>
-          </div>
-          <img
-            class="asset-shot"
-            src="assets/rentanoo/02-booking-confirmation-thumb.png"
-            data-full="assets/rentanoo/02-booking-confirmation.png"
-            alt="Confirmation réservation"
-            width="480" height="300"
-            loading="lazy"
-            data-lightbox
-          >
-        </div>
-        <div class="asset-meta">
-          <div class="asset-pillar" data-i18n="pillar1_num">PILIER 01</div>
-          <h3 data-i18n="asset2_title">Confirmation &amp; tarification</h3>
-          <p data-i18n="asset2_desc">Récap véhicule, dates, frais de service — avant paiement Stripe.</p>
-        </div>
-      </article>
-
-      <article class="asset-card">
-        <div class="browser-frame">
-          <div class="browser-chrome">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="browser-url">fiche véhicule</div>
-          </div>
-          <img
-            class="asset-shot"
-            src="assets/rentanoo/03-vehicle-detail-thumb.png"
-            data-full="assets/rentanoo/03-vehicle-detail.png"
-            alt="Fiche véhicule"
-            width="480" height="300"
-            loading="lazy"
-            data-lightbox
-          >
-        </div>
-        <div class="asset-meta">
-          <div class="asset-pillar" data-i18n="pillar1_num">PILIER 01</div>
-          <h3 data-i18n="asset3_title">Fiche véhicule</h3>
-          <p data-i18n="asset3_desc">Catalogue, options incluses et CTA Réserver — vente 24h/24.</p>
-        </div>
-      </article>
-
-      <article class="asset-card">
-        <div class="asset-slot" data-asset="04-agency-planning">
-          <div class="browser-frame asset-shot">
-            <div class="browser-chrome">
-              <div class="browser-dots"><span></span><span></span><span></span></div>
-              <div class="browser-url">back-office · planning</div>
+    <div class="assets-showcase fade-in">
+      <div class="assets-row">
+        <p class="assets-row-label" data-i18n="assets_row1">Pilier 01 — Réservation en ligne</p>
+        <div class="assets-grid">
+          <article class="asset-card">
+            <div class="asset-preview">
+              <img src="assets/rentanoo/01-catalog-search-display.png" data-full="assets/rentanoo/01-catalog-search.png" alt="Catalogue et recherche" loading="lazy" data-lightbox>
+              <span class="asset-zoom" data-i18n="asset_zoom">Agrandir</span>
             </div>
-            <img
-              class="asset-img"
-              data-asset-id="04-agency-planning"
-              src="assets/rentanoo/04-agency-planning.png"
-              data-full="assets/rentanoo/04-agency-planning.png"
-              alt="Planning agence"
-              width="900" height="563"
-              loading="lazy"
-              data-lightbox
-            >
-          </div>
-          <div class="asset-placeholder">
-            <span class="ph-icon">📋</span>
-            <strong data-i18n="ph4_title">Planning agence</strong>
-            <span data-i18n-html="ph4_desc">Capture à ajouter : <code>04-agency-planning.png</code></span>
-          </div>
-        </div>
-        <div class="asset-meta">
-          <div class="asset-pillar" data-i18n="pillar2_num">PILIER 02</div>
-          <h3 data-i18n="ph4_title">Planning agence</h3>
-          <p data-i18n="ph4_meta">Pilotage des créneaux et véhicules loués.</p>
-        </div>
-      </article>
-
-      <article class="asset-card">
-        <div class="asset-slot" data-asset="05-digital-edl-mobile">
-          <div class="browser-frame asset-shot">
-            <div class="browser-chrome">
-              <div class="browser-dots"><span></span><span></span><span></span></div>
-              <div class="browser-url">mobile · EDL</div>
+            <div class="asset-meta">
+              <div class="asset-pillar" data-i18n="pillar1_num">PILIER 01</div>
+              <h3 data-i18n="asset1_title">Recherche &amp; catalogue</h3>
+              <p data-i18n="asset1_desc">Parcours public : dates, disponibilités, entrée dans le tunnel de réservation.</p>
             </div>
-            <img
-              class="asset-img"
-              data-asset-id="05-digital-edl-mobile"
-              src="assets/rentanoo/05-digital-edl-mobile.png"
-              data-full="assets/rentanoo/05-digital-edl-mobile.png"
-              alt="État des lieux digital"
-              width="900" height="563"
-              loading="lazy"
-              data-lightbox
-            >
-          </div>
-          <div class="asset-placeholder">
-            <span class="ph-icon">📱</span>
-            <strong data-i18n="ph5_title">EDL digital</strong>
-            <span data-i18n-html="ph5_desc">Capture à ajouter : <code>05-digital-edl-mobile.png</code></span>
-          </div>
-        </div>
-        <div class="asset-meta">
-          <div class="asset-pillar" data-i18n="pillar2_num">PILIER 02</div>
-          <h3 data-i18n="ph5_title">État des lieux mobile</h3>
-          <p data-i18n="ph5_meta">Photos, signature, PDF automatisé via N8N.</p>
-        </div>
-      </article>
-
-      <article class="asset-card">
-        <div class="asset-slot" data-asset="06-fleet-maintenance">
-          <div class="browser-frame asset-shot">
-            <div class="browser-chrome">
-              <div class="browser-dots"><span></span><span></span><span></span></div>
-              <div class="browser-url">flotte · maintenance</div>
+          </article>
+          <article class="asset-card">
+            <div class="asset-preview">
+              <img src="assets/rentanoo/02-booking-confirmation-display.png" data-full="assets/rentanoo/02-booking-confirmation.png" alt="Confirmation réservation" loading="lazy" data-lightbox>
+              <span class="asset-zoom" data-i18n="asset_zoom">Agrandir</span>
             </div>
-            <img
-              class="asset-img"
-              data-asset-id="06-fleet-maintenance"
-              src="assets/rentanoo/06-fleet-maintenance.png"
-              data-full="assets/rentanoo/06-fleet-maintenance.png"
-              alt="Gestion de flotte"
-              width="900" height="563"
-              loading="lazy"
-              data-lightbox
-            >
-          </div>
-          <div class="asset-placeholder">
-            <span class="ph-icon">🔧</span>
-            <strong data-i18n="ph6_title">Gestion de flotte</strong>
-            <span data-i18n-html="ph6_desc">Capture à ajouter : <code>06-fleet-maintenance.png</code></span>
-          </div>
+            <div class="asset-meta">
+              <div class="asset-pillar" data-i18n="pillar1_num">PILIER 01</div>
+              <h3 data-i18n="asset2_title">Confirmation &amp; tarification</h3>
+              <p data-i18n="asset2_desc">Récap véhicule, dates, frais de service — avant paiement Stripe.</p>
+            </div>
+          </article>
+          <article class="asset-card">
+            <div class="asset-preview">
+              <img src="assets/rentanoo/03-vehicle-detail-display.png" data-full="assets/rentanoo/03-vehicle-detail.png" alt="Fiche véhicule" loading="lazy" data-lightbox>
+              <span class="asset-zoom" data-i18n="asset_zoom">Agrandir</span>
+            </div>
+            <div class="asset-meta">
+              <div class="asset-pillar" data-i18n="pillar1_num">PILIER 01</div>
+              <h3 data-i18n="asset3_title">Fiche véhicule</h3>
+              <p data-i18n="asset3_desc">Catalogue, options incluses et CTA Réserver — vente 24h/24.</p>
+            </div>
+          </article>
         </div>
-        <div class="asset-meta">
-          <div class="asset-pillar" data-i18n="pillar3_num">PILIER 03</div>
-          <h3 data-i18n="ph6_title">Maintenance &amp; reporting</h3>
-          <p data-i18n="ph6_meta">Coût réel par véhicule, stock et rapports.</p>
+      </div>
+
+      <div class="assets-row">
+        <p class="assets-row-label" data-i18n="assets_row2">Piliers 02 &amp; 03 — Exploitation &amp; flotte</p>
+        <div class="assets-grid">
+          <article class="asset-card">
+            <div class="asset-slot" data-asset="04-agency-planning">
+              <div class="asset-preview">
+                <img class="asset-img" data-asset-id="04-agency-planning" src="assets/rentanoo/04-agency-planning-display.png" data-full="assets/rentanoo/04-agency-planning.png" alt="Planning agence" loading="lazy" data-lightbox>
+                <span class="asset-zoom" data-i18n="asset_zoom">Agrandir</span>
+              </div>
+              <div class="asset-placeholder">
+                <span class="ph-icon">📋</span>
+                <strong data-i18n="ph4_title">Planning agence</strong>
+                <span data-i18n-html="ph4_desc_short">Capture · <code>04-agency-planning.png</code></span>
+              </div>
+            </div>
+            <div class="asset-meta">
+              <div class="asset-pillar" data-i18n="pillar2_num">PILIER 02</div>
+              <h3 data-i18n="ph4_title">Planning agence</h3>
+              <p data-i18n="ph4_meta">Pilotage des créneaux et véhicules loués.</p>
+            </div>
+          </article>
+          <article class="asset-card">
+            <div class="asset-slot" data-asset="05-digital-edl-mobile">
+              <div class="asset-preview">
+                <img class="asset-img" data-asset-id="05-digital-edl-mobile" src="assets/rentanoo/05-digital-edl-mobile.png" data-full="assets/rentanoo/05-digital-edl-mobile.png" alt="État des lieux digital" loading="lazy" data-lightbox>
+                <span class="asset-zoom" data-i18n="asset_zoom">Agrandir</span>
+              </div>
+              <div class="asset-placeholder">
+                <span class="ph-icon">📱</span>
+                <strong data-i18n="ph5_title">EDL digital</strong>
+                <span data-i18n-html="ph5_desc_short">Capture · <code>05-digital-edl-mobile.png</code></span>
+              </div>
+            </div>
+            <div class="asset-meta">
+              <div class="asset-pillar" data-i18n="pillar2_num">PILIER 02</div>
+              <h3 data-i18n="ph5_title">État des lieux mobile</h3>
+              <p data-i18n="ph5_meta">Photos, signature, PDF automatisé via N8N.</p>
+            </div>
+          </article>
+          <article class="asset-card">
+            <div class="asset-slot" data-asset="06-fleet-maintenance">
+              <div class="asset-preview">
+                <img class="asset-img" data-asset-id="06-fleet-maintenance" src="assets/rentanoo/06-fleet-maintenance-display.png" data-full="assets/rentanoo/06-fleet-maintenance.png" alt="Gestion de flotte" loading="lazy" data-lightbox>
+                <span class="asset-zoom" data-i18n="asset_zoom">Agrandir</span>
+              </div>
+              <div class="asset-placeholder">
+                <span class="ph-icon">🔧</span>
+                <strong data-i18n="ph6_title">Gestion de flotte</strong>
+                <span data-i18n-html="ph6_desc_short">Capture · <code>06-fleet-maintenance.png</code></span>
+              </div>
+            </div>
+            <div class="asset-meta">
+              <div class="asset-pillar" data-i18n="pillar3_num">PILIER 03</div>
+              <h3 data-i18n="ph6_title">Maintenance &amp; reporting</h3>
+              <p data-i18n="ph6_meta">Coût réel par véhicule, stock et rapports.</p>
+            </div>
+          </article>
         </div>
-      </article>
+      </div>
     </div>
 
     <p class="assets-legend fade-in" data-i18n-html="assets_legend">Guide des fichiers et tailles optimisées : voir <code>assets/rentanoo/README.md</code> dans le dépôt portfolio.</p>
@@ -1232,6 +1209,11 @@ const T = {
     asset3_caption:'Fiche véhicule — CTA Réserver',
     assets_label:'Aperçu produit', assets_title:"L'application en captures réelles",
     assets_desc:'Chaque écran correspond à un module métier du SaaS. Les placeholders se remplacent dès que les fichiers sont ajoutés dans <code>assets/rentanoo/</code>.',
+    assets_row1:'Pilier 01 — Réservation en ligne', assets_row2:'Piliers 02 & 03 — Exploitation & flotte',
+    asset_zoom:'Agrandir',
+    ph4_desc_short:'Capture · <code>04-agency-planning.png</code>',
+    ph5_desc_short:'Capture · <code>05-digital-edl-mobile.png</code>',
+    ph6_desc_short:'Capture · <code>06-fleet-maintenance.png</code>',
     asset1_title:'Recherche & catalogue', asset1_desc:'Parcours public : dates, disponibilités, entrée dans le tunnel de réservation.',
     asset2_title:'Confirmation & tarification', asset2_desc:'Récap véhicule, dates, frais de service — avant paiement Stripe.',
     asset3_title:'Fiche véhicule', asset3_desc:'Catalogue, options incluses et CTA Réserver — vente 24h/24.',
@@ -1302,6 +1284,11 @@ const T = {
     asset3_caption:'Vehicle page — Book CTA',
     assets_label:'Product preview', assets_title:'The app in real screenshots',
     assets_desc:'Each screen maps to a business module. Placeholders auto-replace when files are added to <code>assets/rentanoo/</code>.',
+    assets_row1:'Pillar 01 — Online booking', assets_row2:'Pillars 02 & 03 — Operations & fleet',
+    asset_zoom:'Enlarge',
+    ph4_desc_short:'Screenshot · <code>04-agency-planning.png</code>',
+    ph5_desc_short:'Screenshot · <code>05-digital-edl-mobile.png</code>',
+    ph6_desc_short:'Screenshot · <code>06-fleet-maintenance.png</code>',
     asset1_title:'Search & catalog', asset1_desc:'Public journey: dates, availability, booking funnel entry.',
     asset2_title:'Confirmation & pricing', asset2_desc:'Vehicle recap, dates, service fee — before Stripe payment.',
     asset3_title:'Vehicle page', asset3_desc:'Catalog, included options and Book CTA — 24/7 sales.',
