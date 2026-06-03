@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rentanoo — Étude de cas Product Builder · Christopher TECHER</title>
+<link rel="icon" href="assets/rentanoo/logo-rentanoo.png" type="image/png">
+<meta property="og:image" content="assets/rentanoo/logo-rentanoo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -67,6 +69,29 @@ nav {
   transition: all .2s;
 }
 .nav-live:hover { background:rgba(65,168,240,0.12); }
+.nav-sep { color:rgba(139,154,176,0.4); font-size:.9rem; user-select:none; }
+.nav-rentanoo-brand {
+  display:inline-flex; text-decoration:none;
+  transition:transform .2s, opacity .2s;
+}
+.nav-rentanoo-brand:hover { transform:translateY(-1px); opacity:.95; }
+.rentanoo-logo-wrap {
+  display:inline-flex; align-items:center; justify-content:center;
+  background:#fff; border-radius:12px;
+  padding:8px 16px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.2);
+}
+.rentanoo-logo-wrap--center { display:flex; margin-left:auto; margin-right:auto; }
+.rentanoo-logo {
+  display:block; width:auto; object-fit:contain;
+}
+.rentanoo-logo--sm { height:22px; max-width:120px; }
+.rentanoo-logo--md { height:36px; max-width:180px; }
+.rentanoo-logo--hero { height:56px; max-width:260px; }
+.nav-rentanoo-brand .rentanoo-logo-wrap { padding:6px 12px; border-radius:10px; }
+.hero-brand { margin:0 0 12px; line-height:1; }
+.hero-brand .rentanoo-logo-wrap { padding:14px 26px; border-radius:14px; }
+.problem-after-card .rentanoo-logo-wrap { margin-bottom:14px; padding:12px 22px; }
 .lang-btn {
   display:flex; align-items:center; gap:6px;
   background: rgba(65,168,240,0.1);
@@ -361,9 +386,6 @@ section { padding: 88px 40px; position:relative; }
   background:linear-gradient(135deg, rgba(65,168,240,0.15), rgba(34,197,94,0.1));
   border-radius:16px; border:1px solid rgba(65,168,240,0.3);
 }
-.problem-after-card .logo-text {
-  font-size:1.6rem; font-weight:800; color:var(--accent); margin-bottom:8px;
-}
 .problem-after-card p { color:var(--light-blue); font-weight:600; font-size:.95rem; }
 .problem-arrow {
   display:flex; align-items:center; justify-content:center;
@@ -593,8 +615,11 @@ footer {
   padding:32px 40px; text-align:center;
   border-top:1px solid rgba(65,168,240,0.1);
   color:var(--grey); font-size:.8rem;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
 }
 footer a { color:var(--accent); text-decoration:none; }
+.footer-rentanoo { display:inline-flex; text-decoration:none; }
+.footer-rentanoo .rentanoo-logo-wrap { padding:8px 14px; }
 
 /* LIGHTBOX */
 .image-lightbox {
@@ -618,6 +643,7 @@ footer a { color:var(--accent); text-decoration:none; }
 @media (max-width: 900px) {
   nav { padding:14px 20px; }
   .breadcrumb { display:none; }
+  .nav-sep, .nav-rentanoo-brand { display:none; }
   section { padding:72px 24px; }
   #hero { padding:100px 24px 60px; }
   .hero-mockup { grid-template-columns:1fr; gap:18px; align-items:stretch; }
@@ -659,6 +685,12 @@ footer a { color:var(--accent); text-decoration:none; }
 <nav>
   <div class="nav-left">
     <a href="index.html" class="nav-logo">CT/</a>
+    <span class="nav-sep" aria-hidden="true">·</span>
+    <a href="https://rentanoo.com" target="_blank" rel="noopener" class="nav-rentanoo-brand" title="Rentanoo">
+      <span class="rentanoo-logo-wrap">
+        <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--sm" width="120" height="22">
+      </span>
+    </a>
     <div class="breadcrumb">
       <a href="index.html" data-i18n="bc_portfolio">Portfolio</a>
       <span>/</span>
@@ -683,7 +715,11 @@ footer a { color:var(--accent); text-decoration:none; }
       <span class="dot" aria-hidden="true"></span>
       <span data-i18n="hero_meta">Christopher TECHER · Product Builder</span>
     </div>
-    <h1>Rentanoo</h1>
+    <h1 class="hero-brand">
+      <span class="rentanoo-logo-wrap">
+        <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--hero" width="260" height="56">
+      </span>
+    </h1>
     <p class="hero-sub" data-i18n="hero_sub">Le système d'exploitation des agences de location de véhicules.</p>
     <p class="hero-tag" data-i18n="hero_tag">Conçu et développé de bout en bout : produit, UX, architecture SaaS, automatisation N8N et intégration Stripe.</p>
     <div class="hero-btns">
@@ -781,7 +817,9 @@ footer a { color:var(--accent); text-decoration:none; }
       <div class="problem-col after">
         <h3 data-i18n="problem_after">Après</h3>
         <div class="problem-after-card">
-          <div class="logo-text">Rentanoo</div>
+          <div class="rentanoo-logo-wrap rentanoo-logo-wrap--center">
+            <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--md" width="180" height="36">
+          </div>
           <p data-i18n="problem_one_platform">Une seule plateforme.</p>
         </div>
       </div>
@@ -1169,6 +1207,11 @@ footer a { color:var(--accent); text-decoration:none; }
 </section>
 
 <footer>
+  <a href="https://rentanoo.com" target="_blank" rel="noopener" class="footer-rentanoo" title="Rentanoo">
+    <span class="rentanoo-logo-wrap">
+      <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--sm" width="100" height="20">
+    </span>
+  </a>
   <span data-i18n="footer_text">Christopher TECHER · Product Builder</span> ·
   <a href="index.html" data-i18n="footer_back">Retour au portfolio</a>
 </footer>

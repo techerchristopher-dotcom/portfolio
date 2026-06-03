@@ -252,6 +252,21 @@ section { padding: 100px 60px; }
 .rentanoo-showcase img:nth-child(3) { transform:translateX(95px) rotateY(-12deg) scale(.82); z-index:2; opacity:.72; }
 .rentanoo-showcase img:hover { z-index:5; opacity:1; filter:brightness(1.08); transform:translateX(0) scale(1.04); }
 
+.rentanoo-logo-wrap {
+  display:inline-flex; align-items:center; justify-content:center;
+  background:#fff; border-radius:12px; padding:8px 16px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.18);
+}
+.rentanoo-logo { display:block; width:auto; object-fit:contain; }
+.project-rentanoo-heading { margin:0 0 12px; line-height:1; }
+.project-rentanoo-heading .rentanoo-logo-wrap { padding:10px 18px; }
+.project-rentanoo-heading .rentanoo-logo { height:38px; max-width:200px; }
+.contact-rentanoo-logo {
+  width:36px; height:36px; object-fit:contain;
+  background:#fff; border-radius:8px; padding:4px 6px;
+  flex-shrink:0;
+}
+
 .image-lightbox {
   position:fixed; inset:0; z-index:9999;
   background:rgba(5,12,22,0.90); backdrop-filter:blur(12px);
@@ -742,7 +757,11 @@ footer p { color:var(--grey); font-size:.85rem; }
         </div>
         <div class="project-info">
           <div class="proj-badge" data-i18n="rentanoo_badge">SaaS vertical · Product Builder</div>
-          <h2>Rentanoo</h2>
+          <h2 class="project-rentanoo-heading">
+            <span class="rentanoo-logo-wrap">
+              <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo" width="200" height="38">
+            </span>
+          </h2>
           <p class="proj-desc" data-i18n="rentanoo_desc">Le système d'exploitation des agences de location de véhicules — SaaS métier conçu et développé de bout en bout.</p>
           <ul class="features">
             <li data-i18n="rentanoo_f1">Réservation en ligne 24/7 · Stripe</li>
@@ -976,9 +995,9 @@ footer p { color:var(--grey); font-size:.85rem; }
             <span class="link-arrow">→</span>
           </a>
           <a href="https://rentanoo.com" target="_blank" class="contact-link">
-            <span class="link-icon">🌐</span>
+            <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="contact-rentanoo-logo" width="36" height="24">
             <div class="link-info">
-              <div class="link-label" data-i18n="contact_live_label">Projet Live</div>
+              <div class="link-label" data-i18n="contact_live_label">Projet Live · Rentanoo</div>
               <div class="link-value">rentanoo.com</div>
             </div>
             <span class="link-arrow">→</span>
@@ -1105,7 +1124,7 @@ const T = {
     // CONTACT
     contact_label:'Contact', contact_title:'Travaillons ensemble',
     contact_desc:'Remote · France & International. Disponible pour des projets fullstack, des missions IA ou des postes en CDI.',
-    contact_live_label:'Projet Live', contact_qr:'Scanner pour me contacter',
+    contact_live_label:'Projet Live · Rentanoo', contact_qr:'Scanner pour me contacter',
     // FOOTER
     footer_desc:'Fullstack Developer · IA · Automatisation · Product Builder',
   },
@@ -1204,7 +1223,7 @@ const T = {
     // CONTACT
     contact_label:'Contact', contact_title:"Let's work together",
     contact_desc:'Remote · France & International. Available for fullstack projects, AI missions or permanent positions.',
-    contact_live_label:'Live Project', contact_qr:'Scan to connect',
+    contact_live_label:'Live Project · Rentanoo', contact_qr:'Scan to connect',
     // FOOTER
     footer_desc:'Fullstack Developer · AI · Automation · Product Builder',
   }

@@ -1,5 +1,11 @@
 # Assets Rentanoo — Portfolio
 
+## Logo
+
+| Fichier | Usage |
+|---------|--------|
+| `logo-rentanoo.png` | Logo officiel — hero, nav, section « Après », carte portfolio, contact, favicon |
+
 ## Fichiers en production (captures réelles)
 
 | Fichier | Écran | Pilier | Usage page |
