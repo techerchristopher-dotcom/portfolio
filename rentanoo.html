@@ -740,26 +740,128 @@ section { padding: 88px 40px; position:relative; }
   border:1px solid rgba(34,197,94,0.35);
 }
 
-/* IMPACT */
+/* IMPACT — avant / après business */
 #impact { background:var(--dark2); }
-.impact-split {
-  display:grid; grid-template-columns:1fr 1fr; gap:24px;
-  margin-bottom:32px;
+.impact-intro {
+  max-width:560px; font-size:.95rem; color:var(--grey);
+  margin:-8px 0 28px; line-height:1.55;
 }
-.impact-list { list-style:none; }
-.impact-list li {
+.impact-board {
+  display:grid; grid-template-columns:1fr auto 1fr; gap:18px;
+  align-items:stretch; margin-bottom:24px;
+}
+.impact-col {
+  position:relative; overflow:hidden;
+  background:linear-gradient(165deg, rgba(30,60,100,0.4), rgba(13,27,42,0.9));
+  border-radius:22px; padding:22px 18px 16px;
+  border:1px solid rgba(65,168,240,0.14);
+  opacity:0; transform:translateY(16px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.impact-board.visible .impact-col { opacity:1; transform:translateY(0); }
+.impact-board.visible .impact-col--before { transition-delay:.05s; }
+.impact-board.visible .impact-col--after { transition-delay:.18s; }
+.impact-col::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+}
+.impact-col--before {
+  border-color:rgba(239,68,68,0.28);
+  background:linear-gradient(165deg, rgba(55,28,38,0.35), rgba(13,27,42,0.92));
+}
+.impact-col--before::before {
+  background:linear-gradient(90deg, #f87171, transparent 80%);
+}
+.impact-col--after {
+  border-color:rgba(34,197,94,0.32);
+  background:linear-gradient(165deg, rgba(18,48,42,0.4), rgba(13,27,42,0.9));
+}
+.impact-col--after::before {
+  background:linear-gradient(90deg, var(--green), transparent 80%);
+}
+.impact-col-head {
+  display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:space-between; gap:8px 10px;
+  margin-bottom:14px;
+}
+.impact-col h3 {
+  font-size:.92rem; font-weight:800; letter-spacing:1.5px;
+  text-transform:uppercase; margin:0; flex:1 1 auto;
+}
+.impact-col--before h3 { color:#f87171; }
+.impact-col--after h3 { color:var(--green); }
+.impact-col-sub {
+  font-size:.76rem; color:var(--grey); line-height:1.4;
+  flex:1 1 100%; margin:0;
+}
+.impact-col-count {
+  font-size:.65rem; font-weight:700;
+  padding:4px 8px; border-radius:8px; letter-spacing:.5px;
+  flex-shrink:0;
+}
+.impact-col--before .impact-col-count {
+  color:#fca5a5; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.25);
+}
+.impact-col--after .impact-col-count {
+  color:#86efac; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.28);
+}
+.impact-items { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.impact-item {
   display:flex; align-items:center; gap:12px;
-  padding:12px 16px; margin-bottom:8px;
-  background:rgba(0,0,0,0.2); border-radius:12px;
-  font-size:.9rem; font-weight:500;
-  border:1px solid rgba(255,255,255,0.05);
+  padding:11px 12px; border-radius:12px;
+  font-size:.84rem; font-weight:600;
+  opacity:0; transform:translateX(-8px);
+  transition:opacity .4s ease, transform .4s ease, border-color .2s;
 }
-.impact-list.before li { color:#fca5a5; border-color:rgba(239,68,68,0.15); }
-.impact-list.after li { color:var(--light-blue); border-color:rgba(65,168,240,0.2); }
-.impact-list li .ico { font-size:1.1rem; flex-shrink:0; }
+.impact-col--after .impact-item { transform:translateX(8px); }
+.impact-board.visible .impact-item { opacity:1; transform:translateX(0); }
+.impact-col--before .impact-item {
+  color:#fecaca; background:rgba(0,0,0,0.22);
+  border:1px dashed rgba(239,68,68,0.28);
+}
+.impact-col--after .impact-item {
+  color:var(--white); background:rgba(255,255,255,0.04);
+  border:1px solid rgba(34,197,94,0.22);
+}
+.impact-col--after .impact-item:hover {
+  border-color:rgba(34,197,94,0.45);
+  background:rgba(34,197,94,0.08);
+}
+.impact-item-icon {
+  flex-shrink:0; width:36px; height:36px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+}
+.impact-col--before .impact-item-icon {
+  background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3);
+}
+.impact-col--after .impact-item-icon {
+  background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3);
+}
+.impact-item-icon svg {
+  width:18px; height:18px; fill:none; stroke-width:1.75;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.impact-col--before .impact-item-icon svg { stroke:#fca5a5; }
+.impact-col--after .impact-item-icon svg { stroke:#7EE8D0; }
+.impact-bridge {
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity .4s ease .12s;
+}
+.impact-board.visible .impact-bridge { opacity:1; }
+.impact-bridge-arrow {
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(65,168,240,0.1); border:2px solid rgba(65,168,240,0.35);
+  display:flex; align-items:center; justify-content:center;
+}
+.impact-bridge-arrow svg {
+  width:20px; height:20px; stroke:var(--accent);
+  fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+}
 .impact-closing {
-  text-align:center; color:var(--grey); font-size:1.02rem;
-  line-height:1.7; max-width:720px; margin:0 auto;
+  text-align:center; color:var(--light-blue); font-size:.98rem; font-weight:500;
+  line-height:1.65; max-width:720px; margin:0 auto;
+  padding:20px 24px; border-radius:16px;
+  background:rgba(65,168,240,0.08); border:1px solid rgba(65,168,240,0.2);
+  border-left:3px solid var(--accent);
 }
 
 /* LESSONS */
@@ -844,7 +946,9 @@ footer a { color:var(--accent); text-decoration:none; }
   .problem-benefits { grid-template-columns:1fr; }
   .pillars-grid, .proof-grid, .lessons-grid { grid-template-columns:1fr; }
   .why-grid { grid-template-columns:1fr; }
-  .impact-split { grid-template-columns:1fr; }
+  .impact-board { grid-template-columns:1fr; gap:14px; }
+  .impact-bridge { justify-content:center; padding:4px 0; }
+  .impact-bridge-arrow { transform:rotate(90deg); }
   .journey-scroll { mask-image:none; padding:16px 8px; overflow-x:visible; }
   .journey-steps {
     flex-direction:column; align-items:stretch; min-width:0;
@@ -870,7 +974,8 @@ footer a { color:var(--accent); text-decoration:none; }
 
 @media (prefers-reduced-motion: reduce) {
   .fade-in, .journey-step, .timeline-step, .pillars-grid .pillar-card,
-  .problem-col, .problem-item, .problem-benefit, .problem-bridge { transition:none; }
+  .problem-col, .problem-item, .problem-benefit, .problem-bridge,
+  .impact-col, .impact-item, .impact-bridge { transition:none; }
   .hero-meta .dot { animation:none; }
   html { scroll-behavior:auto; }
 }
@@ -1427,25 +1532,69 @@ footer a { color:var(--accent); text-decoration:none; }
   <div class="section-inner">
     <p class="section-label fade-in" data-i18n="impact_label">Impact</p>
     <h2 class="section-title fade-in" data-i18n="impact_title">Impact business</h2>
-    <div class="impact-split fade-in">
-      <div>
-        <h3 style="font-size:.85rem;color:#f87171;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px" data-i18n="impact_before_h">Avant</h3>
-        <ul class="impact-list before">
-          <li><span class="ico">💬</span> WhatsApp</li>
-          <li><span class="ico">📊</span> Excel</li>
-          <li><span class="ico">📄</span> <span data-i18n="problem_paper">Papier</span></li>
-          <li><span class="ico">🧠</span> <span data-i18n="impact_b4">Maintenance mémoire</span></li>
+    <p class="impact-intro fade-in" data-i18n="impact_desc">Ce que change Rentanoo au quotidien pour une agence — de la prise de réservation au pilotage de la flotte.</p>
+    <div class="impact-board fade-in" id="impactBoard">
+      <div class="impact-col impact-col--before">
+        <div class="impact-col-head">
+          <span class="impact-col-count" data-i18n="impact_before_count">4 frictions</span>
+          <h3 data-i18n="impact_before_h">Avant</h3>
+          <p class="impact-col-sub" data-i18n="impact_before_sub">Processus manuels et données dispersées.</p>
+        </div>
+        <ul class="impact-items">
+          <li class="impact-item" style="transition-delay:.1s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            <span data-i18n="impact_friction_wa">WhatsApp</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.14s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span>
+            <span>Excel</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.18s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+            <span data-i18n="problem_paper">Papier</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.22s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.5 2A5.5 5.5 0 0 1 15 7.5c0 1.52-.77 2.86-1.94 3.65"/><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-2.5-5.2"/><path d="M8 14c-1.2.8-2 2.1-2 3.5A3.5 3.5 0 0 0 9.5 21"/><path d="M12 2v2"/></svg></span>
+            <span data-i18n="impact_b4">Maintenance mémoire</span>
+          </li>
         </ul>
       </div>
-      <div>
-        <h3 style="font-size:.85rem;color:var(--green);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px" data-i18n="impact_after_h">Après</h3>
-        <ul class="impact-list after">
-          <li><span class="ico">🌐</span> <span data-i18n="impact_a1">Réservation 24/7</span></li>
-          <li><span class="ico">📋</span> <span data-i18n="impact_a2">Planning centralisé</span></li>
-          <li><span class="ico">📱</span> <span data-i18n="impact_a3">EDL digital</span></li>
-          <li><span class="ico">🔧</span> <span data-i18n="impact_a4">Maintenance historisée</span></li>
-          <li><span class="ico">📦</span> <span data-i18n="impact_a5">Gestion stock</span></li>
-          <li><span class="ico">📊</span> <span data-i18n="impact_a6">Reporting</span></li>
+      <div class="impact-bridge" aria-hidden="true">
+        <div class="impact-bridge-arrow">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+      </div>
+      <div class="impact-col impact-col--after">
+        <div class="impact-col-head">
+          <span class="impact-col-count" data-i18n="impact_after_count">6 modules</span>
+          <h3 data-i18n="impact_after_h">Après</h3>
+          <p class="impact-col-sub" data-i18n="impact_after_sub">Fonctionnalités intégrées dans Rentanoo.</p>
+        </div>
+        <ul class="impact-items">
+          <li class="impact-item" style="transition-delay:.12s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+            <span data-i18n="impact_a1">Réservation 24/7</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.16s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span>
+            <span data-i18n="impact_a2">Planning centralisé</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.2s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 6h6M9 10h6"/></svg></span>
+            <span data-i18n="impact_a3">EDL digital</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.24s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+            <span data-i18n="impact_a4">Maintenance historisée</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.28s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+            <span data-i18n="impact_a5">Gestion stock</span>
+          </li>
+          <li class="impact-item" style="transition-delay:.32s">
+            <span class="impact-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16v-4M12 16V8M17 16v-6"/></svg></span>
+            <span data-i18n="impact_a6">Reporting</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -1581,7 +1730,12 @@ const T = {
     tl_v5_title:'Industrialiser', tl_v5_2:'Maintenance prédictive', tl_v5_3:'Application mobile',
     tl_roadmap:'Roadmap',
     impact_label:'Impact', impact_title:'Impact business',
-    impact_before_h:'Avant', impact_after_h:'Après', impact_b4:'Maintenance mémoire',
+    impact_desc:'Ce que change Rentanoo au quotidien pour une agence — de la prise de réservation au pilotage de la flotte.',
+    impact_before_h:'Avant', impact_after_h:'Après',
+    impact_before_sub:'Processus manuels et données dispersées.',
+    impact_after_sub:'Fonctionnalités intégrées dans Rentanoo.',
+    impact_before_count:'4 frictions', impact_after_count:'6 modules',
+    impact_friction_wa:'WhatsApp', impact_b4:'Maintenance mémoire',
     impact_a1:'Réservation 24/7', impact_a2:'Planning centralisé', impact_a3:'EDL digital',
     impact_a4:'Maintenance historisée', impact_a5:'Gestion stock', impact_a6:'Reporting',
     impact_closing:'Rentanoo vise à réduire le temps administratif, limiter les erreurs opérationnelles et améliorer la rentabilité de chaque véhicule.',
@@ -1667,7 +1821,12 @@ const T = {
     tl_v5_title:'Scale up', tl_v5_2:'Predictive maintenance', tl_v5_3:'Mobile app',
     tl_roadmap:'Roadmap',
     impact_label:'Impact', impact_title:'Business impact',
-    impact_before_h:'Before', impact_after_h:'After', impact_b4:'Memory-based maintenance',
+    impact_desc:'What Rentanoo changes day-to-day for an agency — from booking intake to fleet operations.',
+    impact_before_h:'Before', impact_after_h:'After',
+    impact_before_sub:'Manual workflows and scattered data.',
+    impact_after_sub:'Features built into Rentanoo.',
+    impact_before_count:'4 pain points', impact_after_count:'6 modules',
+    impact_friction_wa:'WhatsApp', impact_b4:'Memory-based maintenance',
     impact_a1:'24/7 booking', impact_a2:'Centralized schedule', impact_a3:'Digital EDL',
     impact_a4:'Tracked maintenance', impact_a5:'Inventory management', impact_a6:'Reporting',
     impact_closing:'Rentanoo aims to cut admin time, reduce operational errors and improve profitability per vehicle.',
@@ -1728,11 +1887,13 @@ const flowEl = document.getElementById('bookingFlow');
 const pillarsEl = document.getElementById('pillarsGrid');
 const problemSplitEl = document.getElementById('problemSplit');
 const problemBenefitsEl = document.getElementById('problemBenefits');
+const impactBoardEl = document.getElementById('impactBoard');
 const timelineEl = document.getElementById('productTimeline');
 if (flowEl) observer.observe(flowEl);
 if (pillarsEl) observer.observe(pillarsEl);
 if (problemSplitEl) observer.observe(problemSplitEl);
 if (problemBenefitsEl) observer.observe(problemBenefitsEl);
+if (impactBoardEl) observer.observe(impactBoardEl);
 if (timelineEl) {
   const tlObs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {

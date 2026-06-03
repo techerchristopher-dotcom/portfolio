@@ -185,22 +185,86 @@ section { padding: 100px 60px; }
 .value-card h4 { font-size:.9rem; font-weight:700; color:var(--white); margin-bottom:6px; }
 .value-card p { font-size:.8rem; color:var(--grey); line-height:1.5; }
 
-/* ─── SKILLS ──────────────────────────────────── */
+/* ─── SKILLS — stack technique ───────────────── */
 #skills { background:var(--dark); }
-.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-.skill-card {
-  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
-  border-radius:20px; padding:28px;
-  backdrop-filter:blur(10px);
-  transition: all .3s;
+.skills-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  align-items:stretch;
 }
-.skill-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 20px 40px rgba(65,168,240,0.12); }
-.skill-card .card-icon { font-size:2rem; margin-bottom:14px; }
-.skill-card h3 { font-size:1rem; font-weight:700; color:var(--white); margin-bottom:14px; }
-.skill-tags { display:flex; flex-wrap:wrap; gap:7px; }
+.skill-card {
+  --skill-accent: var(--accent);
+  position:relative; display:flex; flex-direction:column;
+  overflow:hidden;
+  background:linear-gradient(165deg, rgba(30,60,100,0.5), rgba(13,27,42,0.88));
+  border:1px solid rgba(65,168,240,0.18);
+  border-radius:22px; padding:22px 20px 18px;
+  backdrop-filter:blur(10px);
+  opacity:0; transform:translateY(18px);
+  transition:opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s;
+}
+.skills-grid.visible .skill-card { opacity:1; transform:translateY(0); }
+.skills-grid.visible .skill-card:nth-child(1) { transition-delay:.04s; }
+.skills-grid.visible .skill-card:nth-child(2) { transition-delay:.1s; }
+.skills-grid.visible .skill-card:nth-child(3) { transition-delay:.16s; }
+.skills-grid.visible .skill-card:nth-child(4) { transition-delay:.22s; }
+.skills-grid.visible .skill-card:nth-child(5) { transition-delay:.28s; }
+.skills-grid.visible .skill-card:nth-child(6) { transition-delay:.34s; }
+.skill-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--skill-accent), transparent 82%);
+}
+.skill-card::after {
+  content:''; position:absolute; top:-36px; right:-36px;
+  width:100px; height:100px; border-radius:50%;
+  background:radial-gradient(circle, rgba(65,168,240,0.1), transparent 70%);
+  pointer-events:none;
+}
+.skill-card--fe { --skill-accent: #41A8F0; }
+.skill-card--be { --skill-accent: #6BB8FF; }
+.skill-card--infra { --skill-accent: #5B8DEF; }
+.skill-card--ia { --skill-accent: #A78BFA; }
+.skill-card--auto { --skill-accent: #2EC4A8; }
+.skill-card--tools { --skill-accent: #94A3B8; }
+.skill-card:hover {
+  border-color:var(--skill-accent); transform:translateY(-5px);
+  box-shadow:0 20px 44px rgba(0,0,0,0.32), 0 0 0 1px rgba(65,168,240,0.06);
+}
+.skill-card-head {
+  display:flex; align-items:center; gap:12px; margin-bottom:16px;
+}
+.skill-card-icon {
+  flex-shrink:0; width:46px; height:46px; border-radius:14px;
+  background:rgba(65,168,240,0.1); border:2px solid rgba(65,168,240,0.28);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.22);
+}
+.skill-card-icon svg {
+  width:22px; height:22px; stroke:var(--light-blue);
+  fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round;
+}
+.skill-card--ia .skill-card-icon { border-color:rgba(167,139,250,0.35); background:rgba(167,139,250,0.1); }
+.skill-card--ia .skill-card-icon svg { stroke:#c4b5fd; }
+.skill-card--auto .skill-card-icon { border-color:rgba(46,196,168,0.35); background:rgba(46,196,168,0.1); }
+.skill-card--auto .skill-card-icon svg { stroke:#7EE8D0; }
+.skill-card-head h3 {
+  font-size:.98rem; font-weight:800; color:var(--white); line-height:1.25;
+  margin:0;
+}
+.skill-card-meta {
+  display:block; font-size:.68rem; font-weight:600; color:var(--grey);
+  margin-top:3px; letter-spacing:.2px;
+}
+.skill-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; }
 .skill-tag {
-  background:rgba(65,168,240,0.1); border:1px solid rgba(65,168,240,0.2);
-  border-radius:6px; padding:4px 10px; font-size:.75rem; color:var(--light-blue);
+  background:rgba(255,255,255,0.04); border:1px solid rgba(65,168,240,0.2);
+  border-radius:8px; padding:5px 11px; font-size:.72rem; font-weight:600;
+  color:var(--light-blue);
+  transition:background .2s, border-color .2s, color .2s;
+}
+.skill-card:hover .skill-tag { border-color:rgba(65,168,240,0.32); }
+.skill-tag--cert {
+  background:rgba(34,197,94,0.12); border-color:rgba(34,197,94,0.4);
+  color:#86efac;
 }
 
 /* ─── PROJECTS ────────────────────────────────── */
@@ -463,7 +527,7 @@ footer p { color:var(--grey); font-size:.85rem; }
   .hero-content { grid-template-columns:1fr; gap:40px; }
   .hero-card { grid-template-columns:1fr 1fr; }
   .about-grid { grid-template-columns:1fr; }
-  .skills-grid { grid-template-columns:1fr; }
+  .skills-grid { grid-template-columns:1fr 1fr; gap:16px; }
   .project-inner { flex-direction:column !important; }
   .project-visuals { min-height:300px; }
   .project-info { padding:28px 24px; }
@@ -487,6 +551,9 @@ footer p { color:var(--grey); font-size:.85rem; }
   .automation-grid { grid-template-columns:1fr; }
   .results-grid { grid-template-columns:1fr 1fr; }
   footer { flex-direction:column; gap:8px; text-align:center; }
+}
+@media(max-width:560px) {
+  .skills-grid { grid-template-columns:1fr; }
 }
 
 @keyframes float-photo {
@@ -629,65 +696,107 @@ footer p { color:var(--grey); font-size:.85rem; }
     <p class="section-label" data-i18n="skills_label">Compétences</p>
     <h2 class="section-title" data-i18n="skills_title">Stack technique</h2>
     <p class="section-desc" data-i18n="skills_desc">Un écosystème complet : du frontend mobile au pipeline IA, en passant par les workflows d'automatisation et le backend cloud.</p>
-    <div class="skills-grid">
-      <div class="skill-card fade-in">
-        <div class="card-icon">🖥️</div>
-        <h3>Frontend</h3>
+    <div class="skills-grid fade-in" id="skillsGrid">
+      <article class="skill-card skill-card--fe">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_fe">Frontend</h3>
+            <span class="skill-card-meta" data-i18n="skill_fe_meta">7 technologies</span>
+          </div>
+        </div>
         <div class="skill-tags">
           <span class="skill-tag">React</span><span class="skill-tag">Next.js</span>
           <span class="skill-tag">React Native</span><span class="skill-tag">Expo</span>
           <span class="skill-tag">TypeScript</span><span class="skill-tag">Tailwind CSS</span>
           <span class="skill-tag">Vite</span>
         </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="card-icon">⚙️</div>
-        <h3 data-i18n="skill_be">Backend &amp; BDD</h3>
+      </article>
+      <article class="skill-card skill-card--be">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_be">Backend &amp; BDD</h3>
+            <span class="skill-card-meta" data-i18n="skill_be_meta">7 technologies</span>
+          </div>
+        </div>
         <div class="skill-tags">
           <span class="skill-tag">Node.js</span><span class="skill-tag">Express</span>
           <span class="skill-tag">Supabase</span><span class="skill-tag">Edge Functions</span>
           <span class="skill-tag">PostgreSQL</span><span class="skill-tag">pgvector</span>
           <span class="skill-tag">JWT</span>
         </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="card-icon">🚀</div>
-        <h3 data-i18n="skill_infra">Infra &amp; Paiement</h3>
+      </article>
+      <article class="skill-card skill-card--infra">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84 2.13-2.5 4-2.5s3.29 1.66 4 2.5c1.26 1.5 5 2 5 2s-.5-3.74-2-5c-.84-.71-2.5-2.13-2.5-4s1.66-3.29 2.5-4c1.5-1.26 2-5 2-5s-3.74.5-5 2c-.71.84-2.13 2.5-4 2.5s-3.29-1.66-4-2.5C6.74 3.5 3 3 3 3s.5 3.74 2 5c.84.71 2.5 2.13 2.5 4s-1.66 3.29-2.5 4z"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_infra">Infra &amp; Paiement</h3>
+            <span class="skill-card-meta" data-i18n="skill_infra_meta">6 technologies</span>
+          </div>
+        </div>
         <div class="skill-tags">
           <span class="skill-tag">Stripe</span><span class="skill-tag">Railway</span>
           <span class="skill-tag">Vercel</span><span class="skill-tag">Expo EAS</span>
           <span class="skill-tag">Supabase Cloud</span><span class="skill-tag">Google Maps API</span>
         </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="card-icon">🤖</div>
-        <h3>IA &amp; LLMs</h3>
+      </article>
+      <article class="skill-card skill-card--ia">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_ia">IA &amp; LLMs</h3>
+            <span class="skill-card-meta" data-i18n="skill_ia_meta">7 technologies</span>
+          </div>
+        </div>
         <div class="skill-tags">
           <span class="skill-tag">OpenAI API</span><span class="skill-tag">GPT-Vision</span>
           <span class="skill-tag">Claude API</span><span class="skill-tag">RAG</span>
           <span class="skill-tag">Prompt Engineering</span><span class="skill-tag" data-i18n="agents_tag">Agents IA</span>
           <span class="skill-tag">Gemini</span>
         </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="card-icon">🔄</div>
-        <h3 data-i18n="skill_auto">Automatisation</h3>
+      </article>
+      <article class="skill-card skill-card--auto">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_auto">Automatisation</h3>
+            <span class="skill-card-meta" data-i18n="skill_auto_meta">7 technologies</span>
+          </div>
+        </div>
         <div class="skill-tags">
-          <span class="skill-tag">N8N</span><span class="skill-tag" data-i18n="make_cert">MAKE ✓ certifié</span>
+          <span class="skill-tag">N8N</span><span class="skill-tag skill-tag--cert" data-i18n="make_cert">MAKE ✓ certifié</span>
           <span class="skill-tag">Airtable</span><span class="skill-tag">Webhooks</span>
           <span class="skill-tag">Pappers API</span><span class="skill-tag">Dropcontact</span>
           <span class="skill-tag">Google Workspace</span>
         </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="card-icon">🛠️</div>
-        <h3 data-i18n="skill_tools">Outils &amp; Méthodes</h3>
+      </article>
+      <article class="skill-card skill-card--tools">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_tools">Outils &amp; Méthodes</h3>
+            <span class="skill-card-meta" data-i18n="skill_tools_meta">6 technologies</span>
+          </div>
+        </div>
         <div class="skill-tags">
           <span class="skill-tag">Git / GitHub</span><span class="skill-tag">React Query</span>
           <span class="skill-tag">Zod</span><span class="skill-tag">React Hook Form</span>
           <span class="skill-tag">i18next</span><span class="skill-tag">Supabase Realtime</span>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
@@ -699,51 +808,9 @@ footer p { color:var(--grey); font-size:.85rem; }
     <h2 class="section-title" data-i18n="proj_title">Applications en production</h2>
     <p class="section-desc" data-i18n="proj_desc">Des projets réels, avec du code réel, déployés en production. Pas des tutoriels.</p>
 
-    <!-- TUKME -->
-    <div class="project-card fade-in">
+    <!-- RENTANOO — projet n°1 -->
+    <div class="project-card fade-in" id="project-rentanoo">
       <div class="project-inner">
-        <div class="project-visuals" style="background:linear-gradient(135deg,#0a1929,#1a3a5c);">
-          <div class="phone-showcase">
-            <img src="tukme-1.png" alt="Tukme — destination">
-            <img src="tukme-3.png" alt="Tukme — commander une course">
-            <img src="tukme-5.png" alt="Tukme — chauffeur trouvé">
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="proj-badge" data-i18n="tukme_badge">🚕 Application Mobile · Fintech</div>
-          <h2>Tukme</h2>
-          <p class="proj-desc" data-i18n="tukme_desc">Application VTC mobile complète pour commander un tuk-tuk depuis son smartphone — géolocalisation temps réel, paiement Stripe in-app, panel admin web. Projet full-scale de A à Z.</p>
-          <ul class="features">
-            <li data-i18n="tukme_f1">Géolocalisation et carte interactive (Google Maps / Routes API)</li>
-            <li data-i18n="tukme_f2">Paiement Stripe PaymentSheet avec Edge Functions Deno</li>
-            <li data-i18n="tukme_f3">Gestion chauffeur &amp; passager avec synchronisation temps réel</li>
-            <li data-i18n="tukme_f4">Push notifications Expo · Panel admin Next.js</li>
-          </ul>
-          <div class="proj-stack" translate="no">
-            <div class="stack-group">
-              <span class="stack-label">Front</span>
-              <span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">TypeScript</span>
-            </div>
-            <div class="stack-group">
-              <span class="stack-label">Back</span>
-              <span class="stack-tag">Supabase</span><span class="stack-tag">Next.js</span>
-            </div>
-            <div class="stack-group">
-              <span class="stack-label">APIs</span>
-              <span class="stack-tag">Stripe</span><span class="stack-tag">Google Maps API</span>
-            </div>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="proj-link primary">⭐ GitHub</a>
-            <a href="projects/tukme.html" class="proj-link ghost" data-i18n="proj_view">📄 Voir le projet →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RENTANOO -->
-    <div class="project-card reverse fade-in">
-      <div class="project-inner" style="flex-direction:row-reverse;">
         <div class="project-visuals" style="background:linear-gradient(135deg,#1a2535,#0d1b2a);">
           <div class="rentanoo-showcase">
             <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — catalogue et recherche">
@@ -782,6 +849,48 @@ footer p { color:var(--grey); font-size:.85rem; }
             <a href="rentanoo.html" class="proj-link primary" data-i18n="rentanoo_case">📖 Étude de cas →</a>
             <a href="https://rentanoo.com" target="_blank" class="proj-link ghost" data-i18n="rentanoo_live">🌐 Site live</a>
             <a href="https://github.com/techerchristopher-dotcom/rentanoo-nosy-be-clean" target="_blank" class="proj-link ghost">⭐ GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TUKME -->
+    <div class="project-card reverse fade-in">
+      <div class="project-inner">
+        <div class="project-visuals" style="background:linear-gradient(135deg,#0a1929,#1a3a5c);">
+          <div class="phone-showcase">
+            <img src="tukme-1.png" alt="Tukme — destination">
+            <img src="tukme-3.png" alt="Tukme — commander une course">
+            <img src="tukme-5.png" alt="Tukme — chauffeur trouvé">
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="proj-badge" data-i18n="tukme_badge">🚕 Application Mobile · Fintech</div>
+          <h2>Tukme</h2>
+          <p class="proj-desc" data-i18n="tukme_desc">Application VTC mobile complète pour commander un tuk-tuk depuis son smartphone — géolocalisation temps réel, paiement Stripe in-app, panel admin web. Projet full-scale de A à Z.</p>
+          <ul class="features">
+            <li data-i18n="tukme_f1">Géolocalisation et carte interactive (Google Maps / Routes API)</li>
+            <li data-i18n="tukme_f2">Paiement Stripe PaymentSheet avec Edge Functions Deno</li>
+            <li data-i18n="tukme_f3">Gestion chauffeur &amp; passager avec synchronisation temps réel</li>
+            <li data-i18n="tukme_f4">Push notifications Expo · Panel admin Next.js</li>
+          </ul>
+          <div class="proj-stack" translate="no">
+            <div class="stack-group">
+              <span class="stack-label">Front</span>
+              <span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">TypeScript</span>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">Back</span>
+              <span class="stack-tag">Supabase</span><span class="stack-tag">Next.js</span>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">APIs</span>
+              <span class="stack-tag">Stripe</span><span class="stack-tag">Google Maps API</span>
+            </div>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="proj-link primary">⭐ GitHub</a>
+            <a href="projects/tukme.html" class="proj-link ghost" data-i18n="proj_view">📄 Voir le projet →</a>
           </div>
         </div>
       </div>
@@ -1049,8 +1158,11 @@ const T = {
     // SKILLS
     skills_label:'Compétences', skills_title:'Stack technique',
     skills_desc:"Un écosystème complet : du frontend mobile au pipeline IA, en passant par les workflows d'automatisation et le backend cloud.",
-    skill_be:'Backend & BDD', skill_infra:'Infra & Paiement',
-    skill_auto:'Automatisation', skill_tools:'Outils & Méthodes',
+    skill_fe:'Frontend', skill_be:'Backend & BDD', skill_infra:'Infra & Paiement',
+    skill_ia:'IA & LLMs', skill_auto:'Automatisation', skill_tools:'Outils & Méthodes',
+    skill_fe_meta:'7 technologies', skill_be_meta:'7 technologies',
+    skill_infra_meta:'6 technologies', skill_ia_meta:'7 technologies',
+    skill_auto_meta:'7 technologies', skill_tools_meta:'6 technologies',
     make_cert:'MAKE ✓ certifié', agents_tag:'Agents IA',
     // PROJECTS
     proj_label:'Projets', proj_title:'Applications en production',
@@ -1148,8 +1260,11 @@ const T = {
     // SKILLS
     skills_label:'Skills', skills_title:'Tech stack',
     skills_desc:'A complete ecosystem: from mobile frontend to AI pipeline, including automation workflows and cloud backend.',
-    skill_be:'Backend & DB', skill_infra:'Infra & Payments',
-    skill_auto:'Automation', skill_tools:'Tools & Methods',
+    skill_fe:'Frontend', skill_be:'Backend & DB', skill_infra:'Infra & Payments',
+    skill_ia:'AI & LLMs', skill_auto:'Automation', skill_tools:'Tools & Methods',
+    skill_fe_meta:'7 technologies', skill_be_meta:'7 technologies',
+    skill_infra_meta:'6 technologies', skill_ia_meta:'7 technologies',
+    skill_auto_meta:'7 technologies', skill_tools_meta:'6 technologies',
     make_cert:'MAKE ✓ certified', agents_tag:'AI Agents',
     // PROJECTS
     proj_label:'Projects', proj_title:'Production apps',
@@ -1277,6 +1392,8 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+const skillsGridEl=document.getElementById('skillsGrid');
+if(skillsGridEl)observer.observe(skillsGridEl);
 
 // ── IMAGE LIGHTBOX (Tukme + Rentanoo galleries) ──
 const lightbox = document.getElementById('imageLightbox');
