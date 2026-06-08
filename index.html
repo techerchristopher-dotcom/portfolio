@@ -1077,6 +1077,7 @@ footer p { color:var(--grey); font-size:.85rem; }
   to { opacity: 0; transform: translateY(8px) scale(.94); }
 }
 .wa-fab-wrap {
+  display: none;
   position: fixed; z-index: 40;
   width: 56px; height: 56px;
   touch-action: none; user-select: none;
@@ -1138,12 +1139,8 @@ footer p { color:var(--grey); font-size:.85rem; }
   pointer-events: none;
 }
 .wa-drag-hint--hidden { display: none; }
-@media (min-width: 769px) {
-  .wa-fab-wrap {
-    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-    right: 24px; left: auto; top: auto;
-  }
-  .wa-drag-hint { display: none !important; }
+@media (max-width: 768px) {
+  .wa-fab-wrap { display: block; }
 }
 @media (prefers-reduced-motion: reduce) {
   .wa-fab-float, .wa-fab-halo, .wa-fab-ping,
@@ -2502,7 +2499,7 @@ footer p { color:var(--grey); font-size:.85rem; }
 <div id="waFabWrap" class="wa-fab-wrap" aria-live="polite">
   <div id="waBubble" class="wa-bubble wa-bubble--hidden" role="status">
     <div class="wa-bubble-card">
-      <p data-i18n="wa_bubble_msg">Bonjour ! Je suis Christopher. Disponible pour échanger sur votre projet.</p>
+      <p data-i18n="wa_bubble_msg">Bonjour ! Je suis Christopher, Product Builder IA. Un projet d'automatisation ou de SaaS à lancer ?</p>
       <p class="wa-bubble-hint" data-i18n="wa_bubble_hint">Réponse habituelle sous 24 h.</p>
     </div>
     <span class="wa-bubble-tail" aria-hidden="true"></span>
@@ -2739,9 +2736,10 @@ const T = {
     contact_live_label:'Projet Live · Rentanoo', contact_qr:'Scanner pour me contacter',
     // WHATSAPP FAB
     wa_fab_aria:'Contacter Christopher sur WhatsApp',
-    wa_bubble_msg:'Bonjour ! Je suis Christopher. Disponible pour échanger sur votre projet.',
+    wa_bubble_msg:'Bonjour ! Je suis Christopher, Product Builder IA. Un projet d\'automatisation ou de SaaS à lancer ?',
     wa_bubble_hint:'Réponse habituelle sous 24 h.',
     wa_drag_hint:'Maintenir pour déplacer',
+    wa_prefill:'Bonjour Christopher, j\'ai consulté votre portfolio et je souhaite discuter d\'un projet (automatisation IA / product building).',
     // FOOTER
     footer_desc:'Business-First Builder · AI Automation Engineer · Product Builder IA',
   },
@@ -2956,9 +2954,10 @@ const T = {
     contact_live_label:'Live Project · Rentanoo', contact_qr:'Scan to connect',
     // WHATSAPP FAB
     wa_fab_aria:'Contact Christopher on WhatsApp',
-    wa_bubble_msg:"Hi! I'm Christopher. Happy to discuss your project.",
+    wa_bubble_msg:"Hi! I'm Christopher, AI Product Builder. Got an automation or SaaS project to launch?",
     wa_bubble_hint:'Usually replies within 24 h.',
     wa_drag_hint:'Hold to move',
+    wa_prefill:'Hi Christopher, I viewed your portfolio and would like to discuss a project (AI automation / product building).',
     // FOOTER
     footer_desc:'Business-First Builder · AI Automation Engineer · AI Product Builder',
   }
@@ -2994,7 +2993,15 @@ function setLang(lang) {
   try { localStorage.setItem('ct-lang', lang); } catch(e) {}
 
   const waFabBtn = document.getElementById('waFabBtn');
-  if (waFabBtn && d.wa_fab_aria) waFabBtn.setAttribute('aria-label', d.wa_fab_aria);
+  if (waFabBtn) {
+    if (d.wa_fab_aria) waFabBtn.setAttribute('aria-label', d.wa_fab_aria);
+    if (d.wa_prefill) waFabBtn.href = getWaUrl(lang);
+  }
+}
+
+function getWaUrl(lang = currentLang) {
+  const msg = (T[lang] && T[lang].wa_prefill) || T.fr.wa_prefill;
+  return 'https://wa.me/33633707569?text=' + encodeURIComponent(msg);
 }
 
 function toggleLang() {
@@ -3207,11 +3214,10 @@ try {
   if (saved && saved !== 'fr') setLang(saved);
 } catch(e) {}
 
-// ── WHATSAPP FAB ───────────────────────────────
+// ── WHATSAPP FAB (mobile only) ─────────────────
 (function initWhatsAppFab() {
-  const WA_URL = 'https://wa.me/33633707569';
   const LS_POS = 'ct_whatsapp_fab_pos';
-  const SS_BUBBLE = 'ct_whatsapp_bubble_dismissed';
+  const SS_BUBBLE = 'ct_whatsapp_bubble_dismissed_portfolio';
   const LS_DRAG_HINT = 'ct_whatsapp_drag_hint_seen';
   const SIZE = 56;
   const MARGIN = 8;
@@ -3227,7 +3233,7 @@ try {
   const dragHint = document.getElementById('waDragHint');
   if (!wrap || !inner || !btn || !bubble) return;
 
-  btn.href = WA_URL;
+  btn.href = getWaUrl();
 
   const isMobile = () => window.innerWidth <= 768;
   let anchor = null;
@@ -3249,13 +3255,6 @@ try {
     wrap.style.bottom = 'auto';
   };
 
-  const setDesktopFixed = () => {
-    wrap.style.left = 'auto';
-    wrap.style.top = 'auto';
-    wrap.style.right = '24px';
-    wrap.style.bottom = 'calc(24px + env(safe-area-inset-bottom, 0px))';
-  };
-
   const readSavedAnchor = () => {
     try {
       const raw = localStorage.getItem(LS_POS);
@@ -3267,15 +3266,16 @@ try {
   };
 
   const positionFab = () => {
-    if (!isMobile()) { setDesktopFixed(); return; }
+    if (!isMobile()) return;
     anchor = readSavedAnchor() || defaultAnchor();
     applyAnchor(anchor);
   };
 
   positionFab();
   window.addEventListener('resize', () => {
-    positionFab();
-    if (anchor) applyAnchor(clamp(anchor.x, anchor.y));
+    if (!isMobile()) return;
+    if (!anchor) anchor = readSavedAnchor() || defaultAnchor();
+    applyAnchor(clamp(anchor.x, anchor.y));
   });
 
   if (isMobile() && !localStorage.getItem(LS_DRAG_HINT) && dragHint) {
