@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Christopher TECHER — Fullstack Developer & IA</title>
+<title>Christopher TECHER — Product Builder IA · AI Automation Engineer</title>
+<meta name="description" content="Product Builder IA et AI Automation Engineer. Systèmes d'automatisation n8n, workflows Claude, SaaS en production. 15+ ans d'expérience business.">
+<meta name="keywords" content="Product Builder IA, AI Automation Engineer, n8n, Claude API, workflow automation, no-code, low-code, Christopher TECHER">
+<meta property="og:title" content="Christopher TECHER — Product Builder IA · AI Automation Engineer">
+<meta property="og:description" content="Je construis des systèmes d'automatisation IA et des produits digitaux à impact business réel.">
+<meta property="og:type" content="website">
 <style>
 :root {
   --navy: #1F4E79;
@@ -54,6 +59,239 @@ nav ul li a {
   transition: color .2s;
 }
 nav ul li a:hover { color:var(--accent); }
+nav ul li a.active { color:var(--accent); }
+
+/* ─── MOBILE NAV ──────────────────────────────── */
+.nav-toggle {
+  display:none; background:none; border:none; cursor:pointer;
+  padding:8px; color:var(--accent); flex-shrink:0;
+}
+.nav-toggle span {
+  display:block; width:22px; height:2px; background:var(--accent);
+  margin:5px 0; border-radius:2px; transition:all .3s;
+}
+.nav-toggle.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.nav-toggle.open span:nth-child(2) { opacity:0; }
+.nav-toggle.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+.mobile-menu {
+  display:none; position:fixed; top:60px; left:0; right:0; z-index:99;
+  background:rgba(13,27,42,0.98); backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(65,168,240,0.15);
+  padding:16px 24px 24px;
+}
+.mobile-menu.open { display:block; }
+.mobile-menu a {
+  display:block; padding:14px 0; color:var(--grey); text-decoration:none;
+  font-size:.95rem; font-weight:600; border-bottom:1px solid rgba(65,168,240,0.08);
+  transition:color .2s;
+}
+.mobile-menu a:hover { color:var(--accent); }
+
+/* ─── HERO BUSINESS BADGE ─────────────────────── */
+.hero-business-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(232,201,106,0.1); border:1.5px solid rgba(201,168,76,0.45);
+  border-radius:50px; padding:8px 18px; margin-bottom:20px;
+  font-size:.8rem; color:#E8C96A; font-weight:700; letter-spacing:.3px;
+}
+.hero-business-badge .star { font-size:.9rem; }
+.hero-roles {
+  display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px;
+}
+.hero-role-tag {
+  background:rgba(65,168,240,0.08); border:1px solid rgba(65,168,240,0.2);
+  border-radius:50px; padding:5px 14px; font-size:.78rem;
+  color:var(--light-blue); font-weight:600;
+}
+
+/* ─── MAESTRO SHOWCASE ────────────────────────── */
+.maestro-showcase {
+  position:relative; width:100%; min-height:400px;
+  background:linear-gradient(135deg,#0a0a0a,#111);
+  border-radius:16px; padding:28px 20px;
+  border:1px solid rgba(201,168,76,0.25);
+  overflow:hidden;
+}
+.maestro-showcase::before {
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size:40px 40px; pointer-events:none;
+}
+.maestro-wf-track {
+  position:relative; z-index:1;
+  display:flex; flex-direction:column; gap:8px; align-items:center;
+}
+.maestro-wf-row {
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap; justify-content:center;
+}
+.maestro-node {
+  background:#1A1A1A; border:1px solid #2A2A2A; border-radius:8px;
+  padding:8px 12px; font-size:.68rem; font-weight:600; color:#fff;
+  transition:all .4s; white-space:nowrap;
+}
+.maestro-node.gold { border-color:rgba(201,168,76,0.6); color:#E8C96A; }
+.maestro-node.green { border-color:rgba(74,158,107,0.6); color:#4A9E6B; }
+.maestro-node.blue { border-color:rgba(74,127,190,0.6); color:#4A7FBE; }
+.maestro-node.active-node {
+  background:rgba(201,168,76,0.15); border-color:var(--gold,#C9A84C);
+  box-shadow:0 0 20px rgba(201,168,76,0.3); transform:scale(1.05);
+}
+.maestro-wf-arrow { color:rgba(201,168,76,0.4); font-size:.75rem; }
+.maestro-metric-bar {
+  position:relative; z-index:1; margin-top:20px;
+  display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+}
+.maestro-metric {
+  text-align:center; padding:10px 14px;
+  background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.2);
+  border-radius:10px;
+}
+.maestro-metric .m-num { font-size:1.1rem; font-weight:800; color:#E8C96A; display:block; }
+.maestro-metric .m-label { font-size:.65rem; color:#888; margin-top:2px; }
+.proj-badge--gold {
+  background:rgba(201,168,76,0.1) !important;
+  border-color:rgba(201,168,76,0.35) !important;
+  color:#E8C96A !important;
+}
+.project-card--maestro { border-color:rgba(201,168,76,0.2); }
+.project-card--maestro:hover { border-color:rgba(201,168,76,0.45); }
+.proj-link.gold {
+  background:linear-gradient(135deg,#C9A84C,#E8C96A);
+  color:#0A0A0A; box-shadow:0 6px 24px rgba(201,168,76,0.3);
+}
+.proj-link.gold:hover { box-shadow:0 12px 32px rgba(201,168,76,0.45); }
+.capability-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+.capability-tag {
+  background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.25);
+  border-radius:6px; padding:4px 10px; font-size:.72rem;
+  color:#E8C96A; font-weight:600;
+}
+
+/* ─── IMPACT SECTION ──────────────────────────── */
+#impact { background:var(--dark); }
+.impact-grid {
+  display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
+}
+.impact-card {
+  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
+  border-radius:20px; padding:28px; transition:all .3s;
+  display:flex; flex-direction:column; gap:12px;
+}
+.impact-card:hover { border-color:rgba(65,168,240,0.35); transform:translateY(-3px); }
+.impact-card--gold { border-color:rgba(201,168,76,0.2); }
+.impact-card--gold:hover { border-color:rgba(201,168,76,0.4); }
+.impact-card-header { display:flex; align-items:center; gap:12px; }
+.impact-card-icon { font-size:1.6rem; }
+.impact-card-project { font-size:.75rem; font-weight:700; color:var(--accent); letter-spacing:.5px; text-transform:uppercase; }
+.impact-card--gold .impact-card-project { color:#E8C96A; }
+.impact-card-num { font-size:2.4rem; font-weight:800; color:var(--green); line-height:1; }
+.impact-card--gold .impact-card-num { color:#E8C96A; }
+.impact-card-benefit { font-size:.92rem; color:var(--white); font-weight:600; line-height:1.5; }
+.impact-card-detail { font-size:.82rem; color:var(--grey); line-height:1.6; }
+.impact-card-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+.impact-tag {
+  font-size:.68rem; padding:3px 8px; border-radius:5px;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(65,168,240,0.15);
+  color:var(--grey); font-weight:600;
+}
+.impact-closing {
+  margin-top:40px; text-align:center; font-size:1.05rem;
+  color:var(--grey); font-style:italic; line-height:1.7;
+}
+.impact-closing strong { color:var(--accent); font-style:normal; }
+
+/* ─── HOW I BUILD ─────────────────────────────── */
+#how-i-build { background:var(--dark2); }
+.build-pipeline {
+  display:flex; flex-direction:column; align-items:center; gap:0;
+  max-width:640px; margin:0 auto;
+}
+.build-step {
+  width:100%; background:var(--card-bg);
+  border:1px solid rgba(65,168,240,0.15); border-radius:16px;
+  padding:22px 28px; display:flex; align-items:flex-start; gap:16px;
+  opacity:0; transform:translateY(20px);
+  transition:opacity .5s ease, transform .5s ease, border-color .3s;
+}
+.build-pipeline.visible .build-step { opacity:1; transform:translateY(0); }
+.build-pipeline.visible .build-step:nth-child(1) { transition-delay:.05s; }
+.build-pipeline.visible .build-step:nth-child(3) { transition-delay:.15s; }
+.build-pipeline.visible .build-step:nth-child(5) { transition-delay:.25s; }
+.build-pipeline.visible .build-step:nth-child(7) { transition-delay:.35s; }
+.build-pipeline.visible .build-step:nth-child(9) { transition-delay:.45s; }
+.build-pipeline.visible .build-step:nth-child(11) { transition-delay:.55s; }
+.build-step:hover { border-color:rgba(65,168,240,0.35); }
+.build-step-num {
+  flex-shrink:0; width:36px; height:36px; border-radius:50%;
+  background:rgba(65,168,240,0.12); border:2px solid rgba(65,168,240,0.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.8rem; font-weight:800; color:var(--accent);
+}
+.build-step-content h4 { font-size:.95rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+.build-step-content p { font-size:.82rem; color:var(--grey); line-height:1.6; }
+.build-step-example {
+  display:inline-block; margin-top:6px; font-size:.75rem;
+  color:var(--accent); font-weight:600;
+}
+.build-arrow {
+  width:2px; height:28px; background:linear-gradient(to bottom,var(--accent),rgba(65,168,240,0.2));
+  margin:4px 0;
+}
+.build-closing {
+  margin-top:48px; text-align:center; max-width:600px; margin-left:auto; margin-right:auto;
+  font-size:1.02rem; color:var(--grey); line-height:1.7;
+}
+.build-closing strong { color:var(--white); }
+
+/* ─── AUTOMATION ECOSYSTEM ────────────────────── */
+.ecosystem-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px;
+}
+.ecosystem-card {
+  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
+  border-radius:16px; padding:20px; transition:all .3s;
+}
+.ecosystem-card:hover { border-color:rgba(65,168,240,0.35); transform:translateY(-3px); }
+.ecosystem-card--featured { border-color:rgba(46,196,168,0.3); }
+.ecosystem-card--featured:hover { border-color:rgba(46,196,168,0.5); }
+.ecosystem-card--gold { border-color:rgba(201,168,76,0.2); }
+.ecosystem-card-icon { font-size:1.5rem; margin-bottom:10px; }
+.ecosystem-card h4 { font-size:.9rem; font-weight:700; color:var(--white); margin-bottom:6px; }
+.ecosystem-card .eco-metric { font-size:1.3rem; font-weight:800; color:var(--green); margin-bottom:4px; }
+.ecosystem-card--gold .eco-metric { color:#E8C96A; }
+.ecosystem-card p { font-size:.78rem; color:var(--grey); line-height:1.5; margin-bottom:10px; }
+.ecosystem-card .eco-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.eco-tag {
+  font-size:.65rem; padding:3px 8px; border-radius:5px;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(65,168,240,0.15);
+  color:var(--light-blue); font-weight:600;
+}
+.ecosystem-closing {
+  text-align:center; margin-top:32px; font-size:.95rem; color:var(--grey);
+}
+.ecosystem-closing strong { color:var(--accent); }
+.rebecca-spotlight {
+  background:var(--card-bg); border:1px solid rgba(46,196,168,0.25);
+  border-radius:20px; padding:28px; margin-top:8px;
+}
+.rebecca-spotlight-header {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:12px; margin-bottom:20px;
+}
+.rebecca-spotlight-header h3 { font-size:1.1rem; font-weight:700; color:var(--white); }
+.rebecca-stats { display:flex; gap:12px; flex-wrap:wrap; }
+.rebecca-stat {
+  background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25);
+  border-radius:50px; padding:5px 14px; font-size:.75rem;
+  color:var(--green); font-weight:700;
+}
+.contact-maestro-icon {
+  font-size:1.6rem; flex-shrink:0;
+  width:48px; height:48px; display:flex; align-items:center; justify-content:center;
+  background:rgba(201,168,76,0.1); border-radius:12px;
+}
 
 /* ─── LANG BUTTON ─────────────────────────────── */
 .lang-btn {
@@ -186,7 +424,7 @@ section { padding: 100px 60px; }
 .value-card p { font-size:.8rem; color:var(--grey); line-height:1.5; }
 
 /* ─── SKILLS — stack technique ───────────────── */
-#skills { background:var(--dark); }
+#skills { background:var(--dark2); }
 .skills-grid {
   display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
   align-items:stretch;
@@ -521,6 +759,7 @@ footer p { color:var(--grey); font-size:.85rem; }
 @media(max-width:900px) {
   nav { padding:16px 20px; gap:12px; }
   nav ul { display:none; }
+  .nav-toggle { display:block; }
   .lang-btn { padding:5px 10px; font-size:.75rem; }
   section { padding:70px 24px; }
   #hero { padding:100px 24px 60px; }
@@ -550,10 +789,17 @@ footer p { color:var(--grey); font-size:.85rem; }
   .small-projects { grid-template-columns:1fr; }
   .automation-grid { grid-template-columns:1fr; }
   .results-grid { grid-template-columns:1fr 1fr; }
+  .impact-grid { grid-template-columns:1fr; }
+  .ecosystem-grid { grid-template-columns:1fr 1fr; }
+  .maestro-showcase { min-height:320px; }
+  .maestro-node { font-size:.6rem; padding:6px 8px; }
   footer { flex-direction:column; gap:8px; text-align:center; }
 }
 @media(max-width:560px) {
   .skills-grid { grid-template-columns:1fr; }
+  .ecosystem-grid { grid-template-columns:1fr; }
+  .hero-roles { gap:6px; }
+  .hero-role-tag { font-size:.72rem; padding:4px 10px; }
 }
 
 @keyframes float-photo {
@@ -586,21 +832,34 @@ footer p { color:var(--grey); font-size:.85rem; }
 <nav>
   <div class="logo-group">
     <img src="assets/profile.png" alt="Christopher TECHER" class="nav-avatar">
-    <div class="logo">CT/</div>
+    <a href="#hero" class="logo" style="text-decoration:none">CT/</a>
   </div>
   <ul>
     <li><a href="#about" data-i18n="nav_about">Profil</a></li>
-    <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-    <li><a href="#projects" data-i18n="nav_projects">Projets</a></li>
-    <li><a href="#automation" data-i18n="nav_automation">Automatisation</a></li>
-    <li><a href="#experience" data-i18n="nav_experience">Expérience</a></li>
+    <li><a href="#projects" data-i18n="nav_projects">Réalisations</a></li>
+    <li><a href="#impact" data-i18n="nav_impact">Impact</a></li>
+    <li><a href="#how-i-build" data-i18n="nav_method">Méthode</a></li>
+    <li><a href="#automation" data-i18n="nav_ecosystem">Écosystème</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
     <span class="flag" id="lang-flag">🇬🇧</span>
     <span id="lang-txt">EN</span>
   </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#about" data-i18n="nav_about">Profil</a>
+  <a href="#projects" data-i18n="nav_projects">Réalisations</a>
+  <a href="#impact" data-i18n="nav_impact">Impact</a>
+  <a href="#how-i-build" data-i18n="nav_method">Méthode</a>
+  <a href="#automation" data-i18n="nav_ecosystem">Écosystème</a>
+  <a href="#skills" data-i18n="nav_skills">Compétences</a>
+  <a href="#experience" data-i18n="nav_experience">Parcours</a>
+  <a href="#contact" data-i18n="nav_contact">Contact</a>
+</div>
 
 <!-- ── HERO ─────────────────────────────────── -->
 <section id="hero">
@@ -610,31 +869,39 @@ footer p { color:var(--grey); font-size:.85rem; }
     <div class="hero-text">
       <img src="assets/profile.png" alt="Christopher TECHER" class="hero-photo">
       <div class="badge"><span class="badge-dot" aria-hidden="true"></span><span data-i18n="hero_badge">Disponible · Remote &amp; International</span></div>
+      <div class="hero-business-badge" data-i18n="hero_business_badge">
+        <span class="star" aria-hidden="true">★</span> Business-First Builder · 15+ Years Business Experience
+      </div>
       <h1>Christopher<br><span>TECHER</span></h1>
-      <p class="subtitle" data-i18n="hero_subtitle">Fullstack Developer TypeScript · Builder d'applications réelles · Expert en automatisation IA</p>
-      <p class="tagline" data-i18n="hero_tagline">Je code. J'automatise. Je livre en production.</p>
+      <p class="tagline" data-i18n="hero_tagline">Je construis des produits digitaux et des systèmes d'automatisation IA qui génèrent un impact business réel.</p>
+      <div class="hero-roles">
+        <span class="hero-role-tag" data-i18n="hero_role1">Product Builder</span>
+        <span class="hero-role-tag" data-i18n="hero_role2">AI Automation Engineer</span>
+        <span class="hero-role-tag" data-i18n="hero_role3">Business Developer</span>
+        <span class="hero-role-tag" data-i18n="hero_role4">No-Code / Low-Code Builder</span>
+      </div>
       <div class="hero-btns">
-        <a href="#projects" class="btn-primary" data-i18n="hero_btn1">🚀 Voir mes projets</a>
+        <a href="#projects" class="btn-primary" data-i18n="hero_btn1">🚀 Voir mes réalisations</a>
         <a href="#contact" class="btn-secondary" data-i18n="hero_btn2">💬 Me contacter</a>
       </div>
     </div>
 
     <div class="hero-card fade-in">
       <div class="stat-item">
+        <span class="num">&lt;10s</span>
+        <span class="label" data-i18n="stat1">post-call automatisé</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">35h</span>
+        <span class="label" data-i18n="stat2">économisées / semaine</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">2 ETP</span>
+        <span class="label" data-i18n="stat3">automatisés</span>
+      </div>
+      <div class="stat-item">
         <span class="num">15+</span>
-        <span class="label" data-i18n="stat1">ans de business development</span>
-      </div>
-      <div class="stat-item">
-        <span class="num">300K€</span>
-        <span class="label" data-i18n="stat2">CA généré en 4 mois</span>
-      </div>
-      <div class="stat-item">
-        <span class="num">+70%</span>
-        <span class="label" data-i18n="stat3">gain productivité via IA</span>
-      </div>
-      <div class="stat-item">
-        <span class="num">4+</span>
-        <span class="label" data-i18n="stat4">apps déployées en prod</span>
+        <span class="label" data-i18n="stat4">ans business terrain</span>
       </div>
       <div class="tech-strip">
         <span class="tech-tag">React</span>
@@ -660,143 +927,32 @@ footer p { color:var(--grey); font-size:.85rem; }
           <img src="assets/profile.png" alt="Christopher TECHER" class="about-avatar">
           <h2 class="section-title" data-i18n-html="about_title_html">Business developer devenu <span style="color:var(--accent)">builder</span></h2>
         </div>
-        <p data-i18n-html="about_p1">Après <span class="highlight">15 ans à créer, structurer et faire croître des entreprises</span>, j'ai décidé de coder moi-même les outils que je voulais voir exister. Autodidacte, j'ai appris le développement Fullstack TypeScript et l'ingénierie IA pour passer de l'idée au produit en production.</p>
-        <p data-i18n-html="about_p2">Ce qui me différencie : je <span class="accent-text">comprends le business autant que le code</span>. Je ne construis pas juste des applications — je construis des systèmes qui génèrent de la valeur réelle, automatisent des tâches chronophages, et scalent.</p>
-        <p data-i18n="about_p3">Mes apps tournent en production. Mes workflows N8N et MAKE remplacent l'équivalent de 2 ETP. Mon agent IA "Rebecca" analyse des centaines de CV automatiquement.</p>
+        <p data-i18n-html="about_p1">Après <span class="highlight">15 ans à comprendre les commerciaux, les RH, les centres de formation, les loueurs automobiles et les PME</span>, j'ai appris à concevoir et déployer les systèmes qui automatisent leurs processus. Autodidacte, je suis passé de l'idée métier à la solution opérationnelle en production.</p>
+        <p data-i18n-html="about_p2">Ce qui me différencie : des gens savent faire n8n. Moins savent <span class="accent-text">comprendre le métier avant d'automatiser</span>. Je ne construis pas des workflows — je transforme des problèmes business en systèmes IA mesurables.</p>
+        <p data-i18n="about_p3">6+ systèmes en production. Workflows N8N et MAKE qui remplacent 2 ETP. Agent IA Rebecca qui économise 35h par semaine. Maestro qui génère un compte rendu post-appel en moins de 10 secondes.</p>
       </div>
       <div class="values">
         <div class="value-card">
-          <div class="icon">⚡</div>
-          <h4 data-i18n="val1_title">Fullstack Réel</h4>
-          <p data-i18n="val1_desc">Du frontend React au backend Node.js/Supabase, je livre des apps complètes en production.</p>
+          <div class="icon">🎯</div>
+          <h4 data-i18n="val1_title">Compréhension métier</h4>
+          <p data-i18n="val1_desc">15 ans terrain : commerciaux, RH, formation, location auto, PME. Je comprends l'enjeu avant de concevoir.</p>
         </div>
         <div class="value-card">
           <div class="icon">🤖</div>
-          <h4 data-i18n="val2_title">IA Appliquée</h4>
-          <p data-i18n="val2_desc">GPT-Vision, agents IA, RAG, prompt engineering — intégrés dans des workflows qui tournent.</p>
+          <h4 data-i18n="val2_title">Systèmes IA en prod</h4>
+          <p data-i18n="val2_desc">Workflows n8n, Claude API, prompt engineering, orchestration multi-API — déployés et mesurés.</p>
         </div>
         <div class="value-card">
           <div class="icon">🔄</div>
-          <h4 data-i18n="val3_title">Automatisation</h4>
-          <p data-i18n="val3_desc">N8N, MAKE (certifié), Airtable — des systèmes qui remplacent des heures de travail manuel.</p>
+          <h4 data-i18n="val3_title">Automation métier</h4>
+          <p data-i18n="val3_desc">N8N, MAKE (certifié), webhooks, CRM — des pipelines qui remplacent des heures de travail manuel.</p>
         </div>
         <div class="value-card">
-          <div class="icon">💼</div>
-          <h4 data-i18n="val4_title">Vision Business</h4>
-          <p data-i18n="val4_desc">15 ans d'entrepreneuriat. Je code ce qui compte, avec des objectifs mesurables.</p>
+          <div class="icon">🚀</div>
+          <h4 data-i18n="val4_title">Exécution produit</h4>
+          <p data-i18n="val4_desc">Quand le besoin l'exige, je livre aussi un SaaS complet de A à Z — comme Rentanoo.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── SKILLS ─────────────────────────────────── -->
-<section id="skills">
-  <div class="section-inner">
-    <p class="section-label" data-i18n="skills_label">Compétences</p>
-    <h2 class="section-title" data-i18n="skills_title">Stack technique</h2>
-    <p class="section-desc" data-i18n="skills_desc">Un écosystème complet : du frontend mobile au pipeline IA, en passant par les workflows d'automatisation et le backend cloud.</p>
-    <div class="skills-grid fade-in" id="skillsGrid">
-      <article class="skill-card skill-card--fe">
-        <div class="skill-card-head">
-          <div class="skill-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="skill_fe">Frontend</h3>
-            <span class="skill-card-meta" data-i18n="skill_fe_meta">7 technologies</span>
-          </div>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">React</span><span class="skill-tag">Next.js</span>
-          <span class="skill-tag">React Native</span><span class="skill-tag">Expo</span>
-          <span class="skill-tag">TypeScript</span><span class="skill-tag">Tailwind CSS</span>
-          <span class="skill-tag">Vite</span>
-        </div>
-      </article>
-      <article class="skill-card skill-card--be">
-        <div class="skill-card-head">
-          <div class="skill-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="skill_be">Backend &amp; BDD</h3>
-            <span class="skill-card-meta" data-i18n="skill_be_meta">7 technologies</span>
-          </div>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Node.js</span><span class="skill-tag">Express</span>
-          <span class="skill-tag">Supabase</span><span class="skill-tag">Edge Functions</span>
-          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">pgvector</span>
-          <span class="skill-tag">JWT</span>
-        </div>
-      </article>
-      <article class="skill-card skill-card--infra">
-        <div class="skill-card-head">
-          <div class="skill-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84 2.13-2.5 4-2.5s3.29 1.66 4 2.5c1.26 1.5 5 2 5 2s-.5-3.74-2-5c-.84-.71-2.5-2.13-2.5-4s1.66-3.29 2.5-4c1.5-1.26 2-5 2-5s-3.74.5-5 2c-.71.84-2.13 2.5-4 2.5s-3.29-1.66-4-2.5C6.74 3.5 3 3 3 3s.5 3.74 2 5c.84.71 2.5 2.13 2.5 4s-1.66 3.29-2.5 4z"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="skill_infra">Infra &amp; Paiement</h3>
-            <span class="skill-card-meta" data-i18n="skill_infra_meta">6 technologies</span>
-          </div>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Stripe</span><span class="skill-tag">Railway</span>
-          <span class="skill-tag">Vercel</span><span class="skill-tag">Expo EAS</span>
-          <span class="skill-tag">Supabase Cloud</span><span class="skill-tag">Google Maps API</span>
-        </div>
-      </article>
-      <article class="skill-card skill-card--ia">
-        <div class="skill-card-head">
-          <div class="skill-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="skill_ia">IA &amp; LLMs</h3>
-            <span class="skill-card-meta" data-i18n="skill_ia_meta">7 technologies</span>
-          </div>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">OpenAI API</span><span class="skill-tag">GPT-Vision</span>
-          <span class="skill-tag">Claude API</span><span class="skill-tag">RAG</span>
-          <span class="skill-tag">Prompt Engineering</span><span class="skill-tag" data-i18n="agents_tag">Agents IA</span>
-          <span class="skill-tag">Gemini</span>
-        </div>
-      </article>
-      <article class="skill-card skill-card--auto">
-        <div class="skill-card-head">
-          <div class="skill-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="skill_auto">Automatisation</h3>
-            <span class="skill-card-meta" data-i18n="skill_auto_meta">7 technologies</span>
-          </div>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">N8N</span><span class="skill-tag skill-tag--cert" data-i18n="make_cert">MAKE ✓ certifié</span>
-          <span class="skill-tag">Airtable</span><span class="skill-tag">Webhooks</span>
-          <span class="skill-tag">Pappers API</span><span class="skill-tag">Dropcontact</span>
-          <span class="skill-tag">Google Workspace</span>
-        </div>
-      </article>
-      <article class="skill-card skill-card--tools">
-        <div class="skill-card-head">
-          <div class="skill-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <div>
-            <h3 data-i18n="skill_tools">Outils &amp; Méthodes</h3>
-            <span class="skill-card-meta" data-i18n="skill_tools_meta">6 technologies</span>
-          </div>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Git / GitHub</span><span class="skill-tag">React Query</span>
-          <span class="skill-tag">Zod</span><span class="skill-tag">React Hook Form</span>
-          <span class="skill-tag">i18next</span><span class="skill-tag">Supabase Realtime</span>
-        </div>
-      </article>
     </div>
   </div>
 </section>
@@ -804,12 +960,70 @@ footer p { color:var(--grey); font-size:.85rem; }
 <!-- ── PROJECTS ───────────────────────────────── -->
 <section id="projects">
   <div class="section-inner">
-    <p class="section-label" data-i18n="proj_label">Projets</p>
-    <h2 class="section-title" data-i18n="proj_title">Applications en production</h2>
-    <p class="section-desc" data-i18n="proj_desc">Des projets réels, avec du code réel, déployés en production. Pas des tutoriels.</p>
+    <p class="section-label" data-i18n="proj_label">Réalisations</p>
+    <h2 class="section-title" data-i18n="proj_title">Des systèmes IA et des produits en production</h2>
+    <p class="section-desc" data-i18n="proj_desc">Pas des POC. Des solutions opérationnelles qui transforment des processus métier.</p>
 
-    <!-- RENTANOO — projet n°1 -->
-    <div class="project-card fade-in" id="project-rentanoo">
+    <!-- MAESTRO AI — Featured #1 -->
+    <div class="project-card project-card--maestro fade-in" id="project-maestro">
+      <div class="project-inner">
+        <div class="project-visuals" style="background:linear-gradient(135deg,#0a0a0a,#111);padding:24px;">
+          <div class="maestro-showcase" id="maestroShowcase">
+            <div class="maestro-wf-track">
+              <div class="maestro-wf-row">
+                <div class="maestro-node" data-node="0">Webhook</div>
+                <span class="maestro-wf-arrow">→</span>
+                <div class="maestro-node" data-node="1">Modjo API</div>
+                <span class="maestro-wf-arrow">→</span>
+                <div class="maestro-node gold" data-node="2">Claude</div>
+                <span class="maestro-wf-arrow">→</span>
+                <div class="maestro-node" data-node="3">Parse JSON</div>
+              </div>
+              <div class="maestro-wf-row">
+                <div class="maestro-node green" data-node="4">GHL Task</div>
+                <span class="maestro-wf-arrow">→</span>
+                <div class="maestro-node blue" data-node="5">Slack</div>
+                <span class="maestro-wf-arrow">→</span>
+                <div class="maestro-node blue" data-node="6">Email</div>
+                <span class="maestro-wf-arrow">→</span>
+                <div class="maestro-node green" data-node="7">Pipeline</div>
+              </div>
+            </div>
+            <div class="maestro-metric-bar">
+              <div class="maestro-metric"><span class="m-num">&lt;10s</span><span class="m-label" data-i18n="maestro_m1">post-call</span></div>
+              <div class="maestro-metric"><span class="m-num">0</span><span class="m-label" data-i18n="maestro_m2">relance oubliée</span></div>
+              <div class="maestro-metric"><span class="m-num">100%</span><span class="m-label" data-i18n="maestro_m3">nœuds natifs</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="proj-badge proj-badge--gold" data-i18n="maestro_badge">IA Automation · Workflow Engineer · Preuve #1</div>
+          <h2>Maestro AI</h2>
+          <p class="proj-desc" data-i18n="maestro_desc">De l'appel commercial terminé à la tâche CRM créée en moins de 10 secondes — workflow n8n 8 nœuds natifs, 0 intervention humaine.</p>
+          <ul class="features">
+            <li data-i18n="maestro_f1">Workflow n8n orchestré : Modjo → Claude → GoHighLevel → Slack → Email</li>
+            <li data-i18n="maestro_f2">Prompt SONCAS intégré → JSON structuré exploitable directement par le CRM</li>
+            <li data-i18n="maestro_f3">Humain garde le contrôle : email rédigé par Claude, envoyé à valider</li>
+          </ul>
+          <div class="capability-tags">
+            <span class="capability-tag">AI Automation</span>
+            <span class="capability-tag">n8n</span>
+            <span class="capability-tag">Claude</span>
+            <span class="capability-tag">APIs</span>
+            <span class="capability-tag">Prompt Engineering</span>
+            <span class="capability-tag">CRM Automation</span>
+            <span class="capability-tag">Workflow Orchestration</span>
+          </div>
+          <div class="proj-links">
+            <a href="maestro.html" class="proj-link gold" data-i18n="maestro_demo">🎬 Voir la démo interactive →</a>
+            <a href="https://github.com/techerchristopher-dotcom/maestro-workflow" target="_blank" class="proj-link ghost">⭐ GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RENTANOO — Featured #2 -->
+    <div class="project-card reverse fade-in" id="project-rentanoo">
       <div class="project-inner">
         <div class="project-visuals" style="background:linear-gradient(135deg,#1a2535,#0d1b2a);">
           <div class="rentanoo-showcase">
@@ -819,17 +1033,17 @@ footer p { color:var(--grey); font-size:.85rem; }
           </div>
         </div>
         <div class="project-info">
-          <div class="proj-badge" data-i18n="rentanoo_badge">SaaS vertical · Product Builder</div>
+          <div class="proj-badge" data-i18n="rentanoo_badge">SaaS Product Design &amp; Business Execution · Preuve #2</div>
           <h2 class="project-rentanoo-heading">
             <span class="rentanoo-logo-wrap">
               <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo">
             </span>
           </h2>
-          <p class="proj-desc" data-i18n="rentanoo_desc">Le système d'exploitation des agences de location de véhicules — SaaS métier conçu et développé de bout en bout.</p>
+          <p class="proj-desc" data-i18n="rentanoo_desc">Preuve qu'en plus des workflows IA, je sais construire un produit SaaS complet de A à Z — conçu, développé et déployé en production.</p>
           <ul class="features">
-            <li data-i18n="rentanoo_f1">Réservation en ligne 24/7 · Stripe</li>
+            <li data-i18n="rentanoo_f1">Produit SaaS métier livré de bout en bout · Réservation 24/7 · Stripe</li>
             <li data-i18n="rentanoo_f2">CRM, planning et états des lieux digitalisés</li>
-            <li data-i18n="rentanoo_f3">Gestion de flotte · maintenance · reporting</li>
+            <li data-i18n="rentanoo_f3">Gestion de flotte · maintenance · reporting · rentanoo.com live</li>
           </ul>
           <div class="proj-stack" translate="no">
             <div class="stack-group">
@@ -859,9 +1073,9 @@ footer p { color:var(--grey); font-size:.85rem; }
       <div class="project-inner">
         <div class="project-visuals" style="background:linear-gradient(135deg,#0a1929,#1a3a5c);">
           <div class="phone-showcase">
-            <img src="tukme-1.png" alt="Tukme — destination">
-            <img src="tukme-3.png" alt="Tukme — commander une course">
-            <img src="tukme-5.png" alt="Tukme — chauffeur trouvé">
+            <img src="projects/screenshots/tukme-screen-1.jpeg" alt="Tukme — destination">
+            <img src="projects/screenshots/tukme-screen-3.jpg" alt="Tukme — commander une course">
+            <img src="projects/screenshots/tukme-screen-6.jpg" alt="Tukme — chauffeur trouvé">
           </div>
         </div>
         <div class="project-info">
@@ -945,23 +1159,9 @@ footer p { color:var(--grey); font-size:.85rem; }
           <span class="card-icon">🤖</span>
           <h3>Agent Rebecca</h3>
         </div>
-        <p data-i18n="rebecca_desc">Agent IA d'analyse de CV : PDF → GPT-Vision → extraction données → Airtable. Déployé en production.</p>
-        <div class="proj-stack" style="margin-bottom:16px">
-          <div class="stack-group">
-            <span class="stack-label">Auto</span>
-            <span class="stack-tag">MAKE</span>
-          </div>
-          <div class="stack-group">
-            <span class="stack-label">IA</span>
-            <span class="stack-tag">GPT-Vision</span>
-          </div>
-          <div class="stack-group">
-            <span class="stack-label">Data</span>
-            <span class="stack-tag">Airtable</span>
-          </div>
-        </div>
+        <p data-i18n="rebecca_desc_short">Agent IA d'analyse de CV en production — 35h économisées/semaine. Voir l'écosystème complet ↓</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">LinkedIn →</a>
+          <a href="#automation" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;" data-i18n="rebecca_eco">→ Écosystème Automation</a>
           <a href="projects/agent-rebecca.html" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;" data-i18n="proj_view_short">📄 Voir →</a>
         </div>
       </div>
@@ -969,48 +1169,323 @@ footer p { color:var(--grey); font-size:.85rem; }
   </div>
 </section>
 
-<!-- ── AUTOMATION ─────────────────────────────── -->
+<!-- ── IMPACT & RESULTS ───────────────────────── -->
+<section id="impact">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="impact_label">Impact</p>
+    <h2 class="section-title" data-i18n="impact_title">Des résultats mesurables, pas des démos</h2>
+    <p class="section-desc" data-i18n="impact_desc">Chaque système remplace du travail manuel ou accélère un processus métier. Les bénéfices avant les technologies.</p>
+    <div class="impact-grid fade-in" id="impactGrid">
+      <article class="impact-card impact-card--gold">
+        <div class="impact-card-header">
+          <span class="impact-card-icon">📞</span>
+          <span class="impact-card-project">Maestro AI</span>
+        </div>
+        <div class="impact-card-num">&lt; 10s</div>
+        <p class="impact-card-benefit" data-i18n="impact_maestro_benefit">Compte rendu post-appel généré et CRM mis à jour automatiquement</p>
+        <p class="impact-card-detail" data-i18n="impact_maestro_detail">0 relance oubliée · Workflow n8n 8 nœuds · Claude SONCAS → JSON</p>
+        <div class="impact-card-tags">
+          <span class="impact-tag">n8n</span><span class="impact-tag">Claude</span><span class="impact-tag">GHL</span><span class="impact-tag">Modjo</span>
+        </div>
+        <a href="maestro.html" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;margin-top:8px;width:fit-content" data-i18n="impact_maestro_cta">🎬 Voir la démo →</a>
+      </article>
+      <article class="impact-card">
+        <div class="impact-card-header">
+          <span class="impact-card-icon">🤖</span>
+          <span class="impact-card-project">Agent Rebecca</span>
+        </div>
+        <div class="impact-card-num">35h</div>
+        <p class="impact-card-benefit" data-i18n="impact_rebecca_benefit">Économisées par semaine sur l'analyse de candidatures</p>
+        <p class="impact-card-detail" data-i18n="impact_rebecca_detail">+60% réactivité candidats · -40% délai de traitement · Production CEFORA</p>
+        <div class="impact-card-tags">
+          <span class="impact-tag">GPT-Vision</span><span class="impact-tag">MAKE</span><span class="impact-tag">Airtable</span>
+        </div>
+        <a href="#automation" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;margin-top:8px;width:fit-content" data-i18n="impact_rebecca_cta">→ Pipeline Rebecca</a>
+      </article>
+      <article class="impact-card">
+        <div class="impact-card-header">
+          <span class="impact-card-icon">🚗</span>
+          <span class="impact-card-project">Rentanoo</span>
+        </div>
+        <div class="impact-card-num">3</div>
+        <p class="impact-card-benefit" data-i18n="impact_rentanoo_benefit">Modules métier intégrés dans une plateforme de réservation complète</p>
+        <p class="impact-card-detail" data-i18n="impact_rentanoo_detail">SaaS en production · Réservation 24/7 · Stripe · CRM · Flotte</p>
+        <div class="impact-card-tags">
+          <span class="impact-tag">React</span><span class="impact-tag">Stripe</span><span class="impact-tag">Supabase</span>
+        </div>
+        <a href="rentanoo.html" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;margin-top:8px;width:fit-content" data-i18n="rentanoo_case">📖 Étude de cas →</a>
+      </article>
+      <article class="impact-card">
+        <div class="impact-card-header">
+          <span class="impact-card-icon">⚙️</span>
+          <span class="impact-card-project" data-i18n="impact_rh_project">Automatisations RH</span>
+        </div>
+        <div class="impact-card-num">2 ETP</div>
+        <p class="impact-card-benefit" data-i18n="impact_rh_benefit">Équivalent automatisé en prospection et enrichissement</p>
+        <p class="impact-card-detail" data-i18n="impact_rh_detail">1 200 entreprises ciblées/semaine · Scraping + enrichissement API</p>
+        <div class="impact-card-tags">
+          <span class="impact-tag">N8N</span><span class="impact-tag">MAKE</span><span class="impact-tag">Scraping</span>
+        </div>
+      </article>
+    </div>
+    <p class="impact-closing fade-in" data-i18n-html="impact_closing">Je ne livre pas des outils. Je livre du <strong>temps</strong>, de la <strong>fiabilité</strong> et de la <strong>scalabilité</strong>.</p>
+  </div>
+</section>
+
+<!-- ── HOW I BUILD ────────────────────────────── -->
+<section id="how-i-build">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="build_label">Méthode</p>
+    <h2 class="section-title" data-i18n="build_title">How I Build</h2>
+    <p class="section-desc" data-i18n="build_desc">De l'enjeu métier à l'impact mesuré — ma démarche de Product Builder IA.</p>
+    <div class="build-pipeline fade-in" id="buildPipeline">
+      <div class="build-step">
+        <div class="build-step-num">01</div>
+        <div class="build-step-content">
+          <h4 data-i18n="build_s1_title">Business Problem</h4>
+          <p data-i18n="build_s1_desc">Comprendre l'enjeu terrain avant toute ligne de code.</p>
+          <span class="build-step-example" data-i18n="build_s1_ex">→ 15 ans : commerciaux, RH, formation, location auto</span>
+        </div>
+      </div>
+      <div class="build-arrow"></div>
+      <div class="build-step">
+        <div class="build-step-num">02</div>
+        <div class="build-step-content">
+          <h4 data-i18n="build_s2_title">Process Mapping</h4>
+          <p data-i18n="build_s2_desc">Cartographier le workflow actuel, identifier les frictions et les gains rapides.</p>
+          <span class="build-step-example" data-i18n="build_s2_ex">→ Maestro : 20 min post-appel → cartographie Modjo → GHL</span>
+        </div>
+      </div>
+      <div class="build-arrow"></div>
+      <div class="build-step">
+        <div class="build-step-num">03</div>
+        <div class="build-step-content">
+          <h4 data-i18n="build_s3_title">AI &amp; Automation</h4>
+          <p data-i18n="build_s3_desc">Orchestrer n8n, APIs, LLMs — nœuds natifs, expressions dynamiques, credentials.</p>
+          <span class="build-step-example" data-i18n="build_s3_ex">→ 8 nœuds n8n · Claude SONCAS · 0 intervention humaine</span>
+        </div>
+      </div>
+      <div class="build-arrow"></div>
+      <div class="build-step">
+        <div class="build-step-num">04</div>
+        <div class="build-step-content">
+          <h4 data-i18n="build_s4_title">Product Design</h4>
+          <p data-i18n="build_s4_desc">Concevoir l'expérience : contrôle humain, edge cases, validation avant envoi.</p>
+          <span class="build-step-example" data-i18n="build_s4_ex">→ Email « à valider » · Slack structuré · Tâche J+2 dynamique</span>
+        </div>
+      </div>
+      <div class="build-arrow"></div>
+      <div class="build-step">
+        <div class="build-step-num">05</div>
+        <div class="build-step-content">
+          <h4 data-i18n="build_s5_title">Deployment</h4>
+          <p data-i18n="build_s5_desc">Mise en production, monitoring, webhooks, intégration aux outils métier existants.</p>
+          <span class="build-step-example" data-i18n="build_s5_ex">→ n8n Cloud · GHL natif · MAKE certifié · Supabase</span>
+        </div>
+      </div>
+      <div class="build-arrow"></div>
+      <div class="build-step">
+        <div class="build-step-num">06</div>
+        <div class="build-step-content">
+          <h4 data-i18n="build_s6_title">Measured Impact</h4>
+          <p data-i18n="build_s6_desc">Mesurer les KPIs, itérer, scaler. Pas de POC qui dort.</p>
+          <span class="build-step-example" data-i18n="build_s6_ex">→ &lt;10s · 35h/sem · 2 ETP · +60% réactivité</span>
+        </div>
+      </div>
+    </div>
+    <p class="build-closing fade-in" data-i18n-html="build_closing">Ce n'est pas du no-code pour du no-code. C'est du <strong>business compris</strong>, puis automatisé.</p>
+  </div>
+</section>
+
+<!-- ── AUTOMATION ECOSYSTEM ───────────────────── -->
 <section id="automation">
   <div class="section-inner">
-    <div class="automation-grid fade-in">
-      <div class="automation-text">
-        <p class="section-label" data-i18n="auto_label">Automatisation &amp; IA</p>
-        <h2 class="section-title" data-i18n-html="auto_title_html">Des systèmes qui travaillent <span style="color:var(--accent)">à ta place</span></h2>
-        <p data-i18n="auto_desc">Je ne code pas juste des apps — je construis des pipelines complets qui automatisent des processus entiers. MAKE certifié, N8N avancé, GPT intégré en production.</p>
-        <div class="results-grid" style="margin-top:32px;">
-          <div class="result-card">
-            <span class="result-num">+60%</span>
-            <span class="result-label" data-i18n="res1">réactivité candidats</span>
-          </div>
-          <div class="result-card">
-            <span class="result-num">-40%</span>
-            <span class="result-label" data-i18n="res2">délai de traitement</span>
-          </div>
-          <div class="result-card">
-            <span class="result-num">1200</span>
-            <span class="result-label" data-i18n="res3">entreprises/semaine en automatique</span>
-          </div>
-          <div class="result-card">
-            <span class="result-num">2 ETP</span>
-            <span class="result-label" data-i18n="res4">remplacés par automatisation</span>
-          </div>
+    <p class="section-label" data-i18n="auto_label">Écosystème</p>
+    <h2 class="section-title" data-i18n="auto_title">Automation Ecosystem</h2>
+    <p class="section-desc" data-i18n="auto_desc">Maestro n'est pas un projet isolé — c'est l'un des systèmes IA et automatisations déjà en production.</p>
+
+    <div class="ecosystem-grid fade-in">
+      <div class="ecosystem-card ecosystem-card--featured">
+        <div class="ecosystem-card-icon">🤖</div>
+        <h4 data-i18n="eco_rebecca_title">Agent Rebecca</h4>
+        <div class="eco-metric">35h/sem</div>
+        <p data-i18n="eco_rebecca_desc">Analyse CV automatisée : PDF → GPT-Vision → classification → Airtable. Production CEFORA.</p>
+        <div class="eco-tags"><span class="eco-tag">GPT-Vision</span><span class="eco-tag">MAKE</span><span class="eco-tag">Airtable</span></div>
+      </div>
+      <div class="ecosystem-card">
+        <div class="ecosystem-card-icon">👥</div>
+        <h4 data-i18n="eco_rh_title">Automatisations RH</h4>
+        <div class="eco-metric">2 ETP</div>
+        <p data-i18n="eco_rh_desc">Pipelines N8N + MAKE pour automatiser la prospection et l'enrichissement à grande échelle.</p>
+        <div class="eco-tags"><span class="eco-tag">N8N</span><span class="eco-tag">MAKE</span><span class="eco-tag">Webhooks</span></div>
+      </div>
+      <div class="ecosystem-card">
+        <div class="ecosystem-card-icon">🔍</div>
+        <h4 data-i18n="eco_cv_title">CV Analysis IA</h4>
+        <div class="eco-metric">+60%</div>
+        <p data-i18n="eco_cv_desc">Extraction et classification automatique de candidatures avec GPT-Vision et scoring IA.</p>
+        <div class="eco-tags"><span class="eco-tag">GPT-Vision</span><span class="eco-tag">PDF Pipeline</span></div>
+      </div>
+      <div class="ecosystem-card ecosystem-card--gold">
+        <div class="ecosystem-card-icon">📞</div>
+        <h4>Maestro AI</h4>
+        <div class="eco-metric">&lt;10s</div>
+        <p data-i18n="eco_maestro_desc">Post-call automation : Modjo → Claude → GHL → Slack → Email. 8 nœuds n8n natifs.</p>
+        <div class="eco-tags"><span class="eco-tag">n8n</span><span class="eco-tag">Claude</span><span class="eco-tag">GHL</span></div>
+      </div>
+      <div class="ecosystem-card">
+        <div class="ecosystem-card-icon">📊</div>
+        <h4 data-i18n="eco_prosp_title">Prospection IA</h4>
+        <div class="eco-metric">1200/sem</div>
+        <p data-i18n="eco_prosp_desc">Ciblage automatique d'entreprises via scraping, enrichissement API et injection CRM.</p>
+        <div class="eco-tags"><span class="eco-tag">Scraping</span><span class="eco-tag">Pappers</span><span class="eco-tag">Dropcontact</span></div>
+      </div>
+      <div class="ecosystem-card">
+        <div class="ecosystem-card-icon">⚙️</div>
+        <h4 data-i18n="eco_stack_title">N8N + MAKE</h4>
+        <div class="eco-metric" data-i18n="eco_stack_metric">Certifié</div>
+        <p data-i18n="eco_stack_desc">Stack automation transversale : orchestration, expressions, credentials, parallélisation.</p>
+        <div class="eco-tags"><span class="eco-tag">N8N Cloud</span><span class="eco-tag">MAKE ✓</span><span class="eco-tag">Airtable</span></div>
+      </div>
+    </div>
+
+    <div class="rebecca-spotlight fade-in">
+      <div class="rebecca-spotlight-header">
+        <h3 data-i18n="wf_title">🤖 Pipeline Agent IA "Rebecca"</h3>
+        <div class="rebecca-stats">
+          <span class="rebecca-stat" data-i18n="res1">+60% réactivité</span>
+          <span class="rebecca-stat" data-i18n="res2">-40% délai</span>
+          <span class="rebecca-stat">35h/sem</span>
         </div>
       </div>
-      <div class="workflow-card">
-        <h4 data-i18n="wf_title">🤖 Pipeline Agent IA "Rebecca"</h4>
-        <p class="wf-desc" data-i18n="wf_desc">Analyse automatique de candidatures en production chez CEFORA</p>
-        <div class="wf-steps">
-          <div class="wf-step"><span class="step-icon">📄</span><span class="step-text" data-i18n-html="wf_s1"><strong>Réception CV</strong> — PDF via email ou formulaire</span></div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step"><span class="step-icon">🖼️</span><span class="step-text" data-i18n-html="wf_s2"><strong>Conversion</strong> — PDF → JPEG (iLovePDF + Picnie)</span></div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step"><span class="step-icon">🧠</span><span class="step-text" data-i18n-html="wf_s3"><strong>Analyse GPT-Vision</strong> — extraction nom, mail, compétences, zone géo</span></div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step"><span class="step-icon">📊</span><span class="step-text" data-i18n-html="wf_s4"><strong>Classification IA</strong> — formation visée, pertinence, score</span></div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step"><span class="step-icon">✅</span><span class="step-text" data-i18n-html="wf_s5"><strong>Injection Airtable</strong> — CVTech + Drive + notification</span></div>
-        </div>
+      <p class="wf-desc" style="margin-bottom:16px" data-i18n="wf_desc">Analyse automatique de candidatures en production chez CEFORA</p>
+      <div class="wf-steps">
+        <div class="wf-step"><span class="step-icon">📄</span><span class="step-text" data-i18n-html="wf_s1"><strong>Réception CV</strong> — PDF via email ou formulaire</span></div>
+        <div class="wf-arrow">↓</div>
+        <div class="wf-step"><span class="step-icon">🖼️</span><span class="step-text" data-i18n-html="wf_s2"><strong>Conversion</strong> — PDF → JPEG (iLovePDF + Picnie)</span></div>
+        <div class="wf-arrow">↓</div>
+        <div class="wf-step"><span class="step-icon">🧠</span><span class="step-text" data-i18n-html="wf_s3"><strong>Analyse GPT-Vision</strong> — extraction nom, mail, compétences, zone géo</span></div>
+        <div class="wf-arrow">↓</div>
+        <div class="wf-step"><span class="step-icon">📊</span><span class="step-text" data-i18n-html="wf_s4"><strong>Classification IA</strong> — formation visée, pertinence, score</span></div>
+        <div class="wf-arrow">↓</div>
+        <div class="wf-step"><span class="step-icon">✅</span><span class="step-text" data-i18n-html="wf_s5"><strong>Injection Airtable</strong> — CVTech + Drive + notification</span></div>
       </div>
+      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+        <a href="projects/agent-rebecca.html" class="proj-link primary" style="font-size:.85rem;padding:10px 20px" data-i18n="proj_view">📄 Voir le projet →</a>
+        <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="proj-link ghost" style="font-size:.85rem;padding:10px 20px">LinkedIn →</a>
+      </div>
+    </div>
+    <p class="ecosystem-closing fade-in" data-i18n-html="eco_closing"><strong>6+ systèmes en production.</strong> Un écosystème cohérent, pas un projet isolé.</p>
+  </div>
+</section>
+
+<!-- ── SKILLS ─────────────────────────────────── -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="skills_label">Compétences</p>
+    <h2 class="section-title" data-i18n="skills_title">L'écosystème technique derrière ces résultats</h2>
+    <p class="section-desc" data-i18n="skills_desc">Les outils et technologies qui rendent ces systèmes IA et automatisations possibles.</p>
+    <div class="skills-grid fade-in" id="skillsGrid">
+      <article class="skill-card skill-card--auto">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_auto">Automatisation</h3>
+            <span class="skill-card-meta" data-i18n="skill_auto_meta">7 technologies</span>
+          </div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">N8N</span><span class="skill-tag skill-tag--cert" data-i18n="make_cert">MAKE ✓ certifié</span>
+          <span class="skill-tag">Airtable</span><span class="skill-tag">Webhooks</span>
+          <span class="skill-tag">Pappers API</span><span class="skill-tag">Dropcontact</span>
+          <span class="skill-tag">Google Workspace</span>
+        </div>
+      </article>
+      <article class="skill-card skill-card--ia">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_ia">IA &amp; LLMs</h3>
+            <span class="skill-card-meta" data-i18n="skill_ia_meta">7 technologies</span>
+          </div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">OpenAI API</span><span class="skill-tag">GPT-Vision</span>
+          <span class="skill-tag">Claude API</span><span class="skill-tag">RAG</span>
+          <span class="skill-tag">Prompt Engineering</span><span class="skill-tag" data-i18n="agents_tag">Agents IA</span>
+          <span class="skill-tag">Gemini</span>
+        </div>
+      </article>
+      <article class="skill-card skill-card--be">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_be">Backend &amp; BDD</h3>
+            <span class="skill-card-meta" data-i18n="skill_be_meta">7 technologies</span>
+          </div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Node.js</span><span class="skill-tag">Express</span>
+          <span class="skill-tag">Supabase</span><span class="skill-tag">Edge Functions</span>
+          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">pgvector</span>
+          <span class="skill-tag">JWT</span>
+        </div>
+      </article>
+      <article class="skill-card skill-card--fe">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_fe">Frontend</h3>
+            <span class="skill-card-meta" data-i18n="skill_fe_meta">7 technologies</span>
+          </div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span><span class="skill-tag">Next.js</span>
+          <span class="skill-tag">React Native</span><span class="skill-tag">Expo</span>
+          <span class="skill-tag">TypeScript</span><span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">Vite</span>
+        </div>
+      </article>
+      <article class="skill-card skill-card--infra">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84 2.13-2.5 4-2.5s3.29 1.66 4 2.5c1.26 1.5 5 2 5 2s-.5-3.74-2-5c-.84-.71-2.5-2.13-2.5-4s1.66-3.29 2.5-4c1.5-1.26 2-5 2-5s-3.74.5-5 2c-.71.84-2.13 2.5-4 2.5s-3.29-1.66-4-2.5C6.74 3.5 3 3 3 3s.5 3.74 2 5c.84.71 2.5 2.13 2.5 4s-1.66 3.29-2.5 4z"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_infra">Infra &amp; Paiement</h3>
+            <span class="skill-card-meta" data-i18n="skill_infra_meta">6 technologies</span>
+          </div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Stripe</span><span class="skill-tag">Railway</span>
+          <span class="skill-tag">Vercel</span><span class="skill-tag">Expo EAS</span>
+          <span class="skill-tag">Supabase Cloud</span><span class="skill-tag">Google Maps API</span>
+        </div>
+      </article>
+      <article class="skill-card skill-card--tools">
+        <div class="skill-card-head">
+          <div class="skill-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div>
+            <h3 data-i18n="skill_tools">Outils &amp; Méthodes</h3>
+            <span class="skill-card-meta" data-i18n="skill_tools_meta">6 technologies</span>
+          </div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git / GitHub</span><span class="skill-tag">React Query</span>
+          <span class="skill-tag">Zod</span><span class="skill-tag">React Hook Form</span>
+          <span class="skill-tag">i18next</span><span class="skill-tag">Supabase Realtime</span>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1071,10 +1546,18 @@ footer p { color:var(--grey); font-size:.85rem; }
   <div class="section-inner">
     <p class="section-label" data-i18n="contact_label">Contact</p>
     <h2 class="section-title" data-i18n="contact_title">Travaillons ensemble</h2>
-    <p class="section-desc" data-i18n="contact_desc">Remote · France &amp; International. Disponible pour des projets fullstack, des missions IA ou des postes en CDI.</p>
+    <p class="section-desc" data-i18n="contact_desc">Remote · France &amp; International. Disponible pour des missions Product Builder IA, AI Automation Engineer ou freelance long terme.</p>
     <div class="contact-inner fade-in">
       <div>
         <div class="contact-links">
+          <a href="maestro.html" class="contact-link">
+            <span class="contact-maestro-icon">🎬</span>
+            <div class="link-info">
+              <div class="link-label" data-i18n="contact_maestro_label">Démo IA · Maestro</div>
+              <div class="link-value" data-i18n="contact_maestro_value">Workflow post-call en &lt;10s</div>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
           <a href="mailto:techerchristopher@gmail.com" class="contact-link">
             <span class="link-icon">✉️</span>
             <div class="link-info">
@@ -1119,7 +1602,7 @@ footer p { color:var(--grey); font-size:.85rem; }
 <!-- ── FOOTER ─────────────────────────────────── -->
 <footer>
   <div class="logo">Christopher TECHER</div>
-  <p data-i18n="footer_desc">Fullstack Developer · IA · Automatisation · Product Builder</p>
+  <p data-i18n="footer_desc">Business-First Builder · AI Automation Engineer · Product Builder IA</p>
   <p style="color:var(--blue);font-size:.8rem;">Remote · France / International</p>
 </footer>
 
@@ -1136,28 +1619,31 @@ footer p { color:var(--grey); font-size:.85rem; }
 const T = {
   fr: {
     // NAV
-    nav_about:'Profil', nav_skills:'Skills', nav_projects:'Projets',
-    nav_automation:'Automatisation', nav_experience:'Expérience', nav_contact:'Contact',
+    nav_about:'Profil', nav_skills:'Compétences', nav_projects:'Réalisations',
+    nav_impact:'Impact', nav_method:'Méthode', nav_ecosystem:'Écosystème',
+    nav_experience:'Parcours', nav_contact:'Contact',
     // HERO
     hero_badge:'Disponible · Remote & International',
-    hero_subtitle:"Fullstack Developer TypeScript · Builder d'applications réelles · Expert en automatisation IA",
-    hero_tagline:"Je code. J'automatise. Je livre en production.",
-    hero_btn1:'🚀 Voir mes projets', hero_btn2:'💬 Me contacter',
-    stat1:'ans de business development', stat2:'CA généré en 4 mois',
-    stat3:'gain productivité via IA', stat4:'apps déployées en prod',
+    hero_business_badge:'★ Business-First Builder · 15+ Years Business Experience',
+    hero_tagline:"Je construis des produits digitaux et des systèmes d'automatisation IA qui génèrent un impact business réel.",
+    hero_role1:'Product Builder', hero_role2:'AI Automation Engineer',
+    hero_role3:'Business Developer', hero_role4:'No-Code / Low-Code Builder',
+    hero_btn1:'🚀 Voir mes réalisations', hero_btn2:'💬 Me contacter',
+    stat1:'post-call automatisé', stat2:'économisées / semaine',
+    stat3:'automatisés', stat4:'ans business terrain',
     // ABOUT
     about_label:'À propos',
     about_title_html:'Business developer devenu <span style="color:var(--accent)">builder</span>',
-    about_p1:"Après <span class=\"highlight\">15 ans à créer, structurer et faire croître des entreprises</span>, j'ai décidé de coder moi-même les outils que je voulais voir exister. Autodidacte, j'ai appris le développement Fullstack TypeScript et l'ingénierie IA pour passer de l'idée au produit en production.",
-    about_p2:"Ce qui me différencie : je <span class=\"accent-text\">comprends le business autant que le code</span>. Je ne construis pas juste des applications — je construis des systèmes qui génèrent de la valeur réelle, automatisent des tâches chronophages, et scalent.",
-    about_p3:'Mes apps tournent en production. Mes workflows N8N et MAKE remplacent l\'équivalent de 2 ETP. Mon agent IA "Rebecca" analyse des centaines de CV automatiquement.',
-    val1_title:'Fullstack Réel', val1_desc:'Du frontend React au backend Node.js/Supabase, je livre des apps complètes en production.',
-    val2_title:'IA Appliquée', val2_desc:'GPT-Vision, agents IA, RAG, prompt engineering — intégrés dans des workflows qui tournent.',
-    val3_title:'Automatisation', val3_desc:'N8N, MAKE (certifié), Airtable — des systèmes qui remplacent des heures de travail manuel.',
-    val4_title:'Vision Business', val4_desc:"15 ans d'entrepreneuriat. Je code ce qui compte, avec des objectifs mesurables.",
+    about_p1:"Après <span class=\"highlight\">15 ans à comprendre les commerciaux, les RH, les centres de formation, les loueurs automobiles et les PME</span>, j'ai appris à concevoir et déployer les systèmes qui automatisent leurs processus. Autodidacte, je suis passé de l'idée métier à la solution opérationnelle en production.",
+    about_p2:"Ce qui me différencie : des gens savent faire n8n. Moins savent <span class=\"accent-text\">comprendre le métier avant d'automatiser</span>. Je ne construis pas des workflows — je transforme des problèmes business en systèmes IA mesurables.",
+    about_p3:"6+ systèmes en production. Workflows N8N et MAKE qui remplacent 2 ETP. Agent IA Rebecca qui économise 35h par semaine. Maestro qui génère un compte rendu post-appel en moins de 10 secondes.",
+    val1_title:'Compréhension métier', val1_desc:'15 ans terrain : commerciaux, RH, formation, location auto, PME. Je comprends l\'enjeu avant de concevoir.',
+    val2_title:'Systèmes IA en prod', val2_desc:'Workflows n8n, Claude API, prompt engineering, orchestration multi-API — déployés et mesurés.',
+    val3_title:'Automation métier', val3_desc:'N8N, MAKE (certifié), webhooks, CRM — des pipelines qui remplacent des heures de travail manuel.',
+    val4_title:'Exécution produit', val4_desc:'Quand le besoin l\'exige, je livre aussi un SaaS complet de A à Z — comme Rentanoo.',
     // SKILLS
-    skills_label:'Compétences', skills_title:'Stack technique',
-    skills_desc:"Un écosystème complet : du frontend mobile au pipeline IA, en passant par les workflows d'automatisation et le backend cloud.",
+    skills_label:'Compétences', skills_title:"L'écosystème technique derrière ces résultats",
+    skills_desc:'Les outils et technologies qui rendent ces systèmes IA et automatisations possibles.',
     skill_fe:'Frontend', skill_be:'Backend & BDD', skill_infra:'Infra & Paiement',
     skill_ia:'IA & LLMs', skill_auto:'Automatisation', skill_tools:'Outils & Méthodes',
     skill_fe_meta:'7 technologies', skill_be_meta:'7 technologies',
@@ -1165,25 +1651,65 @@ const T = {
     skill_auto_meta:'7 technologies', skill_tools_meta:'6 technologies',
     make_cert:'MAKE ✓ certifié', agents_tag:'Agents IA',
     // PROJECTS
-    proj_label:'Projets', proj_title:'Applications en production',
-    proj_desc:'Des projets réels, avec du code réel, déployés en production. Pas des tutoriels.',
+    proj_label:'Réalisations', proj_title:'Des systèmes IA et des produits en production',
+    proj_desc:'Pas des POC. Des solutions opérationnelles qui transforment des processus métier.',
     proj_view:'📄 Voir le projet →', proj_view_short:'📄 Voir →',
+    maestro_badge:'IA Automation · Workflow Engineer · Preuve #1',
+    maestro_desc:"De l'appel commercial terminé à la tâche CRM créée en moins de 10 secondes — workflow n8n 8 nœuds natifs, 0 intervention humaine.",
+    maestro_f1:'Workflow n8n orchestré : Modjo → Claude → GoHighLevel → Slack → Email',
+    maestro_f2:'Prompt SONCAS intégré → JSON structuré exploitable directement par le CRM',
+    maestro_f3:'Humain garde le contrôle : email rédigé par Claude, envoyé à valider',
+    maestro_demo:'🎬 Voir la démo interactive →',
+    maestro_m1:'post-call', maestro_m2:'relance oubliée', maestro_m3:'nœuds natifs',
+    rebecca_desc_short:"Agent IA d'analyse de CV en production — 35h économisées/semaine. Voir l'écosystème complet ↓",
+    rebecca_eco:'→ Écosystème Automation',
     tukme_badge:'🚕 Application Mobile · Fintech',
     tukme_desc:"Application VTC mobile complète pour commander un tuk-tuk depuis son smartphone — géolocalisation temps réel, paiement Stripe in-app, panel admin web. Projet full-scale de A à Z.",
     tukme_f1:'Géolocalisation et carte interactive (Google Maps / Routes API)',
     tukme_f2:'Paiement Stripe PaymentSheet avec Edge Functions Deno',
     tukme_f3:'Gestion chauffeur & passager avec synchronisation temps réel',
     tukme_f4:'Push notifications Expo · Panel admin Next.js',
-    rentanoo_badge:'SaaS vertical · Product Builder',
-    rentanoo_desc:"Le système d'exploitation des agences de location de véhicules — SaaS métier conçu et développé de bout en bout.",
-    rentanoo_f1:'Réservation en ligne 24/7 · Stripe',
+    rentanoo_badge:'SaaS Product Design & Business Execution · Preuve #2',
+    rentanoo_desc:"Preuve qu'en plus des workflows IA, je sais construire un produit SaaS complet de A à Z — conçu, développé et déployé en production.",
+    rentanoo_f1:'Produit SaaS métier livré de bout en bout · Réservation 24/7 · Stripe',
     rentanoo_f2:'CRM, planning et états des lieux digitalisés',
-    rentanoo_f3:'Gestion de flotte · maintenance · reporting',
+    rentanoo_f3:'Gestion de flotte · maintenance · reporting · rentanoo.com live',
     rentanoo_case:'📖 Étude de cas →',
     rentanoo_live:'🌐 Site live',
     astra_desc:"MVP d'application horoscope IA francophone pilotée par l'API Claude (Anthropic). React + Vite.",
     rag_desc:"Application de vectorisation et recherche sémantique sur documents avec architecture RAG et pgvector.",
     rebecca_desc:"Agent IA d'analyse de CV : PDF → GPT-Vision → extraction données → Airtable. Déployé en production.",
+    // IMPACT
+    impact_label:'Impact', impact_title:'Des résultats mesurables, pas des démos',
+    impact_desc:'Chaque système remplace du travail manuel ou accélère un processus métier. Les bénéfices avant les technologies.',
+    impact_maestro_benefit:'Compte rendu post-appel généré et CRM mis à jour automatiquement',
+    impact_maestro_detail:'0 relance oubliée · Workflow n8n 8 nœuds · Claude SONCAS → JSON',
+    impact_maestro_cta:'🎬 Voir la démo →',
+    impact_rebecca_benefit:'Économisées par semaine sur l\'analyse de candidatures',
+    impact_rebecca_detail:'+60% réactivité candidats · -40% délai de traitement · Production CEFORA',
+    impact_rebecca_cta:'→ Pipeline Rebecca',
+    impact_rentanoo_benefit:'Modules métier intégrés dans une plateforme de réservation complète',
+    impact_rentanoo_detail:'SaaS en production · Réservation 24/7 · Stripe · CRM · Flotte',
+    impact_rh_project:'Automatisations RH',
+    impact_rh_benefit:'Équivalent automatisé en prospection et enrichissement',
+    impact_rh_detail:'1 200 entreprises ciblées/semaine · Scraping + enrichissement API',
+    impact_closing:'Je ne livre pas des outils. Je livre du <strong>temps</strong>, de la <strong>fiabilité</strong> et de la <strong>scalabilité</strong>.',
+    // HOW I BUILD
+    build_label:'Méthode', build_title:'How I Build',
+    build_desc:"De l'enjeu métier à l'impact mesuré — ma démarche de Product Builder IA.",
+    build_s1_title:'Business Problem', build_s1_desc:"Comprendre l'enjeu terrain avant toute ligne de code.",
+    build_s1_ex:'→ 15 ans : commerciaux, RH, formation, location auto',
+    build_s2_title:'Process Mapping', build_s2_desc:'Cartographier le workflow actuel, identifier les frictions et les gains rapides.',
+    build_s2_ex:'→ Maestro : 20 min post-appel → cartographie Modjo → GHL',
+    build_s3_title:'AI & Automation', build_s3_desc:'Orchestrer n8n, APIs, LLMs — nœuds natifs, expressions dynamiques, credentials.',
+    build_s3_ex:'→ 8 nœuds n8n · Claude SONCAS · 0 intervention humaine',
+    build_s4_title:'Product Design', build_s4_desc:"Concevoir l'expérience : contrôle humain, edge cases, validation avant envoi.",
+    build_s4_ex:'→ Email « à valider » · Slack structuré · Tâche J+2 dynamique',
+    build_s5_title:'Deployment', build_s5_desc:'Mise en production, monitoring, webhooks, intégration aux outils métier existants.',
+    build_s5_ex:'→ n8n Cloud · GHL natif · MAKE certifié · Supabase',
+    build_s6_title:'Measured Impact', build_s6_desc:'Mesurer les KPIs, itérer, scaler. Pas de POC qui dort.',
+    build_s6_ex:'→ <10s · 35h/sem · 2 ETP · +60% réactivité',
+    build_closing:"Ce n'est pas du no-code pour du no-code. C'est du <strong>business compris</strong>, puis automatisé.",
     // MOCK UI
     mock_tagline:'Location de véhicules entre particuliers — Nosy Be',
     mock_find:'Trouver un véhicule →', mock_offer:'Proposer le mien',
@@ -1197,12 +1723,18 @@ const T = {
     mock_this_month:'Ce mois', mock_bookings:'Réservations',
     mock_rating:'Note', mock_active_bookings:'Réservations actives',
     mock_active:'Actif', mock_upcoming:'À venir',
-    // AUTOMATION
-    auto_label:'Automatisation & IA',
-    auto_title_html:'Des systèmes qui travaillent <span style="color:var(--accent)">à ta place</span>',
-    auto_desc:"Je ne code pas juste des apps — je construis des pipelines complets qui automatisent des processus entiers. MAKE certifié, N8N avancé, GPT intégré en production.",
-    res1:'réactivité candidats', res2:'délai de traitement',
-    res3:'entreprises/semaine en automatique', res4:'remplacés par automatisation',
+    // AUTOMATION ECOSYSTEM
+    auto_label:'Écosystème', auto_title:'Automation Ecosystem',
+    auto_desc:"Maestro n'est pas un projet isolé — c'est l'un des systèmes IA et automatisations déjà en production.",
+    eco_rebecca_title:'Agent Rebecca', eco_rebecca_desc:'Analyse CV automatisée : PDF → GPT-Vision → classification → Airtable. Production CEFORA.',
+    eco_rh_title:'Automatisations RH', eco_rh_desc:"Pipelines N8N + MAKE pour automatiser la prospection et l'enrichissement à grande échelle.",
+    eco_cv_title:'CV Analysis IA', eco_cv_desc:'Extraction et classification automatique de candidatures avec GPT-Vision et scoring IA.',
+    eco_maestro_desc:'Post-call automation : Modjo → Claude → GHL → Slack → Email. 8 nœuds n8n natifs.',
+    eco_prosp_title:'Prospection IA', eco_prosp_desc:"Ciblage automatique d'entreprises via scraping, enrichissement API et injection CRM.",
+    eco_stack_title:'N8N + MAKE', eco_stack_metric:'Certifié',
+    eco_stack_desc:'Stack automation transversale : orchestration, expressions, credentials, parallélisation.',
+    eco_closing:'<strong>6+ systèmes en production.</strong> Un écosystème cohérent, pas un projet isolé.',
+    res1:'+60% réactivité', res2:'-40% délai',
     wf_title:'🤖 Pipeline Agent IA "Rebecca"',
     wf_desc:'Analyse automatique de candidatures en production chez CEFORA',
     wf_s1:'<strong>Réception CV</strong> — PDF via email ou formulaire',
@@ -1231,35 +1763,39 @@ const T = {
     job4_li2:'Développement commercial, gestion des opérations, stratégie marketing',
     // CONTACT
     contact_label:'Contact', contact_title:'Travaillons ensemble',
-    contact_desc:'Remote · France & International. Disponible pour des projets fullstack, des missions IA ou des postes en CDI.',
+    contact_desc:'Remote · France & International. Disponible pour des missions Product Builder IA, AI Automation Engineer ou freelance long terme.',
+    contact_maestro_label:'Démo IA · Maestro', contact_maestro_value:'Workflow post-call en <10s',
     contact_live_label:'Projet Live · Rentanoo', contact_qr:'Scanner pour me contacter',
     // FOOTER
-    footer_desc:'Fullstack Developer · IA · Automatisation · Product Builder',
+    footer_desc:'Business-First Builder · AI Automation Engineer · Product Builder IA',
   },
   en: {
     // NAV
-    nav_about:'Profile', nav_skills:'Skills', nav_projects:'Projects',
-    nav_automation:'Automation', nav_experience:'Experience', nav_contact:'Contact',
+    nav_about:'Profile', nav_skills:'Skills', nav_projects:'Work',
+    nav_impact:'Impact', nav_method:'Method', nav_ecosystem:'Ecosystem',
+    nav_experience:'Experience', nav_contact:'Contact',
     // HERO
     hero_badge:'Available · Remote & International',
-    hero_subtitle:'Fullstack Developer TypeScript · Real-world app builder · AI Automation Expert',
-    hero_tagline:'I code. I automate. I ship to production.',
-    hero_btn1:'🚀 See my projects', hero_btn2:'💬 Contact me',
-    stat1:'years of business dev', stat2:'revenue in 4 months',
-    stat3:'productivity gain via AI', stat4:'apps deployed in prod',
+    hero_business_badge:'★ Business-First Builder · 15+ Years Business Experience',
+    hero_tagline:'I build digital products and AI automation systems that generate real business impact.',
+    hero_role1:'Product Builder', hero_role2:'AI Automation Engineer',
+    hero_role3:'Business Developer', hero_role4:'No-Code / Low-Code Builder',
+    hero_btn1:'🚀 See my work', hero_btn2:'💬 Contact me',
+    stat1:'automated post-call', stat2:'saved / week',
+    stat3:'automated', stat4:'years business field',
     // ABOUT
     about_label:'About',
     about_title_html:'Business developer turned <span style="color:var(--accent)">builder</span>',
-    about_p1:'After <span class="highlight">15 years of building, structuring and growing businesses</span>, I decided to code the tools I wanted to see exist. Self-taught, I learned Fullstack TypeScript development and AI engineering to go from idea to production product.',
-    about_p2:'What sets me apart: I <span class="accent-text">understand business as much as code</span>. I don\'t just build apps — I build systems that generate real value, automate time-consuming tasks, and scale.',
-    about_p3:'My apps run in production. My N8N and MAKE workflows replace the equivalent of 2 FTEs. My AI agent "Rebecca" automatically analyses hundreds of resumes.',
-    val1_title:'Real Fullstack', val1_desc:'From React frontend to Node.js/Supabase backend, I deliver complete production apps.',
-    val2_title:'Applied AI', val2_desc:'GPT-Vision, AI agents, RAG, prompt engineering — integrated into running workflows.',
-    val3_title:'Automation', val3_desc:'N8N, MAKE (certified), Airtable — systems that replace hours of manual work.',
-    val4_title:'Business Vision', val4_desc:'15 years of entrepreneurship. I code what matters, with measurable objectives.',
+    about_p1:'After <span class="highlight">15 years understanding sales teams, HR, training centers, car rental agencies and SMEs</span>, I learned to design and deploy systems that automate their processes. Self-taught, I went from business idea to operational production solution.',
+    about_p2:'What sets me apart: many people know n8n. Fewer <span class="accent-text">understand the business before automating</span>. I don\'t build workflows — I turn business problems into measurable AI systems.',
+    about_p3:'6+ systems in production. N8N and MAKE workflows replacing 2 FTEs. AI agent Rebecca saving 35h per week. Maestro generating a post-call report in under 10 seconds.',
+    val1_title:'Business understanding', val1_desc:'15 years in the field: sales, HR, training, car rental, SMEs. I understand the challenge before designing.',
+    val2_title:'AI systems in prod', val2_desc:'n8n workflows, Claude API, prompt engineering, multi-API orchestration — deployed and measured.',
+    val3_title:'Business automation', val3_desc:'N8N, MAKE (certified), webhooks, CRM — pipelines that replace hours of manual work.',
+    val4_title:'Product execution', val4_desc:'When needed, I also deliver a complete SaaS from A to Z — like Rentanoo.',
     // SKILLS
-    skills_label:'Skills', skills_title:'Tech stack',
-    skills_desc:'A complete ecosystem: from mobile frontend to AI pipeline, including automation workflows and cloud backend.',
+    skills_label:'Skills', skills_title:'The technical ecosystem behind these results',
+    skills_desc:'The tools and technologies that make these AI systems and automations possible.',
     skill_fe:'Frontend', skill_be:'Backend & DB', skill_infra:'Infra & Payments',
     skill_ia:'AI & LLMs', skill_auto:'Automation', skill_tools:'Tools & Methods',
     skill_fe_meta:'7 technologies', skill_be_meta:'7 technologies',
@@ -1267,25 +1803,65 @@ const T = {
     skill_auto_meta:'7 technologies', skill_tools_meta:'6 technologies',
     make_cert:'MAKE ✓ certified', agents_tag:'AI Agents',
     // PROJECTS
-    proj_label:'Projects', proj_title:'Production apps',
-    proj_desc:'Real projects, with real code, deployed in production. Not tutorials.',
+    proj_label:'Work', proj_title:'AI systems and products in production',
+    proj_desc:'Not POCs. Operational solutions that transform business processes.',
     proj_view:'📄 View project →', proj_view_short:'📄 View →',
+    maestro_badge:'AI Automation · Workflow Engineer · Proof #1',
+    maestro_desc:'From completed sales call to CRM task created in under 10 seconds — 8 native n8n nodes, 0 human intervention.',
+    maestro_f1:'Orchestrated n8n workflow: Modjo → Claude → GoHighLevel → Slack → Email',
+    maestro_f2:'Integrated SONCAS prompt → structured JSON directly usable by CRM',
+    maestro_f3:'Human keeps control: email drafted by Claude, sent for validation',
+    maestro_demo:'🎬 View interactive demo →',
+    maestro_m1:'post-call', maestro_m2:'missed follow-up', maestro_m3:'native nodes',
+    rebecca_desc_short:'AI resume analysis agent in production — 35h saved/week. See full ecosystem ↓',
+    rebecca_eco:'→ Automation Ecosystem',
     tukme_badge:'🚕 Mobile App · Fintech',
     tukme_desc:'Complete mobile ride-hailing app to book a tuk-tuk from your smartphone — real-time geolocation, in-app Stripe payments, web admin panel. Full-scale project from A to Z.',
     tukme_f1:'Real-time geolocation and interactive map (Google Maps / Routes API)',
     tukme_f2:'Stripe PaymentSheet with Deno Edge Functions',
     tukme_f3:'Driver & passenger management with real-time sync',
     tukme_f4:'Expo push notifications · Next.js admin panel',
-    rentanoo_badge:'Vertical SaaS · Product Builder',
-    rentanoo_desc:'The operating system for vehicle rental agencies — end-to-end business SaaS designed and built by Christopher.',
-    rentanoo_f1:'24/7 online booking · Stripe',
+    rentanoo_badge:'SaaS Product Design & Business Execution · Proof #2',
+    rentanoo_desc:'Proof that beyond AI workflows, I can also build a complete SaaS product from A to Z — designed, developed and deployed in production.',
+    rentanoo_f1:'End-to-end business SaaS · 24/7 booking · Stripe',
     rentanoo_f2:'CRM, scheduling and digital condition reports',
-    rentanoo_f3:'Fleet management · maintenance · reporting',
+    rentanoo_f3:'Fleet management · maintenance · reporting · rentanoo.com live',
     rentanoo_case:'📖 Case study →',
     rentanoo_live:'🌐 Live site',
     astra_desc:'French-language AI horoscope MVP powered by the Claude API (Anthropic). React + Vite.',
     rag_desc:'Document vectorization and semantic search app with RAG architecture and pgvector.',
     rebecca_desc:'AI resume analysis agent: PDF → GPT-Vision → data extraction → Airtable. Deployed in production.',
+    // IMPACT
+    impact_label:'Impact', impact_title:'Measurable results, not demos',
+    impact_desc:'Each system replaces manual work or accelerates a business process. Benefits before technologies.',
+    impact_maestro_benefit:'Post-call report generated and CRM updated automatically',
+    impact_maestro_detail:'0 missed follow-up · 8-node n8n workflow · Claude SONCAS → JSON',
+    impact_maestro_cta:'🎬 View demo →',
+    impact_rebecca_benefit:'Saved per week on resume analysis',
+    impact_rebecca_detail:'+60% applicant response · -40% processing time · CEFORA production',
+    impact_rebecca_cta:'→ Rebecca Pipeline',
+    impact_rentanoo_benefit:'Business modules integrated in a complete booking platform',
+    impact_rentanoo_detail:'SaaS in production · 24/7 booking · Stripe · CRM · Fleet',
+    impact_rh_project:'HR Automations',
+    impact_rh_benefit:'Automated equivalent in prospecting and enrichment',
+    impact_rh_detail:'1,200 companies targeted/week · Scraping + API enrichment',
+    impact_closing:'I don\'t deliver tools. I deliver <strong>time</strong>, <strong>reliability</strong> and <strong>scalability</strong>.',
+    // HOW I BUILD
+    build_label:'Method', build_title:'How I Build',
+    build_desc:'From business challenge to measured impact — my AI Product Builder approach.',
+    build_s1_title:'Business Problem', build_s1_desc:'Understand the field challenge before any line of code.',
+    build_s1_ex:'→ 15 years: sales, HR, training, car rental',
+    build_s2_title:'Process Mapping', build_s2_desc:'Map the current workflow, identify friction and quick wins.',
+    build_s2_ex:'→ Maestro: 20 min post-call → Modjo → GHL mapping',
+    build_s3_title:'AI & Automation', build_s3_desc:'Orchestrate n8n, APIs, LLMs — native nodes, dynamic expressions, credentials.',
+    build_s3_ex:'→ 8 n8n nodes · Claude SONCAS · 0 human intervention',
+    build_s4_title:'Product Design', build_s4_desc:'Design the experience: human control, edge cases, validation before sending.',
+    build_s4_ex:'→ "Validate before send" email · Structured Slack · Dynamic J+2 task',
+    build_s5_title:'Deployment', build_s5_desc:'Production deployment, monitoring, webhooks, integration with existing business tools.',
+    build_s5_ex:'→ n8n Cloud · Native GHL · MAKE certified · Supabase',
+    build_s6_title:'Measured Impact', build_s6_desc:'Measure KPIs, iterate, scale. No sleeping POCs.',
+    build_s6_ex:'→ <10s · 35h/week · 2 FTEs · +60% response rate',
+    build_closing:'It\'s not no-code for no-code\'s sake. It\'s <strong>business understood</strong>, then automated.',
     // MOCK UI
     mock_tagline:'Peer-to-peer vehicle rental — Nosy Be',
     mock_find:'Find a vehicle →', mock_offer:'List mine',
@@ -1299,12 +1875,18 @@ const T = {
     mock_this_month:'This month', mock_bookings:'Bookings',
     mock_rating:'Rating', mock_active_bookings:'Active bookings',
     mock_active:'Active', mock_upcoming:'Upcoming',
-    // AUTOMATION
-    auto_label:'Automation & AI',
-    auto_title_html:'Systems that work <span style="color:var(--accent)">for you</span>',
-    auto_desc:"I don't just code apps — I build complete pipelines that automate entire processes. MAKE certified, advanced N8N, GPT integrated in production.",
-    res1:'applicant response rate', res2:'processing time saved',
-    res3:'companies/week automated', res4:'replaced by automation',
+    // AUTOMATION ECOSYSTEM
+    auto_label:'Ecosystem', auto_title:'Automation Ecosystem',
+    auto_desc:'Maestro is not an isolated project — it\'s one of several AI systems and automations already in production.',
+    eco_rebecca_title:'Agent Rebecca', eco_rebecca_desc:'Automated CV analysis: PDF → GPT-Vision → classification → Airtable. CEFORA production.',
+    eco_rh_title:'HR Automations', eco_rh_desc:'N8N + MAKE pipelines to automate prospecting and enrichment at scale.',
+    eco_cv_title:'AI CV Analysis', eco_cv_desc:'Automatic resume extraction and classification with GPT-Vision and AI scoring.',
+    eco_maestro_desc:'Post-call automation: Modjo → Claude → GHL → Slack → Email. 8 native n8n nodes.',
+    eco_prosp_title:'AI Prospecting', eco_prosp_desc:'Automatic company targeting via scraping, API enrichment and CRM injection.',
+    eco_stack_title:'N8N + MAKE', eco_stack_metric:'Certified',
+    eco_stack_desc:'Cross-cutting automation stack: orchestration, expressions, credentials, parallelization.',
+    eco_closing:'<strong>6+ systems in production.</strong> A coherent ecosystem, not an isolated project.',
+    res1:'+60% response', res2:'-40% delay',
     wf_title:'🤖 AI Agent "Rebecca" Pipeline',
     wf_desc:'Automated resume analysis in production at CEFORA',
     wf_s1:'<strong>Resume intake</strong> — PDF via email or form',
@@ -1333,10 +1915,11 @@ const T = {
     job4_li2:'Business development, operations management, marketing strategy',
     // CONTACT
     contact_label:'Contact', contact_title:"Let's work together",
-    contact_desc:'Remote · France & International. Available for fullstack projects, AI missions or permanent positions.',
+    contact_desc:'Remote · France & International. Available for AI Product Builder, AI Automation Engineer roles or long-term freelance.',
+    contact_maestro_label:'AI Demo · Maestro', contact_maestro_value:'Post-call workflow in <10s',
     contact_live_label:'Live Project · Rentanoo', contact_qr:'Scan to connect',
     // FOOTER
-    footer_desc:'Fullstack Developer · AI · Automation · Product Builder',
+    footer_desc:'Business-First Builder · AI Automation Engineer · AI Product Builder',
   }
 };
 
@@ -1394,6 +1977,54 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 const skillsGridEl=document.getElementById('skillsGrid');
 if(skillsGridEl)observer.observe(skillsGridEl);
+const buildPipelineEl=document.getElementById('buildPipeline');
+if(buildPipelineEl)observer.observe(buildPipelineEl);
+
+// ── MOBILE MENU ────────────────────────────────
+const navToggle=document.getElementById('navToggle');
+const mobileMenu=document.getElementById('mobileMenu');
+if(navToggle&&mobileMenu){
+  navToggle.addEventListener('click',()=>{
+    const open=mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open',open);
+    navToggle.setAttribute('aria-expanded',open);
+    mobileMenu.setAttribute('aria-hidden',!open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click',()=>{
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded','false');
+      mobileMenu.setAttribute('aria-hidden','true');
+    });
+  });
+}
+
+// ── MAESTRO WORKFLOW NODE ANIMATION ─────────────
+(function(){
+  const nodes=document.querySelectorAll('.maestro-node');
+  if(!nodes.length)return;
+  let idx=0;
+  const showcase=document.getElementById('maestroShowcase');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        if(!entry.target._interval){
+          entry.target._interval=setInterval(()=>{
+            nodes.forEach(n=>n.classList.remove('active-node'));
+            nodes[idx]?.classList.add('active-node');
+            idx=(idx+1)%nodes.length;
+          },700);
+        }
+      }else if(entry.target._interval){
+        clearInterval(entry.target._interval);
+        entry.target._interval=null;
+        nodes.forEach(n=>n.classList.remove('active-node'));
+      }
+    });
+  },{threshold:0.3});
+  if(showcase)obs.observe(showcase);
+})();
 
 // ── IMAGE LIGHTBOX (Tukme + Rentanoo galleries) ──
 const lightbox = document.getElementById('imageLightbox');
@@ -1519,7 +2150,7 @@ function animateCounters(){
 const statsObs=new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting){animateCounters();statsObs.disconnect();}
 },{threshold:0.3});
-const statsSection=document.querySelector('.results-grid');
+const statsSection=document.querySelector('.ecosystem-grid');
 if(statsSection)statsObs.observe(statsSection);
 
 // ── RESTORE SAVED LANGUAGE ─────────────────────

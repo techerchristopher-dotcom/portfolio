@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Call Automation · Maestro Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --black: #0A0A0A;
+    --surface: #111111;
+    --surface2: #1A1A1A;
+    --border: #2A2A2A;
+    --text: #FFFFFF;
+    --muted: #888888;
+    --green: #4A9E6B;
+    --blue: #4A7FBE;
+    --red: #E05555;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    z-index: 1000;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: rgba(201,168,76,0.05);
+    letter-spacing: 0.05em;
+  }
+
+  /* AUTO-PLAY BUTTON */
+  .autoplay-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 200;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 0 30px rgba(201,168,76,0.3);
+  }
+  .autoplay-btn:hover { transform: scale(1.04); box-shadow: 0 0 50px rgba(201,168,76,0.5); }
+  .autoplay-btn.playing { background: var(--surface2); color: var(--gold); border: 1px solid var(--gold); }
+
+  /* SECTIONS */
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* SCENE LABELS */
+  .scene-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+  .scene-label.visible { opacity: 1; transform: translateY(0); }
+
+  /* HERO */
+  #hero {
+    background: var(--black);
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 20% 80%, rgba(74,158,107,0.04) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero-title .gold { color: var(--gold); }
+  .hero-title .line2 { display: block; color: var(--muted); font-weight: 400; font-size: 0.6em; letter-spacing: -1px; margin-top: 8px; }
+
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .hero-sub strong { color: var(--text); font-style: normal; }
+
+  .hero-stack {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.1s forwards;
+  }
+
+  .stack-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--surface);
+    letter-spacing: 0.05em;
+  }
+  .stack-pill.active { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.05); }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s 2s forwards;
+  }
+  .scroll-hint span { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .scroll-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; animation: bounce 1.5s infinite; }
+
+  /* PAIN SECTION */
+  #pain {
+    background: var(--black);
+  }
+
+  .pain-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 80% 50%, rgba(224,85,85,0.04) 0%, transparent 70%);
+  }
+
+  .section-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+  .section-title.visible { opacity: 1; transform: translateY(0); }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 64px;
+    max-width: 480px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.7s 0.2s ease;
+  }
+  .section-sub.visible { opacity: 1; transform: translateY(0); }
+
+  .pain-timer {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 64px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.7s 0.1s ease;
+  }
+  .pain-timer.visible { opacity: 1; transform: translateY(0); }
+
+  .timer-number {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 96px;
+    font-weight: 800;
+    color: var(--red);
+    letter-spacing: -4px;
+    line-height: 1;
+  }
+  .timer-label { font-size: 20px; color: var(--muted); line-height: 1.4; }
+  .timer-label strong { display: block; color: var(--text); font-size: 24px; }
+
+  .pain-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 960px;
+  }
+
+  .pain-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--red);
+    border-radius: 12px;
+    padding: 28px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+  .pain-card.visible { opacity: 1; transform: translateY(0); }
+  .pain-card:nth-child(2) { transition-delay: 0.15s; }
+  .pain-card:nth-child(3) { transition-delay: 0.3s; }
+
+  .pain-card-icon { font-size: 28px; margin-bottom: 16px; }
+  .pain-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+  .pain-card-body { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* TRANSITION SECTION */
+  #transition {
+    background: var(--black);
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
+    padding: 80px;
+  }
+
+  .transition-text {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.3;
+    max-width: 720px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s ease;
+  }
+  .transition-text.visible { opacity: 1; transform: scale(1); }
+  .transition-text .gold { color: var(--gold); }
+  .transition-text .dim { color: var(--muted); }
+
+  /* SOLUTION SECTION */
+  #solution {
+    background: var(--black);
+  }
+
+  .solution-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 20% 50%, rgba(74,158,107,0.05) 0%, transparent 60%);
+  }
+
+  /* WORKFLOW DIAGRAM */
+  .workflow-container {
+    margin-top: 48px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s 0.3s ease;
+  }
+  .workflow-container.visible { opacity: 1; transform: translateY(0); }
+
+  .workflow-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .wf-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .wf-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    white-space: nowrap;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .wf-box:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .wf-box.gold-border { border-color: rgba(201,168,76,0.5); color: var(--gold); }
+  .wf-box.green-border { border-color: rgba(74,158,107,0.5); color: #4A9E6B; }
+  .wf-box.blue-border { border-color: rgba(74,127,190,0.5); color: #4A7FBE; }
+
+  .wf-label { font-size: 10px; color: var(--muted); text-align: center; max-width: 100px; line-height: 1.3; font-family: 'DM Sans', sans-serif; }
+
+  .wf-arrow {
+    width: 32px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--border), var(--gold));
+    position: relative;
+    flex-shrink: 0;
+    margin-top: -20px;
+  }
+  .wf-arrow::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -3px;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid var(--gold);
+  }
+
+  .workflow-branch {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    margin-top: 8px;
+    padding-left: 480px;
+  }
+
+  .branch-line {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.2));
+    margin: 0 auto 8px;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+    max-width: 720px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 28px 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+  .stat-card.visible { opacity: 1; transform: translateY(0); }
+  .stat-card:nth-child(2) { transition-delay: 0.15s; }
+  .stat-card:nth-child(3) { transition-delay: 0.3s; }
+
+  .stat-number {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* PROMPT SECTION */
+  #prompt-section {
+    background: var(--black);
+  }
+
+  .code-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s 0.2s ease;
+  }
+  .code-split.visible { opacity: 1; transform: translateY(0); }
+
+  .code-block {
+    background: #0D0D0D;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .code-header {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .code-header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .code-header-label.gold { color: var(--gold); }
+  .code-header-label.blue { color: var(--blue); }
+
+  .code-dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FFBD2E; }
+  .dot-g { background: #28CA41; }
+
+  .code-body {
+    padding: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #CCC;
+    white-space: pre;
+  }
+  .code-body .comment { color: #555; }
+  .code-body .key { color: var(--gold); }
+  .code-body .val { color: #7EC8A4; }
+  .code-body .str { color: #E8C96A; }
+  .code-body .punct { color: #666; }
+
+  /* RESULT SECTION */
+  #result {
+    background: var(--black);
+  }
+
+  .result-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,168,76,0.05) 0%, transparent 70%);
+  }
+
+  .result-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin-top: 48px;
+  }
+
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+  .result-card.visible { opacity: 1; transform: translateY(0); }
+  .result-card:nth-child(2) { transition-delay: 0.1s; }
+  .result-card:nth-child(3) { transition-delay: 0.2s; }
+  .result-card:nth-child(4) { transition-delay: 0.3s; }
+
+  .result-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .result-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .result-icon.gold { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); }
+  .result-icon.green { background: rgba(74,158,107,0.1); border: 1px solid rgba(74,158,107,0.2); }
+  .result-icon.blue { background: rgba(74,127,190,0.1); border: 1px solid rgba(74,127,190,0.2); }
+
+  .result-card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; }
+  .result-card-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .result-card-body code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--gold);
+  }
+
+  /* OUTRO */
+  #outro {
+    background: var(--black);
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+  .outro-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(201,168,76,0.03) 0%, transparent 50%);
+  }
+
+  .outro-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.08;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+  .outro-title.visible { opacity: 1; transform: translateY(0); }
+
+  .outro-quote {
+    font-size: 18px;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s 0.3s ease;
+  }
+  .outro-quote.visible { opacity: 1; transform: translateY(0); }
+  .outro-quote strong { color: var(--gold); font-style: normal; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto 48px;
+  }
+
+  .skill-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 16px 20px;
+    text-align: left;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+  .skill-badge.visible { opacity: 1; transform: translateX(0); }
+  .skill-badge:nth-child(2) { border-left-color: var(--green); transition-delay: 0.1s; }
+  .skill-badge:nth-child(3) { border-left-color: var(--blue); transition-delay: 0.2s; }
+  .skill-badge:nth-child(4) { border-left-color: #9B6FE8; transition-delay: 0.3s; }
+
+  .skill-badge-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .skill-badge-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .outro-footer {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transition: all 0.8s 0.6s ease;
+  }
+  .outro-footer.visible { opacity: 1; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+    50% { box-shadow: 0 0 0 8px rgba(201,168,76,0.1); }
+  }
+
+  /* ACTIVE NODE PULSE */
+  .wf-box.active-node {
+    animation: pulse-gold 1.5s infinite;
+    border-color: var(--gold) !important;
+    color: var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <div class="nav-logo">Maestro<span>.</span>AI</div>
+  <div class="nav-badge">TEST TECHNIQUE · DÉVELOPPEUR IA · 2026</div>
+</nav>
+
+<button class="autoplay-btn" id="autoplayBtn" onclick="toggleAutoplay()">
+  <span id="btnIcon">▶</span>
+  <span id="btnText">Auto-scroll</span>
+</button>
+
+<!-- SCENE 1: HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div style="position:relative; z-index:1;">
+    <div class="hero-eyebrow">Post-Call Processing · Automatisation commerciale</div>
+    <h1 class="hero-title">
+      De l'appel terminé<br>
+      <span class="gold">à la tâche créée</span>
+      <span class="line2">en moins de 10 secondes</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">
+      Un workflow n8n qui élimine <strong>20 minutes de travail manuel</strong> après chaque appel commercial — sans intervention humaine.
+    </p>
+    <div class="hero-stack">
+      <div class="stack-pill active">n8n Cloud</div>
+      <div class="stack-pill active">Anthropic Claude</div>
+      <div class="stack-pill active">GoHighLevel</div>
+      <div class="stack-pill active">Modjo</div>
+      <div class="stack-pill">Slack</div>
+      <div class="stack-pill">Email</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- SCENE 2: PAIN -->
+<section id="pain">
+  <div class="pain-bg"></div>
+  <div style="position:relative; z-index:1; max-width: 1200px;">
+    <div class="scene-label" data-animate>01 · Le problème</div>
+    <h2 class="section-title" data-animate>Chaque appel coûte<br>du temps précieux</h2>
+    <p class="section-sub" data-animate>Après chaque appel B2B, Damien doit tout faire manuellement. C'est chronophage, risqué, et impossible à scaler.</p>
+
+    <div class="pain-timer" data-animate>
+      <div class="timer-number">20</div>
+      <div class="timer-label">
+        <strong>minutes perdues</strong>
+        par appel commercial
+      </div>
+    </div>
+
+    <div class="pain-cards">
+      <div class="pain-card" data-animate>
+        <div class="pain-card-icon">📞</div>
+        <div class="pain-card-title">Résumé manuel</div>
+        <div class="pain-card-body">Après chaque appel, noter manuellement le résumé, les objections, les prochaines étapes — sans aide.</div>
+      </div>
+      <div class="pain-card" data-animate>
+        <div class="pain-card-icon">🔁</div>
+        <div class="pain-card-title">Relances oubliées</div>
+        <div class="pain-card-body">Sans tâche automatique dans le CRM, les relances arrivent 2–3 jours trop tard. Opportunités perdues.</div>
+      </div>
+      <div class="pain-card" data-animate>
+        <div class="pain-card-icon">📉</div>
+        <div class="pain-card-title">Impossible à scaler</div>
+        <div class="pain-card-body">Plus d'appels = plus de temps post-call. Le commercial est bloqué par l'administratif, pas la vente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 3: TRANSITION -->
+<section id="transition">
+  <div style="position:relative; z-index:1;">
+    <p class="transition-text" data-animate>
+      <span class="dim">Et si tout ça</span><br>
+      se faisait <span class="gold">automatiquement</span><br>
+      <span class="dim">pendant que Damien</span><br>
+      <span class="gold">passe l'appel suivant ?</span>
+    </p>
+  </div>
+</section>
+
+<!-- SCENE 4: SOLUTION -->
+<section id="solution">
+  <div class="solution-bg"></div>
+  <div style="position:relative; z-index:1; max-width: 1200px;">
+    <div class="scene-label" data-animate>02 · La solution</div>
+    <h2 class="section-title" data-animate>8 nœuds natifs n8n<br><span style="color:var(--gold)">0 intervention humaine</span></h2>
+    <p class="section-sub" data-animate>Un workflow déclenché automatiquement à la fin de chaque appel Modjo. Claude analyse, GHL agit, Damien valide.</p>
+
+    <div class="workflow-container" data-animate>
+      <div class="workflow-track" id="workflowTrack">
+        <div class="wf-node">
+          <div class="wf-box" id="node-webhook">Webhook</div>
+          <div class="wf-label">Déclencheur POST<br>Header Auth</div>
+        </div>
+        <div class="wf-arrow"></div>
+        <div class="wf-node">
+          <div class="wf-box" id="node-modjo">get MODJO API</div>
+          <div class="wf-label">GET transcription<br>HTTP Request</div>
+        </div>
+        <div class="wf-arrow"></div>
+        <div class="wf-node">
+          <div class="wf-box gold-border" id="node-claude">Message a model</div>
+          <div class="wf-label">Anthropic natif<br>Analyse IA</div>
+        </div>
+        <div class="wf-arrow"></div>
+        <div class="wf-node">
+          <div class="wf-box" id="node-parse">Parse Claude JSON</div>
+          <div class="wf-label">Code JS<br>try/catch</div>
+        </div>
+        <div class="wf-arrow"></div>
+        <div class="wf-node">
+          <div class="wf-box green-border" id="node-task">Create a task</div>
+          <div class="wf-label">GHL natif<br>Relance auto</div>
+        </div>
+        <div class="wf-arrow"></div>
+        <div class="wf-node">
+          <div class="wf-box blue-border" id="node-slack">Slack</div>
+          <div class="wf-label">Notification<br>Damien</div>
+        </div>
+        <div class="wf-arrow"></div>
+        <div class="wf-node">
+          <div class="wf-box blue-border" id="node-email">Send Email</div>
+          <div class="wf-label">Draft à valider<br>avant envoi</div>
+        </div>
+      </div>
+      <div style="padding-left: 390px; margin-top: -8px;">
+        <div class="branch-line"></div>
+        <div class="wf-node">
+          <div class="wf-box green-border" id="node-opp">Update an opportunity</div>
+          <div class="wf-label">GHL natif · Pipeline mis à jour</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card" data-animate>
+        <div class="stat-number">&lt; 10s</div>
+        <div class="stat-label">De la fin d'appel à la tâche créée dans GHL</div>
+      </div>
+      <div class="stat-card" data-animate>
+        <div class="stat-number">0</div>
+        <div class="stat-label">Relances oubliées · Système automatique</div>
+      </div>
+      <div class="stat-card" data-animate>
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Nœuds natifs n8n · Zéro dépendance externe</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 5: PROMPT -->
+<section id="prompt-section">
+  <div style="position:relative; z-index:1; max-width: 1200px;">
+    <div class="scene-label" data-animate>03 · Le moteur IA</div>
+    <h2 class="section-title" data-animate>Prompt SONCAS<br>→ JSON structuré</h2>
+    <p class="section-sub" data-animate>Claude reçoit la transcription et retourne un JSON exploitable directement par GHL, Slack et Email. Aucun post-traitement.</p>
+
+    <div class="code-split" data-animate>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="code-header-label gold">SYSTEM PROMPT · SONCAS</div>
+        </div>
+        <div class="code-body"><span class="comment">// Identité + contexte métier</span>
+<span class="key">Tu es</span> <span class="str">l'assistant commercial de Damien</span>,
+co-fondateur de Maestro Media.
+
+Maestro connecte grandes écoles
+et candidats via SDR externalisés.
+
+<span class="comment">// Méthode commerciale intégrée</span>
+<span class="key">Tu maîtrises le SONCAS</span> :
+Sécurité · Orgueil · Nouveauté
+Confort · Argent · Sympathie
+
+<span class="comment">// Instruction de sortie stricte</span>
+Retourne <span class="val">UNIQUEMENT</span> un JSON valide.
+<span class="val">Sans texte</span> avant ou après.</div>
+      </div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="code-header-label blue">OUTPUT JSON · STRUCTURÉ</div>
+        </div>
+        <div class="code-body"><span class="punct">{</span>
+  <span class="key">"classification"</span><span class="punct">:</span> <span class="str">"closing"</span>,
+  <span class="key">"resume"</span><span class="punct">:</span> <span class="str">"2-3 phrases..."</span>,
+  <span class="key">"extraction"</span><span class="punct">: {</span>
+    <span class="key">"enjeux"</span><span class="punct">:</span> <span class="str">"..."</span>,
+    <span class="key">"objections"</span><span class="punct">:</span> <span class="str">"..."</span>,
+    <span class="key">"signaux_achat"</span><span class="punct">:</span> <span class="str">"..."</span>
+  <span class="punct">},</span>
+  <span class="key">"taches_relance"</span><span class="punct">: [{</span>
+    <span class="key">"titre"</span><span class="punct">:</span> <span class="str">"Relancer Marie J+2"</span>,
+    <span class="key">"echeance_jours"</span><span class="punct">:</span> <span class="val">2</span>
+  <span class="punct">}],</span>
+  <span class="key">"update_deal"</span><span class="punct">:</span> <span class="val">true</span>,
+  <span class="key">"email_followup"</span><span class="punct">: {</span>
+    <span class="key">"objet"</span><span class="punct">:</span> <span class="str">"Suite à notre échange..."</span>,
+    <span class="key">"corps"</span><span class="punct">:</span> <span class="str">"..."</span>
+  <span class="punct">}</span>
+<span class="punct">}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 6: RESULT -->
+<section id="result">
+  <div class="result-bg"></div>
+  <div style="position:relative; z-index:1; max-width: 1200px;">
+    <div class="scene-label" data-animate>04 · Ce que reçoit Damien</div>
+    <h2 class="section-title" data-animate>Tout livré.<br>Rien à saisir.</h2>
+    <p class="section-sub" data-animate>En moins de 10 secondes après la fin de l'appel, Damien reçoit tout — et garde le contrôle final avant envoi.</p>
+
+    <div class="result-cards">
+      <div class="result-card" data-animate>
+        <div class="result-card-header">
+          <div class="result-icon gold">✅</div>
+          <div class="result-card-title">Tâche GHL créée</div>
+        </div>
+        <div class="result-card-body">
+          La tâche de relance est créée automatiquement dans GoHighLevel avec le bon contact, la bonne échéance <code>J+2</code> et le contexte de l'appel.
+        </div>
+      </div>
+      <div class="result-card" data-animate>
+        <div class="result-card-header">
+          <div class="result-icon green">📊</div>
+          <div class="result-card-title">Pipeline mis à jour</div>
+        </div>
+        <div class="result-card-body">
+          Si Claude détecte un signal d'achat fort, l'opportunité est automatiquement avancée dans le pipeline GHL. <code>update_deal: true</code>
+        </div>
+      </div>
+      <div class="result-card" data-animate>
+        <div class="result-card-header">
+          <div class="result-icon blue">💬</div>
+          <div class="result-card-title">Résumé Slack</div>
+        </div>
+        <div class="result-card-body">
+          Damien reçoit dans <code>#post-call-damien</code> un résumé structuré : classification, enjeux, objections, signaux d'achat, prochaines étapes.
+        </div>
+      </div>
+      <div class="result-card" data-animate>
+        <div class="result-card-header">
+          <div class="result-icon gold">📧</div>
+          <div class="result-card-title">Email rédigé par Claude</div>
+        </div>
+        <div class="result-card-body">
+          L'email de follow-up est rédigé dans le style Maestro Media et envoyé à Damien pour validation. <code>Humain garde le contrôle.</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 7: OUTRO -->
+<section id="outro">
+  <div class="outro-bg"></div>
+  <div style="position:relative; z-index:1; max-width: 800px; margin: 0 auto;">
+    <div class="scene-label" style="text-align:center;" data-animate>Ce que ce test démontre</div>
+    <h2 class="outro-title" data-animate>
+      Un développeur IA<br>
+      <span style="color:var(--gold)">qui pense produit.</span>
+    </h2>
+
+    <div class="skills-grid">
+      <div class="skill-badge" data-animate>
+        <div class="skill-badge-title">Orchestration n8n</div>
+        <div class="skill-badge-desc">Nœuds natifs, parallélisation, expressions dynamiques, credentials</div>
+      </div>
+      <div class="skill-badge" data-animate>
+        <div class="skill-badge-title">Prompt Engineering</div>
+        <div class="skill-badge-desc">SONCAS intégré, JSON strict, try/catch, Anthropic natif</div>
+      </div>
+      <div class="skill-badge" data-animate>
+        <div class="skill-badge-title">Intégration API</div>
+        <div class="skill-badge-desc">Modjo REST, Anthropic, GoHighLevel natif, Slack, Email</div>
+      </div>
+      <div class="skill-badge" data-animate>
+        <div class="skill-badge-title">Sens Produit</div>
+        <div class="skill-badge-desc">Email "à valider", Slack structuré, tâche avec échéance dynamique</div>
+      </div>
+    </div>
+
+    <p class="outro-quote" data-animate>
+      "Un bon développeur IA ne fait pas juste tourner des LLMs — il construit des systèmes où <strong>l'IA s'intègre dans les workflows métier</strong> existants sans friction."
+    </p>
+
+    <div class="outro-footer" data-animate>
+      CANDIDATURE DÉVELOPPEUR IA · MAESTRO MEDIA · 2026
+    </div>
+  </div>
+</section>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 4 + 'px';
+    cursor.style.top = my - 4 + 'px';
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 16 + 'px';
+    ring.style.top = ry - 16 + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // PROGRESS BAR
+  const bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (window.scrollY / h * 100) + '%';
+  });
+
+  // INTERSECTION OBSERVER
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+  // AUTO-SCROLL
+  let autoPlaying = false;
+  let scrollInterval;
+
+  function toggleAutoplay() {
+    autoPlaying = !autoPlaying;
+    const btn = document.getElementById('autoplayBtn');
+    const icon = document.getElementById('btnIcon');
+    const text = document.getElementById('btnText');
+
+    if (autoPlaying) {
+      btn.classList.add('playing');
+      icon.textContent = '⏸';
+      text.textContent = 'Pause';
+      scrollInterval = setInterval(() => {
+        if (window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 10) {
+          clearInterval(scrollInterval);
+          autoPlaying = false;
+          btn.classList.remove('playing');
+          icon.textContent = '▶';
+          text.textContent = 'Auto-scroll';
+        } else {
+          window.scrollBy(0, 2);
+        }
+      }, 16);
+    } else {
+      clearInterval(scrollInterval);
+      btn.classList.remove('playing');
+      icon.textContent = '▶';
+      text.textContent = 'Auto-scroll';
+    }
+  }
+
+  // WORKFLOW NODE ANIMATION
+  const nodes = ['node-webhook','node-modjo','node-claude','node-parse','node-task','node-opp','node-slack','node-email'];
+  let nodeIdx = 0;
+  let nodeInterval;
+
+  const wfObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !nodeInterval) {
+        nodeInterval = setInterval(() => {
+          nodes.forEach(id => document.getElementById(id)?.classList.remove('active-node'));
+          document.getElementById(nodes[nodeIdx])?.classList.add('active-node');
+          nodeIdx = (nodeIdx + 1) % nodes.length;
+        }, 700);
+      } else if (!entry.isIntersecting && nodeInterval) {
+        clearInterval(nodeInterval);
+        nodeInterval = null;
+        nodes.forEach(id => document.getElementById(id)?.classList.remove('active-node'));
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const wfEl = document.querySelector('.workflow-container');
+  if (wfEl) wfObserver.observe(wfEl);
+</script>
+</body>
+</html>
