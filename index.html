@@ -203,95 +203,403 @@ nav ul li a.active { color:var(--accent); }
 .impact-closing strong { color:var(--accent); font-style:normal; }
 
 /* ─── HOW I BUILD ─────────────────────────────── */
-#how-i-build { background:var(--dark2); }
-.build-pipeline {
-  display:flex; flex-direction:column; align-items:center; gap:0;
-  max-width:640px; margin:0 auto;
+#how-i-build { background:var(--dark); }
+.build-flow {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  margin-bottom:8px;
 }
-.build-step {
-  width:100%; background:var(--card-bg);
-  border:1px solid rgba(65,168,240,0.15); border-radius:16px;
-  padding:22px 28px; display:flex; align-items:flex-start; gap:16px;
-  opacity:0; transform:translateY(20px);
-  transition:opacity .5s ease, transform .5s ease, border-color .3s;
+.build-card {
+  position:relative; z-index:1;
+  background:linear-gradient(160deg,rgba(30,60,100,0.4) 0%,rgba(13,27,42,0.65) 100%);
+  border:1px solid rgba(65,168,240,0.12); border-radius:20px;
+  padding:24px 22px; display:flex; flex-direction:column; gap:10px;
+  opacity:0; transform:translateY(24px);
+  transition:opacity .5s ease,transform .5s ease,border-color .3s,box-shadow .3s;
 }
-.build-pipeline.visible .build-step { opacity:1; transform:translateY(0); }
-.build-pipeline.visible .build-step:nth-child(1) { transition-delay:.05s; }
-.build-pipeline.visible .build-step:nth-child(3) { transition-delay:.15s; }
-.build-pipeline.visible .build-step:nth-child(5) { transition-delay:.25s; }
-.build-pipeline.visible .build-step:nth-child(7) { transition-delay:.35s; }
-.build-pipeline.visible .build-step:nth-child(9) { transition-delay:.45s; }
-.build-pipeline.visible .build-step:nth-child(11) { transition-delay:.55s; }
-.build-step:hover { border-color:rgba(65,168,240,0.35); }
-.build-step-num {
-  flex-shrink:0; width:36px; height:36px; border-radius:50%;
-  background:rgba(65,168,240,0.12); border:2px solid rgba(65,168,240,0.3);
+.build-flow.visible .build-card { opacity:1; transform:translateY(0); }
+.build-flow.visible .build-card:nth-child(1) { transition-delay:.05s; }
+.build-flow.visible .build-card:nth-child(2) { transition-delay:.1s; }
+.build-flow.visible .build-card:nth-child(3) { transition-delay:.15s; }
+.build-flow.visible .build-card:nth-child(4) { transition-delay:.2s; }
+.build-flow.visible .build-card:nth-child(5) { transition-delay:.25s; }
+.build-flow.visible .build-card:nth-child(6) { transition-delay:.3s; }
+.build-card:hover {
+  border-color:rgba(65,168,240,0.3); transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.2);
+}
+.build-card--final {
+  border-color:rgba(34,197,94,0.2);
+  background:linear-gradient(160deg,rgba(34,197,94,0.06) 0%,rgba(13,27,42,0.65) 100%);
+}
+.build-card--final:hover { border-color:rgba(34,197,94,0.4); box-shadow:0 16px 40px rgba(34,197,94,0.08); }
+.build-card-head {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;
+}
+.build-icon {
+  width:40px; height:40px; border-radius:12px;
   display:flex; align-items:center; justify-content:center;
-  font-size:.8rem; font-weight:800; color:var(--accent);
+  font-size:1.15rem; background:rgba(65,168,240,0.1); border:1px solid rgba(65,168,240,0.18);
 }
-.build-step-content h4 { font-size:.95rem; font-weight:700; color:var(--white); margin-bottom:4px; }
-.build-step-content p { font-size:.82rem; color:var(--grey); line-height:1.6; }
-.build-step-example {
-  display:inline-block; margin-top:6px; font-size:.75rem;
-  color:var(--accent); font-weight:600;
+.build-card--final .build-icon { background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.25); }
+.build-num {
+  font-size:.68rem; font-weight:800; letter-spacing:1.5px;
+  color:rgba(65,168,240,0.6);
 }
-.build-arrow {
-  width:2px; height:28px; background:linear-gradient(to bottom,var(--accent),rgba(65,168,240,0.2));
-  margin:4px 0;
+.build-card--final .build-num { color:rgba(34,197,94,0.7); }
+.build-card h4 { font-size:.92rem; font-weight:800; color:var(--white); line-height:1.3; }
+.build-card-desc { font-size:.78rem; color:var(--grey); line-height:1.5; flex-grow:1; }
+.build-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px; }
+.build-tag {
+  font-size:.65rem; font-weight:700; padding:5px 10px; border-radius:50px;
+  background:rgba(65,168,240,0.08); border:1px solid rgba(65,168,240,0.18);
+  color:var(--light-blue); white-space:nowrap;
+}
+.build-card--final .build-tag {
+  background:rgba(34,197,94,0.08); border-color:rgba(34,197,94,0.2); color:var(--green);
 }
 .build-closing {
-  margin-top:48px; text-align:center; max-width:600px; margin-left:auto; margin-right:auto;
-  font-size:1.02rem; color:var(--grey); line-height:1.7;
+  margin-top:44px; text-align:center; max-width:560px; margin-left:auto; margin-right:auto;
+  padding:20px 28px; border-radius:16px;
+  background:rgba(65,168,240,0.05); border:1px solid rgba(65,168,240,0.12);
+  font-size:.92rem; color:var(--grey); line-height:1.65;
 }
-.build-closing strong { color:var(--white); }
+.build-closing strong { color:var(--white); font-weight:700; }
 
 /* ─── AUTOMATION ECOSYSTEM ────────────────────── */
-.ecosystem-grid {
+.eco-banner {
   display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px;
 }
-.ecosystem-card {
-  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
-  border-radius:16px; padding:20px; transition:all .3s;
+.eco-banner-item {
+  text-align:center; padding:20px 16px;
+  background:linear-gradient(160deg,rgba(65,168,240,0.06) 0%,rgba(13,27,42,0.4) 100%);
+  border:1px solid rgba(65,168,240,0.12); border-radius:18px;
+  transition:transform .3s,border-color .3s;
 }
-.ecosystem-card:hover { border-color:rgba(65,168,240,0.35); transform:translateY(-3px); }
-.ecosystem-card--featured { border-color:rgba(46,196,168,0.3); }
-.ecosystem-card--featured:hover { border-color:rgba(46,196,168,0.5); }
-.ecosystem-card--gold { border-color:rgba(201,168,76,0.2); }
-.ecosystem-card-icon { font-size:1.5rem; margin-bottom:10px; }
-.ecosystem-card h4 { font-size:.9rem; font-weight:700; color:var(--white); margin-bottom:6px; }
-.ecosystem-card .eco-metric { font-size:1.3rem; font-weight:800; color:var(--green); margin-bottom:4px; }
-.ecosystem-card--gold .eco-metric { color:#E8C96A; }
-.ecosystem-card p { font-size:.78rem; color:var(--grey); line-height:1.5; margin-bottom:10px; }
-.ecosystem-card .eco-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.eco-banner-item:hover { transform:translateY(-3px); border-color:rgba(65,168,240,0.25); }
+.eco-banner-num {
+  display:block; font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
+  color:var(--accent); line-height:1; margin-bottom:6px;
+}
+.eco-banner-label { font-size:.75rem; color:var(--grey); font-weight:500; }
+.eco-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:36px;
+}
+.eco-card {
+  position:relative; overflow:hidden;
+  background:linear-gradient(160deg,rgba(30,60,100,0.35) 0%,rgba(13,27,42,0.6) 100%);
+  border:1px solid rgba(65,168,240,0.1); border-radius:18px;
+  padding:20px 18px; display:flex; flex-direction:column; gap:8px;
+  transition:all .3s;
+}
+.eco-card:hover { border-color:rgba(65,168,240,0.28); transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,0.2); }
+.eco-card--teal { border-color:rgba(46,196,168,0.18); }
+.eco-card--teal:hover { border-color:rgba(46,196,168,0.38); box-shadow:0 12px 32px rgba(46,196,168,0.08); }
+.eco-card--gold { border-color:rgba(201,168,76,0.18); }
+.eco-card--gold:hover { border-color:rgba(201,168,76,0.38); box-shadow:0 12px 32px rgba(201,168,76,0.08); }
+.eco-card-top { display:flex; align-items:center; justify-content:space-between; }
+.eco-icon {
+  width:36px; height:36px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+  background:rgba(65,168,240,0.1); border:1px solid rgba(65,168,240,0.15);
+}
+.eco-card--teal .eco-icon { background:rgba(46,196,168,0.1); border-color:rgba(46,196,168,0.2); }
+.eco-card--gold .eco-icon { background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.2); }
+.eco-metric {
+  font-size:1.15rem; font-weight:800; line-height:1;
+  color:var(--green);
+}
+.eco-card--gold .eco-metric { color:#E8C96A; }
+.eco-card--teal .eco-metric { color:#2EC4A8; }
+.eco-card h4 { font-size:.88rem; font-weight:800; color:var(--white); }
+.eco-hook { font-size:.74rem; color:var(--grey); line-height:1.45; flex-grow:1; }
+.eco-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:auto; padding-top:4px; }
 .eco-tag {
-  font-size:.65rem; padding:3px 8px; border-radius:5px;
-  background:rgba(255,255,255,0.04); border:1px solid rgba(65,168,240,0.15);
-  color:var(--light-blue); font-weight:600;
+  font-size:.62rem; font-weight:700; padding:4px 9px; border-radius:50px;
+  background:rgba(65,168,240,0.07); border:1px solid rgba(65,168,240,0.15);
+  color:var(--light-blue);
 }
-.ecosystem-closing {
-  text-align:center; margin-top:32px; font-size:.95rem; color:var(--grey);
+.eco-card--teal .eco-tag { background:rgba(46,196,168,0.07); border-color:rgba(46,196,168,0.15); color:#2EC4A8; }
+.eco-card--gold .eco-tag { background:rgba(201,168,76,0.07); border-color:rgba(201,168,76,0.15); color:#E8C96A; }
+.eco-spotlight {
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg,rgba(46,196,168,0.08) 0%,rgba(13,27,42,0.75) 100%);
+  border:1px solid rgba(46,196,168,0.22); border-radius:24px;
+  padding:32px 36px; margin-bottom:36px;
 }
-.ecosystem-closing strong { color:var(--accent); }
-.rebecca-spotlight {
-  background:var(--card-bg); border:1px solid rgba(46,196,168,0.25);
-  border-radius:20px; padding:28px; margin-top:8px;
+.eco-spotlight-accent {
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,#2EC4A8,transparent);
 }
-.rebecca-spotlight-header {
+.eco-spotlight-top {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:20px; flex-wrap:wrap; margin-bottom:20px;
+}
+.eco-spotlight-id { display:flex; align-items:center; gap:16px; }
+.eco-spotlight-icon {
+  width:52px; height:52px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+  background:rgba(46,196,168,0.12); border:1px solid rgba(46,196,168,0.25);
+}
+.eco-spotlight-id h3 { font-size:1.15rem; font-weight:800; margin-bottom:4px; }
+.eco-spotlight-sub { font-size:.78rem; color:var(--grey); }
+.eco-spotlight-metric { text-align:right; flex-shrink:0; }
+.eco-spotlight-num {
+  display:block; font-size:clamp(1.8rem,3vw,2.4rem); font-weight:800; line-height:1;
+  background:linear-gradient(135deg,#2EC4A8,#5eead4);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.eco-spotlight-unit { font-size:.72rem; color:var(--grey); font-weight:600; margin-top:4px; display:block; }
+.eco-pipeline {
+  display:flex; align-items:center; flex-wrap:wrap; gap:6px;
+  margin-bottom:22px; padding:16px 18px;
+  background:rgba(0,0,0,0.2); border-radius:14px;
+  border:1px solid rgba(46,196,168,0.1);
+}
+.eco-pnode {
+  font-size:.72rem; font-weight:700; padding:6px 12px; border-radius:8px;
+  background:rgba(46,196,168,0.08); border:1px solid rgba(46,196,168,0.2); color:#2EC4A8;
+  white-space:nowrap;
+}
+.eco-parrow { color:rgba(139,154,176,0.45); font-size:.7rem; font-weight:700; }
+.eco-spotlight-footer {
   display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:12px; margin-bottom:20px;
+  gap:16px; flex-wrap:wrap;
 }
-.rebecca-spotlight-header h3 { font-size:1.1rem; font-weight:700; color:var(--white); }
-.rebecca-stats { display:flex; gap:12px; flex-wrap:wrap; }
-.rebecca-stat {
-  background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25);
-  border-radius:50px; padding:5px 14px; font-size:.75rem;
-  color:var(--green); font-weight:700;
+.eco-kpis { display:flex; flex-wrap:wrap; gap:8px; }
+.eco-kpi {
+  font-size:.72rem; font-weight:700; padding:6px 14px; border-radius:50px;
+  background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.2); color:var(--green);
 }
+.eco-spotlight-btns { display:flex; gap:10px; flex-wrap:wrap; }
+.eco-closing {
+  text-align:center; max-width:560px; margin:0 auto;
+  padding:20px 28px; border-radius:16px;
+  background:rgba(65,168,240,0.05); border:1px solid rgba(65,168,240,0.12);
+  font-size:.92rem; color:var(--grey); line-height:1.65;
+}
+.eco-closing strong { color:var(--white); font-weight:700; }
 .contact-maestro-icon {
   font-size:1.6rem; flex-shrink:0;
   width:48px; height:48px; display:flex; align-items:center; justify-content:center;
   background:rgba(201,168,76,0.1); border-radius:12px;
 }
+
+/* ─── CASE STUDIES ────────────────────────────── */
+#case-studies { background:var(--dark2); }
+.proof-metrics {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:48px;
+}
+.proof-metric {
+  text-align:center; padding:24px 16px;
+  background:linear-gradient(160deg,rgba(34,197,94,0.06) 0%,rgba(13,27,42,0.4) 100%);
+  border:1px solid rgba(34,197,94,0.15); border-radius:18px;
+  transition:transform .3s,border-color .3s;
+}
+.proof-metric:hover { transform:translateY(-3px); border-color:rgba(34,197,94,0.3); }
+.proof-metric-num {
+  display:block; font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800;
+  color:var(--green); line-height:1; margin-bottom:6px;
+}
+.proof-metric-label { font-size:.75rem; color:var(--grey); font-weight:500; line-height:1.4; }
+.case-studies-grid { display:flex; flex-direction:column; gap:28px; }
+.cs-card {
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg,rgba(30,60,100,0.45) 0%,rgba(13,27,42,0.7) 100%);
+  border:1px solid rgba(65,168,240,0.12); border-radius:24px;
+  padding:32px 36px; transition:all .35s;
+}
+.cs-card:hover { border-color:rgba(65,168,240,0.3); transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,0.25); }
+.cs-card--gold { border-color:rgba(201,168,76,0.2); }
+.cs-card--gold:hover { border-color:rgba(201,168,76,0.4); box-shadow:0 24px 48px rgba(201,168,76,0.08); }
+.cs-card--teal { border-color:rgba(46,196,168,0.2); }
+.cs-card--teal:hover { border-color:rgba(46,196,168,0.4); box-shadow:0 24px 48px rgba(46,196,168,0.08); }
+.cs-accent {
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+}
+.cs-card--gold .cs-accent { background:linear-gradient(90deg,#E8C96A,#C9A84C 40%,transparent); }
+.cs-card--teal .cs-accent { background:linear-gradient(90deg,#2EC4A8,transparent); }
+.cs-top {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:20px; margin-bottom:20px; flex-wrap:wrap;
+}
+.cs-identity { display:flex; align-items:center; gap:16px; }
+.cs-icon {
+  width:52px; height:52px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem; flex-shrink:0;
+  background:rgba(65,168,240,0.1); border:1px solid rgba(65,168,240,0.2);
+}
+.cs-card--gold .cs-icon { background:rgba(201,168,76,0.12); border-color:rgba(201,168,76,0.25); }
+.cs-card--teal .cs-icon { background:rgba(46,196,168,0.12); border-color:rgba(46,196,168,0.25); }
+.cs-identity h3 { font-size:1.25rem; font-weight:800; margin-bottom:6px; }
+.cs-badge {
+  font-size:.68rem; font-weight:700; padding:4px 10px; border-radius:50px;
+  background:rgba(65,168,240,0.08); border:1px solid rgba(65,168,240,0.2); color:var(--light-blue);
+}
+.cs-card--gold .cs-badge { background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.25); color:#E8C96A; }
+.cs-card--teal .cs-badge { background:rgba(46,196,168,0.1); border-color:rgba(46,196,168,0.25); color:#2EC4A8; }
+.cs-metric { text-align:right; flex-shrink:0; }
+.cs-metric-num {
+  display:block; font-size:clamp(2rem,4vw,2.8rem); font-weight:800; line-height:1;
+  background:linear-gradient(135deg,var(--accent),var(--light-blue));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.cs-card--gold .cs-metric-num { background:linear-gradient(135deg,#E8C96A,#C9A84C); -webkit-background-clip:text; background-clip:text; }
+.cs-card--teal .cs-metric-num { background:linear-gradient(135deg,#2EC4A8,#5eead4); -webkit-background-clip:text; background-clip:text; }
+.cs-metric-label { font-size:.72rem; color:var(--grey); font-weight:600; letter-spacing:.5px; margin-top:4px; display:block; }
+.cs-hook {
+  font-size:.92rem; color:var(--grey); line-height:1.55; margin-bottom:22px;
+  padding-left:14px; border-left:2px solid rgba(65,168,240,0.25);
+}
+.cs-card--gold .cs-hook { border-left-color:rgba(201,168,76,0.35); }
+.cs-card--teal .cs-hook { border-left-color:rgba(46,196,168,0.35); }
+.cs-pipeline {
+  display:flex; align-items:center; flex-wrap:wrap; gap:6px;
+  margin-bottom:24px; padding:16px 18px;
+  background:rgba(0,0,0,0.2); border-radius:14px;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.cs-node {
+  font-size:.72rem; font-weight:700; padding:6px 12px; border-radius:8px;
+  background:rgba(65,168,240,0.1); border:1px solid rgba(65,168,240,0.2);
+  color:var(--light-blue); white-space:nowrap;
+}
+.cs-card--gold .cs-node { background:rgba(201,168,76,0.08); border-color:rgba(201,168,76,0.2); color:#E8C96A; }
+.cs-card--teal .cs-node { background:rgba(46,196,168,0.08); border-color:rgba(46,196,168,0.2); color:#2EC4A8; }
+.cs-arrow { color:rgba(139,154,176,0.5); font-size:.7rem; font-weight:700; }
+.cs-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap; padding-top:4px;
+}
+.cs-kpis { display:flex; flex-wrap:wrap; gap:8px; }
+.cs-kpi {
+  font-size:.72rem; font-weight:700; padding:6px 14px; border-radius:50px;
+  background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.2); color:var(--green);
+}
+.cs-cta {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.82rem; font-weight:700; text-decoration:none;
+  padding:10px 22px; border-radius:50px; transition:all .25s; white-space:nowrap;
+}
+.cs-cta--gold {
+  background:rgba(201,168,76,0.15); border:1.5px solid rgba(201,168,76,0.4);
+  color:#E8C96A;
+}
+.cs-cta--gold:hover { background:rgba(201,168,76,0.25); transform:translateX(3px); }
+.cs-cta--teal {
+  background:rgba(46,196,168,0.12); border:1.5px solid rgba(46,196,168,0.35);
+  color:#2EC4A8;
+}
+.cs-cta--teal:hover { background:rgba(46,196,168,0.22); transform:translateX(3px); }
+.cs-cta--blue {
+  background:rgba(65,168,240,0.12); border:1.5px solid rgba(65,168,240,0.35);
+  color:var(--accent);
+}
+.cs-cta--blue:hover { background:rgba(65,168,240,0.22); transform:translateX(3px); }
+
+/* ─── WHO I HELP ──────────────────────────────── */
+#who-i-help { background:var(--dark); }
+.who-grid {
+  display:grid; grid-template-columns:repeat(6,1fr); gap:18px;
+}
+.who-card {
+  grid-column:span 2;
+  position:relative; overflow:hidden;
+  background:linear-gradient(160deg,rgba(30,60,100,0.35) 0%,rgba(13,27,42,0.6) 100%);
+  border:1px solid rgba(65,168,240,0.1); border-radius:20px;
+  padding:22px 20px; display:flex; flex-direction:column; gap:12px;
+  transition:all .3s;
+}
+.who-card:hover { border-color:rgba(65,168,240,0.28); transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,0.2); }
+.who-card:nth-child(4) { grid-column:2 / span 2; }
+.who-card:nth-child(5) { grid-column:4 / span 2; }
+.who-card-head { display:flex; align-items:center; gap:12px; }
+.who-icon {
+  width:42px; height:42px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+  background:rgba(65,168,240,0.1); border:1px solid rgba(65,168,240,0.15); flex-shrink:0;
+}
+.who-card h4 { font-size:.95rem; font-weight:800; color:var(--white); }
+.who-pain {
+  font-size:.78rem; color:var(--grey); line-height:1.5;
+  padding-left:12px; border-left:2px solid rgba(65,168,240,0.25);
+}
+.who-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.who-tag {
+  font-size:.62rem; font-weight:700; padding:5px 10px; border-radius:50px;
+  background:rgba(65,168,240,0.07); border:1px solid rgba(65,168,240,0.15);
+  color:var(--light-blue);
+}
+.who-kpis {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;
+  border-top:1px solid rgba(65,168,240,0.08);
+}
+.who-kpi {
+  font-size:.62rem; font-weight:700; padding:5px 10px; border-radius:50px;
+  background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.18); color:var(--green);
+}
+
+/* ─── WORK WITH ME ────────────────────────────── */
+#work-with-me { background:var(--dark2); }
+.services-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:40px;
+}
+.service-card {
+  background:var(--card-bg); border:1px solid rgba(65,168,240,0.18);
+  border-radius:22px; padding:28px; transition:all .3s;
+  display:flex; flex-direction:column; gap:14px;
+}
+.service-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 20px 40px rgba(65,168,240,0.1); }
+.service-card-icon { font-size:2rem; }
+.service-card h4 { font-size:1.05rem; font-weight:800; }
+.service-card-desc { font-size:.85rem; color:var(--grey); line-height:1.6; }
+.service-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+.service-tag {
+  font-size:.72rem; padding:4px 10px; border-radius:6px;
+  background:rgba(65,168,240,0.08); border:1px solid rgba(65,168,240,0.2);
+  color:var(--light-blue); font-weight:600;
+}
+.service-ideal { font-size:.75rem; color:var(--grey); font-style:italic; }
+.pricing-block {
+  background:linear-gradient(135deg, rgba(30,60,100,0.6), rgba(13,27,42,0.9));
+  border:1px solid rgba(65,168,240,0.25); border-radius:24px;
+  padding:36px 40px; text-align:center; margin-bottom:40px;
+}
+.pricing-block h3 { font-size:1rem; font-weight:700; color:var(--grey); margin-bottom:20px; letter-spacing:.5px; }
+.pricing-row { display:flex; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:20px; }
+.pricing-option { text-align:center; }
+.pricing-num { font-size:2.8rem; font-weight:800; color:var(--accent); line-height:1; }
+.pricing-flat-inline { font-size:1.8rem; }
+.pricing-unit { font-size:.85rem; color:var(--grey); margin-top:4px; }
+.pricing-or { font-size:1.2rem; color:var(--grey); font-weight:600; }
+.pricing-notes { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.pricing-note {
+  font-size:.78rem; color:var(--green); font-weight:600;
+  background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.2);
+  border-radius:50px; padding:6px 14px;
+}
+.pricing-note::before { content:'✓ '; }
+.work-cta { text-align:center; }
+.work-cta h3 { font-size:1.6rem; font-weight:800; margin-bottom:8px; }
+.work-cta p { color:var(--grey); margin-bottom:28px; font-size:.95rem; }
+.work-cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.btn-calendly-soon {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.04); color:var(--grey);
+  border:1.5px dashed rgba(139,154,176,0.4); text-decoration:none;
+  padding:13px 26px; border-radius:50px; font-weight:600; font-size:.9rem;
+  cursor:not-allowed; opacity:.75;
+}
+.work-ref { text-align:center; margin-top:32px; font-size:.88rem; color:var(--grey); }
+.work-ref a { color:var(--accent); font-weight:600; text-decoration:none; }
+.work-ref a:hover { text-decoration:underline; }
+.contact-ref-banner {
+  background:rgba(65,168,240,0.08); border:1px solid rgba(65,168,240,0.2);
+  border-radius:16px; padding:16px 24px; margin-bottom:24px; text-align:center;
+  font-size:.9rem; color:var(--grey);
+}
+.contact-ref-banner a { color:var(--accent); font-weight:700; text-decoration:none; }
 
 /* ─── LANG BUTTON ─────────────────────────────── */
 .lang-btn {
@@ -755,53 +1063,7 @@ footer p { color:var(--grey); font-size:.85rem; }
 .fade-in { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
 .fade-in.visible { opacity:1; transform:translateY(0); }
 
-/* ─── RESPONSIVE ─────────────────────────────── */
-@media(max-width:900px) {
-  nav { padding:16px 20px; gap:12px; }
-  nav ul { display:none; }
-  .nav-toggle { display:block; }
-  .lang-btn { padding:5px 10px; font-size:.75rem; }
-  section { padding:70px 24px; }
-  #hero { padding:100px 24px 60px; }
-  .hero-content { grid-template-columns:1fr; gap:40px; }
-  .hero-card { grid-template-columns:1fr 1fr; }
-  .about-grid { grid-template-columns:1fr; }
-  .skills-grid { grid-template-columns:1fr 1fr; gap:16px; }
-  .project-inner { flex-direction:column !important; }
-  .project-visuals { min-height:300px; }
-  .project-info { padding:28px 24px; }
-  .phone-showcase { height:430px; }
-  .phone-showcase img { width:155px; }
-  .phone-showcase img:nth-child(1) { transform:translateX(-105px) rotate(-7deg) scale(.78); }
-  .phone-showcase img:nth-child(3) { transform:translateX(105px) rotate(7deg) scale(.78); }
-  .rentanoo-showcase { height:360px; }
-  .rentanoo-showcase img { width:82%; max-width:360px; }
-  .rentanoo-showcase img:nth-child(1) { transform:translateX(-58px) rotateY(10deg) scale(.78); }
-  .rentanoo-showcase img:nth-child(2) { transform:translateX(0) scale(.94); }
-  .rentanoo-showcase img:nth-child(3) { transform:translateX(58px) rotateY(-10deg) scale(.78); }
-  .image-lightbox { padding:18px; }
-  .image-lightbox img { max-width:94vw; max-height:82vh; border-radius:22px; }
-  .lightbox-close { top:16px; right:16px; width:46px; height:46px; font-size:30px; }
-  .lightbox-nav { width:46px; height:46px; font-size:34px; }
-  .lightbox-prev { left:12px; }
-  .lightbox-next { right:12px; }
-  .lightbox-counter { bottom:14px; font-size:.8rem; }
-  .small-projects { grid-template-columns:1fr; }
-  .automation-grid { grid-template-columns:1fr; }
-  .results-grid { grid-template-columns:1fr 1fr; }
-  .impact-grid { grid-template-columns:1fr; }
-  .ecosystem-grid { grid-template-columns:1fr 1fr; }
-  .maestro-showcase { min-height:320px; }
-  .maestro-node { font-size:.6rem; padding:6px 8px; }
-  footer { flex-direction:column; gap:8px; text-align:center; }
-}
-@media(max-width:560px) {
-  .skills-grid { grid-template-columns:1fr; }
-  .ecosystem-grid { grid-template-columns:1fr; }
-  .hero-roles { gap:6px; }
-  .hero-role-tag { font-size:.72rem; padding:4px 10px; }
-}
-
+/* ─── RESPONSIVE — mobile first overrides ─────── */
 @keyframes float-photo {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-12px); }
@@ -816,13 +1078,172 @@ footer p { color:var(--grey); font-size:.85rem; }
 }
 .about-title-row { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
 .about-avatar { width:60px; height:60px; border-radius:50%; object-fit:cover; border:2px solid rgba(65,168,240,0.4); }
-.logo-group { display:flex; align-items:center; gap:10px; }
+.logo-group { display:flex; align-items:center; gap:10px; flex-shrink:0; }
 .nav-avatar  { width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid rgba(65,168,240,0.35); }
+.nav-actions { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+
+/* Tablet ≤ 900px */
+@media(max-width:900px) {
+  nav { padding:14px 20px; gap:10px; }
+  nav ul { display:none; }
+  .nav-toggle { display:block; }
+  .lang-btn { padding:5px 10px; font-size:.75rem; }
+  section { padding:72px 24px; }
+  #hero { padding:96px 24px 56px; min-height:auto; }
+  .hero-content { grid-template-columns:1fr; gap:36px; }
+  .hero-card { grid-template-columns:1fr 1fr; }
+  .about-grid { grid-template-columns:1fr; gap:40px; }
+  .values { grid-template-columns:1fr 1fr; }
+  .skills-grid { grid-template-columns:1fr 1fr; gap:16px; }
+  .project-inner { flex-direction:column !important; min-height:auto; }
+  .project-visuals { min-height:280px; padding:24px 16px; }
+  .project-info { padding:28px 24px; }
+  .project-info h2 { font-size:1.45rem; }
+  .phone-showcase { height:400px; }
+  .phone-showcase img { width:150px; }
+  .phone-showcase img:nth-child(1) { transform:translateX(-95px) rotate(-7deg) scale(.76); }
+  .phone-showcase img:nth-child(3) { transform:translateX(95px) rotate(7deg) scale(.76); }
+  .rentanoo-showcase { height:340px; }
+  .rentanoo-showcase img { width:84%; max-width:340px; }
+  .rentanoo-showcase img:nth-child(1) { transform:translateX(-52px) rotateY(10deg) scale(.76); }
+  .rentanoo-showcase img:nth-child(2) { transform:translateX(0) scale(.92); }
+  .rentanoo-showcase img:nth-child(3) { transform:translateX(52px) rotateY(-10deg) scale(.76); }
+  .rentanoo-logo { width:180px; }
+  .small-projects { grid-template-columns:1fr; }
+  .impact-grid { grid-template-columns:1fr; }
+  .proof-metrics { grid-template-columns:repeat(2,1fr); }
+  .build-flow { grid-template-columns:repeat(2,1fr); }
+  .eco-grid { grid-template-columns:repeat(2,1fr); }
+  .eco-banner { grid-template-columns:repeat(3,1fr); }
+  .eco-spotlight { padding:24px 20px; }
+  .eco-spotlight-top { flex-direction:column; }
+  .eco-spotlight-metric { text-align:left; }
+  .who-grid { grid-template-columns:repeat(2,1fr); }
+  .who-card, .who-card:nth-child(4), .who-card:nth-child(5) { grid-column:span 1; }
+  .services-grid { grid-template-columns:1fr; }
+  .maestro-showcase { min-height:300px; padding:20px 14px; }
+  .maestro-node { font-size:.58rem; padding:5px 7px; }
+  .cs-card { padding:26px 22px; }
+  .cs-top { flex-direction:column; gap:14px; }
+  .cs-metric { text-align:left; }
+  .cs-footer { flex-direction:column; align-items:flex-start; gap:14px; }
+  .cs-cta { width:100%; justify-content:center; }
+  footer { flex-direction:column; gap:8px; text-align:center; padding:28px 24px; }
+  .image-lightbox { padding:18px; }
+  .image-lightbox img { max-width:94vw; max-height:82vh; border-radius:22px; }
+  .lightbox-close { top:16px; right:16px; width:46px; height:46px; font-size:30px; }
+  .lightbox-nav { width:46px; height:46px; font-size:34px; }
+  .lightbox-prev { left:12px; }
+  .lightbox-next { right:12px; }
+  .lightbox-counter { bottom:14px; font-size:.8rem; }
+}
+
+/* Mobile ≤ 768px */
 @media(max-width:768px) {
-  .hero-photo { width:110px; height:110px; margin-bottom:18px; }
-  .contact-inner { grid-template-columns:1fr; gap:32px; }
-  .contact-photo { max-width:240px; }
-  .contact-photo-wrapper { order:-1; }
+  nav {
+    padding:12px 16px;
+    padding-top:max(12px, env(safe-area-inset-top));
+  }
+  .mobile-menu {
+    top:56px;
+    padding-bottom:max(24px, env(safe-area-inset-bottom));
+  }
+  .mobile-menu a { padding:16px 0; min-height:48px; display:flex; align-items:center; }
+  section { padding:60px 18px; }
+  #hero { padding:88px 18px 48px; }
+  .section-desc { font-size:.95rem; margin-bottom:40px; line-height:1.65; }
+  .section-title { font-size:clamp(1.5rem,6vw,2rem); }
+  .hero-text h1 { font-size:clamp(2rem,9vw,2.6rem); }
+  .hero-text .tagline { font-size:.92rem; margin-bottom:24px; }
+  .hero-business-badge { font-size:.72rem; padding:6px 14px; text-align:left; }
+  .hero-photo { width:100px; height:100px; margin-bottom:16px; }
+  .hero-card { grid-template-columns:1fr 1fr; gap:12px; padding:22px 16px; }
+  .stat-item { padding:14px 10px; }
+  .stat-item .num { font-size:1.6rem; }
+  .hero-btns { flex-direction:column; width:100%; }
+  .hero-btns .btn-primary, .hero-btns .btn-secondary { width:100%; justify-content:center; }
+  .values { grid-template-columns:1fr; }
+  .skills-grid { grid-template-columns:1fr; }
+  .project-card { margin-bottom:40px; border-radius:20px; }
+  .project-info { padding:24px 18px; }
+  .project-info h2 { font-size:1.3rem; }
+  .proj-links { flex-direction:column; width:100%; }
+  .proj-links .proj-link { width:100%; justify-content:center; }
+  .phone-showcase { height:340px; }
+  .phone-showcase img { width:130px; }
+  .phone-showcase img:nth-child(1) { transform:translateX(-72px) rotate(-6deg) scale(.72); }
+  .phone-showcase img:nth-child(3) { transform:translateX(72px) rotate(6deg) scale(.72); }
+  .rentanoo-showcase { height:280px; }
+  .rentanoo-showcase img:nth-child(1) { transform:translateX(-40px) rotateY(8deg) scale(.7); }
+  .rentanoo-showcase img:nth-child(3) { transform:translateX(40px) rotateY(-8deg) scale(.7); }
+  .impact-card { padding:22px 18px; }
+  .impact-card-num { font-size:2rem; }
+  .proof-metrics { grid-template-columns:repeat(2,1fr); gap:12px; }
+  .proof-metric { padding:18px 12px; }
+  .cs-pipeline, .eco-pipeline {
+    flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; gap:8px; padding-bottom:10px;
+  }
+  .cs-pipeline::-webkit-scrollbar, .eco-pipeline::-webkit-scrollbar { display:none; }
+  .cs-node, .eco-pnode { flex-shrink:0; }
+  .build-flow { grid-template-columns:1fr; }
+  .eco-grid { grid-template-columns:1fr; }
+  .eco-banner { grid-template-columns:1fr; gap:12px; }
+  .eco-spotlight-footer { flex-direction:column; align-items:stretch; gap:14px; }
+  .eco-spotlight-btns { flex-direction:column; width:100%; }
+  .eco-spotlight-btns .cs-cta { width:100%; justify-content:center; }
+  .who-grid { grid-template-columns:1fr; }
+  .pricing-block { padding:28px 18px; }
+  .pricing-num { font-size:2.2rem; }
+  .pricing-row { gap:16px; }
+  .work-cta h3 { font-size:clamp(1.25rem,5vw,1.5rem); }
+  .work-cta-btns { flex-direction:column; align-items:stretch; }
+  .work-cta-btns .btn-primary, .work-cta-btns .btn-secondary, .work-cta-btns .btn-calendly-soon {
+    width:100%; justify-content:center; text-align:center;
+  }
+  .contact-inner { grid-template-columns:1fr; gap:28px; }
+  .contact-photo-wrapper { order:-1; display:flex; justify-content:center; }
+  .contact-photo { max-width:200px; }
+  .contact-link { padding:16px 18px; }
+  .timeline { padding-left:24px; }
+  .timeline-item { margin-bottom:36px; }
+  .timeline-item h3 { font-size:1rem; }
+}
+
+/* Small mobile ≤ 480px */
+@media(max-width:480px) {
+  nav { padding:10px 14px; }
+  .nav-avatar { width:30px; height:30px; }
+  nav .logo { font-size:1rem; }
+  section { padding:52px 14px; }
+  #hero { padding:80px 14px 40px; }
+  .hero-card { grid-template-columns:1fr 1fr; gap:10px; }
+  .hero-roles { gap:6px; }
+  .hero-role-tag { font-size:.68rem; padding:4px 9px; }
+  .hero-business-badge { font-size:.65rem; line-height:1.4; }
+  .proof-metrics { grid-template-columns:1fr 1fr; gap:10px; }
+  .proof-metric-num { font-size:1.4rem; }
+  .cs-card { padding:20px 16px; border-radius:18px; }
+  .cs-metric-num { font-size:1.8rem; }
+  .eco-spotlight { padding:20px 16px; border-radius:18px; }
+  .eco-spotlight-num { font-size:1.8rem; }
+  .build-card { padding:18px 16px; }
+  .who-card { padding:18px 16px; }
+  .eco-card { padding:18px 16px; }
+  .service-card { padding:22px 18px; }
+  .pricing-flat-inline { font-size:1.4rem !important; }
+  .maestro-wf-row { gap:4px; }
+  .maestro-metric-bar { gap:8px; }
+  .maestro-metric { padding:8px 10px; flex:1; min-width:80px; }
+  .project-visuals { min-height:240px; }
+  .phone-showcase { height:300px; }
+  .phone-showcase img { width:115px; }
+  .phone-showcase img:nth-child(1) { transform:translateX(-58px) rotate(-5deg) scale(.68); }
+  .phone-showcase img:nth-child(3) { transform:translateX(58px) rotate(5deg) scale(.68); }
+  footer { padding:24px 14px; }
+  .lightbox-nav { width:40px; height:40px; font-size:28px; }
+  .lightbox-prev { left:8px; }
+  .lightbox-next { right:8px; }
 }
 </style>
 </head>
@@ -837,25 +1258,28 @@ footer p { color:var(--grey); font-size:.85rem; }
   <ul>
     <li><a href="#about" data-i18n="nav_about">Profil</a></li>
     <li><a href="#projects" data-i18n="nav_projects">Réalisations</a></li>
-    <li><a href="#impact" data-i18n="nav_impact">Impact</a></li>
-    <li><a href="#how-i-build" data-i18n="nav_method">Méthode</a></li>
-    <li><a href="#automation" data-i18n="nav_ecosystem">Écosystème</a></li>
+    <li><a href="#case-studies" data-i18n="nav_cases">Cas clients</a></li>
+    <li><a href="#work-with-me" data-i18n="nav_collab">Collaborer</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
-    <span class="flag" id="lang-flag">🇬🇧</span>
-    <span id="lang-txt">EN</span>
-  </button>
+  <div class="nav-actions">
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+      <span class="flag" id="lang-flag">🇬🇧</span>
+      <span id="lang-txt">EN</span>
+    </button>
+  </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <a href="#about" data-i18n="nav_about">Profil</a>
   <a href="#projects" data-i18n="nav_projects">Réalisations</a>
   <a href="#impact" data-i18n="nav_impact">Impact</a>
+  <a href="#case-studies" data-i18n="nav_cases">Cas clients</a>
   <a href="#how-i-build" data-i18n="nav_method">Méthode</a>
-  <a href="#automation" data-i18n="nav_ecosystem">Écosystème</a>
+  <a href="#work-with-me" data-i18n="nav_collab">Collaborer</a>
+  <a href="#who-i-help" data-i18n="nav_who">Qui j'aide</a>
   <a href="#skills" data-i18n="nav_skills">Compétences</a>
   <a href="#experience" data-i18n="nav_experience">Parcours</a>
   <a href="#contact" data-i18n="nav_contact">Contact</a>
@@ -881,8 +1305,8 @@ footer p { color:var(--grey); font-size:.85rem; }
         <span class="hero-role-tag" data-i18n="hero_role4">No-Code / Low-Code Builder</span>
       </div>
       <div class="hero-btns">
-        <a href="#projects" class="btn-primary" data-i18n="hero_btn1">🚀 Voir mes réalisations</a>
-        <a href="#contact" class="btn-secondary" data-i18n="hero_btn2">💬 Me contacter</a>
+        <a href="#projects" class="btn-primary" data-i18n="hero_btn1">🚀 Voir mes résultats</a>
+        <a href="#work-with-me" class="btn-secondary" data-i18n="hero_btn2">🤝 Collaborer</a>
       </div>
     </div>
 
@@ -1232,66 +1656,219 @@ footer p { color:var(--grey); font-size:.85rem; }
   </div>
 </section>
 
+<!-- ── FEATURED CASE STUDIES ──────────────────── -->
+<section id="case-studies">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="cs_label">Études de cas</p>
+    <h2 class="section-title" data-i18n="cs_title">Featured Case Studies</h2>
+    <p class="section-desc" data-i18n="cs_desc">Des problèmes métier transformés en systèmes opérationnels.</p>
+
+    <div class="proof-metrics fade-in">
+      <div class="proof-metric">
+        <span class="proof-metric-num">35h</span>
+        <span class="proof-metric-label" data-i18n="proof_1">économisées / semaine</span>
+      </div>
+      <div class="proof-metric">
+        <span class="proof-metric-num">2</span>
+        <span class="proof-metric-label" data-i18n="proof_2">ETP automatisés</span>
+      </div>
+      <div class="proof-metric">
+        <span class="proof-metric-num">&lt;10s</span>
+        <span class="proof-metric-label" data-i18n="proof_3">après un appel</span>
+      </div>
+      <div class="proof-metric">
+        <span class="proof-metric-num">Live</span>
+        <span class="proof-metric-label" data-i18n="proof_4">SaaS en production</span>
+      </div>
+    </div>
+
+    <div class="case-studies-grid fade-in">
+      <article class="cs-card cs-card--gold">
+        <div class="cs-accent"></div>
+        <div class="cs-top">
+          <div class="cs-identity">
+            <span class="cs-icon">⚡</span>
+            <div>
+              <h3>Maestro AI</h3>
+              <span class="cs-badge">AI Automation · n8n · Claude</span>
+            </div>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-metric-num">&lt;10s</span>
+            <span class="cs-metric-label" data-i18n="cs_maestro_metric">post-call automatisé</span>
+          </div>
+        </div>
+        <p class="cs-hook" data-i18n="cs_maestro_hook">20 min perdues après chaque appel — résumé manuel, relances oubliées, impossible à scaler.</p>
+        <div class="cs-pipeline" aria-label="Pipeline Maestro">
+          <span class="cs-node">Modjo</span><span class="cs-arrow">→</span>
+          <span class="cs-node">Claude</span><span class="cs-arrow">→</span>
+          <span class="cs-node">GoHighLevel</span><span class="cs-arrow">→</span>
+          <span class="cs-node">Slack</span><span class="cs-arrow">→</span>
+          <span class="cs-node">Email</span>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-kpis">
+            <span class="cs-kpi" data-i18n="cs_maestro_kpi1">0 relance oubliée</span>
+            <span class="cs-kpi" data-i18n="cs_maestro_kpi2">CRM auto</span>
+            <span class="cs-kpi" data-i18n="cs_maestro_kpi3">8 nœuds n8n</span>
+          </div>
+          <a href="maestro.html" class="cs-cta cs-cta--gold" data-i18n="maestro_demo">🎬 Démo interactive →</a>
+        </div>
+      </article>
+
+      <article class="cs-card cs-card--teal">
+        <div class="cs-accent"></div>
+        <div class="cs-top">
+          <div class="cs-identity">
+            <span class="cs-icon">🤖</span>
+            <div>
+              <h3>Agent Rebecca</h3>
+              <span class="cs-badge">Agent IA · GPT-Vision · MAKE</span>
+            </div>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-metric-num">35h</span>
+            <span class="cs-metric-label" data-i18n="cs_rebecca_metric">économisées / semaine</span>
+          </div>
+        </div>
+        <p class="cs-hook" data-i18n="cs_rebecca_hook">Candidatures traitées manuellement — chronophage, erreurs, délais de réponse.</p>
+        <div class="cs-pipeline" aria-label="Pipeline Rebecca">
+          <span class="cs-node">PDF</span><span class="cs-arrow">→</span>
+          <span class="cs-node">GPT-Vision</span><span class="cs-arrow">→</span>
+          <span class="cs-node">Classification</span><span class="cs-arrow">→</span>
+          <span class="cs-node">Airtable</span>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-kpis">
+            <span class="cs-kpi" data-i18n="cs_rebecca_kpi1">+60% réactivité</span>
+            <span class="cs-kpi" data-i18n="cs_rebecca_kpi2">-40% délai</span>
+            <span class="cs-kpi" data-i18n="cs_rebecca_kpi3">Prod CEFORA</span>
+          </div>
+          <a href="#automation" class="cs-cta cs-cta--teal" data-i18n="cs_rebecca_cta">→ Voir le pipeline</a>
+        </div>
+      </article>
+
+      <article class="cs-card">
+        <div class="cs-accent"></div>
+        <div class="cs-top">
+          <div class="cs-identity">
+            <span class="cs-icon">🚗</span>
+            <div>
+              <h3>Rentanoo</h3>
+              <span class="cs-badge">SaaS · Product Builder</span>
+            </div>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-metric-num">Live</span>
+            <span class="cs-metric-label" data-i18n="cs_rentanoo_metric">rentanoo.com</span>
+          </div>
+        </div>
+        <p class="cs-hook" data-i18n="cs_rentanoo_hook">Excel, WhatsApp, papier — outils dispersés sans vision centralisée.</p>
+        <div class="cs-pipeline" aria-label="Modules Rentanoo">
+          <span class="cs-node" data-i18n="cs_rentanoo_n1">Réservation</span><span class="cs-arrow">+</span>
+          <span class="cs-node" data-i18n="cs_rentanoo_n2">CRM</span><span class="cs-arrow">+</span>
+          <span class="cs-node" data-i18n="cs_rentanoo_n3">Planning</span><span class="cs-arrow">+</span>
+          <span class="cs-node" data-i18n="cs_rentanoo_n4">Flotte</span>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-kpis">
+            <span class="cs-kpi" data-i18n="cs_rentanoo_kpi1">SaaS complet</span>
+            <span class="cs-kpi" data-i18n="cs_rentanoo_kpi2">Stripe intégré</span>
+            <span class="cs-kpi" data-i18n="cs_rentanoo_kpi3">De A à Z</span>
+          </div>
+          <a href="rentanoo.html" class="cs-cta cs-cta--blue" data-i18n="rentanoo_case">📖 Étude de cas →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ── HOW I BUILD ────────────────────────────── -->
 <section id="how-i-build">
   <div class="section-inner">
     <p class="section-label" data-i18n="build_label">Méthode</p>
     <h2 class="section-title" data-i18n="build_title">How I Build</h2>
     <p class="section-desc" data-i18n="build_desc">De l'enjeu métier à l'impact mesuré — ma démarche de Product Builder IA.</p>
-    <div class="build-pipeline fade-in" id="buildPipeline">
-      <div class="build-step">
-        <div class="build-step-num">01</div>
-        <div class="build-step-content">
-          <h4 data-i18n="build_s1_title">Business Problem</h4>
-          <p data-i18n="build_s1_desc">Comprendre l'enjeu terrain avant toute ligne de code.</p>
-          <span class="build-step-example" data-i18n="build_s1_ex">→ 15 ans : commerciaux, RH, formation, location auto</span>
+    <div class="build-flow fade-in" id="buildPipeline">
+      <article class="build-card">
+        <div class="build-card-head">
+          <span class="build-icon">🎯</span>
+          <span class="build-num">01</span>
         </div>
-      </div>
-      <div class="build-arrow"></div>
-      <div class="build-step">
-        <div class="build-step-num">02</div>
-        <div class="build-step-content">
-          <h4 data-i18n="build_s2_title">Process Mapping</h4>
-          <p data-i18n="build_s2_desc">Cartographier le workflow actuel, identifier les frictions et les gains rapides.</p>
-          <span class="build-step-example" data-i18n="build_s2_ex">→ Maestro : 20 min post-appel → cartographie Modjo → GHL</span>
+        <h4 data-i18n="build_s1_title">Business Problem</h4>
+        <p class="build-card-desc" data-i18n="build_s1_desc">Comprendre l'enjeu terrain avant toute ligne de code.</p>
+        <div class="build-tags">
+          <span class="build-tag" data-i18n="build_s1_t1">15 ans terrain</span>
+          <span class="build-tag" data-i18n="build_s1_t2">Commerciaux · RH</span>
+          <span class="build-tag" data-i18n="build_s1_t3">Formation</span>
         </div>
-      </div>
-      <div class="build-arrow"></div>
-      <div class="build-step">
-        <div class="build-step-num">03</div>
-        <div class="build-step-content">
-          <h4 data-i18n="build_s3_title">AI &amp; Automation</h4>
-          <p data-i18n="build_s3_desc">Orchestrer n8n, APIs, LLMs — nœuds natifs, expressions dynamiques, credentials.</p>
-          <span class="build-step-example" data-i18n="build_s3_ex">→ 8 nœuds n8n · Claude SONCAS · 0 intervention humaine</span>
+      </article>
+      <article class="build-card">
+        <div class="build-card-head">
+          <span class="build-icon">🗺️</span>
+          <span class="build-num">02</span>
         </div>
-      </div>
-      <div class="build-arrow"></div>
-      <div class="build-step">
-        <div class="build-step-num">04</div>
-        <div class="build-step-content">
-          <h4 data-i18n="build_s4_title">Product Design</h4>
-          <p data-i18n="build_s4_desc">Concevoir l'expérience : contrôle humain, edge cases, validation avant envoi.</p>
-          <span class="build-step-example" data-i18n="build_s4_ex">→ Email « à valider » · Slack structuré · Tâche J+2 dynamique</span>
+        <h4 data-i18n="build_s2_title">Process Mapping</h4>
+        <p class="build-card-desc" data-i18n="build_s2_desc">Cartographier le workflow, identifier frictions et gains rapides.</p>
+        <div class="build-tags">
+          <span class="build-tag" data-i18n="build_s2_t1">Maestro</span>
+          <span class="build-tag" data-i18n="build_s2_t2">Modjo → GHL</span>
+          <span class="build-tag" data-i18n="build_s2_t3">20 min post-call</span>
         </div>
-      </div>
-      <div class="build-arrow"></div>
-      <div class="build-step">
-        <div class="build-step-num">05</div>
-        <div class="build-step-content">
-          <h4 data-i18n="build_s5_title">Deployment</h4>
-          <p data-i18n="build_s5_desc">Mise en production, monitoring, webhooks, intégration aux outils métier existants.</p>
-          <span class="build-step-example" data-i18n="build_s5_ex">→ n8n Cloud · GHL natif · MAKE certifié · Supabase</span>
+      </article>
+      <article class="build-card">
+        <div class="build-card-head">
+          <span class="build-icon">⚡</span>
+          <span class="build-num">03</span>
         </div>
-      </div>
-      <div class="build-arrow"></div>
-      <div class="build-step">
-        <div class="build-step-num">06</div>
-        <div class="build-step-content">
-          <h4 data-i18n="build_s6_title">Measured Impact</h4>
-          <p data-i18n="build_s6_desc">Mesurer les KPIs, itérer, scaler. Pas de POC qui dort.</p>
-          <span class="build-step-example" data-i18n="build_s6_ex">→ &lt;10s · 35h/sem · 2 ETP · +60% réactivité</span>
+        <h4 data-i18n="build_s3_title">AI &amp; Automation</h4>
+        <p class="build-card-desc" data-i18n="build_s3_desc">Orchestrer n8n, APIs, LLMs — nœuds natifs, credentials.</p>
+        <div class="build-tags">
+          <span class="build-tag" data-i18n="build_s3_t1">8 nœuds n8n</span>
+          <span class="build-tag" data-i18n="build_s3_t2">Claude SONCAS</span>
+          <span class="build-tag" data-i18n="build_s3_t3">0 intervention</span>
         </div>
-      </div>
+      </article>
+      <article class="build-card">
+        <div class="build-card-head">
+          <span class="build-icon">🎨</span>
+          <span class="build-num">04</span>
+        </div>
+        <h4 data-i18n="build_s4_title">Product Design</h4>
+        <p class="build-card-desc" data-i18n="build_s4_desc">Contrôle humain, edge cases, validation avant envoi.</p>
+        <div class="build-tags">
+          <span class="build-tag" data-i18n="build_s4_t1">Email à valider</span>
+          <span class="build-tag" data-i18n="build_s4_t2">Slack structuré</span>
+          <span class="build-tag" data-i18n="build_s4_t3">Tâche J+2</span>
+        </div>
+      </article>
+      <article class="build-card">
+        <div class="build-card-head">
+          <span class="build-icon">🚀</span>
+          <span class="build-num">05</span>
+        </div>
+        <h4 data-i18n="build_s5_title">Deployment</h4>
+        <p class="build-card-desc" data-i18n="build_s5_desc">Production, monitoring, webhooks, intégration outils métier.</p>
+        <div class="build-tags">
+          <span class="build-tag" data-i18n="build_s5_t1">n8n Cloud</span>
+          <span class="build-tag" data-i18n="build_s5_t2">MAKE certifié</span>
+          <span class="build-tag" data-i18n="build_s5_t3">Supabase</span>
+        </div>
+      </article>
+      <article class="build-card build-card--final">
+        <div class="build-card-head">
+          <span class="build-icon">📈</span>
+          <span class="build-num">06</span>
+        </div>
+        <h4 data-i18n="build_s6_title">Measured Impact</h4>
+        <p class="build-card-desc" data-i18n="build_s6_desc">KPIs mesurés, itération, scale. Pas de POC qui dort.</p>
+        <div class="build-tags">
+          <span class="build-tag" data-i18n="build_s6_t1">&lt;10s</span>
+          <span class="build-tag" data-i18n="build_s6_t2">35h/sem</span>
+          <span class="build-tag" data-i18n="build_s6_t3">2 ETP</span>
+          <span class="build-tag" data-i18n="build_s6_t4">+60%</span>
+        </div>
+      </article>
     </div>
     <p class="build-closing fade-in" data-i18n-html="build_closing">Ce n'est pas du no-code pour du no-code. C'est du <strong>business compris</strong>, puis automatisé.</p>
   </div>
@@ -1302,80 +1879,128 @@ footer p { color:var(--grey); font-size:.85rem; }
   <div class="section-inner">
     <p class="section-label" data-i18n="auto_label">Écosystème</p>
     <h2 class="section-title" data-i18n="auto_title">Automation Ecosystem</h2>
-    <p class="section-desc" data-i18n="auto_desc">Maestro n'est pas un projet isolé — c'est l'un des systèmes IA et automatisations déjà en production.</p>
+    <p class="section-desc" data-i18n="auto_desc">6+ systèmes IA en production — un écosystème cohérent, pas un projet isolé.</p>
 
-    <div class="ecosystem-grid fade-in">
-      <div class="ecosystem-card ecosystem-card--featured">
-        <div class="ecosystem-card-icon">🤖</div>
-        <h4 data-i18n="eco_rebecca_title">Agent Rebecca</h4>
-        <div class="eco-metric">35h/sem</div>
-        <p data-i18n="eco_rebecca_desc">Analyse CV automatisée : PDF → GPT-Vision → classification → Airtable. Production CEFORA.</p>
-        <div class="eco-tags"><span class="eco-tag">GPT-Vision</span><span class="eco-tag">MAKE</span><span class="eco-tag">Airtable</span></div>
+    <div class="eco-banner fade-in">
+      <div class="eco-banner-item">
+        <span class="eco-banner-num">6+</span>
+        <span class="eco-banner-label" data-i18n="eco_b1">systèmes en prod</span>
       </div>
-      <div class="ecosystem-card">
-        <div class="ecosystem-card-icon">👥</div>
-        <h4 data-i18n="eco_rh_title">Automatisations RH</h4>
-        <div class="eco-metric">2 ETP</div>
-        <p data-i18n="eco_rh_desc">Pipelines N8N + MAKE pour automatiser la prospection et l'enrichissement à grande échelle.</p>
-        <div class="eco-tags"><span class="eco-tag">N8N</span><span class="eco-tag">MAKE</span><span class="eco-tag">Webhooks</span></div>
+      <div class="eco-banner-item">
+        <span class="eco-banner-num">N8N</span>
+        <span class="eco-banner-label" data-i18n="eco_b2">+ MAKE certifié</span>
       </div>
-      <div class="ecosystem-card">
-        <div class="ecosystem-card-icon">🔍</div>
-        <h4 data-i18n="eco_cv_title">CV Analysis IA</h4>
-        <div class="eco-metric">+60%</div>
-        <p data-i18n="eco_cv_desc">Extraction et classification automatique de candidatures avec GPT-Vision et scoring IA.</p>
-        <div class="eco-tags"><span class="eco-tag">GPT-Vision</span><span class="eco-tag">PDF Pipeline</span></div>
-      </div>
-      <div class="ecosystem-card ecosystem-card--gold">
-        <div class="ecosystem-card-icon">📞</div>
-        <h4>Maestro AI</h4>
-        <div class="eco-metric">&lt;10s</div>
-        <p data-i18n="eco_maestro_desc">Post-call automation : Modjo → Claude → GHL → Slack → Email. 8 nœuds n8n natifs.</p>
-        <div class="eco-tags"><span class="eco-tag">n8n</span><span class="eco-tag">Claude</span><span class="eco-tag">GHL</span></div>
-      </div>
-      <div class="ecosystem-card">
-        <div class="ecosystem-card-icon">📊</div>
-        <h4 data-i18n="eco_prosp_title">Prospection IA</h4>
-        <div class="eco-metric">1200/sem</div>
-        <p data-i18n="eco_prosp_desc">Ciblage automatique d'entreprises via scraping, enrichissement API et injection CRM.</p>
-        <div class="eco-tags"><span class="eco-tag">Scraping</span><span class="eco-tag">Pappers</span><span class="eco-tag">Dropcontact</span></div>
-      </div>
-      <div class="ecosystem-card">
-        <div class="ecosystem-card-icon">⚙️</div>
-        <h4 data-i18n="eco_stack_title">N8N + MAKE</h4>
-        <div class="eco-metric" data-i18n="eco_stack_metric">Certifié</div>
-        <p data-i18n="eco_stack_desc">Stack automation transversale : orchestration, expressions, credentials, parallélisation.</p>
-        <div class="eco-tags"><span class="eco-tag">N8N Cloud</span><span class="eco-tag">MAKE ✓</span><span class="eco-tag">Airtable</span></div>
+      <div class="eco-banner-item">
+        <span class="eco-banner-num">Live</span>
+        <span class="eco-banner-label" data-i18n="eco_b3">déployé chez clients</span>
       </div>
     </div>
 
-    <div class="rebecca-spotlight fade-in">
-      <div class="rebecca-spotlight-header">
-        <h3 data-i18n="wf_title">🤖 Pipeline Agent IA "Rebecca"</h3>
-        <div class="rebecca-stats">
-          <span class="rebecca-stat" data-i18n="res1">+60% réactivité</span>
-          <span class="rebecca-stat" data-i18n="res2">-40% délai</span>
-          <span class="rebecca-stat">35h/sem</span>
+    <div class="eco-grid fade-in">
+      <article class="eco-card eco-card--teal">
+        <div class="eco-card-top">
+          <span class="eco-icon">🤖</span>
+          <span class="eco-metric">35h</span>
+        </div>
+        <h4 data-i18n="eco_rebecca_title">Agent Rebecca</h4>
+        <p class="eco-hook" data-i18n="eco_rebecca_hook">Analyse CV automatisée — production CEFORA</p>
+        <div class="eco-tags">
+          <span class="eco-tag">GPT-Vision</span><span class="eco-tag">MAKE</span><span class="eco-tag">Airtable</span>
+        </div>
+      </article>
+      <article class="eco-card">
+        <div class="eco-card-top">
+          <span class="eco-icon">👥</span>
+          <span class="eco-metric">2 ETP</span>
+        </div>
+        <h4 data-i18n="eco_rh_title">Automatisations RH</h4>
+        <p class="eco-hook" data-i18n="eco_rh_hook">Prospection &amp; enrichissement à grande échelle</p>
+        <div class="eco-tags">
+          <span class="eco-tag">N8N</span><span class="eco-tag">MAKE</span><span class="eco-tag">Webhooks</span>
+        </div>
+      </article>
+      <article class="eco-card">
+        <div class="eco-card-top">
+          <span class="eco-icon">🔍</span>
+          <span class="eco-metric">+60%</span>
+        </div>
+        <h4 data-i18n="eco_cv_title">CV Analysis IA</h4>
+        <p class="eco-hook" data-i18n="eco_cv_hook">Extraction &amp; scoring automatique de candidatures</p>
+        <div class="eco-tags">
+          <span class="eco-tag">GPT-Vision</span><span class="eco-tag">PDF Pipeline</span>
+        </div>
+      </article>
+      <article class="eco-card eco-card--gold">
+        <div class="eco-card-top">
+          <span class="eco-icon">📞</span>
+          <span class="eco-metric">&lt;10s</span>
+        </div>
+        <h4>Maestro AI</h4>
+        <p class="eco-hook" data-i18n="eco_maestro_hook">Post-call : Modjo → Claude → CRM → Slack</p>
+        <div class="eco-tags">
+          <span class="eco-tag">n8n</span><span class="eco-tag">Claude</span><span class="eco-tag">GHL</span>
+        </div>
+      </article>
+      <article class="eco-card">
+        <div class="eco-card-top">
+          <span class="eco-icon">📊</span>
+          <span class="eco-metric">1200</span>
+        </div>
+        <h4 data-i18n="eco_prosp_title">Prospection IA</h4>
+        <p class="eco-hook" data-i18n="eco_prosp_hook">Scraping, enrichissement API, injection CRM</p>
+        <div class="eco-tags">
+          <span class="eco-tag">Scraping</span><span class="eco-tag">Pappers</span><span class="eco-tag">Dropcontact</span>
+        </div>
+      </article>
+      <article class="eco-card">
+        <div class="eco-card-top">
+          <span class="eco-icon">⚙️</span>
+          <span class="eco-metric" data-i18n="eco_stack_metric">✓</span>
+        </div>
+        <h4 data-i18n="eco_stack_title">N8N + MAKE</h4>
+        <p class="eco-hook" data-i18n="eco_stack_hook">Stack automation transversale certifiée</p>
+        <div class="eco-tags">
+          <span class="eco-tag">N8N Cloud</span><span class="eco-tag">MAKE ✓</span><span class="eco-tag">Airtable</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="eco-spotlight fade-in" id="rebeccaPipeline">
+      <div class="eco-spotlight-accent"></div>
+      <div class="eco-spotlight-top">
+        <div class="eco-spotlight-id">
+          <span class="eco-spotlight-icon">🤖</span>
+          <div>
+            <h3 data-i18n="wf_title">Pipeline Agent Rebecca</h3>
+            <p class="eco-spotlight-sub" data-i18n="wf_desc">Analyse automatique de candidatures — CEFORA</p>
+          </div>
+        </div>
+        <div class="eco-spotlight-metric">
+          <span class="eco-spotlight-num">35h</span>
+          <span class="eco-spotlight-unit" data-i18n="cs_rebecca_metric">économisées / semaine</span>
         </div>
       </div>
-      <p class="wf-desc" style="margin-bottom:16px" data-i18n="wf_desc">Analyse automatique de candidatures en production chez CEFORA</p>
-      <div class="wf-steps">
-        <div class="wf-step"><span class="step-icon">📄</span><span class="step-text" data-i18n-html="wf_s1"><strong>Réception CV</strong> — PDF via email ou formulaire</span></div>
-        <div class="wf-arrow">↓</div>
-        <div class="wf-step"><span class="step-icon">🖼️</span><span class="step-text" data-i18n-html="wf_s2"><strong>Conversion</strong> — PDF → JPEG (iLovePDF + Picnie)</span></div>
-        <div class="wf-arrow">↓</div>
-        <div class="wf-step"><span class="step-icon">🧠</span><span class="step-text" data-i18n-html="wf_s3"><strong>Analyse GPT-Vision</strong> — extraction nom, mail, compétences, zone géo</span></div>
-        <div class="wf-arrow">↓</div>
-        <div class="wf-step"><span class="step-icon">📊</span><span class="step-text" data-i18n-html="wf_s4"><strong>Classification IA</strong> — formation visée, pertinence, score</span></div>
-        <div class="wf-arrow">↓</div>
-        <div class="wf-step"><span class="step-icon">✅</span><span class="step-text" data-i18n-html="wf_s5"><strong>Injection Airtable</strong> — CVTech + Drive + notification</span></div>
+      <div class="eco-pipeline" aria-label="Pipeline Rebecca">
+        <span class="eco-pnode" data-i18n="wf_n1">📄 Réception CV</span><span class="eco-parrow">→</span>
+        <span class="eco-pnode" data-i18n="wf_n2">🖼️ Conversion</span><span class="eco-parrow">→</span>
+        <span class="eco-pnode" data-i18n="wf_n3">🧠 GPT-Vision</span><span class="eco-parrow">→</span>
+        <span class="eco-pnode" data-i18n="wf_n4">📊 Classification</span><span class="eco-parrow">→</span>
+        <span class="eco-pnode" data-i18n="wf_n5">✅ Airtable</span>
       </div>
-      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-        <a href="projects/agent-rebecca.html" class="proj-link primary" style="font-size:.85rem;padding:10px 20px" data-i18n="proj_view">📄 Voir le projet →</a>
-        <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="proj-link ghost" style="font-size:.85rem;padding:10px 20px">LinkedIn →</a>
+      <div class="eco-spotlight-footer">
+        <div class="eco-kpis">
+          <span class="eco-kpi" data-i18n="res1">+60% réactivité</span>
+          <span class="eco-kpi" data-i18n="res2">-40% délai</span>
+          <span class="eco-kpi">35h/sem</span>
+        </div>
+        <div class="eco-spotlight-btns">
+          <a href="projects/agent-rebecca.html" class="cs-cta cs-cta--teal" data-i18n="proj_view">📄 Voir le projet →</a>
+          <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="cs-cta cs-cta--blue">LinkedIn →</a>
+        </div>
       </div>
     </div>
-    <p class="ecosystem-closing fade-in" data-i18n-html="eco_closing"><strong>6+ systèmes en production.</strong> Un écosystème cohérent, pas un projet isolé.</p>
+
+    <p class="eco-closing fade-in" data-i18n-html="eco_closing"><strong>6+ systèmes en production.</strong> Chaque projet renforce l'écosystème.</p>
   </div>
 </section>
 
@@ -1490,6 +2115,182 @@ footer p { color:var(--grey); font-size:.85rem; }
   </div>
 </section>
 
+<!-- ── WHO I HELP ─────────────────────────────── -->
+<section id="who-i-help">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="who_label">Qui j'aide</p>
+    <h2 class="section-title" data-i18n="who_title">Who I Help</h2>
+    <p class="section-desc" data-i18n="who_desc">Identifiez-vous — je construis des systèmes IA et des produits pour des problèmes métier concrets.</p>
+
+    <div class="who-grid fade-in">
+      <article class="who-card">
+        <div class="who-card-head">
+          <span class="who-icon">🏢</span>
+          <h4 data-i18n="who_pme_title">PME</h4>
+        </div>
+        <p class="who-pain" data-i18n="who_pme_pain">Excel, emails, outils dispersés — impossible de scaler sans recruter.</p>
+        <div class="who-tags">
+          <span class="who-tag" data-i18n="who_pme_t1">n8n / MAKE</span>
+          <span class="who-tag" data-i18n="who_pme_t2">Intégrations CRM</span>
+          <span class="who-tag" data-i18n="who_pme_t3">Process centralisé</span>
+        </div>
+        <div class="who-kpis">
+          <span class="who-kpi" data-i18n="who_pme_k1">- tâches manuelles</span>
+          <span class="who-kpi" data-i18n="who_pme_k2">Process fiables</span>
+          <span class="who-kpi" data-i18n="who_pme_k3">Scale sans surcharge</span>
+        </div>
+      </article>
+
+      <article class="who-card">
+        <div class="who-card-head">
+          <span class="who-icon">🚀</span>
+          <h4 data-i18n="who_startup_title">Startups</h4>
+        </div>
+        <p class="who-pain" data-i18n="who_startup_pain">MVP ou SaaS rapidement, sans budget pour une équipe tech complète.</p>
+        <div class="who-tags">
+          <span class="who-tag">React</span>
+          <span class="who-tag">Supabase</span>
+          <span class="who-tag" data-i18n="who_startup_t3">Product A → Z</span>
+        </div>
+        <div class="who-kpis">
+          <span class="who-kpi" data-i18n="who_startup_k1">Prod live</span>
+          <span class="who-kpi" data-i18n="who_startup_k2">Time-to-market</span>
+          <span class="who-kpi" data-i18n="who_startup_k3">Focus business</span>
+        </div>
+      </article>
+
+      <article class="who-card">
+        <div class="who-card-head">
+          <span class="who-icon">🎓</span>
+          <h4 data-i18n="who_training_title">Centres de formation</h4>
+        </div>
+        <p class="who-pain" data-i18n="who_training_pain">Candidatures manuelles, délais longs, équipes commerciales saturées.</p>
+        <div class="who-tags">
+          <span class="who-tag">GPT-Vision</span>
+          <span class="who-tag" data-i18n="who_training_t2">Prospection IA</span>
+          <span class="who-tag" data-i18n="who_training_t3">Pipeline auto</span>
+        </div>
+        <div class="who-kpis">
+          <span class="who-kpi">35h/sem</span>
+          <span class="who-kpi">+60%</span>
+          <span class="who-kpi" data-i18n="who_training_k3">Grande échelle</span>
+        </div>
+      </article>
+
+      <article class="who-card">
+        <div class="who-card-head">
+          <span class="who-icon">📞</span>
+          <h4 data-i18n="who_sales_title">Équipes commerciales</h4>
+        </div>
+        <p class="who-pain" data-i18n="who_sales_pain">20 min perdues post-appel — relances oubliées, CRM jamais à jour.</p>
+        <div class="who-tags">
+          <span class="who-tag" data-i18n="who_sales_t1">Post-call IA</span>
+          <span class="who-tag">Claude</span>
+          <span class="who-tag" data-i18n="who_sales_t3">CRM auto</span>
+        </div>
+        <div class="who-kpis">
+          <span class="who-kpi">&lt;10s</span>
+          <span class="who-kpi" data-i18n="who_sales_k2">0 relance</span>
+          <span class="who-kpi" data-i18n="who_sales_k3">Focus closing</span>
+        </div>
+      </article>
+
+      <article class="who-card">
+        <div class="who-card-head">
+          <span class="who-icon">👥</span>
+          <h4 data-i18n="who_hr_title">Cabinets RH</h4>
+        </div>
+        <p class="who-pain" data-i18n="who_hr_pain">Tri CV chronophage — volume ingérable sans perte de qualité.</p>
+        <div class="who-tags">
+          <span class="who-tag" data-i18n="who_hr_t1">Parsing IA</span>
+          <span class="who-tag" data-i18n="who_hr_t2">Scoring auto</span>
+          <span class="who-tag">ATS / Airtable</span>
+        </div>
+        <div class="who-kpis">
+          <span class="who-kpi" data-i18n="who_hr_k1">Instantané</span>
+          <span class="who-kpi" data-i18n="who_hr_k2">Scoring fiable</span>
+          <span class="who-kpi" data-i18n="who_hr_k3">Focus entretiens</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORK WITH ME ───────────────────────────── -->
+<section id="work-with-me">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="wwm_label">Collaborer</p>
+    <h2 class="section-title" data-i18n="wwm_title">Work With Me</h2>
+    <p class="section-desc" data-i18n="wwm_desc">Je ne vends pas du temps — je construis des systèmes qui génèrent un impact business mesurable.</p>
+
+    <div class="services-grid fade-in">
+      <article class="service-card">
+        <span class="service-card-icon">⚡</span>
+        <h4 data-i18n="svc_auto_title">AI Automation</h4>
+        <p class="service-card-desc" data-i18n="svc_auto_desc">Workflows n8n, MAKE, agents IA — de l'idée métier au pipeline en production avec KPIs mesurables.</p>
+        <div class="service-tags">
+          <span class="service-tag">n8n</span><span class="service-tag">Claude API</span>
+          <span class="service-tag">MAKE</span><span class="service-tag">Webhooks</span>
+        </div>
+        <p class="service-ideal" data-i18n="svc_auto_ideal">Idéal : équipes commerciales, RH, centres de formation</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-card-icon">🛠️</span>
+        <h4 data-i18n="svc_product_title">Product Building</h4>
+        <p class="service-card-desc" data-i18n="svc_product_desc">SaaS, MVP, applications métier — conception, développement et déploiement de A à Z.</p>
+        <div class="service-tags">
+          <span class="service-tag">React</span><span class="service-tag">Supabase</span>
+          <span class="service-tag">Stripe</span><span class="service-tag">TypeScript</span>
+        </div>
+        <p class="service-ideal" data-i18n="svc_product_ideal">Idéal : startups, PME en digitalisation</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-card-icon">📊</span>
+        <h4 data-i18n="svc_process_title">Process Optimization</h4>
+        <p class="service-card-desc" data-i18n="svc_process_desc">Cartographie des processus, identification des frictions, automatisation ciblée avec ROI mesurable.</p>
+        <div class="service-tags">
+          <span class="service-tag">Process Mapping</span><span class="service-tag">CRM</span>
+          <span class="service-tag">KPIs</span>
+        </div>
+        <p class="service-ideal" data-i18n="svc_process_ideal">Idéal : PME, équipes opérationnelles</p>
+      </article>
+    </div>
+
+    <div class="pricing-block fade-in">
+      <h3 data-i18n="pricing_title">Tarification transparente</h3>
+      <div class="pricing-row">
+        <div class="pricing-option">
+          <div class="pricing-num">25€</div>
+          <div class="pricing-unit" data-i18n="pricing_hour">/ heure</div>
+        </div>
+        <span class="pricing-or" data-i18n="pricing_or">ou</span>
+        <div class="pricing-option">
+          <div class="pricing-num pricing-flat-inline" data-i18n="pricing_flat">Forfait projet</div>
+          <div class="pricing-unit" data-i18n="pricing_flat_sub">scope défini · livrable clair</div>
+        </div>
+      </div>
+      <div class="pricing-notes">
+        <span class="pricing-note" data-i18n="pricing_note1">Collaborations long terme</span>
+        <span class="pricing-note" data-i18n="pricing_note2">Remote · France &amp; International</span>
+        <span class="pricing-note" data-i18n="pricing_note3">Résultats mesurables</span>
+      </div>
+    </div>
+
+    <div class="work-cta fade-in">
+      <h3 data-i18n="wwm_cta_title">Prêt à automatiser ou construire ?</h3>
+      <p data-i18n="wwm_cta_desc">Discutons de votre enjeu métier — je vous propose une approche concrète en 30 minutes.</p>
+      <div class="work-cta-btns">
+        <a href="mailto:techerchristopher@gmail.com" class="btn-primary" data-i18n="wwm_btn_email">✉️ M'écrire</a>
+        <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="btn-secondary" data-i18n="wwm_btn_linkedin">💼 LinkedIn</a>
+        <span class="btn-calendly-soon" data-i18n="wwm_btn_calendly">📅 Calendly — bientôt</span>
+      </div>
+      <p class="work-ref" data-i18n-html="wwm_ref">Voir les <a href="#case-studies">études de cas détaillées →</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- ── EXPERIENCE ─────────────────────────────── -->
 <section id="experience">
   <div class="section-inner">
@@ -1545,19 +2346,16 @@ footer p { color:var(--grey); font-size:.85rem; }
 <section id="contact">
   <div class="section-inner">
     <p class="section-label" data-i18n="contact_label">Contact</p>
-    <h2 class="section-title" data-i18n="contact_title">Travaillons ensemble</h2>
-    <p class="section-desc" data-i18n="contact_desc">Remote · France &amp; International. Disponible pour des missions Product Builder IA, AI Automation Engineer ou freelance long terme.</p>
+    <h2 class="section-title" data-i18n="contact_title">Une question ?</h2>
+    <p class="section-desc" data-i18n="contact_desc">Remote · France &amp; International. Pour une collaboration, commencez par la section Collaborer.</p>
+
+    <div class="contact-ref-banner fade-in" data-i18n-html="contact_banner">
+      🤝 Vous avez un projet ? <a href="#work-with-me">Voir comment collaborer →</a>
+    </div>
+
     <div class="contact-inner fade-in">
       <div>
         <div class="contact-links">
-          <a href="maestro.html" class="contact-link">
-            <span class="contact-maestro-icon">🎬</span>
-            <div class="link-info">
-              <div class="link-label" data-i18n="contact_maestro_label">Démo IA · Maestro</div>
-              <div class="link-value" data-i18n="contact_maestro_value">Workflow post-call en &lt;10s</div>
-            </div>
-            <span class="link-arrow">→</span>
-          </a>
           <a href="mailto:techerchristopher@gmail.com" class="contact-link">
             <span class="link-icon">✉️</span>
             <div class="link-info">
@@ -1574,19 +2372,19 @@ footer p { color:var(--grey); font-size:.85rem; }
             </div>
             <span class="link-arrow">→</span>
           </a>
+          <a href="maestro.html" class="contact-link">
+            <span class="contact-maestro-icon">🎬</span>
+            <div class="link-info">
+              <div class="link-label" data-i18n="contact_maestro_label">Démo IA · Maestro</div>
+              <div class="link-value" data-i18n="contact_maestro_value">Workflow post-call en &lt;10s</div>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
           <a href="https://github.com/techerchristopher-dotcom" target="_blank" class="contact-link">
             <span class="link-icon">⭐</span>
             <div class="link-info">
               <div class="link-label">GitHub</div>
               <div class="link-value">github.com/techerchristopher-dotcom</div>
-            </div>
-            <span class="link-arrow">→</span>
-          </a>
-          <a href="https://rentanoo.com" target="_blank" class="contact-link">
-            <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="contact-rentanoo-logo">
-            <div class="link-info">
-              <div class="link-label" data-i18n="contact_live_label">Projet Live · Rentanoo</div>
-              <div class="link-value">rentanoo.com</div>
             </div>
             <span class="link-arrow">→</span>
           </a>
@@ -1621,6 +2419,7 @@ const T = {
     // NAV
     nav_about:'Profil', nav_skills:'Compétences', nav_projects:'Réalisations',
     nav_impact:'Impact', nav_method:'Méthode', nav_ecosystem:'Écosystème',
+    nav_cases:'Cas clients', nav_collab:'Collaborer', nav_who:"Qui j'aide",
     nav_experience:'Parcours', nav_contact:'Contact',
     // HERO
     hero_badge:'Disponible · Remote & International',
@@ -1628,7 +2427,7 @@ const T = {
     hero_tagline:"Je construis des produits digitaux et des systèmes d'automatisation IA qui génèrent un impact business réel.",
     hero_role1:'Product Builder', hero_role2:'AI Automation Engineer',
     hero_role3:'Business Developer', hero_role4:'No-Code / Low-Code Builder',
-    hero_btn1:'🚀 Voir mes réalisations', hero_btn2:'💬 Me contacter',
+    hero_btn1:'🚀 Voir mes résultats', hero_btn2:'🤝 Collaborer',
     stat1:'post-call automatisé', stat2:'économisées / semaine',
     stat3:'automatisés', stat4:'ans business terrain',
     // ABOUT
@@ -1659,7 +2458,7 @@ const T = {
     maestro_f1:'Workflow n8n orchestré : Modjo → Claude → GoHighLevel → Slack → Email',
     maestro_f2:'Prompt SONCAS intégré → JSON structuré exploitable directement par le CRM',
     maestro_f3:'Humain garde le contrôle : email rédigé par Claude, envoyé à valider',
-    maestro_demo:'🎬 Voir la démo interactive →',
+    maestro_demo:'🎬 Démo interactive →',
     maestro_m1:'post-call', maestro_m2:'relance oubliée', maestro_m3:'nœuds natifs',
     rebecca_desc_short:"Agent IA d'analyse de CV en production — 35h économisées/semaine. Voir l'écosystème complet ↓",
     rebecca_eco:'→ Écosystème Automation',
@@ -1694,21 +2493,81 @@ const T = {
     impact_rh_benefit:'Équivalent automatisé en prospection et enrichissement',
     impact_rh_detail:'1 200 entreprises ciblées/semaine · Scraping + enrichissement API',
     impact_closing:'Je ne livre pas des outils. Je livre du <strong>temps</strong>, de la <strong>fiabilité</strong> et de la <strong>scalabilité</strong>.',
+    // CASE STUDIES
+    cs_label:'Études de cas', cs_title:'Featured Case Studies',
+    cs_desc:'Des problèmes métier transformés en systèmes opérationnels.',
+    proof_1:'économisées / semaine', proof_2:'ETP automatisés',
+    proof_3:'après un appel', proof_4:'SaaS en production',
+    cs_maestro_metric:'post-call automatisé',
+    cs_maestro_hook:'20 min perdues après chaque appel — résumé manuel, relances oubliées, impossible à scaler.',
+    cs_maestro_kpi1:'0 relance oubliée', cs_maestro_kpi2:'CRM auto', cs_maestro_kpi3:'8 nœuds n8n',
+    cs_rebecca_metric:'économisées / semaine',
+    cs_rebecca_hook:'Candidatures traitées manuellement — chronophage, erreurs, délais de réponse.',
+    cs_rebecca_kpi1:'+60% réactivité', cs_rebecca_kpi2:'-40% délai', cs_rebecca_kpi3:'Prod CEFORA',
+    cs_rebecca_cta:'→ Voir le pipeline',
+    cs_rentanoo_metric:'rentanoo.com',
+    cs_rentanoo_hook:'Excel, WhatsApp, papier — outils dispersés sans vision centralisée.',
+    cs_rentanoo_n1:'Réservation', cs_rentanoo_n2:'CRM', cs_rentanoo_n3:'Planning', cs_rentanoo_n4:'Flotte',
+    cs_rentanoo_kpi1:'SaaS complet', cs_rentanoo_kpi2:'Stripe intégré', cs_rentanoo_kpi3:'De A à Z',
+    // WHO I HELP
+    who_label:"Qui j'aide", who_title:'Who I Help',
+    who_desc:'Identifiez-vous — je construis des systèmes IA et des produits pour des problèmes métier concrets.',
+    who_pme_title:'PME',
+    who_pme_pain:'Excel, emails, outils dispersés — impossible de scaler sans recruter.',
+    who_pme_t1:'n8n / MAKE', who_pme_t2:'Intégrations CRM', who_pme_t3:'Process centralisé',
+    who_pme_k1:'- tâches manuelles', who_pme_k2:'Process fiables', who_pme_k3:'Scale sans surcharge',
+    who_startup_title:'Startups',
+    who_startup_pain:'MVP ou SaaS rapidement, sans budget pour une équipe tech complète.',
+    who_startup_t3:'Product A → Z',
+    who_startup_k1:'Prod live', who_startup_k2:'Time-to-market', who_startup_k3:'Focus business',
+    who_training_title:'Centres de formation',
+    who_training_pain:'Candidatures manuelles, délais longs, équipes commerciales saturées.',
+    who_training_t2:'Prospection IA', who_training_t3:'Pipeline auto',
+    who_training_k3:'Grande échelle',
+    who_sales_title:'Équipes commerciales',
+    who_sales_pain:'20 min perdues post-appel — relances oubliées, CRM jamais à jour.',
+    who_sales_t1:'Post-call IA', who_sales_t3:'CRM auto',
+    who_sales_k2:'0 relance', who_sales_k3:'Focus closing',
+    who_hr_title:'Cabinets RH',
+    who_hr_pain:'Tri CV chronophage — volume ingérable sans perte de qualité.',
+    who_hr_t1:'Parsing IA', who_hr_t2:'Scoring auto',
+    who_hr_k1:'Instantané', who_hr_k2:'Scoring fiable', who_hr_k3:'Focus entretiens',
+    // WORK WITH ME
+    wwm_label:'Collaborer', wwm_title:'Work With Me',
+    wwm_desc:'Je ne vends pas du temps — je construis des systèmes qui génèrent un impact business mesurable.',
+    svc_auto_title:'AI Automation',
+    svc_auto_desc:'Workflows n8n, MAKE, agents IA — de l\'idée métier au pipeline en production avec KPIs mesurables.',
+    svc_auto_ideal:'Idéal : équipes commerciales, RH, centres de formation',
+    svc_product_title:'Product Building',
+    svc_product_desc:'SaaS, MVP, applications métier — conception, développement et déploiement de A à Z.',
+    svc_product_ideal:'Idéal : startups, PME en digitalisation',
+    svc_process_title:'Process Optimization',
+    svc_process_desc:'Cartographie des processus, identification des frictions, automatisation ciblée avec ROI mesurable.',
+    svc_process_ideal:'Idéal : PME, équipes opérationnelles',
+    pricing_title:'Tarification transparente', pricing_hour:'/ heure', pricing_or:'ou',
+    pricing_flat:'Forfait projet', pricing_flat_sub:'scope défini · livrable clair',
+    pricing_note1:'Collaborations long terme', pricing_note2:'Remote · France & International',
+    pricing_note3:'Résultats mesurables',
+    wwm_cta_title:'Prêt à automatiser ou construire ?',
+    wwm_cta_desc:'Discutons de votre enjeu métier — je vous propose une approche concrète en 30 minutes.',
+    wwm_btn_email:'✉️ M\'écrire', wwm_btn_linkedin:'💼 LinkedIn',
+    wwm_btn_calendly:'📅 Calendly — bientôt',
+    wwm_ref:'Voir les <a href="#case-studies">études de cas détaillées →</a>',
     // HOW I BUILD
     build_label:'Méthode', build_title:'How I Build',
     build_desc:"De l'enjeu métier à l'impact mesuré — ma démarche de Product Builder IA.",
     build_s1_title:'Business Problem', build_s1_desc:"Comprendre l'enjeu terrain avant toute ligne de code.",
-    build_s1_ex:'→ 15 ans : commerciaux, RH, formation, location auto',
-    build_s2_title:'Process Mapping', build_s2_desc:'Cartographier le workflow actuel, identifier les frictions et les gains rapides.',
-    build_s2_ex:'→ Maestro : 20 min post-appel → cartographie Modjo → GHL',
-    build_s3_title:'AI & Automation', build_s3_desc:'Orchestrer n8n, APIs, LLMs — nœuds natifs, expressions dynamiques, credentials.',
-    build_s3_ex:'→ 8 nœuds n8n · Claude SONCAS · 0 intervention humaine',
-    build_s4_title:'Product Design', build_s4_desc:"Concevoir l'expérience : contrôle humain, edge cases, validation avant envoi.",
-    build_s4_ex:'→ Email « à valider » · Slack structuré · Tâche J+2 dynamique',
-    build_s5_title:'Deployment', build_s5_desc:'Mise en production, monitoring, webhooks, intégration aux outils métier existants.',
-    build_s5_ex:'→ n8n Cloud · GHL natif · MAKE certifié · Supabase',
-    build_s6_title:'Measured Impact', build_s6_desc:'Mesurer les KPIs, itérer, scaler. Pas de POC qui dort.',
-    build_s6_ex:'→ <10s · 35h/sem · 2 ETP · +60% réactivité',
+    build_s1_t1:'15 ans terrain', build_s1_t2:'Commerciaux · RH', build_s1_t3:'Formation',
+    build_s2_title:'Process Mapping', build_s2_desc:'Cartographier le workflow, identifier frictions et gains rapides.',
+    build_s2_t1:'Maestro', build_s2_t2:'Modjo → GHL', build_s2_t3:'20 min post-call',
+    build_s3_title:'AI & Automation', build_s3_desc:'Orchestrer n8n, APIs, LLMs — nœuds natifs, credentials.',
+    build_s3_t1:'8 nœuds n8n', build_s3_t2:'Claude SONCAS', build_s3_t3:'0 intervention',
+    build_s4_title:'Product Design', build_s4_desc:'Contrôle humain, edge cases, validation avant envoi.',
+    build_s4_t1:'Email à valider', build_s4_t2:'Slack structuré', build_s4_t3:'Tâche J+2',
+    build_s5_title:'Deployment', build_s5_desc:'Production, monitoring, webhooks, intégration outils métier.',
+    build_s5_t1:'n8n Cloud', build_s5_t2:'MAKE certifié', build_s5_t3:'Supabase',
+    build_s6_title:'Measured Impact', build_s6_desc:'KPIs mesurés, itération, scale. Pas de POC qui dort.',
+    build_s6_t1:'<10s', build_s6_t2:'35h/sem', build_s6_t3:'2 ETP', build_s6_t4:'+60%',
     build_closing:"Ce n'est pas du no-code pour du no-code. C'est du <strong>business compris</strong>, puis automatisé.",
     // MOCK UI
     mock_tagline:'Location de véhicules entre particuliers — Nosy Be',
@@ -1725,23 +2584,21 @@ const T = {
     mock_active:'Actif', mock_upcoming:'À venir',
     // AUTOMATION ECOSYSTEM
     auto_label:'Écosystème', auto_title:'Automation Ecosystem',
-    auto_desc:"Maestro n'est pas un projet isolé — c'est l'un des systèmes IA et automatisations déjà en production.",
-    eco_rebecca_title:'Agent Rebecca', eco_rebecca_desc:'Analyse CV automatisée : PDF → GPT-Vision → classification → Airtable. Production CEFORA.',
-    eco_rh_title:'Automatisations RH', eco_rh_desc:"Pipelines N8N + MAKE pour automatiser la prospection et l'enrichissement à grande échelle.",
-    eco_cv_title:'CV Analysis IA', eco_cv_desc:'Extraction et classification automatique de candidatures avec GPT-Vision et scoring IA.',
-    eco_maestro_desc:'Post-call automation : Modjo → Claude → GHL → Slack → Email. 8 nœuds n8n natifs.',
-    eco_prosp_title:'Prospection IA', eco_prosp_desc:"Ciblage automatique d'entreprises via scraping, enrichissement API et injection CRM.",
-    eco_stack_title:'N8N + MAKE', eco_stack_metric:'Certifié',
-    eco_stack_desc:'Stack automation transversale : orchestration, expressions, credentials, parallélisation.',
-    eco_closing:'<strong>6+ systèmes en production.</strong> Un écosystème cohérent, pas un projet isolé.',
+    auto_desc:'6+ systèmes IA en production — un écosystème cohérent, pas un projet isolé.',
+    eco_b1:'systèmes en prod', eco_b2:'+ MAKE certifié', eco_b3:'déployé chez clients',
+    eco_rebecca_title:'Agent Rebecca', eco_rebecca_hook:'Analyse CV automatisée — production CEFORA',
+    eco_rh_title:'Automatisations RH', eco_rh_hook:'Prospection & enrichissement à grande échelle',
+    eco_cv_title:'CV Analysis IA', eco_cv_hook:'Extraction & scoring automatique de candidatures',
+    eco_maestro_hook:'Post-call : Modjo → Claude → CRM → Slack',
+    eco_prosp_title:'Prospection IA', eco_prosp_hook:'Scraping, enrichissement API, injection CRM',
+    eco_stack_title:'N8N + MAKE', eco_stack_metric:'✓',
+    eco_stack_hook:'Stack automation transversale certifiée',
+    eco_closing:'<strong>6+ systèmes en production.</strong> Chaque projet renforce l\'écosystème.',
     res1:'+60% réactivité', res2:'-40% délai',
-    wf_title:'🤖 Pipeline Agent IA "Rebecca"',
-    wf_desc:'Analyse automatique de candidatures en production chez CEFORA',
-    wf_s1:'<strong>Réception CV</strong> — PDF via email ou formulaire',
-    wf_s2:'<strong>Conversion</strong> — PDF → JPEG (iLovePDF + Picnie)',
-    wf_s3:'<strong>Analyse GPT-Vision</strong> — extraction nom, mail, compétences, zone géo',
-    wf_s4:'<strong>Classification IA</strong> — formation visée, pertinence, score',
-    wf_s5:'<strong>Injection Airtable</strong> — CVTech + Drive + notification',
+    wf_title:'Pipeline Agent Rebecca',
+    wf_desc:'Analyse automatique de candidatures — CEFORA',
+    wf_n1:'📄 Réception CV', wf_n2:'🖼️ Conversion', wf_n3:'🧠 GPT-Vision',
+    wf_n4:'📊 Classification', wf_n5:'✅ Airtable',
     // EXPERIENCE
     exp_label:'Parcours', exp_title:'Expérience professionnelle',
     exp_desc:'Business developer pendant 15 ans, builder depuis 2023. Un profil rare qui comprend autant le marché que le code.',
@@ -1762,8 +2619,9 @@ const T = {
     job4_li1:"Création et pilotage d'une société IT et solutions business pour PME",
     job4_li2:'Développement commercial, gestion des opérations, stratégie marketing',
     // CONTACT
-    contact_label:'Contact', contact_title:'Travaillons ensemble',
-    contact_desc:'Remote · France & International. Disponible pour des missions Product Builder IA, AI Automation Engineer ou freelance long terme.',
+    contact_label:'Contact', contact_title:'Une question ?',
+    contact_desc:'Remote · France & International. Pour une collaboration, commencez par la section Collaborer.',
+    contact_banner:'🤝 Vous avez un projet ? <a href="#work-with-me">Voir comment collaborer →</a>',
     contact_maestro_label:'Démo IA · Maestro', contact_maestro_value:'Workflow post-call en <10s',
     contact_live_label:'Projet Live · Rentanoo', contact_qr:'Scanner pour me contacter',
     // FOOTER
@@ -1773,6 +2631,7 @@ const T = {
     // NAV
     nav_about:'Profile', nav_skills:'Skills', nav_projects:'Work',
     nav_impact:'Impact', nav_method:'Method', nav_ecosystem:'Ecosystem',
+    nav_cases:'Case Studies', nav_collab:'Work With Me', nav_who:'Who I Help',
     nav_experience:'Experience', nav_contact:'Contact',
     // HERO
     hero_badge:'Available · Remote & International',
@@ -1780,7 +2639,7 @@ const T = {
     hero_tagline:'I build digital products and AI automation systems that generate real business impact.',
     hero_role1:'Product Builder', hero_role2:'AI Automation Engineer',
     hero_role3:'Business Developer', hero_role4:'No-Code / Low-Code Builder',
-    hero_btn1:'🚀 See my work', hero_btn2:'💬 Contact me',
+    hero_btn1:'🚀 See my results', hero_btn2:'🤝 Work together',
     stat1:'automated post-call', stat2:'saved / week',
     stat3:'automated', stat4:'years business field',
     // ABOUT
@@ -1811,7 +2670,7 @@ const T = {
     maestro_f1:'Orchestrated n8n workflow: Modjo → Claude → GoHighLevel → Slack → Email',
     maestro_f2:'Integrated SONCAS prompt → structured JSON directly usable by CRM',
     maestro_f3:'Human keeps control: email drafted by Claude, sent for validation',
-    maestro_demo:'🎬 View interactive demo →',
+    maestro_demo:'🎬 Interactive demo →',
     maestro_m1:'post-call', maestro_m2:'missed follow-up', maestro_m3:'native nodes',
     rebecca_desc_short:'AI resume analysis agent in production — 35h saved/week. See full ecosystem ↓',
     rebecca_eco:'→ Automation Ecosystem',
@@ -1846,21 +2705,81 @@ const T = {
     impact_rh_benefit:'Automated equivalent in prospecting and enrichment',
     impact_rh_detail:'1,200 companies targeted/week · Scraping + API enrichment',
     impact_closing:'I don\'t deliver tools. I deliver <strong>time</strong>, <strong>reliability</strong> and <strong>scalability</strong>.',
+    // CASE STUDIES
+    cs_label:'Case Studies', cs_title:'Featured Case Studies',
+    cs_desc:'Business problems turned into operational systems.',
+    proof_1:'saved / week', proof_2:'FTEs automated',
+    proof_3:'after a call', proof_4:'SaaS in production',
+    cs_maestro_metric:'automated post-call',
+    cs_maestro_hook:'20 min lost after every call — manual summary, missed follow-ups, impossible to scale.',
+    cs_maestro_kpi1:'0 missed follow-up', cs_maestro_kpi2:'Auto CRM', cs_maestro_kpi3:'8 n8n nodes',
+    cs_rebecca_metric:'saved / week',
+    cs_rebecca_hook:'Applications processed manually — time-consuming, errors, slow response.',
+    cs_rebecca_kpi1:'+60% response', cs_rebecca_kpi2:'-40% delay', cs_rebecca_kpi3:'CEFORA prod',
+    cs_rebecca_cta:'→ View pipeline',
+    cs_rentanoo_metric:'rentanoo.com',
+    cs_rentanoo_hook:'Excel, WhatsApp, paper — scattered tools with no centralized view.',
+    cs_rentanoo_n1:'Booking', cs_rentanoo_n2:'CRM', cs_rentanoo_n3:'Scheduling', cs_rentanoo_n4:'Fleet',
+    cs_rentanoo_kpi1:'Full SaaS', cs_rentanoo_kpi2:'Stripe integrated', cs_rentanoo_kpi3:'A to Z',
+    // WHO I HELP
+    who_label:'Who I Help', who_title:'Who I Help',
+    who_desc:'Find yourself — I build AI systems and products for concrete business problems.',
+    who_pme_title:'SMEs',
+    who_pme_pain:'Excel, emails, scattered tools — impossible to scale without hiring.',
+    who_pme_t1:'n8n / MAKE', who_pme_t2:'CRM integrations', who_pme_t3:'Centralized process',
+    who_pme_k1:'- manual tasks', who_pme_k2:'Reliable processes', who_pme_k3:'Scale without overload',
+    who_startup_title:'Startups',
+    who_startup_pain:'MVP or SaaS fast, without budget for a full tech team.',
+    who_startup_t3:'Product A → Z',
+    who_startup_k1:'Live prod', who_startup_k2:'Time-to-market', who_startup_k3:'Focus business',
+    who_training_title:'Training Centers',
+    who_training_pain:'Manual applications, long delays, saturated sales teams.',
+    who_training_t2:'AI prospecting', who_training_t3:'Auto pipeline',
+    who_training_k3:'Large scale',
+    who_sales_title:'Sales Teams',
+    who_sales_pain:'20 min lost post-call — missed follow-ups, CRM never updated.',
+    who_sales_t1:'Post-call AI', who_sales_t3:'Auto CRM',
+    who_sales_k2:'0 missed follow-up', who_sales_k3:'Focus closing',
+    who_hr_title:'HR Agencies',
+    who_hr_pain:'Time-consuming CV screening — volume unmanageable without quality loss.',
+    who_hr_t1:'AI parsing', who_hr_t2:'Auto scoring',
+    who_hr_k1:'Instant', who_hr_k2:'Reliable scoring', who_hr_k3:'Focus interviews',
+    // WORK WITH ME
+    wwm_label:'Collaborate', wwm_title:'Work With Me',
+    wwm_desc:'I don\'t sell time — I build systems that generate measurable business impact.',
+    svc_auto_title:'AI Automation',
+    svc_auto_desc:'n8n, MAKE workflows, AI agents — from business idea to production pipeline with measurable KPIs.',
+    svc_auto_ideal:'Ideal for: sales teams, HR, training centers',
+    svc_product_title:'Product Building',
+    svc_product_desc:'SaaS, MVP, business apps — design, development and deployment from A to Z.',
+    svc_product_ideal:'Ideal for: startups, SMEs going digital',
+    svc_process_title:'Process Optimization',
+    svc_process_desc:'Process mapping, friction identification, targeted automation with measurable ROI.',
+    svc_process_ideal:'Ideal for: SMEs, operations teams',
+    pricing_title:'Transparent pricing', pricing_hour:'/ hour', pricing_or:'or',
+    pricing_flat:'Project flat rate', pricing_flat_sub:'defined scope · clear deliverable',
+    pricing_note1:'Long-term collaborations', pricing_note2:'Remote · France & International',
+    pricing_note3:'Measurable results',
+    wwm_cta_title:'Ready to automate or build?',
+    wwm_cta_desc:'Let\'s discuss your business challenge — I\'ll propose a concrete approach in 30 minutes.',
+    wwm_btn_email:'✉️ Email me', wwm_btn_linkedin:'💼 LinkedIn',
+    wwm_btn_calendly:'📅 Calendly — coming soon',
+    wwm_ref:'See <a href="#case-studies">detailed case studies →</a>',
     // HOW I BUILD
     build_label:'Method', build_title:'How I Build',
     build_desc:'From business challenge to measured impact — my AI Product Builder approach.',
     build_s1_title:'Business Problem', build_s1_desc:'Understand the field challenge before any line of code.',
-    build_s1_ex:'→ 15 years: sales, HR, training, car rental',
-    build_s2_title:'Process Mapping', build_s2_desc:'Map the current workflow, identify friction and quick wins.',
-    build_s2_ex:'→ Maestro: 20 min post-call → Modjo → GHL mapping',
-    build_s3_title:'AI & Automation', build_s3_desc:'Orchestrate n8n, APIs, LLMs — native nodes, dynamic expressions, credentials.',
-    build_s3_ex:'→ 8 n8n nodes · Claude SONCAS · 0 human intervention',
-    build_s4_title:'Product Design', build_s4_desc:'Design the experience: human control, edge cases, validation before sending.',
-    build_s4_ex:'→ "Validate before send" email · Structured Slack · Dynamic J+2 task',
-    build_s5_title:'Deployment', build_s5_desc:'Production deployment, monitoring, webhooks, integration with existing business tools.',
-    build_s5_ex:'→ n8n Cloud · Native GHL · MAKE certified · Supabase',
-    build_s6_title:'Measured Impact', build_s6_desc:'Measure KPIs, iterate, scale. No sleeping POCs.',
-    build_s6_ex:'→ <10s · 35h/week · 2 FTEs · +60% response rate',
+    build_s1_t1:'15 years field', build_s1_t2:'Sales · HR', build_s1_t3:'Training',
+    build_s2_title:'Process Mapping', build_s2_desc:'Map workflow, identify friction and quick wins.',
+    build_s2_t1:'Maestro', build_s2_t2:'Modjo → GHL', build_s2_t3:'20 min post-call',
+    build_s3_title:'AI & Automation', build_s3_desc:'Orchestrate n8n, APIs, LLMs — native nodes, credentials.',
+    build_s3_t1:'8 n8n nodes', build_s3_t2:'Claude SONCAS', build_s3_t3:'0 intervention',
+    build_s4_title:'Product Design', build_s4_desc:'Human control, edge cases, validation before sending.',
+    build_s4_t1:'Validate email', build_s4_t2:'Structured Slack', build_s4_t3:'J+2 task',
+    build_s5_title:'Deployment', build_s5_desc:'Production, monitoring, webhooks, business tool integration.',
+    build_s5_t1:'n8n Cloud', build_s5_t2:'MAKE certified', build_s5_t3:'Supabase',
+    build_s6_title:'Measured Impact', build_s6_desc:'Measured KPIs, iterate, scale. No sleeping POCs.',
+    build_s6_t1:'<10s', build_s6_t2:'35h/week', build_s6_t3:'2 FTEs', build_s6_t4:'+60%',
     build_closing:'It\'s not no-code for no-code\'s sake. It\'s <strong>business understood</strong>, then automated.',
     // MOCK UI
     mock_tagline:'Peer-to-peer vehicle rental — Nosy Be',
@@ -1877,23 +2796,21 @@ const T = {
     mock_active:'Active', mock_upcoming:'Upcoming',
     // AUTOMATION ECOSYSTEM
     auto_label:'Ecosystem', auto_title:'Automation Ecosystem',
-    auto_desc:'Maestro is not an isolated project — it\'s one of several AI systems and automations already in production.',
-    eco_rebecca_title:'Agent Rebecca', eco_rebecca_desc:'Automated CV analysis: PDF → GPT-Vision → classification → Airtable. CEFORA production.',
-    eco_rh_title:'HR Automations', eco_rh_desc:'N8N + MAKE pipelines to automate prospecting and enrichment at scale.',
-    eco_cv_title:'AI CV Analysis', eco_cv_desc:'Automatic resume extraction and classification with GPT-Vision and AI scoring.',
-    eco_maestro_desc:'Post-call automation: Modjo → Claude → GHL → Slack → Email. 8 native n8n nodes.',
-    eco_prosp_title:'AI Prospecting', eco_prosp_desc:'Automatic company targeting via scraping, API enrichment and CRM injection.',
-    eco_stack_title:'N8N + MAKE', eco_stack_metric:'Certified',
-    eco_stack_desc:'Cross-cutting automation stack: orchestration, expressions, credentials, parallelization.',
-    eco_closing:'<strong>6+ systems in production.</strong> A coherent ecosystem, not an isolated project.',
+    auto_desc:'6+ AI systems in production — a coherent ecosystem, not an isolated project.',
+    eco_b1:'systems in prod', eco_b2:'+ MAKE certified', eco_b3:'deployed for clients',
+    eco_rebecca_title:'Agent Rebecca', eco_rebecca_hook:'Automated CV analysis — CEFORA production',
+    eco_rh_title:'HR Automations', eco_rh_hook:'Large-scale prospecting & enrichment',
+    eco_cv_title:'AI CV Analysis', eco_cv_hook:'Automatic resume extraction & scoring',
+    eco_maestro_hook:'Post-call: Modjo → Claude → CRM → Slack',
+    eco_prosp_title:'AI Prospecting', eco_prosp_hook:'Scraping, API enrichment, CRM injection',
+    eco_stack_title:'N8N + MAKE', eco_stack_metric:'✓',
+    eco_stack_hook:'Certified cross-cutting automation stack',
+    eco_closing:'<strong>6+ systems in production.</strong> Each project strengthens the ecosystem.',
     res1:'+60% response', res2:'-40% delay',
-    wf_title:'🤖 AI Agent "Rebecca" Pipeline',
-    wf_desc:'Automated resume analysis in production at CEFORA',
-    wf_s1:'<strong>Resume intake</strong> — PDF via email or form',
-    wf_s2:'<strong>Conversion</strong> — PDF → JPEG (iLovePDF + Picnie)',
-    wf_s3:'<strong>GPT-Vision analysis</strong> — name, email, skills, geo zone extraction',
-    wf_s4:'<strong>AI Classification</strong> — target program, relevance, score',
-    wf_s5:'<strong>Airtable injection</strong> — CVTech + Drive + notification',
+    wf_title:'Agent Rebecca Pipeline',
+    wf_desc:'Automated resume analysis — CEFORA',
+    wf_n1:'📄 Resume intake', wf_n2:'🖼️ Conversion', wf_n3:'🧠 GPT-Vision',
+    wf_n4:'📊 Classification', wf_n5:'✅ Airtable',
     // EXPERIENCE
     exp_label:'Experience', exp_title:'Professional Experience',
     exp_desc:'Business developer for 15 years, builder since 2023. A rare profile that understands both market and code.',
@@ -1914,8 +2831,9 @@ const T = {
     job4_li1:'Founded and led an IT and business solutions company for SMEs',
     job4_li2:'Business development, operations management, marketing strategy',
     // CONTACT
-    contact_label:'Contact', contact_title:"Let's work together",
-    contact_desc:'Remote · France & International. Available for AI Product Builder, AI Automation Engineer roles or long-term freelance.',
+    contact_label:'Contact', contact_title:'Got a question?',
+    contact_desc:'Remote · France & International. For a collaboration, start with the Work With Me section.',
+    contact_banner:'🤝 Have a project? <a href="#work-with-me">See how to collaborate →</a>',
     contact_maestro_label:'AI Demo · Maestro', contact_maestro_value:'Post-call workflow in <10s',
     contact_live_label:'Live Project · Rentanoo', contact_qr:'Scan to connect',
     // FOOTER
@@ -1984,20 +2902,22 @@ if(buildPipelineEl)observer.observe(buildPipelineEl);
 const navToggle=document.getElementById('navToggle');
 const mobileMenu=document.getElementById('mobileMenu');
 if(navToggle&&mobileMenu){
+  const closeMenu=()=>{
+    mobileMenu.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+    mobileMenu.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  };
   navToggle.addEventListener('click',()=>{
     const open=mobileMenu.classList.toggle('open');
     navToggle.classList.toggle('open',open);
     navToggle.setAttribute('aria-expanded',open);
     mobileMenu.setAttribute('aria-hidden',!open);
+    document.body.style.overflow=open?'hidden':'';
   });
-  mobileMenu.querySelectorAll('a').forEach(link=>{
-    link.addEventListener('click',()=>{
-      mobileMenu.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded','false');
-      mobileMenu.setAttribute('aria-hidden','true');
-    });
-  });
+  mobileMenu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+  window.addEventListener('resize',()=>{ if(window.innerWidth>900)closeMenu(); });
 }
 
 // ── MAESTRO WORKFLOW NODE ANIMATION ─────────────
@@ -2150,7 +3070,7 @@ function animateCounters(){
 const statsObs=new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting){animateCounters();statsObs.disconnect();}
 },{threshold:0.3});
-const statsSection=document.querySelector('.ecosystem-grid');
+const statsSection=document.querySelector('#automation');
 if(statsSection)statsObs.observe(statsSection);
 
 // ── RESTORE SAVED LANGUAGE ─────────────────────
