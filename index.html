@@ -1077,8 +1077,9 @@ footer p { color:var(--grey); font-size:.85rem; }
   to { opacity: 0; transform: translateY(8px) scale(.94); }
 }
 .wa-fab-wrap {
-  display: none;
   position: fixed; z-index: 40;
+  right: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   width: 56px; height: 56px;
   touch-action: none; user-select: none;
 }
@@ -1139,8 +1140,9 @@ footer p { color:var(--grey); font-size:.85rem; }
   pointer-events: none;
 }
 .wa-drag-hint--hidden { display: none; }
-@media (max-width: 768px) {
-  .wa-fab-wrap { display: block; }
+@media (min-width: 769px) {
+  .wa-drag-hint { display: none !important; }
+  .wa-fab-btn { cursor: pointer; }
 }
 @media (prefers-reduced-motion: reduce) {
   .wa-fab-float, .wa-fab-halo, .wa-fab-ping,
@@ -3255,6 +3257,13 @@ try {
     wrap.style.bottom = 'auto';
   };
 
+  const setDesktopFixed = () => {
+    wrap.style.left = 'auto';
+    wrap.style.top = 'auto';
+    wrap.style.right = '24px';
+    wrap.style.bottom = 'calc(24px + env(safe-area-inset-bottom, 0px))';
+  };
+
   const readSavedAnchor = () => {
     try {
       const raw = localStorage.getItem(LS_POS);
@@ -3266,14 +3275,14 @@ try {
   };
 
   const positionFab = () => {
-    if (!isMobile()) return;
+    if (!isMobile()) { setDesktopFixed(); return; }
     anchor = readSavedAnchor() || defaultAnchor();
     applyAnchor(anchor);
   };
 
   positionFab();
   window.addEventListener('resize', () => {
-    if (!isMobile()) return;
+    if (!isMobile()) { setDesktopFixed(); return; }
     if (!anchor) anchor = readSavedAnchor() || defaultAnchor();
     applyAnchor(clamp(anchor.x, anchor.y));
   });

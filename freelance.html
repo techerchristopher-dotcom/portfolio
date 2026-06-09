@@ -129,7 +129,7 @@ footer a { color:var(--accent); text-decoration:none; }
 @keyframes wa-ping { 75%,100%{transform:scale(1.6);opacity:0} }
 @keyframes wa-bubble-enter { from{opacity:0;transform:translateY(10px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
 @keyframes wa-bubble-exit { from{opacity:1;transform:translateY(0) scale(1)} to{opacity:0;transform:translateY(8px) scale(.94)} }
-.wa-fab-wrap { display:none; position:fixed; z-index:40; width:56px; height:56px; touch-action:none; user-select:none; }
+.wa-fab-wrap { position:fixed; z-index:40; right:24px; bottom:calc(24px + env(safe-area-inset-bottom,0px)); width:56px; height:56px; touch-action:none; user-select:none; }
 .wa-fab-inner { position:relative; width:56px; height:56px; }
 .wa-fab-float { animation:wa-float 3.5s ease-in-out infinite; }
 .wa-fab-halo { position:absolute; inset:-8px; border-radius:50%; background:rgba(37,211,102,.35); filter:blur(2px); animation:wa-halo 2.2s ease-in-out infinite; pointer-events:none; }
@@ -146,7 +146,7 @@ footer a { color:var(--accent); text-decoration:none; }
 .wa-bubble-tail { position:absolute; bottom:-6px; right:16px; width:12px; height:12px; transform:rotate(45deg); border-bottom:1px solid rgba(37,211,102,.25); border-right:1px solid rgba(37,211,102,.25); background:#fff; }
 .wa-drag-hint { position:absolute; top:calc(100% + 6px); right:0; white-space:nowrap; padding:4px 10px; border-radius:999px; background:rgba(13,27,42,.88); color:#fff; font-size:.62rem; font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,.2); animation:wa-bubble-enter .55s cubic-bezier(.22,1,.36,1) forwards; pointer-events:none; }
 .wa-drag-hint--hidden { display:none; }
-@media(max-width:768px) { .wa-fab-wrap { display:block; } }
+@media(min-width:769px) { .wa-drag-hint { display:none!important; } .wa-fab-btn { cursor:pointer; } }
 @media(prefers-reduced-motion:reduce) { .wa-fab-float,.wa-fab-halo,.wa-fab-ping,.wa-bubble--enter,.wa-bubble--exit,.wa-drag-hint { animation:none!important; } }
 </style>
 </head>
@@ -293,9 +293,18 @@ footer a { color:var(--accent); text-decoration:none; }
     y: Math.min(Math.max(SIZE + MARGIN, y), window.innerHeight - MARGIN),
   });
   const defaultAnchor = () => clamp(window.innerWidth - 20, window.innerHeight - 96);
+  const isMobile = () => window.innerWidth <= 768;
+  const setDesktopFixed = () => {
+    wrap.style.left = 'auto';
+    wrap.style.top = 'auto';
+    wrap.style.right = '24px';
+    wrap.style.bottom = 'calc(24px + env(safe-area-inset-bottom, 0px))';
+  };
   const applyAnchor = (a) => {
     wrap.style.left = (a.x - SIZE) + 'px';
     wrap.style.top = (a.y - SIZE) + 'px';
+    wrap.style.right = 'auto';
+    wrap.style.bottom = 'auto';
   };
   const readSavedAnchor = () => {
     try {
@@ -307,11 +316,19 @@ footer a { color:var(--accent); text-decoration:none; }
     return null;
   };
 
-  anchor = readSavedAnchor() || defaultAnchor();
-  applyAnchor(anchor);
-  window.addEventListener('resize', () => { if (anchor) applyAnchor(clamp(anchor.x, anchor.y)); });
+  const positionFab = () => {
+    if (!isMobile()) { setDesktopFixed(); return; }
+    anchor = readSavedAnchor() || defaultAnchor();
+    applyAnchor(anchor);
+  };
+  positionFab();
+  window.addEventListener('resize', () => {
+    if (!isMobile()) { setDesktopFixed(); return; }
+    if (!anchor) anchor = readSavedAnchor() || defaultAnchor();
+    applyAnchor(clamp(anchor.x, anchor.y));
+  });
 
-  if (!localStorage.getItem(LS_DRAG_HINT) && dragHint) {
+  if (isMobile() && !localStorage.getItem(LS_DRAG_HINT) && dragHint) {
     dragHint.classList.remove('wa-drag-hint--hidden');
     setTimeout(() => {
       dragHint.classList.add('wa-drag-hint--hidden');
@@ -350,7 +367,7 @@ footer a { color:var(--accent); text-decoration:none; }
 
   const drag = { active: false, moved: false, pointerId: -1, startX: 0, startY: 0, originX: 0, originY: 0 };
   inner.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
+    if (!isMobile() || e.button !== 0) return;
     drag.active = true; drag.moved = false; drag.pointerId = e.pointerId;
     drag.startX = e.clientX; drag.startY = e.clientY;
     drag.originX = anchor.x; drag.originY = anchor.y;
