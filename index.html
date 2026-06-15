@@ -384,6 +384,106 @@ nav ul li a.active { color:var(--accent); }
   background:rgba(201,168,76,0.1); border-radius:12px;
 }
 
+/* ─── 3 DOMAINES ──────────────────────────────── */
+#domaines { background: var(--dark2); }
+.domaines-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.domaine-card {
+  border-radius: 24px; padding: 32px 28px;
+  border: 1px solid rgba(65,168,240,0.14);
+  background: linear-gradient(160deg, rgba(30,60,100,0.35), rgba(13,27,42,0.9));
+  position: relative; overflow: hidden;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
+}
+.domaine-card:hover { border-color:rgba(65,168,240,0.4); transform:translateY(-4px); box-shadow:0 24px 56px rgba(0,0,0,0.35); }
+.domaine-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.domaine-card.ia::before { background: linear-gradient(90deg,#a78bfa,transparent 80%); }
+.domaine-card.saas::before { background: linear-gradient(90deg,var(--accent),transparent 80%); }
+.domaine-card.mobile::before { background: linear-gradient(90deg,#22c55e,transparent 80%); }
+.domaine-icon { font-size:2.2rem; margin-bottom:14px; display:block; }
+.domaine-num {
+  font-size:.65rem; font-weight:800; letter-spacing:2px;
+  text-transform:uppercase; margin-bottom:6px;
+}
+.domaine-card.ia .domaine-num { color:#a78bfa; }
+.domaine-card.saas .domaine-num { color:var(--accent); }
+.domaine-card.mobile .domaine-num { color:#22c55e; }
+.domaine-title { font-size:1.15rem; font-weight:800; margin-bottom:8px; }
+.domaine-desc { font-size:.82rem; color:var(--grey); line-height:1.55; margin-bottom:20px; }
+.domaine-projects { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+.domaine-project {
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:.8rem; padding:8px 12px;
+  background:rgba(0,0,0,0.25); border-radius:8px;
+  border: 1px solid rgba(65,168,240,0.08);
+}
+.domaine-project-name { font-weight:600; color:var(--light-blue); }
+.domaine-project-status {
+  font-size:.65rem; font-weight:700; letter-spacing:.5px;
+  text-transform:uppercase; padding:3px 8px; border-radius:50px;
+}
+.status-live { background:rgba(34,197,94,0.15); color:#22c55e; }
+.status-wip { background:rgba(251,191,36,0.15); color:#fbbf24; }
+.domaine-stack { display:flex; flex-wrap:wrap; gap:6px; }
+.domaine-tag {
+  font-size:.68rem; font-weight:600; padding:4px 10px;
+  background:rgba(65,168,240,0.08); border:1px solid rgba(65,168,240,0.2);
+  border-radius:50px; color:var(--grey);
+}
+
+/* ─── EN COURS ─────────────────────────────────── */
+#en-cours { background:var(--dark); }
+.en-cours-banner {
+  display:flex; align-items:center; gap:12px;
+  background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.2);
+  border-radius:12px; padding:14px 20px; margin-bottom:36px;
+  font-size:.85rem; color:rgba(251,191,36,0.9);
+}
+.en-cours-banner .dot-wip {
+  width:8px; height:8px; border-radius:50%; background:#fbbf24;
+  animation:pulse 2s infinite; flex-shrink:0;
+}
+.en-cours-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+.en-cours-card {
+  background:linear-gradient(160deg,rgba(30,60,100,0.3),rgba(13,27,42,0.9));
+  border:1px solid rgba(251,191,36,0.2); border-radius:24px; padding:28px;
+  position:relative; overflow:hidden;
+  transition:border-color .3s, transform .3s;
+}
+.en-cours-card:hover { border-color:rgba(251,191,36,0.4); transform:translateY(-3px); }
+.en-cours-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,#fbbf24,transparent 80%);
+}
+.en-cours-badges { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+.en-cours-badge {
+  font-size:.65rem; font-weight:800; letter-spacing:1.5px;
+  text-transform:uppercase; padding:4px 10px; border-radius:50px;
+}
+.badge-ia { background:rgba(167,139,250,0.15); color:#a78bfa; }
+.badge-mobile { background:rgba(34,197,94,0.12); color:#22c55e; }
+.badge-wip { background:rgba(251,191,36,0.12); color:#fbbf24; }
+.en-cours-title { font-size:1.2rem; font-weight:800; margin-bottom:8px; }
+.en-cours-desc { font-size:.85rem; color:var(--grey); line-height:1.6; margin-bottom:20px; }
+.en-cours-features { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; }
+.en-cours-feat {
+  font-size:.8rem; color:var(--light-blue);
+  display:flex; align-items:flex-start; gap:8px;
+}
+.en-cours-feat::before { content:'→'; color:var(--accent); flex-shrink:0; }
+
+/* cat badge sur project cards */
+.cat-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.65rem; font-weight:800; letter-spacing:1.5px;
+  text-transform:uppercase; padding:5px 12px; border-radius:50px;
+  margin-bottom:10px;
+}
+.cat-ia { background:rgba(167,139,250,0.12); color:#a78bfa; border:1px solid rgba(167,139,250,0.25); }
+.cat-saas { background:rgba(65,168,240,0.1); color:var(--accent); border:1px solid rgba(65,168,240,0.25); }
+.cat-mobile { background:rgba(34,197,94,0.1); color:#22c55e; border:1px solid rgba(34,197,94,0.25); }
+
 /* ─── CASE STUDIES ────────────────────────────── */
 #case-studies { background:var(--dark2); }
 .proof-metrics {
@@ -1473,6 +1573,47 @@ footer p { color:var(--grey); font-size:.85rem; }
   </div>
 </section>
 
+<!-- ── 3 DOMAINES ──────────────────────────────── -->
+<section id="domaines" style="background:var(--darker);padding:80px 0;">
+  <div class="section-inner">
+    <p class="section-label">Expertise</p>
+    <h2 class="section-title">3 Domaines, 1 Builder</h2>
+    <p class="section-desc">Je construis à la croisée de l'IA, du SaaS et du mobile. Chaque domaine nourrit les autres.</p>
+    <div class="domaines-grid">
+      <div class="domaine-card ia">
+        <div class="domaine-icon">🤖</div>
+        <div class="domaine-num">01</div>
+        <h3 class="domaine-title">IA &amp; Automatisation</h3>
+        <p class="domaine-desc">Agents IA, workflows n8n/MAKE, RAG, intégrations LLM. Je construis des systèmes qui remplacent du travail manuel répétitif et génèrent un impact mesurable.</p>
+        <div class="domaine-projects">
+          <div class="domaine-project"><span class="domaine-project-name">Maestro AI</span><span class="domaine-project-status status-live">● Live</span></div>
+          <div class="domaine-project"><span class="domaine-project-name">Agent Rebecca</span><span class="domaine-project-status status-live">● Live</span></div>
+          <div class="domaine-project"><span class="domaine-project-name">TSplus RAG</span><span class="domaine-project-status status-live">● Live</span></div>
+        </div>
+      </div>
+      <div class="domaine-card saas">
+        <div class="domaine-icon">📦</div>
+        <div class="domaine-num">02</div>
+        <h3 class="domaine-title">SaaS &amp; Produit</h3>
+        <p class="domaine-desc">De l'idée au produit en production — React, Supabase, Railway, paiement, multilingue. Je conçois des SaaS complets avec une vision business-first, pas dev-first.</p>
+        <div class="domaine-projects">
+          <div class="domaine-project"><span class="domaine-project-name">Rentanoo</span><span class="domaine-project-status status-live">● Live</span></div>
+        </div>
+      </div>
+      <div class="domaine-card mobile">
+        <div class="domaine-icon">📱</div>
+        <div class="domaine-num">03</div>
+        <h3 class="domaine-title">Application Mobile</h3>
+        <p class="domaine-desc">React Native + Expo, géolocalisation, paiement Stripe, push notifications. Des apps mobiles full-scale avec backend Supabase et panel admin intégré.</p>
+        <div class="domaine-projects">
+          <div class="domaine-project"><span class="domaine-project-name">Tukme</span><span class="domaine-project-status status-wip">⏳ En cours</span></div>
+          <div class="domaine-project"><span class="domaine-project-name">Astra App</span><span class="domaine-project-status status-wip">⏳ En cours</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── PROJECTS ───────────────────────────────── -->
 <section id="projects">
   <div class="section-inner">
@@ -1514,6 +1655,10 @@ footer p { color:var(--grey); font-size:.85rem; }
         </div>
         <div class="project-info">
           <div class="proj-badge proj-badge--gold" data-i18n="maestro_badge">IA Automation · Workflow Engineer · Preuve #1</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="cat-badge cat-ia">🤖 IA &amp; Automatisation</span>
+            <span class="status-live" style="font-size:.7rem;padding:4px 10px;border-radius:20px;font-weight:700;">● LIVE</span>
+          </div>
           <h2>Maestro AI</h2>
           <p class="proj-desc" data-i18n="maestro_desc">De l'appel commercial terminé à la tâche CRM créée en moins de 10 secondes — workflow n8n 8 nœuds natifs, 0 intervention humaine.</p>
           <ul class="features">
@@ -1550,6 +1695,10 @@ footer p { color:var(--grey); font-size:.85rem; }
         </div>
         <div class="project-info">
           <div class="proj-badge" data-i18n="rentanoo_badge">SaaS Product Design &amp; Business Execution · Preuve #2</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="cat-badge cat-saas">📦 SaaS</span>
+            <span class="status-live" style="font-size:.7rem;padding:4px 10px;border-radius:20px;font-weight:700;">● LIVE</span>
+          </div>
           <h2 class="project-rentanoo-heading">
             <span class="rentanoo-logo-wrap">
               <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo">
@@ -1596,6 +1745,10 @@ footer p { color:var(--grey); font-size:.85rem; }
         </div>
         <div class="project-info">
           <div class="proj-badge" data-i18n="tukme_badge">🚕 Application Mobile · Fintech</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="cat-badge cat-mobile">📱 Mobile</span>
+            <span class="status-wip" style="font-size:.7rem;padding:4px 10px;border-radius:20px;font-weight:700;">⏳ EN COURS</span>
+          </div>
           <h2>Tukme</h2>
           <p class="proj-desc" data-i18n="tukme_desc">Application VTC mobile complète pour commander un tuk-tuk depuis son smartphone — géolocalisation temps réel, paiement Stripe in-app, panel admin web. Projet full-scale de A à Z.</p>
           <ul class="features">
@@ -1633,6 +1786,11 @@ footer p { color:var(--grey); font-size:.85rem; }
           <span class="card-icon">✨</span>
           <h3>Astra App</h3>
         </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+          <span class="cat-badge cat-ia" style="font-size:.65rem;">🤖 IA</span>
+          <span class="cat-badge cat-mobile" style="font-size:.65rem;">📱 Mobile</span>
+          <span class="status-wip" style="font-size:.65rem;padding:3px 8px;border-radius:20px;font-weight:700;">⏳ EN COURS</span>
+        </div>
         <p data-i18n="astra_desc">MVP d'application horoscope IA francophone pilotée par l'API Claude (Anthropic). React + Vite.</p>
         <div class="proj-stack" style="margin-bottom:16px">
           <div class="stack-group">
@@ -1653,6 +1811,10 @@ footer p { color:var(--grey); font-size:.85rem; }
         <div class="card-top">
           <span class="card-icon">🧠</span>
           <h3>TSplus RAG Supabase</h3>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+          <span class="cat-badge cat-ia" style="font-size:.65rem;">🤖 IA</span>
+          <span class="status-live" style="font-size:.65rem;padding:3px 8px;border-radius:20px;font-weight:700;">● LIVE</span>
         </div>
         <p data-i18n="rag_desc">Application de vectorisation et recherche sémantique sur documents avec architecture RAG et pgvector.</p>
         <div class="proj-stack" style="margin-bottom:16px">
@@ -1675,10 +1837,62 @@ footer p { color:var(--grey); font-size:.85rem; }
           <span class="card-icon">🤖</span>
           <h3>Agent Rebecca</h3>
         </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+          <span class="cat-badge cat-ia" style="font-size:.65rem;">🤖 IA</span>
+          <span class="status-live" style="font-size:.65rem;padding:3px 8px;border-radius:20px;font-weight:700;">● LIVE</span>
+        </div>
         <p data-i18n="rebecca_desc_short">Agent IA d'analyse de CV en production — 35h économisées/semaine. Voir l'écosystème complet ↓</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <a href="#automation" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;" data-i18n="rebecca_eco">→ Écosystème Automation</a>
           <a href="projects/agent-rebecca.html" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;" data-i18n="proj_view_short">📄 Voir →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EN COURS ────────────────────────────────── -->
+<section id="en-cours">
+  <div class="section-inner">
+    <div class="en-cours-banner">
+      <span class="dot-wip"></span>
+      <strong>2 projets en cours de développement</strong> — construction active, pas des idées sur papier.
+    </div>
+    <div class="en-cours-grid">
+      <!-- Tukme -->
+      <div class="en-cours-card">
+        <div class="en-cours-badges">
+          <span class="en-cours-badge">📱 Mobile</span>
+          <span class="en-cours-badge" style="background:rgba(251,191,36,.15);color:#fbbf24;">⏳ En cours</span>
+        </div>
+        <div class="en-cours-title">🚕 Tukme</div>
+        <p class="en-cours-desc">Application VTC mobile complète pour commander un tuk-tuk — géolocalisation temps réel, paiement Stripe in-app, panel admin web. Full-scale de A à Z.</p>
+        <div class="en-cours-features">
+          <div class="en-cours-feat">React Native + Expo + TypeScript</div>
+          <div class="en-cours-feat">Supabase realtime · Stripe PaymentSheet</div>
+          <div class="en-cours-feat">Google Maps Routes API · Push notifications</div>
+          <div class="en-cours-feat">Panel admin Next.js intégré</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">GitHub →</a>
+        </div>
+      </div>
+      <!-- Astra App -->
+      <div class="en-cours-card">
+        <div class="en-cours-badges">
+          <span class="en-cours-badge">🤖 IA</span>
+          <span class="en-cours-badge">📱 Mobile</span>
+          <span class="en-cours-badge" style="background:rgba(251,191,36,.15);color:#fbbf24;">⏳ En cours</span>
+        </div>
+        <div class="en-cours-title">✨ Astra App</div>
+        <p class="en-cours-desc">App horoscope IA francophone pilotée par Claude (Anthropic). À la croisée de l'IA générative et du mobile. React + Vite + Claude API.</p>
+        <div class="en-cours-features">
+          <div class="en-cours-feat">Claude API (Anthropic) · React + Vite</div>
+          <div class="en-cours-feat">Prompt engineering horoscope personnalisé</div>
+          <div class="en-cours-feat">UX mobile-first · Francophone</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a href="https://github.com/techerchristopher-dotcom/astra-app" target="_blank" class="proj-link ghost" style="font-size:.8rem;padding:8px 16px;">GitHub →</a>
         </div>
       </div>
     </div>
@@ -3373,3 +3587,4 @@ try {
 </script>
 </body>
 </html>
+
