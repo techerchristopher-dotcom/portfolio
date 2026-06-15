@@ -897,6 +897,98 @@ section { padding: 88px 40px; position:relative; }
   display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
 }
 
+/* METRICS BAR */
+.metrics-bar {
+  display:flex; flex-wrap:wrap; gap:0;
+  background:rgba(65,168,240,0.06);
+  border:1px solid rgba(65,168,240,0.18);
+  border-radius:16px; overflow:hidden;
+  margin-top:36px;
+}
+.metric-item {
+  flex:1; min-width:140px;
+  padding:18px 20px;
+  text-align:center;
+  border-right:1px solid rgba(65,168,240,0.12);
+  position:relative;
+}
+.metric-item:last-child { border-right:none; }
+.metric-num {
+  font-size:1.9rem; font-weight:800;
+  color:var(--accent); line-height:1;
+  display:block; margin-bottom:4px;
+}
+.metric-label {
+  font-size:.72rem; color:var(--grey);
+  font-weight:600; letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+/* PERSONAS */
+.personas-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+  margin-bottom:0;
+}
+.persona-card {
+  background:linear-gradient(135deg, rgba(30,60,100,0.35), rgba(13,27,42,0.9));
+  border:1px solid rgba(65,168,240,0.18);
+  border-radius:24px; padding:28px;
+  position:relative; overflow:hidden;
+}
+.persona-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+}
+.persona-card.client::before { background:linear-gradient(90deg,#22c55e,transparent 80%); }
+.persona-card.owner::before { background:linear-gradient(90deg,var(--accent),transparent 80%); }
+.persona-emoji { font-size:2rem; margin-bottom:12px; display:block; }
+.persona-title { font-size:1rem; font-weight:800; margin-bottom:4px; }
+.persona-sub { font-size:.8rem; color:var(--grey); margin-bottom:18px; }
+.persona-steps {
+  display:flex; flex-direction:column; gap:8px;
+}
+.persona-step {
+  display:flex; align-items:center; gap:10px;
+  font-size:.82rem; color:var(--light-blue);
+}
+.persona-step-num {
+  width:22px; height:22px; border-radius:50%;
+  background:rgba(65,168,240,0.15); border:1px solid rgba(65,168,240,0.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.65rem; font-weight:800; color:var(--accent);
+  flex-shrink:0;
+}
+
+/* TECH DEPTH */
+.tech-depth-grid {
+  display:grid; grid-template-columns:repeat(2,1fr); gap:16px;
+}
+.tech-depth-card {
+  background:rgba(13,27,42,0.8);
+  border:1px solid rgba(65,168,240,0.14);
+  border-radius:16px; padding:20px;
+  transition:border-color .3s, transform .3s;
+}
+.tech-depth-card:hover {
+  border-color:rgba(65,168,240,0.4);
+  transform:translateY(-2px);
+}
+.tech-depth-label {
+  font-size:.65rem; font-weight:800; letter-spacing:2px;
+  color:var(--accent); text-transform:uppercase; margin-bottom:8px;
+}
+.tech-depth-title {
+  font-size:.92rem; font-weight:700; margin-bottom:6px; color:var(--white);
+}
+.tech-depth-desc {
+  font-size:.78rem; color:var(--grey); line-height:1.5;
+}
+.tech-depth-code {
+  font-family:monospace; font-size:.72rem; color:var(--accent);
+  background:rgba(0,0,0,0.4); padding:6px 10px;
+  border-radius:6px; margin-top:8px; display:block;
+  border-left:2px solid rgba(65,168,240,0.4);
+}
+
 /* FOOTER */
 footer {
   padding:32px 40px; text-align:center;
@@ -945,6 +1037,9 @@ footer a { color:var(--accent); text-decoration:none; }
   .problem-bridge-label { max-width:none; }
   .problem-benefits { grid-template-columns:1fr; }
   .pillars-grid, .proof-grid, .lessons-grid { grid-template-columns:1fr; }
+  .personas-grid, .tech-depth-grid { grid-template-columns:1fr; }
+  .metrics-bar { flex-direction:column; }
+  .metric-item { border-right:none; border-bottom:1px solid rgba(65,168,240,0.12); }
   .why-grid { grid-template-columns:1fr; }
   .impact-board { grid-template-columns:1fr; gap:14px; }
   .impact-bridge { justify-content:center; padding:4px 0; }
@@ -1021,8 +1116,8 @@ footer a { color:var(--accent); text-decoration:none; }
         <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--hero">
       </span>
     </h1>
-    <p class="hero-sub">Marketplace de location à Nosy Be + SaaS de gestion pour les loueurs.</p>
-    <p class="hero-tag">Plateforme multi-modules conçue et développée de bout en bout : marketplace B2C avec commission, outils B2B en abonnement, back-office opérationnel d'agence. React · TypeScript · Supabase · Express · Railway · Stripe · N8N.</p>
+    <p class="hero-sub">La plateforme Airbnb-like pour louer voitures, motos &amp; villas à Nosy Be — avec un SaaS de gestion complet pour les loueurs.</p>
+    <p class="hero-tag">3 modules, 2 modèles économiques, conçus et développés de bout en bout : marketplace B2C (commission), outils SaaS B2B (abonnement futur), back-office opérationnel. React · TypeScript · Supabase · Express · Railway · Stripe · N8N.</p>
     <div class="hero-btns">
       <a href="index.html#contact" class="btn-primary" data-i18n="hero_cta_contact">Contact</a>
       <a href="https://rentanoo.com" target="_blank" rel="noopener" class="btn-secondary" data-i18n="hero_cta_live">Site live</a>
@@ -1038,6 +1133,30 @@ footer a { color:var(--accent); text-decoration:none; }
       <span class="hero-pill">TypeScript</span>
       <span class="hero-pill">Railway</span>
       <span class="hero-pill">i18next</span>
+    </div>
+
+    <!-- METRICS BAR -->
+    <div class="metrics-bar fade-in">
+      <div class="metric-item">
+        <span class="metric-num">28</span>
+        <span class="metric-label">Annonces live</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-num">4</span>
+        <span class="metric-label">Langues UI</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-num">3</span>
+        <span class="metric-label">Modules métier</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-num">10</span>
+        <span class="metric-label">Étapes de parcours</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-num">∞</span>
+        <span class="metric-label">Production Railway</span>
+      </div>
     </div>
 
     <div class="hero-mockup" id="heroMockup">
@@ -1173,6 +1292,44 @@ footer a { color:var(--accent); text-decoration:none; }
         <strong data-i18n="impact_line3">Plus de visibilité sur la rentabilité.</strong>
         <span data-i18n="impact_b3">Pilotage flotte et marges en temps réel.</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAS -->
+<section id="personas" style="background:var(--dark2);padding:72px 40px;">
+  <div class="section-inner">
+    <p class="section-label fade-in">Utilisateurs</p>
+    <h2 class="section-title fade-in">Qui utilise Rentanoo ?</h2>
+    <p class="section-desc fade-in" style="margin-bottom:36px">Deux profils, deux expériences distinctes — une seule plateforme.</p>
+    <div class="personas-grid fade-in">
+
+      <div class="persona-card client">
+        <span class="persona-emoji">👤</span>
+        <div class="persona-title">Le Client / Voyageur</div>
+        <div class="persona-sub">Touriste ou résident cherchant à louer à Nosy Be</div>
+        <div class="persona-steps">
+          <div class="persona-step"><div class="persona-step-num">1</div>Parcourt le catalogue (voitures, motos, villas…)</div>
+          <div class="persona-step"><div class="persona-step-num">2</div>Sélectionne ses dates et services additionnels</div>
+          <div class="persona-step"><div class="persona-step-num">3</div>Paie par CB (Stripe) ou en agence</div>
+          <div class="persona-step"><div class="persona-step-num">4</div>Reçoit confirmation + EDL digital à la prise en charge</div>
+          <div class="persona-step"><div class="persona-step-num">5</div>Peut lire la description en EN / DE / IT</div>
+        </div>
+      </div>
+
+      <div class="persona-card owner">
+        <span class="persona-emoji">🏢</span>
+        <div class="persona-title">Le Propriétaire / Loueur</div>
+        <div class="persona-sub">Agence ou particulier inscrit gratuitement sur la marketplace</div>
+        <div class="persona-steps">
+          <div class="persona-step"><div class="persona-step-num">1</div>Crée ses annonces (véhicules, hébergements, services)</div>
+          <div class="persona-step"><div class="persona-step-num">2</div>Configure tarifs, remises et services additionnels</div>
+          <div class="persona-step"><div class="persona-step-num">3</div>Reçoit les réservations sur son dashboard</div>
+          <div class="persona-step"><div class="persona-step-num">4</div>Gère planning, EDL digitaux et empreinte bancaire</div>
+          <div class="persona-step"><div class="persona-step-num">5</div>Suit la rentabilité de chaque véhicule / logement</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1495,15 +1652,88 @@ footer a { color:var(--accent); text-decoration:none; }
       <div class="proof-card">
         <h3><span class="ico">🛡</span> <span data-i18n="proof6_title">Défis résolus</span></h3>
         <ul class="proof-list">
-          <li data-i18n="proof6_l1">Anti double réservation</li>
-          <li data-i18n="proof6_l2">Tarification métier</li>
-          <li data-i18n="proof6_l3">EDL digital</li>
-          <li data-i18n="proof6_l4">Gestion stock</li>
-          <li>OG preview social dynamique</li>
+          <li>Anti double réservation temps réel</li>
+          <li>Tarification dynamique multi-règles</li>
+          <li>EDL digital + PDF légal auto</li>
+          <li>Stock pièces détachées</li>
+          <li>OG preview social dynamique (bot detection)</li>
           <li>Traduction à la demande (MyMemory API)</li>
           <li>Multi-types véhicules &amp; hébergements</li>
         </ul>
       </div>
+      <div class="proof-card">
+        <h3><span class="ico">💬</span> Messagerie &amp; KYC</h3>
+        <ul class="proof-list">
+          <li>Messagerie temps réel client ↔ propriétaire</li>
+          <li>KYC — vérification identité locataires (permis, CNI)</li>
+          <li>Notifications email automatisées (N8N)</li>
+          <li>Historique conversations par réservation</li>
+        </ul>
+      </div>
+      <div class="proof-card">
+        <h3><span class="ico">🔍</span> SEO technique</h3>
+        <ul class="proof-list">
+          <li>OG dynamique côté serveur (Express middleware)</li>
+          <li>JSON-LD structured data par annonce</li>
+          <li>Sitemap dynamique</li>
+          <li>Meta robots multi-pages</li>
+          <li>Interface 4 langues (i18next — FR/EN/DE/IT)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLEXITÉ TECHNIQUE -->
+<section id="tech-depth" style="background:var(--dark2);">
+  <div class="section-inner">
+    <p class="section-label fade-in">Sous le capot</p>
+    <h2 class="section-title fade-in">La complexité technique cachée</h2>
+    <p class="section-desc fade-in" style="margin-bottom:36px">Ce qu'on ne voit pas depuis l'interface — mais qui fait toute la différence en production.</p>
+    <div class="tech-depth-grid fade-in">
+
+      <div class="tech-depth-card">
+        <div class="tech-depth-label">Sécurité multi-tenant</div>
+        <div class="tech-depth-title">RLS Supabase par propriétaire</div>
+        <div class="tech-depth-desc">Chaque loueur voit et modifie uniquement ses propres données. Row Level Security côté PostgreSQL — aucun filtre côté client.</div>
+        <code class="tech-depth-code">CREATE POLICY "owner_only" ON vehicles USING (owner_id = auth.uid())</code>
+      </div>
+
+      <div class="tech-depth-card">
+        <div class="tech-depth-label">Social preview</div>
+        <div class="tech-depth-title">OG injection server-side</div>
+        <div class="tech-depth-desc">Express détecte les bots Facebook / WhatsApp / Twitter et injecte les balises OG dynamiques avec la vraie photo du véhicule avant de servir le HTML.</div>
+        <code class="tech-depth-code">facebookexternalhit|whatsapp|twitterbot → inject og:image, og:title</code>
+      </div>
+
+      <div class="tech-depth-card">
+        <div class="tech-depth-label">Requêtes DB</div>
+        <div class="tech-depth-title">Supabase RPC pour UUID → licence</div>
+        <div class="tech-depth-desc">Le filtre ILIKE sur UUID échoue à cause de l'encodage URL des % par le client JS. Solution : fonction SQL RPC qui contourne le problème via JSON body.</div>
+        <code class="tech-depth-code">supabase.rpc("get_vehicle_by_license", &#123; p_license &#125;)</code>
+      </div>
+
+      <div class="tech-depth-card">
+        <div class="tech-depth-label">Anti double-booking</div>
+        <div class="tech-depth-title">Vérification temps réel avant paiement</div>
+        <div class="tech-depth-desc">Avant chaque paiement Stripe, une vérification de disponibilité est faite côté serveur. Si le créneau est pris entre la sélection et le paiement, la réservation est bloquée.</div>
+        <code class="tech-depth-code">CHECK availability → CREATE booking → CHARGE stripe (atomique)</code>
+      </div>
+
+      <div class="tech-depth-card">
+        <div class="tech-depth-label">Automatisation</div>
+        <div class="tech-depth-title">Chain N8N 5 étapes</div>
+        <div class="tech-depth-desc">Chaque événement réservation déclenche une chaîne : confirmation email client, notification propriétaire, mise à jour planning, génération PDF EDL, archivage.</div>
+        <code class="tech-depth-code">Webhook → Email → Planning → PDF → Archivage</code>
+      </div>
+
+      <div class="tech-depth-card">
+        <div class="tech-depth-label">Internationalisation</div>
+        <div class="tech-depth-title">i18n UI + traduction contenu à la demande</div>
+        <div class="tech-depth-desc">Interface complète en 4 langues (i18next). Descriptions véhicules traduites en DB ou à la volée via MyMemory API — le bouton "Traduire" n'apparaît que si la traduction manque.</div>
+        <code class="tech-depth-code">stored_translation ?? await /api/translate (MyMemory)</code>
+      </div>
+
     </div>
   </div>
 </section>
