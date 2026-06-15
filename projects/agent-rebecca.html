@@ -3,407 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agent Rebecca — Christopher TECHER</title>
+<title>Agent Rebecca — Automatisation RH IA — Christopher TECHER</title>
+<meta name="description" content="Agent IA d'analyse de CV déployé en production chez CEFORA. 35h économisées/semaine, +60% réactivité.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #0D0D0D;
-  --surface:  #141414;
-  --surface2: #1C1C1C;
-  --border:   #222222;
-  --border2:  #333333;
-  --text:     #EEEEEE;
-  --text2:    #666666;
-  --text3:    #3A3A3A;
-  --lime:     #C8FC00;
-  --lime-dim: rgba(200,252,0,0.07);
-  --lime-b:   rgba(200,252,0,0.18);
-  /* Legacy compat */
-  --navy:      #1E1E1E;
-  --blue:      #2A2A2A;
-  --light-blue:#C8C8C8;
-  --accent:    #C8FC00;
-  --dark:      #0D0D0D;
-  --dark2:     #161616;
-  --white:     #EEEEEE;
-  --grey:      #777777;
-  --green:     #86efac;
-  --card-bg:   #1A1A1A;
-  --glass:     rgba(255,255,255,0.04);
+  --bg:#0D0D0D; --surface:#141414; --surface2:#1C1C1C;
+  --border:#222; --border2:#333;
+  --text:#EEEEEE; --text2:#666; --text3:#3A3A3A;
+  --lime:#C8FC00; --lime-dim:rgba(200,252,0,0.07); --lime-b:rgba(200,252,0,0.18);
 }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+::selection{background:rgba(200,252,0,0.2);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--lime);}
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  background: var(--dark);
-  color: var(--white);
-  overflow-x: hidden;
-}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 64px;background:rgba(13,13,13,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:padding .3s;}
+nav.scrolled{padding:13px 64px;}
+.nav-logo{font-size:1rem;font-weight:800;letter-spacing:-.01em;}
+.nav-logo span{color:var(--lime);}
+.nav-back{font-size:.85rem;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:8px;padding:8px 18px;border:1px solid var(--border2);border-radius:50px;transition:all .2s;}
+.nav-back:hover{color:var(--text);border-color:var(--text2);}
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--dark); }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+/* HERO */
+#hero{min-height:72vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 72px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 10% 70%, rgba(200,252,0,0.035) 0%,transparent 65%);pointer-events:none;}
+.hero-grain{position:absolute;inset:0;opacity:.3;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
+.hero-content{position:relative;z-index:2;}
+.hero-breadcrumb{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text2);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.hero-breadcrumb::before{content:'';width:24px;height:1px;background:var(--text3);}
+.hero-num{font-size:.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
+.hero-title{font-size:clamp(3rem,7vw,6rem);font-weight:800;line-height:.92;letter-spacing:-.04em;margin-bottom:32px;}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
+.bd{font-size:.62rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:50px;}
+.bd-ia{background:rgba(196,181,253,0.1);color:#c4b5fd;}
+.bd-saas{background:rgba(200,252,0,0.08);color:var(--lime);}
+.bd-mobile{background:rgba(134,239,172,0.1);color:#86efac;}
+.bd-live{background:rgba(200,252,0,0.07);color:var(--lime);}
+.bd-wip{background:rgba(251,191,36,0.1);color:#fbbf24;}
+.hero-desc{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--text2);max-width:600px;line-height:1.65;font-weight:500;}
 
-nav {
-  position: fixed; top:0; left:0; right:0; z-index:100;
-  display:flex; align-items:center; justify-content:space-between;
-  padding: 16px 60px;
-  background: rgba(13,13,13,0.96);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid #222;
-}
-.nav-logo { font-size:1.1rem; font-weight:700; color:var(--accent); letter-spacing:1px; text-decoration:none; }
-.nav-back {
-  display:inline-flex; align-items:center; gap:7px;
-  color: var(--grey); text-decoration:none; font-size:.88rem; font-weight:600;
-  border:1px solid rgba(200,252,0,0.12); border-radius:50px; padding:7px 16px;
-  transition: all .2s;
-}
-.nav-back:hover { color:var(--accent); border-color:var(--accent); background:rgba(255,255,255,0.04); }
+/* METRICS STRIP */
+#metrics{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);}
+.metric-item{padding:48px 52px;border-right:1px solid var(--border);transition:background .2s;}
+.metric-item:last-child{border-right:none;}
+.metric-item:hover{background:rgba(200,252,0,0.02);}
+.metric-num{display:block;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:8px;}
+.metric-lbl{font-size:.8rem;color:var(--text2);font-weight:500;line-height:1.4;}
 
-#hero {
-  min-height: 70vh;
-  display:flex; align-items:center;
-  padding: 120px 60px 80px;
-  position:relative; overflow:hidden;
-}
-.hero-bg {
-  position:absolute; inset:0;
-  background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(46,117,182,0.2) 0%, transparent 70%),
-              linear-gradient(180deg, #0D0D0D 0%, #0D0D0D 100%);
-}
-.hero-inner { position:relative; z-index:2; max-width:860px; margin:0 auto; width:100%; }
-.proj-badge-hero {
-  display:inline-flex; align-items:center; gap:8px;
-  background: rgba(255,255,255,0.05); border:1px solid rgba(200,252,0,0.2);
-  border-radius:50px; padding:6px 16px; margin-bottom:24px;
-  font-size:.8rem; color:var(--accent); font-weight:700; letter-spacing:.5px;
-}
-.hero-inner h1 { font-size:clamp(2.4rem,5vw,3.8rem); font-weight:800; line-height:1.1; margin-bottom:16px; }
-.hero-inner h1 span { color:var(--accent); }
-.hero-tagline { font-size:1.1rem; color:var(--grey); line-height:1.7; margin-bottom:36px; max-width:620px; }
-.result-pill {
-  display:inline-flex; align-items:center; gap:7px;
-  background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3);
-  border-radius:50px; padding:7px 16px; font-size:.82rem; color:var(--green); font-weight:700;
-  margin-bottom:28px;
-}
-.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+/* CONTENT SECTIONS */
+.s-wrap{padding:80px 64px;}
+.s-eyebrow{font-size:.68rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+.s-eyebrow::after{content:'';flex:1;height:1px;background:var(--border);}
+.s-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px;}
+.s-desc{font-size:.95rem;color:var(--text2);line-height:1.75;max-width:680px;}
+.s-alt{background:var(--surface);}
 
-.btn-primary {
-  display:inline-flex; align-items:center; gap:8px;
-  background: linear-gradient(135deg, var(--blue), var(--accent));
-  color:#fff; text-decoration:none; padding:13px 26px;
-  border-radius:50px; font-weight:700; font-size:.93rem;
-  transition: all .3s; box-shadow: 0 8px 28px rgba(200,252,0,0.2);
-}
-.btn-primary:hover { transform:translateY(-3px); box-shadow:0 14px 38px rgba(65,168,240,0.45); }
-.btn-ghost {
-  display:inline-flex; align-items:center; gap:8px;
-  background:transparent; color:var(--accent);
-  border:1.5px solid rgba(200,252,0,0.28); text-decoration:none;
-  padding:12px 24px; border-radius:50px; font-weight:600; font-size:.93rem;
-  transition: all .3s;
-}
-.btn-ghost:hover { background:rgba(255,255,255,0.06); transform:translateY(-3px); }
+/* Two-col layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:48px;}
 
-section { padding: 90px 60px; }
-.section-inner { max-width:960px; margin:0 auto; }
-.section-label { font-size:.72rem; font-weight:700; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:10px; }
-.section-title { font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; margin-bottom:14px; line-height:1.2; }
-.section-desc { color:var(--grey); font-size:1rem; line-height:1.75; }
+/* Feature list */
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.feat-list li{display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--text2);line-height:1.6;}
+.feat-list li::before{content:'→';color:var(--lime);font-weight:700;flex-shrink:0;margin-top:1px;}
+.feat-list li strong{color:var(--text);}
 
-#about { background: var(--dark2); }
-.about-content { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
-.about-text p { color:var(--grey); line-height:1.8; margin-bottom:16px; font-size:.98rem; }
-.about-text p strong { color:var(--white); }
-.features-list { list-style:none; display:flex; flex-direction:column; gap:11px; margin-top:8px; }
-.features-list li { display:flex; align-items:flex-start; gap:10px; color:var(--grey); font-size:.9rem; line-height:1.5; }
-.features-list li::before { content:"→"; color:var(--accent); font-weight:700; flex-shrink:0; margin-top:1px; }
+/* Pipeline flow */
+.flow{display:flex;flex-direction:column;gap:2px;}
+.flow-step{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);transition:border-color .2s;}
+.flow-step:hover{border-color:var(--border2);}
+.flow-icon{font-size:1.2rem;flex-shrink:0;width:36px;text-align:center;}
+.flow-body h4{font-size:.85rem;font-weight:700;margin-bottom:2px;}
+.flow-body p{font-size:.75rem;color:var(--text2);line-height:1.35;}
+.flow-arrow{text-align:center;color:var(--text3);font-size:.9rem;padding:4px 0;}
 
-/* Pipeline workflow */
-.pipeline-card {
-  background:var(--card-bg); border:1px solid rgba(200,252,0,0.12);
-  border-radius:20px; padding:28px; backdrop-filter:blur(10px);
-}
-.pipeline-card h4 { font-size:1rem; font-weight:700; color:var(--white); margin-bottom:6px; }
-.pipeline-desc { font-size:.85rem; color:var(--grey); margin-bottom:22px; }
-.wf-steps { display:flex; flex-direction:column; gap:10px; }
-.wf-step {
-  display:flex; align-items:center; gap:12px;
-  background:rgba(255,255,255,0.03); border-radius:10px; padding:10px 14px;
-  border:1px solid rgba(255,255,255,0.06);
-}
-.wf-step .step-icon { font-size:1.1rem; }
-.wf-step .step-text { font-size:.82rem; color:var(--grey); }
-.wf-step .step-text strong { color:var(--white); }
-.wf-arrow { text-align:center; color:rgba(200,252,0,0.28); font-size:.9rem; }
+/* Stack — simple list, not card soup */
+.stack-table{display:flex;flex-direction:column;gap:0;margin-top:36px;border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.stack-row{display:flex;align-items:center;gap:24px;padding:18px 24px;border-bottom:1px solid var(--border);transition:background .2s;}
+.stack-row:last-child{border-bottom:none;}
+.stack-row:hover{background:var(--surface);}
+.stack-cat{font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);min-width:110px;flex-shrink:0;}
+.stack-items{display:flex;flex-wrap:wrap;gap:8px;}
+.stack-tag{font-size:.75rem;font-weight:600;color:var(--text2);}
+.stack-tag+.stack-tag::before{content:'·';margin-right:4px;color:var(--text3);}
 
-/* Results grid */
-.results-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:28px; }
-.result-card {
-  background:var(--card-bg); border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px; padding:20px; text-align:center;
-}
-.result-card .result-num { font-size:2rem; font-weight:800; color:var(--green); display:block; margin-bottom:4px; }
-.result-card .result-label { font-size:.75rem; color:var(--grey); line-height:1.4; }
+/* Links section */
+.links-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;}
+.btn-lime{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#0D0D0D;font-weight:800;font-size:.9rem;padding:14px 28px;border-radius:50px;transition:all .2s;}
+.btn-lime:hover{opacity:.9;transform:translateY(-2px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border2);color:var(--text2);font-weight:700;font-size:.9rem;padding:13px 24px;border-radius:50px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--text2);color:var(--text);}
 
-#stack { background: var(--dark); }
-.stack-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.stack-card {
-  background:var(--card-bg); border:1px solid rgba(255,255,255,0.06);
-  border-radius:20px; padding:26px; backdrop-filter:blur(10px); transition:all .3s;
-}
-.stack-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 18px 38px rgba(255,255,255,0.06); }
-.stack-card-icon { font-size:1.8rem; margin-bottom:12px; }
-.stack-card h3 { font-size:.95rem; font-weight:700; color:var(--white); margin-bottom:14px; }
-.tags { display:flex; flex-wrap:wrap; gap:7px; }
-.tag {
-  background:rgba(255,255,255,0.06); border:1px solid rgba(200,252,0,0.12);
-  border-radius:6px; padding:4px 10px; font-size:.73rem; color:var(--light-blue); font-weight:600;
-}
+/* FOOTER */
+footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-weight:800;font-size:.9rem;}
+.footer-logo span{color:var(--lime);}
+.footer-back{font-size:.8rem;font-weight:600;color:var(--text2);transition:color .2s;}
+.footer-back:hover{color:var(--lime);}
 
-#screenshots { background: var(--dark2); }
-.screenshots-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px; }
-.screenshot-item { position:relative; border-radius:16px; overflow:hidden; cursor:pointer; }
-.screenshot-img { width:100%; height:100%; object-fit:cover; transition: transform .3s, filter .3s; border:1px solid rgba(255,255,255,0.06); border-radius:16px; }
-.screenshot-item:hover .screenshot-img { transform:scale(1.03); filter:brightness(1.06); }
-.placeholder-img {
-  background: linear-gradient(135deg, rgba(31,78,121,0.4), rgba(13,27,42,0.8));
-  display:flex; align-items:center; justify-content:center;
-  min-height:200px; border:1.5px dashed rgba(200,252,0,0.2); border-radius:16px;
-}
-.placeholder-label { font-size:.78rem; color:rgba(200,252,0,0.38); text-align:center; padding:16px; line-height:1.6; pointer-events:none; }
-.screenshots-note { margin-top:20px; font-size:.82rem; color:rgba(200,252,0,0.38); font-style:italic; }
+/* ANIM */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
 
-#links { background: var(--dark); }
-
-footer {
-  background:var(--dark2); border-top:1px solid rgba(255,255,255,0.06);
-  padding:28px 60px; display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:12px;
-}
-footer .logo { font-weight:800; color:var(--accent); font-size:1rem; }
-footer p { color:var(--grey); font-size:.83rem; }
-footer a { color:var(--accent); text-decoration:none; font-weight:600; font-size:.85rem; }
-footer a:hover { text-decoration:underline; }
-
-.fade-in { opacity:0; transform:translateY(28px); transition:opacity .65s ease, transform .65s ease; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
-
-@media(max-width:900px) {
-  nav { padding:14px 20px; }
-  section { padding:70px 24px; }
-  #hero { padding:110px 24px 70px; }
-  .about-content { grid-template-columns:1fr; gap:36px; }
-  .stack-grid { grid-template-columns:1fr 1fr; }
-  .screenshots-grid { grid-template-columns:1fr 1fr; }
-  .results-grid { grid-template-columns:1fr 1fr; }
-}
-@media(max-width:600px) {
-  .stack-grid { grid-template-columns:1fr; }
-  .screenshots-grid { grid-template-columns:1fr; }
-  footer { flex-direction:column; text-align:center; }
-}
+/* RESPONSIVE */
+@media(max-width:1024px){nav,#hero,.s-wrap,footer{padding-left:32px;padding-right:32px;}.metric-item{padding:36px 32px;}}
+@media(max-width:768px){nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}#hero{padding:0 24px 56px;}.s-wrap{padding:60px 24px;}.two-col{grid-template-columns:1fr;gap:40px;}.metrics-row{grid-template-columns:1fr;}.metric-item{border-right:none;border-bottom:1px solid var(--border);padding:28px 24px;}.metric-item:last-child{border-bottom:none;}footer{padding:20px 24px;}}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="../index.html" class="nav-logo" style="color:var(--text);font-weight:800;font-size:1rem;letter-spacing:-.01em">CT<span style="color:#C8FC00">.</span></a>
-  <a href="../index.html#projects" class="nav-back">← Portfolio</a>
+  <a href="../index.html" class="nav-logo">CT<span>.</span></a>
+  <a href="../index.html#work" class="nav-back">← Portfolio</a>
 </nav>
 
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-inner fade-in">
-    <div class="proj-badge-hero">🤖 Agent IA · Automatisation RH · Production</div>
-    <h1>Agent <span>Rebecca</span></h1>
-    <p class="hero-tagline">
-      Agent IA d'analyse automatique de CV déployé en production chez CEFORA. PDF → GPT-Vision → extraction structurée → Airtable. Un pipeline no-code qui remplace des heures de tri manuel.
-    </p>
-    <div class="result-pill">✓ Déployé en production · +60% réactivité · -40% délai de traitement</div>
-    <div class="hero-btns">
-      <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="btn-primary">💼 Voir sur LinkedIn</a>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-breadcrumb">Projet 02</div>
+    <h1 class="hero-title">Agent
+Rebecca</h1>
+    <div class="hero-badges">
+      <span class="bd bd-ia">🤖 IA</span><span class="bd bd-ia">Automatisation RH</span>
+      <span class="bd bd-live">● Live</span>
     </div>
+    <p class="hero-desc">Agent IA d'analyse de CV déployé en production chez CEFORA. PDF → GPT-Vision → extraction structurée → Airtable. Un pipeline no-code qui remplace des heures de tri manuel et 2 ETP.</p>
   </div>
 </section>
 
-<section id="about">
-  <div class="section-inner">
-    <div class="about-content fade-in">
-      <div class="about-text">
-        <p class="section-label">À propos du projet</p>
-        <h2 class="section-title">L'agent qui analyse 100+ CVs automatiquement</h2>
-
-        <!-- 📝 PLACEHOLDER : remplace ces paragraphes par une description plus détaillée -->
-        <p>Agent Rebecca est un <strong>pipeline d'automatisation RH</strong> déployé en production chez CEFORA. Il analyse automatiquement les CVs reçus par email ou formulaire, extrait les informations clés via GPT-Vision, les classe, et les injecte dans Airtable.</p>
-
-        <!-- 📝 PLACEHOLDER : contexte métier, défis, résultats concrets -->
-        <p>[ Description détaillée à compléter — contexte chez CEFORA, volume traité, types de formations visées, critères de classification, résultats observés. ]</p>
-
-        <ul class="features-list">
-          <li>Réception automatique des CVs via email ou formulaire web</li>
-          <li>Conversion PDF → JPEG via iLovePDF + Picnie pour analyse visuelle</li>
-          <li>Analyse GPT-Vision : extraction nom, email, compétences, zone géographique</li>
-          <li>Classification IA : formation visée, pertinence du profil, score de matching</li>
-          <li>Injection automatique dans Airtable avec stockage Drive + notification équipe</li>
-        </ul>
-
-        <div class="results-grid">
-          <div class="result-card">
-            <span class="result-num">+60%</span>
-            <span class="result-label">réactivité candidats</span>
-          </div>
-          <div class="result-card">
-            <span class="result-num">-40%</span>
-            <span class="result-label">délai de traitement</span>
-          </div>
-          <div class="result-card">
-            <span class="result-num">1 200</span>
-            <span class="result-label">entreprises/semaine en automatique</span>
-          </div>
-          <div class="result-card">
-            <span class="result-num">2 ETP</span>
-            <span class="result-label">remplacés par le pipeline</span>
-          </div>
-        </div>
+<section id="metrics">
+  <div class="metrics-row">
+      <div class="metric-item fade-up">
+        <span class="metric-num">35h</span>
+        <span class="metric-lbl">économisées
+par semaine</span>
       </div>
-
-      <!-- Pipeline -->
-      <div class="pipeline-card">
-        <h4>🤖 Pipeline Agent IA "Rebecca"</h4>
-        <p class="pipeline-desc">Analyse automatique de candidatures en production chez CEFORA</p>
-        <div class="wf-steps">
-          <div class="wf-step">
-            <span class="step-icon">📄</span>
-            <span class="step-text"><strong>Réception CV</strong> — PDF via email ou formulaire</span>
-          </div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step">
-            <span class="step-icon">🖼️</span>
-            <span class="step-text"><strong>Conversion</strong> — PDF → JPEG (iLovePDF + Picnie)</span>
-          </div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step">
-            <span class="step-icon">🧠</span>
-            <span class="step-text"><strong>Analyse GPT-Vision</strong> — extraction nom, mail, compétences, zone géo</span>
-          </div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step">
-            <span class="step-icon">📊</span>
-            <span class="step-text"><strong>Classification IA</strong> — formation visée, pertinence, score</span>
-          </div>
-          <div class="wf-arrow">↓</div>
-          <div class="wf-step">
-            <span class="step-icon">✅</span>
-            <span class="step-text"><strong>Injection Airtable</strong> — CVTech + Drive + notification</span>
-          </div>
-        </div>
+      <div class="metric-item fade-up">
+        <span class="metric-num">+60%</span>
+        <span class="metric-lbl">réactivité
+candidats</span>
       </div>
-    </div>
-  </div>
+      <div class="metric-item fade-up">
+        <span class="metric-num">2 ETP</span>
+        <span class="metric-lbl">remplacés
+par le pipeline</span>
+      </div></div>
 </section>
 
-<section id="stack">
-  <div class="section-inner">
-    <p class="section-label">Stack technique</p>
-    <h2 class="section-title">Technologies utilisées</h2>
-    <p class="section-desc" style="margin-bottom:36px;">Pipeline no-code / low-code construit sur MAKE, GPT-Vision pour l'analyse visuelle des CVs, et Airtable comme base de données RH.</p>
-    <div class="stack-grid fade-in">
-      <div class="stack-card">
-        <div class="stack-card-icon">🔄</div>
-        <h3>Automatisation</h3>
-        <div class="tags">
-          <span class="tag">MAKE (certifié)</span>
-          <span class="tag">Webhooks</span>
-          <span class="tag">iLovePDF API</span>
-          <span class="tag">Picnie</span>
-        </div>
-      </div>
-      <div class="stack-card">
-        <div class="stack-card-icon">🤖</div>
-        <h3>Intelligence Artificielle</h3>
-        <div class="tags">
-          <span class="tag">GPT-Vision (OpenAI)</span>
-          <span class="tag">Prompt Engineering</span>
-          <span class="tag">Extraction structurée</span>
-        </div>
-      </div>
-      <div class="stack-card">
-        <div class="stack-card-icon">📊</div>
-        <h3>Données & Stockage</h3>
-        <div class="tags">
-          <span class="tag">Airtable</span>
-          <span class="tag">Google Drive</span>
-          <span class="tag">Google Workspace</span>
-        </div>
-      </div>
+<div class="s-wrap s-alt fade-up" id="about">
+  <p class="s-eyebrow">Projet</p>
+  <div class="two-col">
+    <div>
+      <h2 class="s-title">Ce que ça fait</h2>
+      <ul class="feat-list"><li><strong>Réception automatique</strong> — CVs reçus par email ou formulaire, traités sans intervention</li><li><strong>Vision IA</strong> — GPT-Vision lit le PDF converti en image, extrait chaque champ</li><li><strong>Classification automatique</strong> — scoring pertinence, formation visée, zone géographique</li><li><strong>Base RH centralisée</strong> — injection Airtable avec lien Drive vers CV original</li><li><strong>Notification équipe</strong> — alerte automatique dès qu'un profil est classé</li><li>Pas de code côté client — 100% no-code sur MAKE (certifié)</li></ul>
+    </div>
+    <div>
+      <p class="s-eyebrow">Pipeline</p>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-icon">📄</span>
+          <div class="flow-body">
+            <h4>Réception CV</h4>
+            <p>PDF via email ou formulaire web</p>
+          </div>
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">🖼️</span>
+          <div class="flow-body">
+            <h4>Conversion PDF → JPEG</h4>
+            <p>iLovePDF + Picnie pour analyse visuelle</p>
+          </div>
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">🧠</span>
+          <div class="flow-body">
+            <h4>Analyse GPT-Vision</h4>
+            <p>Extraction nom, email, compétences, zone géo</p>
+          </div>
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">📊</span>
+          <div class="flow-body">
+            <h4>Classification IA</h4>
+            <p>Formation visée, pertinence, score de matching</p>
+          </div>
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">✅</span>
+          <div class="flow-body">
+            <h4>Injection Airtable</h4>
+            <p>CVTech + Drive + notification équipe</p>
+          </div>
+        </div></div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="screenshots">
-  <div class="section-inner">
-    <p class="section-label">Captures d'écran</p>
-    <h2 class="section-title">Le pipeline en images</h2>
-    <p class="section-desc">Aperçu du workflow MAKE et de la base Airtable résultante.</p>
+<div class="s-wrap fade-up" id="stack">
+  <p class="s-eyebrow">Stack</p>
+  <h2 class="s-title">Technologies</h2>
+  <div class="stack-table"><div class="stack-row"><span class="stack-cat">Automatisation</span><div class="stack-items"><span class="stack-tag">MAKE (certifié)</span><span class="stack-tag">Webhooks</span><span class="stack-tag">iLovePDF API</span><span class="stack-tag">Picnie</span></div></div><div class="stack-row"><span class="stack-cat">IA & Vision</span><div class="stack-items"><span class="stack-tag">GPT-Vision (OpenAI)</span><span class="stack-tag">Prompt Engineering</span><span class="stack-tag">Extraction structurée</span></div></div><div class="stack-row"><span class="stack-cat">Données</span><div class="stack-items"><span class="stack-tag">Airtable</span><span class="stack-tag">Google Drive</span><span class="stack-tag">Google Workspace</span></div></div></div>
+</div>
 
-    <div class="screenshots-grid fade-in">
-      <!-- 📸 PLACEHOLDER screenshot 1 — nommer: rebecca-screen-1.jpg (ex: vue workflow MAKE) -->
-      <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Workflow MAKE<br>rebecca-screen-1.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
-      </div>
-      <!-- 📸 PLACEHOLDER screenshot 2 — nommer: rebecca-screen-2.jpg (ex: base Airtable) -->
-      <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Base Airtable<br>rebecca-screen-2.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
-      </div>
-      <!-- 📸 PLACEHOLDER screenshot 3 — nommer: rebecca-screen-3.jpg (ex: résultat analyse GPT) -->
-      <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Résultat GPT-Vision<br>rebecca-screen-3.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
-      </div>
-    </div>
-    <p class="screenshots-note">💡 Images à insérer : captures du workflow MAKE, de la base Airtable, ou d'un exemple d'extraction GPT-Vision.</p>
-  </div>
-</section>
 
-<section id="links">
-  <div class="section-inner fade-in">
-    <p class="section-label">Liens</p>
-    <h2 class="section-title">En savoir plus</h2>
-    <p class="section-desc" style="margin-bottom:32px;">Ce projet est un workflow MAKE propriétaire déployé en production — pas de repo public. Contacte-moi sur LinkedIn pour en discuter.</p>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;">
-      <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="btn-primary">💼 Voir sur LinkedIn</a>
-      <a href="../index.html#contact" class="btn-ghost">✉️ Me contacter</a>
-    </div>
-  </div>
-</section>
+
+<div class="s-wrap s-alt fade-up" id="links">
+  <p class="s-eyebrow">Liens</p>
+  <div class="links-row"><a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="btn-lime">💼 LinkedIn — discuter du projet</a><a href="../index.html#contact"  class="btn-outline">✉️ Me contacter</a></div>
+</div>
 
 <footer>
-  <div class="logo">Christopher TECHER</div>
-  <p>Fullstack Developer · IA · Automatisation</p>
-  <a href="../index.html">← Retour au portfolio</a>
+  <span class="footer-logo">CT<span>.</span></span>
+  <a href="../index.html#work" class="footer-back">← Retour au portfolio</a>
 </footer>
 
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  nav.style.background = window.scrollY > 50 ? 'rgba(13,13,13,0.98)' : 'rgba(13,13,13,0.96)';
-});
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
+const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }), {threshold:.08,rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
