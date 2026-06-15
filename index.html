@@ -167,16 +167,23 @@ nav.scrolled { padding:14px 64px; }
 /* ─── WORK ─────────────────────────────────────── */
 #work { padding:100px 64px; }
 
-/* Filters */
-.filters { display:flex; gap:8px; margin-bottom:52px; flex-wrap:wrap; }
-.filter-btn {
-  font-size:.78rem; font-weight:700; padding:8px 20px;
-  border:1px solid var(--border); border-radius:50px;
-  background:none; color:var(--text2); cursor:pointer;
-  transition:all .2s; letter-spacing:.1px; font-family:inherit;
+/* Category groups */
+.cat-block { margin-bottom:80px; }
+.cat-block:last-child { margin-bottom:0; }
+.cat-header {
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:16px; margin-bottom:0; padding-bottom:14px;
+  border-bottom:1px solid var(--border2);
+  margin-bottom:0;
 }
-.filter-btn:hover { border-color:var(--border2); color:var(--text); }
-.filter-btn.active { background:var(--lime); color:#0D0D0D; border-color:var(--lime); }
+.cat-title {
+  font-size:.65rem; font-weight:800; letter-spacing:3px;
+  text-transform:uppercase; color:var(--text2);
+}
+.cat-count {
+  font-size:.65rem; font-weight:700; color:var(--text3); letter-spacing:1px;
+  white-space:nowrap;
+}
 
 /* Project list — editorial rows */
 .projects-list { display:flex; flex-direction:column; }
@@ -188,8 +195,6 @@ nav.scrolled { padding:14px 64px; }
   cursor:default;
 }
 .project-item:last-child { border-bottom:1px solid var(--border); }
-.project-item.hidden { display:none; }
-
 /* Head row: num | title+sub | badges */
 .proj-head {
   display:grid;
@@ -425,8 +430,6 @@ footer {
   .num-item { border-right:none !important; border-bottom:1px solid var(--border) !important; }
   .num-item:last-child { border-bottom:none !important; }
   .contact-h { font-size:clamp(2.5rem, 12vw, 4rem); }
-  .filters { gap:6px; }
-  .filter-btn { font-size:.73rem; padding:7px 14px; }
 }
 </style>
 </head>
@@ -482,308 +485,333 @@ footer {
 <!-- ── WORK ─────────────────────────────────────── -->
 <section id="work">
   <p class="s-eyebrow">Travail</p>
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all">Tout</button>
-    <button class="filter-btn" data-filter="ia">IA &amp; Automatisation</button>
-    <button class="filter-btn" data-filter="saas">SaaS</button>
-    <button class="filter-btn" data-filter="mobile">Mobile</button>
+
+  <!-- CATÉGORIE 1 : IA & Automatisation -->
+  <div class="cat-block fade-up">
+    <div class="cat-header">
+      <span class="cat-title">🤖 IA &amp; Automatisation</span>
+      <span class="cat-count">4 projets</span>
+    </div>
+    <div class="projects-list">
+
+      <!-- 01 MAESTRO AI -->
+      <article class="project-item">
+        <div class="proj-head">
+          <span class="proj-num">01</span>
+          <div>
+            <h2 class="proj-title">Maestro AI</h2>
+            <p class="proj-sub">De l'appel commercial terminé à la tâche CRM créée — en moins de 10 secondes. Workflow n8n orchestré 8 nœuds natifs, zéro intervention humaine.</p>
+          </div>
+          <div class="proj-badges">
+            <span class="bd bd-ia">🤖 IA</span>
+            <span class="bd bd-live">● Live</span>
+          </div>
+        </div>
+        <div class="proj-metrics">
+          <span></span>
+          <div class="proj-metrics-inner">
+            <div class="proj-metric hi">
+              <span class="m-num">&lt;10s</span>
+              <span class="m-lbl">post-call automatisé</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">0</span>
+              <span class="m-lbl">relances oubliées</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">8</span>
+              <span class="m-lbl">nœuds natifs n8n</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span></span>
+          <div class="proj-foot-inner">
+            <span class="proj-stack">n8n · Claude (Anthropic) · GoHighLevel · Modjo · Slack · Email</span>
+            <div class="proj-lnks">
+              <a href="maestro.html" class="lnk-main">Voir la démo →</a>
+              <a href="https://github.com/techerchristopher-dotcom/maestro-workflow" target="_blank" class="lnk-ghost">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 AGENT REBECCA -->
+      <article class="project-item">
+        <div class="proj-head">
+          <span class="proj-num">02</span>
+          <div>
+            <h2 class="proj-title">Agent Rebecca</h2>
+            <p class="proj-sub">Agent IA d'analyse de CV en production chez CEFORA — 35 heures économisées par semaine, +60% de réactivité candidats, -40% de délai de traitement.</p>
+          </div>
+          <div class="proj-badges">
+            <span class="bd bd-ia">🤖 IA</span>
+            <span class="bd bd-live">● Live</span>
+          </div>
+        </div>
+        <div class="proj-metrics">
+          <span></span>
+          <div class="proj-metrics-inner">
+            <div class="proj-metric hi">
+              <span class="m-num">35h</span>
+              <span class="m-lbl">économisées / semaine</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">+60%</span>
+              <span class="m-lbl">réactivité candidats</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">-40%</span>
+              <span class="m-lbl">délai de traitement</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span></span>
+          <div class="proj-foot-inner">
+            <span class="proj-stack">GPT-Vision · MAKE (Integromat) · Airtable · Email automation</span>
+            <div class="proj-lnks">
+              <a href="projects/agent-rebecca.html" class="lnk-main">Voir le projet →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 TSPLUS RAG -->
+      <article class="project-item">
+        <div class="proj-head">
+          <span class="proj-num">04</span>
+          <div>
+            <h2 class="proj-title">TSplus RAG Supabase</h2>
+            <p class="proj-sub">Architecture RAG complète pour vectorisation et recherche sémantique sur documents internes. Déployé en production pour TSplus — indexation infinie, réponses contextuelles.</p>
+          </div>
+          <div class="proj-badges">
+            <span class="bd bd-ia">🤖 IA</span>
+            <span class="bd bd-live">● Live</span>
+          </div>
+        </div>
+        <div class="proj-metrics">
+          <span></span>
+          <div class="proj-metrics-inner">
+            <div class="proj-metric hi">
+              <span class="m-num">RAG</span>
+              <span class="m-lbl">architecture complète</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">pgvector</span>
+              <span class="m-lbl">recherche sémantique</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">∞</span>
+              <span class="m-lbl">documents indexables</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span></span>
+          <div class="proj-foot-inner">
+            <span class="proj-stack">TypeScript · Supabase · pgvector · OpenAI Embeddings</span>
+            <div class="proj-lnks">
+              <a href="projects/tsplus-rag.html" class="lnk-main">Voir le projet →</a>
+              <a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="lnk-ghost">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 07 ALLORESA AI -->
+      <article class="project-item">
+        <div class="proj-head">
+          <span class="proj-num">07</span>
+          <div>
+            <h2 class="proj-title">AlloResa AI</h2>
+            <p class="proj-sub">Agent IA vocal qui répond au téléphone, qualifie et prend les réservations 24h/7 pour les restaurants. Pipeline MAKE 14 nœuds — 0 appel manqué, +30% de réservations, 15h économisées par semaine.</p>
+          </div>
+          <div class="proj-badges">
+            <span class="bd bd-ia">🤖 IA</span>
+            <span class="bd bd-ia">📞 Agent vocal</span>
+            <span class="bd bd-wip">⏳ En cours</span>
+          </div>
+        </div>
+        <div class="proj-metrics">
+          <span></span>
+          <div class="proj-metrics-inner">
+            <div class="proj-metric hi">
+              <span class="m-num">0</span>
+              <span class="m-lbl">appel manqué</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">+30%</span>
+              <span class="m-lbl">réservations</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">15h</span>
+              <span class="m-lbl">économisées / sem.</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span></span>
+          <div class="proj-foot-inner">
+            <span class="proj-stack">MAKE · GPT · Airtable · Bubble · Google Calendar · SMS API</span>
+            <div class="proj-lnks">
+              <a href="projects/alloresa.html" class="lnk-main">Voir le projet →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
   </div>
-  <div class="projects-list">
 
-    <!-- 01 MAESTRO AI -->
-    <article class="project-item fade-up" data-domain="ia">
-      <div class="proj-head">
-        <span class="proj-num">01</span>
-        <div>
-          <h2 class="proj-title">Maestro AI</h2>
-          <p class="proj-sub">De l'appel commercial terminé à la tâche CRM créée — en moins de 10 secondes. Workflow n8n orchestré 8 nœuds natifs, zéro intervention humaine.</p>
-        </div>
-        <div class="proj-badges">
-          <span class="bd bd-ia">🤖 IA</span>
-          <span class="bd bd-live">● Live</span>
-        </div>
-      </div>
-      <div class="proj-metrics">
-        <span></span>
-        <div class="proj-metrics-inner">
-          <div class="proj-metric hi">
-            <span class="m-num">&lt;10s</span>
-            <span class="m-lbl">post-call automatisé</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">0</span>
-            <span class="m-lbl">relances oubliées</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">8</span>
-            <span class="m-lbl">nœuds natifs n8n</span>
-          </div>
-        </div>
-      </div>
-      <div class="proj-foot">
-        <span></span>
-        <div class="proj-foot-inner">
-          <span class="proj-stack">n8n · Claude (Anthropic) · GoHighLevel · Modjo · Slack · Email</span>
-          <div class="proj-lnks">
-            <a href="maestro.html" class="lnk-main">Voir la démo →</a>
-            <a href="https://github.com/techerchristopher-dotcom/maestro-workflow" target="_blank" class="lnk-ghost">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
+  <!-- CATÉGORIE 2 : SaaS -->
+  <div class="cat-block fade-up">
+    <div class="cat-header">
+      <span class="cat-title">📦 SaaS</span>
+      <span class="cat-count">1 projet</span>
+    </div>
+    <div class="projects-list">
 
-    <!-- 02 AGENT REBECCA -->
-    <article class="project-item fade-up" data-domain="ia">
-      <div class="proj-head">
-        <span class="proj-num">02</span>
-        <div>
-          <h2 class="proj-title">Agent Rebecca</h2>
-          <p class="proj-sub">Agent IA d'analyse de CV en production chez CEFORA — 35 heures économisées par semaine, +60% de réactivité candidats, -40% de délai de traitement.</p>
-        </div>
-        <div class="proj-badges">
-          <span class="bd bd-ia">🤖 IA</span>
-          <span class="bd bd-live">● Live</span>
-        </div>
-      </div>
-      <div class="proj-metrics">
-        <span></span>
-        <div class="proj-metrics-inner">
-          <div class="proj-metric hi">
-            <span class="m-num">35h</span>
-            <span class="m-lbl">économisées / semaine</span>
+      <!-- 03 RENTANOO -->
+      <article class="project-item">
+        <div class="proj-head">
+          <span class="proj-num">03</span>
+          <div>
+            <h2 class="proj-title">Rentanoo</h2>
+            <p class="proj-sub">Plateforme SaaS de location — véhicules, motos, hébergements. Conçue et développée de A à Z : back-office, réservations, paiement Stripe, 4 langues, déployée sur Railway.</p>
           </div>
-          <div class="proj-metric">
-            <span class="m-num">+60%</span>
-            <span class="m-lbl">réactivité candidats</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">-40%</span>
-            <span class="m-lbl">délai de traitement</span>
+          <div class="proj-badges">
+            <span class="bd bd-saas">📦 SaaS</span>
+            <span class="bd bd-live">● Live</span>
           </div>
         </div>
-      </div>
-      <div class="proj-foot">
-        <span></span>
-        <div class="proj-foot-inner">
-          <span class="proj-stack">GPT-Vision · MAKE (Integromat) · Airtable · Email automation</span>
-          <div class="proj-lnks">
-            <a href="projects/agent-rebecca.html" class="lnk-main">Voir le projet →</a>
+        <div class="proj-metrics">
+          <span></span>
+          <div class="proj-metrics-inner">
+            <div class="proj-metric hi">
+              <span class="m-num">28</span>
+              <span class="m-lbl">annonces en production</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">4</span>
+              <span class="m-lbl">langues supportées</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">3</span>
+              <span class="m-lbl">modules métier</span>
+            </div>
           </div>
         </div>
-      </div>
-    </article>
+        <div class="proj-foot">
+          <span></span>
+          <div class="proj-foot-inner">
+            <span class="proj-stack">React · TypeScript · Supabase · Stripe · Railway · i18n (FR/EN/DE/IT)</span>
+            <div class="proj-lnks">
+              <a href="rentanoo.html" class="lnk-main">Étude de cas →</a>
+            </div>
+          </div>
+        </div>
+      </article>
 
-    <!-- 03 RENTANOO -->
-    <article class="project-item fade-up" data-domain="saas">
-      <div class="proj-head">
-        <span class="proj-num">03</span>
-        <div>
-          <h2 class="proj-title">Rentanoo</h2>
-          <p class="proj-sub">Plateforme SaaS de location — véhicules, motos, hébergements. Conçue et développée de A à Z : back-office, réservations, paiement Stripe, 4 langues, déployée sur Railway.</p>
-        </div>
-        <div class="proj-badges">
-          <span class="bd bd-saas">📦 SaaS</span>
-          <span class="bd bd-live">● Live</span>
-        </div>
-      </div>
-      <div class="proj-metrics">
-        <span></span>
-        <div class="proj-metrics-inner">
-          <div class="proj-metric hi">
-            <span class="m-num">28</span>
-            <span class="m-lbl">annonces en production</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">4</span>
-            <span class="m-lbl">langues supportées</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">3</span>
-            <span class="m-lbl">modules métier</span>
-          </div>
-        </div>
-      </div>
-      <div class="proj-foot">
-        <span></span>
-        <div class="proj-foot-inner">
-          <span class="proj-stack">React · TypeScript · Supabase · Stripe · Railway · i18n (FR/EN/DE/IT)</span>
-          <div class="proj-lnks">
-            <a href="rentanoo.html" class="lnk-main">Étude de cas →</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 04 TSPLUS RAG -->
-    <article class="project-item fade-up" data-domain="ia">
-      <div class="proj-head">
-        <span class="proj-num">04</span>
-        <div>
-          <h2 class="proj-title">TSplus RAG Supabase</h2>
-          <p class="proj-sub">Architecture RAG complète pour vectorisation et recherche sémantique sur documents internes. Déployé en production pour TSplus — indexation infinie, réponses contextuelles.</p>
-        </div>
-        <div class="proj-badges">
-          <span class="bd bd-ia">🤖 IA</span>
-          <span class="bd bd-live">● Live</span>
-        </div>
-      </div>
-      <div class="proj-metrics">
-        <span></span>
-        <div class="proj-metrics-inner">
-          <div class="proj-metric hi">
-            <span class="m-num">RAG</span>
-            <span class="m-lbl">architecture complète</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">pgvector</span>
-            <span class="m-lbl">recherche sémantique</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">∞</span>
-            <span class="m-lbl">documents indexables</span>
-          </div>
-        </div>
-      </div>
-      <div class="proj-foot">
-        <span></span>
-        <div class="proj-foot-inner">
-          <span class="proj-stack">TypeScript · Supabase · pgvector · OpenAI Embeddings</span>
-          <div class="proj-lnks">
-            <a href="projects/tsplus-rag.html" class="lnk-main">Voir le projet →</a>
-            <a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="lnk-ghost">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 05 TUKME -->
-    <article class="project-item fade-up" data-domain="mobile">
-      <div class="proj-head">
-        <span class="proj-num">05</span>
-        <div>
-          <h2 class="proj-title">Tukme</h2>
-          <p class="proj-sub">Application VTC mobile complète — commander un tuk-tuk via smartphone. Géolocalisation temps réel, paiement Stripe in-app, gestion chauffeur/passager, panel admin Next.js.</p>
-        </div>
-        <div class="proj-badges">
-          <span class="bd bd-mobile">📱 Mobile</span>
-          <span class="bd bd-wip">⏳ En cours</span>
-        </div>
-      </div>
-      <div class="proj-metrics">
-        <span></span>
-        <div class="proj-metrics-inner">
-          <div class="proj-metric hi">
-            <span class="m-num">RT</span>
-            <span class="m-lbl">géoloc temps réel</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">Stripe</span>
-            <span class="m-lbl">paiement in-app</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">2</span>
-            <span class="m-lbl">apps (passager + chauffeur)</span>
-          </div>
-        </div>
-      </div>
-      <div class="proj-foot">
-        <span></span>
-        <div class="proj-foot-inner">
-          <span class="proj-stack">React Native · Expo · TypeScript · Supabase · Stripe · Google Maps API · Next.js</span>
-          <div class="proj-lnks">
-            <a href="projects/tukme.html" class="lnk-main">Voir le projet →</a>
-            <a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="lnk-ghost">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 06 ASTRA APP -->
-    <article class="project-item fade-up" data-domain="ia mobile">
-      <div class="proj-head">
-        <span class="proj-num">06</span>
-        <div>
-          <h2 class="proj-title">Astra App</h2>
-          <p class="proj-sub">App horoscope IA francophone pilotée par l'API Claude — prompt engineering personnalisé, UX mobile-first. À la croisée de l'IA générative et du mobile.</p>
-        </div>
-        <div class="proj-badges">
-          <span class="bd bd-ia">🤖 IA</span>
-          <span class="bd bd-mobile">📱 Mobile</span>
-          <span class="bd bd-wip">⏳ En cours</span>
-        </div>
-      </div>
-      <div class="proj-metrics">
-        <span></span>
-        <div class="proj-metrics-inner">
-          <div class="proj-metric hi">
-            <span class="m-num">Claude</span>
-            <span class="m-lbl">API Anthropic</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">FR</span>
-            <span class="m-lbl">francophone first</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">MVP</span>
-            <span class="m-lbl">en développement</span>
-          </div>
-        </div>
-      </div>
-      <div class="proj-foot">
-        <span></span>
-        <div class="proj-foot-inner">
-          <span class="proj-stack">React · Vite · Claude API · Prompt Engineering</span>
-          <div class="proj-lnks">
-            <a href="projects/astra-app.html" class="lnk-main">Voir le projet →</a>
-            <a href="https://github.com/techerchristopher-dotcom/astra-app" target="_blank" class="lnk-ghost">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 07 ALLORESA AI -->
-    <article class="project-item fade-up" data-domain="ia">
-      <div class="proj-head">
-        <span class="proj-num">07</span>
-        <div>
-          <h2 class="proj-title">AlloResa AI</h2>
-          <p class="proj-sub">Agent IA vocal qui répond au téléphone, qualifie et prend les réservations 24h/7 pour les restaurants. Pipeline MAKE 14 nœuds — 0 appel manqué, +30% de réservations, 15h économisées par semaine.</p>
-        </div>
-        <div class="proj-badges">
-          <span class="bd bd-ia">🤖 IA</span>
-          <span class="bd bd-ia">📞 Agent vocal</span>
-          <span class="bd bd-wip">⏳ En cours</span>
-        </div>
-      </div>
-      <div class="proj-metrics">
-        <span></span>
-        <div class="proj-metrics-inner">
-          <div class="proj-metric hi">
-            <span class="m-num">0</span>
-            <span class="m-lbl">appel manqué</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">+30%</span>
-            <span class="m-lbl">réservations</span>
-          </div>
-          <div class="proj-metric">
-            <span class="m-num">15h</span>
-            <span class="m-lbl">économisées / sem.</span>
-          </div>
-        </div>
-      </div>
-      <div class="proj-foot">
-        <span></span>
-        <div class="proj-foot-inner">
-          <span class="proj-stack">MAKE · GPT · Airtable · Bubble · Google Calendar · SMS API</span>
-          <div class="proj-lnks">
-            <a href="projects/alloresa.html" class="lnk-main">Voir le projet →</a>
-          </div>
-        </div>
-      </div>
-    </article>
-
+    </div>
   </div>
+
+  <!-- CATÉGORIE 3 : Applications -->
+  <div class="cat-block fade-up">
+    <div class="cat-header">
+      <span class="cat-title">📱 Applications</span>
+      <span class="cat-count">2 projets</span>
+    </div>
+    <div class="projects-list">
+
+      <!-- 05 TUKME -->
+      <article class="project-item">
+        <div class="proj-head">
+          <span class="proj-num">05</span>
+          <div>
+            <h2 class="proj-title">Tukme</h2>
+            <p class="proj-sub">Application VTC mobile complète — commander un tuk-tuk via smartphone. Géolocalisation temps réel, paiement Stripe in-app, gestion chauffeur/passager, panel admin Next.js.</p>
+          </div>
+          <div class="proj-badges">
+            <span class="bd bd-mobile">📱 Mobile</span>
+            <span class="bd bd-wip">⏳ En cours</span>
+          </div>
+        </div>
+        <div class="proj-metrics">
+          <span></span>
+          <div class="proj-metrics-inner">
+            <div class="proj-metric hi">
+              <span class="m-num">RT</span>
+              <span class="m-lbl">géoloc temps réel</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">Stripe</span>
+              <span class="m-lbl">paiement in-app</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">2</span>
+              <span class="m-lbl">apps (passager + chauffeur)</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span></span>
+          <div class="proj-foot-inner">
+            <span class="proj-stack">React Native · Expo · TypeScript · Supabase · Stripe · Google Maps API · Next.js</span>
+            <div class="proj-lnks">
+              <a href="projects/tukme.html" class="lnk-main">Voir le projet →</a>
+              <a href="https://github.com/techerchristopher-dotcom/tukme" target="_blank" class="lnk-ghost">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06 ASTRA APP -->
+      <article class="project-item">
+        <div class="proj-head">
+          <span class="proj-num">06</span>
+          <div>
+            <h2 class="proj-title">Astra App</h2>
+            <p class="proj-sub">App horoscope IA francophone pilotée par l'API Claude — prompt engineering personnalisé, UX mobile-first. À la croisée de l'IA générative et du mobile.</p>
+          </div>
+          <div class="proj-badges">
+            <span class="bd bd-ia">🤖 IA</span>
+            <span class="bd bd-mobile">📱 Mobile</span>
+            <span class="bd bd-wip">⏳ En cours</span>
+          </div>
+        </div>
+        <div class="proj-metrics">
+          <span></span>
+          <div class="proj-metrics-inner">
+            <div class="proj-metric hi">
+              <span class="m-num">Claude</span>
+              <span class="m-lbl">API Anthropic</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">FR</span>
+              <span class="m-lbl">francophone first</span>
+            </div>
+            <div class="proj-metric">
+              <span class="m-num">MVP</span>
+              <span class="m-lbl">en développement</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span></span>
+          <div class="proj-foot-inner">
+            <span class="proj-stack">React · Vite · Claude API · Prompt Engineering</span>
+            <div class="proj-lnks">
+              <a href="projects/astra-app.html" class="lnk-main">Voir le projet →</a>
+              <a href="https://github.com/techerchristopher-dotcom/astra-app" target="_blank" class="lnk-ghost">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
 </section>
 
 <!-- ── NUMBERS STRIP ──────────────────────────── -->
@@ -902,23 +930,6 @@ mobileNav.querySelectorAll('a').forEach(a =>
     mobileNav.setAttribute('aria-hidden', true);
   })
 );
-
-// ── PROJECT FILTERS ──────────────────────────────
-const filterBtns  = document.querySelectorAll('.filter-btn');
-const projectItems = document.querySelectorAll('.project-item');
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    projectItems.forEach(item => {
-      const domain = item.dataset.domain || '';
-      const show = filter === 'all' || domain.split(' ').includes(filter);
-      item.classList.toggle('hidden', !show);
-    });
-  });
-});
 
 // ── SCROLL ANIMATIONS ────────────────────────────
 const io = new IntersectionObserver((entries) => {
