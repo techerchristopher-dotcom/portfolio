@@ -1021,8 +1021,8 @@ footer a { color:var(--accent); text-decoration:none; }
         <img src="assets/rentanoo/logo-rentanoo.png" alt="Rentanoo" class="rentanoo-logo rentanoo-logo--hero">
       </span>
     </h1>
-    <p class="hero-sub" data-i18n="hero_sub">Le système d'exploitation des agences de location de véhicules.</p>
-    <p class="hero-tag" data-i18n="hero_tag">Conçu et développé de bout en bout : produit, UX, architecture SaaS, automatisation N8N et intégration Stripe.</p>
+    <p class="hero-sub">Marketplace de location à Nosy Be + SaaS de gestion pour les loueurs.</p>
+    <p class="hero-tag">Plateforme multi-modules conçue et développée de bout en bout : marketplace B2C avec commission, outils B2B en abonnement, back-office opérationnel d'agence. React · TypeScript · Supabase · Express · Railway · Stripe · N8N.</p>
     <div class="hero-btns">
       <a href="index.html#contact" class="btn-primary" data-i18n="hero_cta_contact">Contact</a>
       <a href="https://rentanoo.com" target="_blank" rel="noopener" class="btn-secondary" data-i18n="hero_cta_live">Site live</a>
@@ -1177,73 +1177,96 @@ footer a { color:var(--accent); text-decoration:none; }
   </div>
 </section>
 
-<!-- 4. PILLARS -->
+<!-- 4. MODULES -->
 <section id="pillars">
   <div class="section-inner">
-    <p class="section-label fade-in" data-i18n="pillars_label">Produit</p>
-    <h2 class="section-title fade-in" data-i18n="pillars_title">Les 3 piliers</h2>
-    <p class="pillars-intro fade-in" data-i18n="pillars_desc">Trois modules qui couvrent tout le cycle — de la vente en ligne au pilotage de la flotte.</p>
+    <p class="section-label fade-in">Architecture Produit</p>
+    <h2 class="section-title fade-in">3 modules, 2 modèles économiques</h2>
+    <p class="pillars-intro fade-in">Une marketplace publique (B2C) + des outils SaaS pour les professionnels (B2B) + un back-office opérationnel d'agence.</p>
+
+    <!-- Modèle économique rapide -->
+    <div class="fade-in" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px;">
+      <div style="flex:1;min-width:220px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:16px;padding:18px 22px;">
+        <div style="font-size:.68rem;font-weight:800;letter-spacing:2px;color:#22c55e;text-transform:uppercase;margin-bottom:6px">Commission</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px">Module 01 — Marketplace</div>
+        <div style="font-size:.82rem;color:var(--grey)">Inscription propriétaire gratuite. Rentanoo prend une commission sur chaque réservation générée via la plateforme.</div>
+      </div>
+      <div style="flex:1;min-width:220px;background:rgba(65,168,240,0.08);border:1px solid rgba(65,168,240,0.22);border-radius:16px;padding:18px 22px;">
+        <div style="font-size:.68rem;font-weight:800;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:6px">Abonnement · Futur</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px">Module 02 — SaaS Loueurs</div>
+        <div style="font-size:.82rem;color:var(--grey)">Outils digitaux professionnels proposés en abonnement mensuel. Pipeline produit en cours de structuration.</div>
+      </div>
+    </div>
+
     <div class="pillars-grid fade-in" id="pillarsGrid">
+
+      <!-- MODULE 01 -->
       <article class="pillar-card pillar-card--01">
         <div class="pillar-head">
           <div class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01"/></svg>
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           </div>
           <div class="pillar-head-text">
-            <span class="pillar-num" data-i18n="pillar1_num">PILIER 01</span>
-            <h3 data-i18n="pillar1_title">Réservation en ligne</h3>
+            <span class="pillar-num">MODULE 01 · B2C</span>
+            <h3>Marketplace de réservation</h3>
           </div>
         </div>
-        <p class="pillar-objective" data-i18n="pillar1_obj">Objectif : Vendre 24h/24.</p>
+        <p class="pillar-objective">Mettre en relation clients et propriétaires à Nosy Be. Vendre 24h/24 sans intermédiaire humain.</p>
         <ul class="pillar-features">
-          <li data-i18n="pillar1_f1">Catalogue</li>
-          <li data-i18n="pillar1_f2">Disponibilités</li>
-          <li data-i18n="pillar1_f3">Réservation</li>
-          <li data-i18n="pillar1_f4">Paiement Stripe</li>
-          <li>4 types : voiture / moto / scooter / hébergement</li>
-          <li>Services configurables (aéroport, barge, livraison…)</li>
+          <li>Catalogue public multi-types (voiture, moto, scooter, hébergement)</li>
+          <li>Disponibilités en temps réel</li>
+          <li>Paiement Stripe <em style="color:var(--grey);font-size:.8em">ou</em> paiement en agence</li>
+          <li>Services configurables par propriétaire (aéroport, barge, livraison…)</li>
           <li>Tarification dynamique (saisons, longue durée)</li>
-          <li>Partage social (FB, WhatsApp, lien)</li>
-          <li>Descriptions multilingues EN / DE / IT</li>
+          <li>Descriptions multilingues EN / DE / IT + traduction à la demande</li>
+          <li>Partage social avec OG preview dynamique (FB, WhatsApp)</li>
+          <li>Inscription propriétaire gratuite · commission sur ventes</li>
         </ul>
       </article>
+
+      <!-- MODULE 02 -->
       <article class="pillar-card pillar-card--02">
         <div class="pillar-head">
           <div class="pillar-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg>
           </div>
           <div class="pillar-head-text">
-            <span class="pillar-num" data-i18n="pillar2_num">PILIER 02</span>
-            <h3 data-i18n="pillar2_title">CRM &amp; Exploitation</h3>
+            <span class="pillar-num">MODULE 02 · B2B SaaS</span>
+            <h3>Outils digitaux loueurs</h3>
           </div>
         </div>
-        <p class="pillar-objective" data-i18n="pillar2_obj">Objectif : Piloter l'agence.</p>
+        <p class="pillar-objective">Donner aux propriétaires des outils pro pour gérer leur activité sans Excel ni papier. Abonnement mensuel (futur).</p>
         <ul class="pillar-features">
-          <li data-i18n="pillar2_f1">CRM</li>
-          <li data-i18n="pillar2_f2">Planning</li>
-          <li data-i18n="pillar2_f3">Cautions</li>
-          <li data-i18n="pillar2_f4">Paiements</li>
-          <li data-i18n="pillar2_f5">États des lieux digitalisés</li>
+          <li>Planning des réservations (départ / retour)</li>
+          <li>CRM propriétaire — suivi clients &amp; réservations</li>
+          <li>État des lieux digitalisé + PDF légal automatisé (N8N)</li>
+          <li>Empreinte bancaire &amp; paiement CB intégrés</li>
+          <li>Suivi du parc : entretien, réparations, rentabilité</li>
+          <li>Valable véhicules <em style="color:var(--grey);font-size:.8em">&amp;</em> hébergements</li>
         </ul>
       </article>
+
+      <!-- MODULE 03 -->
       <article class="pillar-card pillar-card--03">
         <div class="pillar-head">
           <div class="pillar-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3H5v3c0 .6.4 1 1 1h2"/><path d="M7 11h10"/><path d="M7 7l1.5-3h7L17 7"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="17.5" r="2.5"/></svg>
           </div>
           <div class="pillar-head-text">
-            <span class="pillar-num" data-i18n="pillar3_num">PILIER 03</span>
-            <h3 data-i18n="pillar3_title">Gestion de flotte</h3>
+            <span class="pillar-num">MODULE 03 · Opérationnel</span>
+            <h3>Back-office agence</h3>
           </div>
         </div>
-        <p class="pillar-objective" data-i18n="pillar3_obj">Objectif : Connaître le coût réel de chaque véhicule.</p>
+        <p class="pillar-objective">Usage interne agence. Prise de réservation au comptoir, pilotage de la flotte et gestion du stock.</p>
         <ul class="pillar-features">
-          <li data-i18n="pillar3_f1">Maintenance</li>
-          <li data-i18n="pillar3_f2">Réparations</li>
-          <li data-i18n="pillar3_f3">Stock pièces</li>
-          <li data-i18n="pillar3_f4">Rapports</li>
+          <li>Création de réservation admin (sans passer par la marketplace)</li>
+          <li>Planning agence centralisé</li>
+          <li>Maintenance véhicules — suivi des interventions</li>
+          <li>Stock pièces détachées</li>
+          <li>Rapports de rentabilité par véhicule</li>
         </ul>
       </article>
+
     </div>
   </div>
 </section>
