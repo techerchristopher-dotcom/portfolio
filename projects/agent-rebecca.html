@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Rebecca — Automatisation RH IA — Christopher TECHER</title>
-<meta name="description" content="Agent IA d'analyse de CV déployé en production chez CEFORA. 35h économisées/semaine, +60% réactivité.">
+<meta name="description" content="Agent IA d'analyse de CV déployé en production chez CEFORA. 35h économisées/semaine, +60% réactivité, 12s par CV, 92% précision IA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
   --border:#222; --border2:#333;
   --text:#EEEEEE; --text2:#666; --text3:#3A3A3A;
   --lime:#C8FC00; --lime-dim:rgba(200,252,0,0.07); --lime-b:rgba(200,252,0,0.18);
+  --green:#86efac; --purple:#c4b5fd;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -35,101 +36,206 @@ nav.scrolled{padding:13px 64px;}
 
 /* HERO */
 #hero{min-height:72vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 72px;position:relative;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 10% 70%, rgba(200,252,0,0.035) 0%,transparent 65%);pointer-events:none;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 10% 70%, rgba(200,252,0,0.03) 0%,transparent 65%);pointer-events:none;}
 .hero-grain{position:absolute;inset:0;opacity:.3;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
 .hero-content{position:relative;z-index:2;}
 .hero-breadcrumb{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text2);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
 .hero-breadcrumb::before{content:'';width:24px;height:1px;background:var(--text3);}
-.hero-num{font-size:.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
 .hero-title{font-size:clamp(3rem,7vw,6rem);font-weight:800;line-height:.92;letter-spacing:-.04em;margin-bottom:32px;}
 .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
 .bd{font-size:.62rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:50px;}
 .bd-ia{background:rgba(196,181,253,0.1);color:#c4b5fd;}
-.bd-saas{background:rgba(200,252,0,0.08);color:var(--lime);}
-.bd-mobile{background:rgba(134,239,172,0.1);color:#86efac;}
 .bd-live{background:rgba(200,252,0,0.07);color:var(--lime);}
-.bd-wip{background:rgba(251,191,36,0.1);color:#fbbf24;}
-.hero-desc{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--text2);max-width:600px;line-height:1.65;font-weight:500;}
+.bd-green{background:rgba(134,239,172,0.1);color:#86efac;}
+.hero-desc{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--text2);max-width:640px;line-height:1.65;font-weight:500;}
 
 /* METRICS STRIP */
 #metrics{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);}
-.metric-item{padding:48px 52px;border-right:1px solid var(--border);transition:background .2s;}
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);}
+.metric-item{padding:44px 48px;border-right:1px solid var(--border);transition:background .2s;}
 .metric-item:last-child{border-right:none;}
 .metric-item:hover{background:rgba(200,252,0,0.02);}
-.metric-num{display:block;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:8px;}
-.metric-lbl{font-size:.8rem;color:var(--text2);font-weight:500;line-height:1.4;}
+.metric-num{display:block;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:8px;}
+.metric-lbl{font-size:.75rem;color:var(--text2);font-weight:500;line-height:1.4;}
 
-/* CONTENT SECTIONS */
+/* SECTIONS */
 .s-wrap{padding:80px 64px;}
 .s-eyebrow{font-size:.68rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:14px;margin-bottom:36px;}
 .s-eyebrow::after{content:'';flex:1;height:1px;background:var(--border);}
 .s-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px;}
-.s-desc{font-size:.95rem;color:var(--text2);line-height:1.75;max-width:680px;}
+.s-desc{font-size:.95rem;color:var(--text2);line-height:1.75;max-width:720px;}
 .s-alt{background:var(--surface);}
-
-/* Two-col layout */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:48px;}
 
 /* Feature list */
 .feat-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px;}
-.feat-list li{display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--text2);line-height:1.6;}
-.feat-list li::before{content:'→';color:var(--lime);font-weight:700;flex-shrink:0;margin-top:1px;}
+.feat-list li{display:flex;align-items:flex-start;gap:12px;font-size:.88rem;color:var(--text2);line-height:1.6;}
+.feat-list li::before{content:'→';color:var(--lime);font-weight:700;flex-shrink:0;margin-top:2px;}
 .feat-list li strong{color:var(--text);}
 
-/* Pipeline flow */
-.flow{display:flex;flex-direction:column;gap:2px;}
-.flow-step{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);transition:border-color .2s;}
-.flow-step:hover{border-color:var(--border2);}
-.flow-icon{font-size:1.2rem;flex-shrink:0;width:36px;text-align:center;}
-.flow-body h4{font-size:.85rem;font-weight:700;margin-bottom:2px;}
-.flow-body p{font-size:.75rem;color:var(--text2);line-height:1.35;}
-.flow-arrow{text-align:center;color:var(--text3);font-size:.9rem;padding:4px 0;}
+/* PIPELINE — full 11 steps */
+.pipeline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:40px;}
+.pipe-step{background:var(--bg);padding:24px;display:flex;flex-direction:column;gap:10px;transition:background .2s;}
+.pipe-step:hover{background:var(--surface2);}
+.pipe-num{font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lime);}
+.pipe-title{font-size:.88rem;font-weight:800;color:var(--text);}
+.pipe-desc{font-size:.75rem;color:var(--text2);line-height:1.5;}
+.pipe-tool{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:3px 10px;font-size:.65rem;font-weight:700;color:var(--text2);margin-top:4px;width:fit-content;}
+.pipe-result{background:rgba(200,252,0,0.04);border:1px solid var(--lime-b);grid-column:1/-1;padding:20px 24px;}
+.pipe-result-title{font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin-bottom:10px;}
+.pipe-result-items{display:flex;flex-wrap:wrap;gap:8px;}
+.pipe-result-item{font-size:.75rem;color:var(--text2);display:flex;align-items:center;gap:6px;}
+.pipe-result-item::before{content:'✓';color:var(--green);font-weight:800;font-size:.65rem;}
 
-/* Stack — simple list, not card soup */
+/* N8N NODES */
+.nodes-section{margin-top:56px;}
+.nodes-label{font-size:.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;}
+.nodes-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.node{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:8px;padding:6px 12px;
+  font-size:.72rem;font-weight:600;color:var(--text2);
+}
+.node-arrow{color:var(--text3);font-size:.75rem;}
+
+/* RAPPORT MOCKUP */
+.rapport-mockup{
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  margin-top:40px;background:var(--surface2);
+}
+.rapport-header{
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+}
+.rapport-header-left{}
+.rapport-eyebrow{font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin-bottom:6px;}
+.rapport-name{font-size:1.1rem;font-weight:800;color:var(--text);}
+.rapport-role{font-size:.8rem;color:var(--purple);font-weight:600;margin-top:2px;}
+.rapport-meta{font-size:.72rem;color:var(--text2);margin-top:8px;display:flex;flex-direction:column;gap:3px;}
+.rapport-score{text-align:right;}
+.rapport-score-num{font-size:2.5rem;font-weight:800;letter-spacing:-.04em;color:var(--text);}
+.rapport-score-den{font-size:1rem;color:var(--text2);}
+.rapport-score-label{
+  display:inline-block;margin-top:4px;
+  background:rgba(134,239,172,0.1);border:1px solid rgba(134,239,172,0.25);
+  border-radius:50px;padding:3px 12px;
+  font-size:.65rem;font-weight:800;color:var(--green);
+}
+.rapport-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.rapport-col{padding:20px 24px;border-right:1px solid var(--border);}
+.rapport-col:last-child{border-right:none;}
+.rapport-col-title{font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
+.skill-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.skill-name{font-size:.75rem;color:var(--text2);min-width:90px;flex-shrink:0;}
+.skill-bar-wrap{flex:1;height:4px;background:var(--surface);border-radius:2px;overflow:hidden;}
+.skill-bar{height:100%;background:var(--purple);border-radius:2px;}
+.skill-pct{font-size:.65rem;color:var(--text2);min-width:28px;text-align:right;}
+.adequation-item{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--text2);margin-bottom:8px;}
+.adequation-item::before{content:'✓';color:var(--green);font-size:.65rem;font-weight:800;flex-shrink:0;}
+.rapport-footer{
+  padding:16px 24px;border-top:1px solid var(--border);
+  background:var(--bg);display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.rapport-footer-col{}
+.rapport-footer-label{font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.rapport-summary{font-size:.75rem;color:var(--text2);line-height:1.55;}
+.rapport-reco{
+  background:rgba(196,181,253,0.06);border:1px solid rgba(196,181,253,0.15);
+  border-radius:10px;padding:12px 14px;
+  font-size:.75rem;color:var(--purple);font-weight:600;line-height:1.5;
+}
+
+/* DATABASE MOCKUP */
+.db-mockup{
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  margin-top:40px;
+}
+.db-header{
+  padding:16px 24px;border-bottom:1px solid var(--border);
+  background:var(--surface);display:flex;align-items:center;justify-content:space-between;
+}
+.db-title{font-size:.88rem;font-weight:800;color:var(--text);}
+.db-count{font-size:.75rem;color:var(--text2);margin-left:8px;}
+.db-btn{
+  background:var(--lime);color:#0D0D0D;
+  border-radius:6px;padding:5px 12px;
+  font-size:.72rem;font-weight:800;
+}
+.db-table-head{
+  display:grid;grid-template-columns:2fr 1.5fr 60px 80px 90px 80px;
+  padding:10px 24px;border-bottom:1px solid var(--border);
+  background:var(--surface2);
+}
+.db-th{font-size:.58rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);}
+.db-row{
+  display:grid;grid-template-columns:2fr 1.5fr 60px 80px 90px 80px;
+  padding:12px 24px;border-bottom:1px solid var(--border);
+  align-items:center;transition:background .15s;
+}
+.db-row:last-child{border-bottom:none;}
+.db-row:hover{background:var(--surface);}
+.db-name{font-size:.8rem;font-weight:700;color:var(--text);}
+.db-email{font-size:.68rem;color:var(--text2);margin-top:1px;}
+.db-poste{font-size:.78rem;color:var(--text2);}
+.db-score{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  font-size:.75rem;font-weight:800;
+}
+.score-hi{background:rgba(134,239,172,0.12);color:var(--green);}
+.score-mid{background:rgba(251,191,36,0.12);color:#fbbf24;}
+.db-exp{font-size:.75rem;color:var(--text2);}
+.db-source{font-size:.68rem;color:var(--text2);}
+.db-status{display:inline-flex;border-radius:50px;padding:3px 9px;font-size:.62rem;font-weight:800;}
+.st-new{background:rgba(200,252,0,0.07);color:var(--lime);}
+.st-eval{background:rgba(251,191,36,0.1);color:#fbbf24;}
+.st-short{background:rgba(134,239,172,0.1);color:var(--green);}
+.db-footer{padding:12px 24px;background:var(--surface);border-top:1px solid var(--border);font-size:.72rem;color:var(--text2);}
+
+/* IMPACT */
+.impact-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:40px;}
+.imp-stat{background:var(--bg);padding:28px 24px;}
+.imp-num{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-.04em;margin-bottom:6px;color:var(--text);}
+.imp-label{font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text2);line-height:1.4;}
+.imp-trend{font-size:.68rem;color:var(--green);margin-top:4px;font-weight:600;}
+
+/* Sources breakdown */
+.sources-row{display:flex;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:24px;height:48px;}
+.source-bar{display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:#0D0D0D;transition:flex .3s;}
+.source-li{background:var(--purple);flex:42;}
+.source-em{background:var(--lime);flex:25;}
+.source-fo{background:#fb923c;flex:18;}
+.source-si{background:var(--green);flex:10;}
+.source-au{background:var(--text3);flex:5;color:var(--text2);}
+.sources-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;}
+.src-item{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text2);}
+.src-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+/* Precision metrics */
+.precision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px;}
+.prec-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.prec-num{font-size:1.8rem;font-weight:800;letter-spacing:-.04em;color:var(--lime);margin-bottom:4px;}
+.prec-label{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text2);}
+.prec-sub{font-size:.72rem;color:var(--text2);margin-top:6px;line-height:1.4;}
+.prec-trend{font-size:.65rem;color:var(--green);margin-top:4px;font-weight:600;}
+
+/* Stack */
 .stack-table{display:flex;flex-direction:column;gap:0;margin-top:36px;border:1px solid var(--border);border-radius:16px;overflow:hidden;}
-.stack-row{display:flex;align-items:center;gap:24px;padding:18px 24px;border-bottom:1px solid var(--border);transition:background .2s;}
+.stack-row{display:flex;align-items:flex-start;gap:24px;padding:18px 24px;border-bottom:1px solid var(--border);transition:background .2s;}
 .stack-row:last-child{border-bottom:none;}
 .stack-row:hover{background:var(--surface);}
-.stack-cat{font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);min-width:110px;flex-shrink:0;}
-.stack-items{display:flex;flex-wrap:wrap;gap:8px;}
-.stack-tag{font-size:.75rem;font-weight:600;color:var(--text2);}
-.stack-tag+.stack-tag::before{content:'·';margin-right:4px;color:var(--text3);}
+.stack-cat{font-size:.62rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);min-width:130px;flex-shrink:0;padding-top:3px;}
+.stack-items{display:flex;flex-wrap:wrap;gap:6px;}
+.stack-tag{font-size:.73rem;font-weight:700;color:var(--text2);background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:3px 10px;}
+.stack-note{font-size:.73rem;color:var(--text3);padding-top:3px;flex:1;}
 
-/* Links section */
+/* Links */
 .links-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;}
 .btn-lime{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#0D0D0D;font-weight:800;font-size:.9rem;padding:14px 28px;border-radius:50px;transition:all .2s;}
 .btn-lime:hover{opacity:.9;transform:translateY(-2px);}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border2);color:var(--text2);font-weight:700;font-size:.9rem;padding:13px 24px;border-radius:50px;transition:all .2s;}
 .btn-outline:hover{border-color:var(--text2);color:var(--text);}
-
-/* GALLERY */
-.gallery-section{padding:80px 64px;background:var(--surface);}
-.gallery-grid-full{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;}
-.gallery-grid-full .wide{grid-column:1/-1;}
-.gallery-card{
-  position:relative;border:1px solid var(--border);border-radius:14px;
-  overflow:hidden;cursor:zoom-in;
-  transition:border-color .25s,transform .25s;
-  background:var(--bg);
-}
-.gallery-card:hover{border-color:rgba(200,252,0,0.28);transform:translateY(-2px);}
-.gallery-card img{width:100%;height:auto;display:block;}
-.gallery-caption{
-  padding:14px 18px;border-top:1px solid var(--border);
-  background:var(--surface2);
-}
-.gallery-caption-label{font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin-bottom:4px;}
-.gallery-caption-name{font-size:.85rem;font-weight:700;color:var(--text);}
-.gallery-caption-desc{font-size:.75rem;color:var(--text2);margin-top:3px;line-height:1.4;}
-
-/* LIGHTBOX */
-.lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.93);display:none;align-items:center;justify-content:center;padding:24px;}
-.lb.active{display:flex;}
-.lb img{max-width:min(94vw,1100px);max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 40px 100px rgba(0,0,0,0.6);}
-.lb-close{position:fixed;top:20px;right:24px;width:40px;height:40px;border:1px solid rgba(255,255,255,0.15);border-radius:50%;background:rgba(255,255,255,0.06);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);width:44px;height:44px;border:1px solid rgba(255,255,255,0.15);border-radius:50%;background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.lb-prev{left:16px;}.lb-next{right:16px;}
 
 /* FOOTER */
 footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
@@ -143,8 +249,35 @@ footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-i
 .fade-up.visible{opacity:1;transform:translateY(0);}
 
 /* RESPONSIVE */
-@media(max-width:1024px){nav,#hero,.s-wrap,footer{padding-left:32px;padding-right:32px;}.metric-item{padding:36px 32px;}}
-@media(max-width:768px){nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}#hero{padding:0 24px 56px;}.s-wrap{padding:60px 24px;}.two-col{grid-template-columns:1fr;gap:40px;}.metrics-row{grid-template-columns:1fr;}.metric-item{border-right:none;border-bottom:1px solid var(--border);padding:28px 24px;}.metric-item:last-child{border-bottom:none;}footer{padding:20px 24px;}.gallery-section{padding:60px 24px;}.gallery-grid-full{grid-template-columns:1fr;}.gallery-grid-full .wide{grid-column:auto;}}
+@media(max-width:1024px){
+  nav,#hero,.s-wrap,footer{padding-left:32px;padding-right:32px;}
+  .metric-item{padding:32px 28px;}
+  .pipeline-grid{grid-template-columns:repeat(2,1fr);}
+  .rapport-body{grid-template-columns:1fr;}
+  .rapport-col{border-right:none;border-bottom:1px solid var(--border);}
+  .rapport-footer{grid-template-columns:1fr;}
+  .impact-stats{grid-template-columns:repeat(2,1fr);}
+  .db-table-head,.db-row{grid-template-columns:2fr 1.5fr 50px 70px 70px;}
+  .db-source{display:none;}
+}
+@media(max-width:768px){
+  nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}
+  #hero{padding:0 24px 56px;}
+  .s-wrap{padding:60px 24px;}
+  .two-col{grid-template-columns:1fr;gap:40px;}
+  .metrics-row{grid-template-columns:repeat(2,1fr);}
+  .metric-item{border-right:none;border-bottom:1px solid var(--border);padding:24px;}
+  .metric-item:nth-child(even){border-right:none;}
+  .metric-item:nth-child(odd){border-right:1px solid var(--border);}
+  .metric-item:nth-child(3),.metric-item:nth-child(4){border-bottom:none;}
+  .pipeline-grid{grid-template-columns:1fr;}
+  .nodes-flow{gap:4px;}
+  .impact-stats{grid-template-columns:1fr 1fr;}
+  .precision-grid{grid-template-columns:1fr;}
+  .db-table-head,.db-row{grid-template-columns:2fr 50px 70px;}
+  .db-poste,.db-exp{display:none;}
+  footer{padding:20px 24px;}
+}
 </style>
 </head>
 <body>
@@ -154,166 +287,491 @@ footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-i
   <a href="../index.html#work" class="nav-back">← Portfolio</a>
 </nav>
 
+<!-- ═══════ HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grain"></div>
   <div class="hero-content">
     <div class="hero-breadcrumb">Projet 02</div>
-    <h1 class="hero-title">Agent
-Rebecca</h1>
+    <h1 class="hero-title">Agent<br>Rebecca</h1>
     <div class="hero-badges">
-      <span class="bd bd-ia">🤖 IA</span><span class="bd bd-ia">Automatisation RH</span>
-      <span class="bd bd-live">● Live</span>
+      <span class="bd bd-ia">🤖 IA</span>
+      <span class="bd bd-ia">Automatisation RH</span>
+      <span class="bd bd-live">● Live — CEFORA</span>
+      <span class="bd bd-green">n8n · MAKE</span>
     </div>
-    <p class="hero-desc">Agent IA d'analyse de CV déployé en production chez CEFORA. PDF → GPT-Vision → extraction structurée → Airtable. Un pipeline no-code qui remplace des heures de tri manuel et 2 ETP.</p>
+    <p class="hero-desc">Agent IA d'analyse de CV déployé en production chez CEFORA. Le pipeline transforme chaque candidature reçue en rapport structuré, score de matching et injection automatique dans la base RH — sans intervention humaine. 20+ nœuds n8n, GPT-Vision, Google Workspace.</p>
   </div>
 </section>
 
+<!-- ═══════ METRICS — 4 stats extraites des résultats réels -->
 <section id="metrics">
   <div class="metrics-row">
-      <div class="metric-item fade-up">
-        <span class="metric-num">35h</span>
-        <span class="metric-lbl">économisées
-par semaine</span>
-      </div>
-      <div class="metric-item fade-up">
-        <span class="metric-num">+60%</span>
-        <span class="metric-lbl">réactivité
-candidats</span>
-      </div>
-      <div class="metric-item fade-up">
-        <span class="metric-num">2 ETP</span>
-        <span class="metric-lbl">remplacés
-par le pipeline</span>
-      </div></div>
+    <div class="metric-item fade-up">
+      <span class="metric-num">35h</span>
+      <span class="metric-lbl">économisées<br>par semaine</span>
+    </div>
+    <div class="metric-item fade-up">
+      <span class="metric-num">12s</span>
+      <span class="metric-lbl">traitement complet<br>par CV</span>
+    </div>
+    <div class="metric-item fade-up">
+      <span class="metric-num">92%</span>
+      <span class="metric-lbl">précision IA<br>analyse & classification</span>
+    </div>
+    <div class="metric-item fade-up">
+      <span class="metric-num">2 ETP</span>
+      <span class="metric-lbl">remplacés<br>par le pipeline</span>
+    </div>
+  </div>
 </section>
 
+<!-- ═══════ CE QUE ÇA FAIT -->
 <div class="s-wrap s-alt fade-up" id="about">
   <p class="s-eyebrow">Projet</p>
   <div class="two-col">
     <div>
       <h2 class="s-title">Ce que ça fait</h2>
-      <ul class="feat-list"><li><strong>Réception automatique</strong> — CVs reçus par email ou formulaire, traités sans intervention</li><li><strong>Vision IA</strong> — GPT-Vision lit le PDF converti en image, extrait chaque champ</li><li><strong>Classification automatique</strong> — scoring pertinence, formation visée, zone géographique</li><li><strong>Base RH centralisée</strong> — injection Airtable avec lien Drive vers CV original</li><li><strong>Notification équipe</strong> — alerte automatique dès qu'un profil est classé</li><li>Pas de code côté client — 100% no-code sur MAKE (certifié)</li></ul>
+      <p class="s-desc">De la réception du CV à l'intégration dans la base candidats — traitement 100% automatisé, 0 saisie manuelle.</p>
+      <ul class="feat-list" style="margin-top:24px;">
+        <li><strong>Réception multi-source</strong> — CVs reçus par Gmail, formulaire web, LinkedIn ou plateforme de recrutement</li>
+        <li><strong>Conversion PDF → JPEG</strong> — iLovePDF extrait chaque page, upload Drive avec lien public pour GPT-Vision</li>
+        <li><strong>Vision IA</strong> — GPT-Vision lit l'image du CV, extrait nom, email, compétences, formation, langues, disponibilité, salaire attendu</li>
+        <li><strong>Score de matching /100</strong> — algorithme de scoring multi-critères, classification automatique, taux de qualification 68%</li>
+        <li><strong>Rapport candidat généré</strong> — Google Docs formaté avec barres de compétences, adéquation au poste, résumé IA et recommandation</li>
+        <li><strong>Dossier Drive par candidat</strong> — création automatique, déplacement CV + rapport, lien public du rapport</li>
+        <li><strong>Base centralisée</strong> — injection Google Sheets avec score, expérience, source, statut — 842 candidats synchronisés</li>
+        <li><strong>Notifications équipe RH</strong> — Gmail selon profil (type profil → Router → email ciblé + plaquette graphique en pièce jointe)</li>
+      </ul>
     </div>
     <div>
-      <p class="s-eyebrow">Pipeline</p>
-      <div class="flow">
-        <div class="flow-step">
-          <span class="flow-icon">📄</span>
-          <div class="flow-body">
-            <h4>Réception CV</h4>
-            <p>PDF via email ou formulaire web</p>
-          </div>
-        </div><div class="flow-arrow">↓</div>
-        <div class="flow-step">
-          <span class="flow-icon">🖼️</span>
-          <div class="flow-body">
-            <h4>Conversion PDF → JPEG</h4>
-            <p>iLovePDF + Picnie pour analyse visuelle</p>
-          </div>
-        </div><div class="flow-arrow">↓</div>
-        <div class="flow-step">
-          <span class="flow-icon">🧠</span>
-          <div class="flow-body">
-            <h4>Analyse GPT-Vision</h4>
-            <p>Extraction nom, email, compétences, zone géo</p>
-          </div>
-        </div><div class="flow-arrow">↓</div>
-        <div class="flow-step">
-          <span class="flow-icon">📊</span>
-          <div class="flow-body">
-            <h4>Classification IA</h4>
-            <p>Formation visée, pertinence, score de matching</p>
-          </div>
-        </div><div class="flow-arrow">↓</div>
-        <div class="flow-step">
-          <span class="flow-icon">✅</span>
-          <div class="flow-body">
-            <h4>Injection Airtable</h4>
-            <p>CVTech + Drive + notification équipe</p>
-          </div>
-        </div></div>
+      <p class="s-eyebrow">Résultats CEFORA</p>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:16px;">
+        <div style="padding:20px;background:var(--bg);border:1px solid var(--border);border-radius:12px;">
+          <div style="font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">Avant Rebecca</div>
+          <ul class="feat-list">
+            <li style="color:rgba(248,113,113,0.8)">Tri manuel des CVs — 35h par semaine</li>
+            <li style="color:rgba(248,113,113,0.8)">Délai de réponse candidat : 3 à 5 jours</li>
+            <li style="color:rgba(248,113,113,0.8)">Saisie manuelle dans CRM — erreurs fréquentes</li>
+            <li style="color:rgba(248,113,113,0.8)">Aucune standardisation de l'évaluation</li>
+          </ul>
+        </div>
+        <div style="padding:20px;background:rgba(134,239,172,0.04);border:1px solid rgba(134,239,172,0.15);border-radius:12px;">
+          <div style="font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:10px;">Après Rebecca</div>
+          <ul class="feat-list">
+            <li><strong>12 secondes</strong> par CV, traitement complet</li>
+            <li><strong>+60% de réactivité</strong> envers les candidats</li>
+            <li><strong>0 saisie manuelle</strong> — données extraites et injectées auto</li>
+            <li><strong>92% de précision</strong> dans l'analyse et la classification</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- ═══════ PIPELINE — 11 étapes logiques -->
+<div class="s-wrap fade-up" id="pipeline">
+  <p class="s-eyebrow">Pipeline</p>
+  <h2 class="s-title">Flux complet en 11 étapes</h2>
+  <p class="s-desc">De la candidature reçue à l'intégration dans la base — le pipeline Rebecca en détail.</p>
+
+  <div class="pipeline-grid">
+    <div class="pipe-step">
+      <span class="pipe-num">01</span>
+      <div class="pipe-title">Candidature reçue</div>
+      <div class="pipe-desc">Réception automatique via Gmail, formulaire web, LinkedIn ou plateforme recrutement.</div>
+      <span class="pipe-tool">Gmail · Forms · LinkedIn</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">02</span>
+      <div class="pipe-title">Extraction du CV</div>
+      <div class="pipe-desc">Le PDF est téléchargé depuis Google Drive et envoyé à iLovePDF pour conversion page par page.</div>
+      <span class="pipe-tool">Google Drive · iLovePDF API</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">03</span>
+      <div class="pipe-title">Upload & lien public</div>
+      <div class="pipe-desc">L'image JPEG est uploadée sur Drive, un lien public est généré pour GPT-Vision.</div>
+      <span class="pipe-tool">Google Drive · Picnie</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">04</span>
+      <div class="pipe-title">Analyse IA (GPT-Vision)</div>
+      <div class="pipe-desc">GPT-Vision lit l'image du CV et comprend : compétences, expériences, formations, langues, disponibilité, salaire attendu.</div>
+      <span class="pipe-tool">OpenAI GPT-Vision</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">05</span>
+      <div class="pipe-title">Extraction structurée</div>
+      <div class="pipe-desc">Les données brutes de l'IA sont parsées en JSON structuré — prêt pour la suite du pipeline.</div>
+      <span class="pipe-tool">JSON · Parsing</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">06</span>
+      <div class="pipe-title">Génération du rapport</div>
+      <div class="pipe-desc">Un Google Docs formaté est généré automatiquement — score, barres de compétences, adéquation au poste, résumé IA, recommandation.</div>
+      <span class="pipe-tool">Google Docs · IA Générative</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">07</span>
+      <div class="pipe-title">Score & classement</div>
+      <div class="pipe-desc">Le candidat est noté /100 selon plusieurs critères, classé automatiquement. Taux de qualification : 68%.</div>
+      <span class="pipe-tool">Algorithme scoring</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">08</span>
+      <div class="pipe-title">Dossier candidat Drive</div>
+      <div class="pipe-desc">Création automatique du dossier, déplacement du CV et du rapport, génération du lien public du rapport.</div>
+      <span class="pipe-tool">Google Drive</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">09</span>
+      <div class="pipe-title">Injection base candidats</div>
+      <div class="pipe-desc">Toutes les données sont injectées dans Google Sheets — score, expérience, source, statut, lien dossier. Zéro saisie manuelle.</div>
+      <span class="pipe-tool">Google Sheets</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">10</span>
+      <div class="pipe-title">Routing par profil</div>
+      <div class="pipe-desc">Un Router n8n analyse le type de profil et dirige vers la notification appropriée selon les critères définis.</div>
+      <span class="pipe-tool">Router · Type profil</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-num">11</span>
+      <div class="pipe-title">Notifications équipe RH</div>
+      <div class="pipe-desc">Email ciblé à l'équipe RH avec le rapport + plaquette graphique en pièce jointe. Candidat prêt pour le suivi ou entretien.</div>
+      <span class="pipe-tool">Gmail · Drive</span>
+    </div>
+
+    <div class="pipe-result">
+      <div class="pipe-result-title">Résultat du pipeline</div>
+      <div class="pipe-result-items">
+        <span class="pipe-result-item">Traitement 100% automatisé</span>
+        <span class="pipe-result-item">Gain de temps considérable</span>
+        <span class="pipe-result-item">Moins d'erreurs manuelles</span>
+        <span class="pipe-result-item">Meilleure qualité de recrutement</span>
+        <span class="pipe-result-item">Processus standardisé et scalable</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- n8n nodes flow -->
+  <div class="nodes-section">
+    <div class="nodes-label">Nœuds n8n — workflow réel (20+ nodes)</div>
+    <div class="nodes-flow">
+      <span class="node">📁 Dossier Drive</span><span class="node-arrow">→</span>
+      <span class="node">⬇ Téléchargement PDF</span><span class="node-arrow">→</span>
+      <span class="node">📄 iLovePDF</span><span class="node-arrow">→</span>
+      <span class="node">⬆ Upload JPEG</span><span class="node-arrow">→</span>
+      <span class="node">🔗 Lien public</span><span class="node-arrow">→</span>
+      <span class="node">🧰 Tools</span><span class="node-arrow">→</span>
+      <span class="node">🧠 OpenAI GPT-Vision</span><span class="node-arrow">→</span>
+      <span class="node">{ } JSON</span><span class="node-arrow">→</span>
+      <span class="node">📊 Analyser CV</span><span class="node-arrow">→</span>
+      <span class="node">📝 Google Docs</span><span class="node-arrow">→</span>
+      <span class="node">📁 Création dossier</span><span class="node-arrow">→</span>
+      <span class="node">✏️ Rename dossier</span><span class="node-arrow">→</span>
+      <span class="node">↕ Déplacer CV</span><span class="node-arrow">→</span>
+      <span class="node">↕ Déplacer rapport</span><span class="node-arrow">→</span>
+      <span class="node">🔗 Lien rapport</span><span class="node-arrow">→</span>
+      <span class="node">👤 Type profil</span><span class="node-arrow">→</span>
+      <span class="node">📊 Google Sheets</span><span class="node-arrow">→</span>
+      <span class="node">⚡ Router</span><span class="node-arrow">→</span>
+      <span class="node">📧 Gmail RH</span>
+      <span class="node">📧 Gmail candidat</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ OUTPUT — rapport candidat (mockup HTML des données réelles) -->
+<div class="s-wrap s-alt fade-up" id="output">
+  <p class="s-eyebrow">Output</p>
+  <h2 class="s-title">Le rapport candidat généré</h2>
+  <p class="s-desc">Chaque candidature génère automatiquement un rapport structuré — données extraites, score /100, compétences, adéquation au poste et recommandation IA.</p>
+
+  <div class="rapport-mockup">
+    <div class="rapport-header">
+      <div class="rapport-header-left">
+        <div class="rapport-eyebrow">Généré par Rebecca AI · 17 mai 2024 - 10:24</div>
+        <div class="rapport-name">Marie Andriamanga</div>
+        <div class="rapport-role">UX/UI Designer</div>
+        <div class="rapport-meta">
+          <span>marie.andriamanga@gmail.com</span>
+          <span>+261 34 12 345 67 · Antananarivo, Madagascar</span>
+          <span>linkedin.com/in/marie-andriamanga</span>
+        </div>
+      </div>
+      <div class="rapport-score">
+        <div><span class="rapport-score-num">78</span><span class="rapport-score-den">/100</span></div>
+        <div><span class="rapport-score-label">✓ BON MATCH</span></div>
+      </div>
+    </div>
+
+    <div class="rapport-body">
+      <div class="rapport-col">
+        <div class="rapport-col-title">Informations extraites</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:.75rem;">
+            <span style="color:var(--text2)">Expérience</span><span style="color:var(--text);font-weight:600;">4 ans</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.75rem;">
+            <span style="color:var(--text2)">Formation</span><span style="color:var(--text);font-weight:600;text-align:right;max-width:200px;">Master Design Digital · ISPM Antananarivo</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.75rem;">
+            <span style="color:var(--text2)">Langues</span><span style="color:var(--text);font-weight:600;">FR courant · EN intermédiaire</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.75rem;">
+            <span style="color:var(--text2)">Disponibilité</span><span style="color:var(--green);font-weight:700;">Immédiate</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.75rem;">
+            <span style="color:var(--text2)">Compétences clés</span><span style="color:var(--text);font-weight:600;text-align:right;max-width:200px;">Figma · Adobe XD · UI Design · UX Research · Prototypage</span>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <div class="rapport-col-title">Compétences identifiées</div>
+          <div class="skill-row"><span class="skill-name">UI Design</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div><span class="skill-pct">90%</span></div>
+          <div class="skill-row"><span class="skill-name">Communication</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div><span class="skill-pct">85%</span></div>
+          <div class="skill-row"><span class="skill-name">UX Research</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+          <div class="skill-row"><span class="skill-name">Prototypage</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div><span class="skill-pct">75%</span></div>
+          <div class="skill-row"><span class="skill-name">Design System</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div><span class="skill-pct">70%</span></div>
+        </div>
+      </div>
+
+      <div class="rapport-col">
+        <div class="rapport-col-title">Adéquation au poste</div>
+        <div class="adequation-item">Correspond bien aux compétences requises</div>
+        <div class="adequation-item">Expérience pertinente dans des projets similaires</div>
+        <div class="adequation-item">Bon niveau en outils de design et prototypage</div>
+        <div class="adequation-item">Profil créatif et orienté utilisateur</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:16px;">
+          <div style="width:56px;height:56px;border-radius:50%;border:3px solid var(--purple);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:var(--purple);">78%</div>
+          <span style="font-size:.75rem;color:var(--text2);">Bon match</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rapport-footer">
+      <div class="rapport-footer-col">
+        <div class="rapport-footer-label">Résumé de l'IA</div>
+        <div class="rapport-summary">Marie est une UX/UI Designer motivée avec 4 ans d'expérience dans la conception d'interfaces utilisateur et la recherche UX. Elle maîtrise les outils de design et a travaillé sur des projets web et mobile. Son profil correspond bien au poste et elle peut contribuer efficacement à l'amélioration de l'expérience utilisateur.</div>
+      </div>
+      <div class="rapport-footer-col">
+        <div class="rapport-footer-label">Recommandation</div>
+        <div class="rapport-reco">Candidat à fort potentiel — recommandé pour passer à l'étape d'entretien technique.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ BASE CANDIDATS -->
+<div class="s-wrap fade-up" id="database">
+  <p class="s-eyebrow">Base de données</p>
+  <h2 class="s-title">842 candidats synchronisés automatiquement</h2>
+  <p class="s-desc">Chaque candidature traitée alimente la base en temps réel. Score, expérience, source, statut — 0 saisie manuelle.</p>
+
+  <div class="db-mockup">
+    <div class="db-header">
+      <div>
+        <span class="db-title">Base candidats</span>
+        <span class="db-count">842 candidats · Synchronisée en temps réel</span>
+      </div>
+      <span class="db-btn">+ Ajouter un candidat</span>
+    </div>
+    <div class="db-table-head">
+      <span class="db-th">Candidat</span>
+      <span class="db-th">Poste visé</span>
+      <span class="db-th">Score</span>
+      <span class="db-th">Expérience</span>
+      <span class="db-th">Source</span>
+      <span class="db-th">Statut</span>
+    </div>
+    <div class="db-row">
+      <div><div class="db-name">Marie Andriamanga</div><div class="db-email">marie.andriamanga@gmail.com</div></div>
+      <div class="db-poste">UX/UI Designer</div>
+      <div><span class="db-score score-mid">78</span></div>
+      <div class="db-exp">4 ans</div>
+      <div class="db-source">LinkedIn</div>
+      <div><span class="db-status st-new">Nouveau</span></div>
+    </div>
+    <div class="db-row">
+      <div><div class="db-name">David Rakotoarisoa</div><div class="db-email">david.rakoto@gmail.com</div></div>
+      <div class="db-poste">Product Manager</div>
+      <div><span class="db-score score-hi">82</span></div>
+      <div class="db-exp">6 ans</div>
+      <div class="db-source">Gmail</div>
+      <div><span class="db-status st-eval">À évaluer</span></div>
+    </div>
+    <div class="db-row">
+      <div><div class="db-name">Jean Randriaina</div><div class="db-email">jean.randria@gmail.com</div></div>
+      <div class="db-poste">Développeur Full Stack</div>
+      <div><span class="db-score score-hi">85</span></div>
+      <div class="db-exp">5 ans</div>
+      <div class="db-source">LinkedIn</div>
+      <div><span class="db-status st-short">Shortlisté</span></div>
+    </div>
+    <div class="db-row">
+      <div><div class="db-name">Tiana Rakotomalala</div><div class="db-email">tiana.rakoto@gmail.com</div></div>
+      <div class="db-poste">DevOps Engineer</div>
+      <div><span class="db-score score-hi">83</span></div>
+      <div class="db-exp">5 ans</div>
+      <div class="db-source">Gmail</div>
+      <div><span class="db-status st-short">Shortlisté</span></div>
+    </div>
+    <div class="db-row">
+      <div><div class="db-name">Rija Andriamanantena</div><div class="db-email">rija.andri@mail.com</div></div>
+      <div class="db-poste">Data Analyst</div>
+      <div><span class="db-score score-hi">80</span></div>
+      <div class="db-exp">4 ans</div>
+      <div class="db-source">LinkedIn</div>
+      <div><span class="db-status st-short">Shortlisté</span></div>
+    </div>
+    <div class="db-footer">Affichage de 1 à 5 sur 842 candidats · 85 pages</div>
+  </div>
+</div>
+
+<!-- ═══════ IMPACT & RÉSULTATS -->
+<div class="s-wrap s-alt fade-up" id="impact">
+  <p class="s-eyebrow">Impact</p>
+  <h2 class="s-title">Résultats mesurables</h2>
+  <p class="s-desc">Données issues de la production CEFORA — 30 derniers jours.</p>
+
+  <div class="impact-stats">
+    <div class="imp-stat">
+      <div class="imp-num">35h</div>
+      <div class="imp-label">Heures économisées<br>par semaine</div>
+      <div class="imp-trend">↑ +18% vs semaine dernière</div>
+    </div>
+    <div class="imp-stat">
+      <div class="imp-num">842</div>
+      <div class="imp-label">Candidatures traitées<br>ce mois-ci</div>
+      <div class="imp-trend">↑ +23% vs mois dernier</div>
+    </div>
+    <div class="imp-stat">
+      <div class="imp-num">100%</div>
+      <div class="imp-label">Taux d'automatisation<br>des processus</div>
+      <div class="imp-trend">↑ +12% vs mois dernier</div>
+    </div>
+    <div class="imp-stat">
+      <div class="imp-num">12s</div>
+      <div class="imp-label">Temps moyen<br>par CV complet</div>
+      <div class="imp-trend">↓ -82% vs traitement manuel</div>
+    </div>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;">
+    <div style="font-size:.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">Répartition par source</div>
+    <div class="sources-row">
+      <div class="source-bar source-li">42%</div>
+      <div class="source-bar source-em">25%</div>
+      <div class="source-bar source-fo">18%</div>
+      <div class="source-bar source-si">10%</div>
+      <div class="source-bar source-au">5%</div>
+    </div>
+    <div class="sources-legend">
+      <span class="src-item"><span class="src-dot" style="background:var(--purple)"></span>LinkedIn 42%</span>
+      <span class="src-item"><span class="src-dot" style="background:var(--lime)"></span>Email 25%</span>
+      <span class="src-item"><span class="src-dot" style="background:#fb923c"></span>Formulaire 18%</span>
+      <span class="src-item"><span class="src-dot" style="background:var(--green)"></span>Site carrière 10%</span>
+      <span class="src-item"><span class="src-dot" style="background:var(--text3)"></span>Autres 5%</span>
+    </div>
+  </div>
+
+  <!-- Précision & qualification -->
+  <div class="precision-grid" style="margin-top:40px;">
+    <div class="prec-card">
+      <div class="prec-num">68%</div>
+      <div class="prec-label">Taux de qualification</div>
+      <div class="prec-sub">Des candidats sont qualifiés automatiquement par l'IA selon les critères du poste.</div>
+      <div class="prec-trend">↑ +15% vs mois dernier</div>
+    </div>
+    <div class="prec-card">
+      <div class="prec-num">92%</div>
+      <div class="prec-label">Précision de l'IA</div>
+      <div class="prec-sub">Précision dans l'analyse et la classification des profils candidats.</div>
+      <div class="prec-trend">↑ +8% vs mois dernier</div>
+    </div>
+    <div class="prec-card">
+      <div class="prec-num">842</div>
+      <div class="prec-label">Rapports générés</div>
+      <div class="prec-sub">Rapports d'analyse générés automatiquement et archivés sur Google Drive.</div>
+      <div class="prec-trend">↑ +20% vs mois dernier</div>
+    </div>
+    <div class="prec-card">
+      <div class="prec-num">100%</div>
+      <div class="prec-label">Pipeline mis à jour</div>
+      <div class="prec-sub">Des candidatures sont synchronisées en temps réel dans Google Sheets.</div>
+      <div class="prec-trend" style="color:var(--lime);">En temps réel</div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;padding:24px 28px;background:var(--bg);border:1px solid var(--border2);border-left:3px solid var(--lime);border-radius:12px;">
+    <p style="font-size:.95rem;color:var(--text2);line-height:1.7;font-style:italic;">"Rebecca AI a transformé notre processus de recrutement. Nous gagnons un temps considérable et prenons de meilleures décisions."</p>
+    <p style="font-size:.75rem;color:var(--text3);margin-top:8px;font-weight:700;">— Responsable RH · CEFORA</p>
+  </div>
+</div>
+
+<!-- ═══════ STACK -->
 <div class="s-wrap fade-up" id="stack">
   <p class="s-eyebrow">Stack</p>
   <h2 class="s-title">Technologies</h2>
-  <div class="stack-table"><div class="stack-row"><span class="stack-cat">Automatisation</span><div class="stack-items"><span class="stack-tag">MAKE (certifié)</span><span class="stack-tag">Webhooks</span><span class="stack-tag">iLovePDF API</span><span class="stack-tag">Picnie</span></div></div><div class="stack-row"><span class="stack-cat">IA & Vision</span><div class="stack-items"><span class="stack-tag">GPT-Vision (OpenAI)</span><span class="stack-tag">Prompt Engineering</span><span class="stack-tag">Extraction structurée</span></div></div><div class="stack-row"><span class="stack-cat">Données</span><div class="stack-items"><span class="stack-tag">Airtable</span><span class="stack-tag">Google Drive</span><span class="stack-tag">Google Workspace</span></div></div></div>
+  <div class="stack-table">
+    <div class="stack-row">
+      <span class="stack-cat">Orchestration</span>
+      <div class="stack-items">
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">MAKE (certifié)</span>
+        <span class="stack-tag">Webhooks</span>
+        <span class="stack-tag">Router</span>
+      </div>
+      <div class="stack-note">20+ nœuds · workflow branché selon type de profil</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">Conversion PDF</span>
+      <div class="stack-items">
+        <span class="stack-tag">iLovePDF API</span>
+        <span class="stack-tag">Picnie</span>
+      </div>
+      <div class="stack-note">PDF → JPEG page par page · upload Drive + lien public</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">IA & Vision</span>
+      <div class="stack-items">
+        <span class="stack-tag">OpenAI GPT-Vision</span>
+        <span class="stack-tag">IA Générative</span>
+        <span class="stack-tag">Prompt Engineering</span>
+      </div>
+      <div class="stack-note">Extraction structurée · scoring · résumé · recommandation</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">Données</span>
+      <div class="stack-items">
+        <span class="stack-tag">Google Sheets</span>
+        <span class="stack-tag">Google Drive</span>
+        <span class="stack-tag">Google Docs</span>
+      </div>
+      <div class="stack-note">Base candidats 842+ · dossier Drive par candidat · rapport Docs</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">Notifications</span>
+      <div class="stack-items">
+        <span class="stack-tag">Gmail</span>
+        <span class="stack-tag">Google Workspace</span>
+      </div>
+      <div class="stack-note">Email RH + candidat · plaquette graphique en PJ</div>
+    </div>
+  </div>
 </div>
 
-
-
-<section class="gallery-section fade-up" id="gallery">
-  <p class="s-eyebrow">Aperçu</p>
-  <h2 class="s-title">Le système en images</h2>
-  <div class="gallery-grid-full">
-
-    <!-- Workflow n8n — full width -->
-    <div class="gallery-card wide" data-lb="0">
-      <img src="../assets/rebecca/01-workflow-n8n.png" alt="Workflow n8n Agent Rebecca — pipeline complet" loading="lazy">
-      <div class="gallery-caption">
-        <div class="gallery-caption-label">Pipeline · n8n</div>
-        <div class="gallery-caption-name">Workflow n8n complet</div>
-        <div class="gallery-caption-desc">Vue du pipeline de bout en bout — Google Drive → iLovePDF → GPT-Vision → Google Docs → Sheets → Notification email.</div>
-      </div>
-    </div>
-
-    <!-- Flux infographie -->
-    <div class="gallery-card" data-lb="1">
-      <img src="../assets/rebecca/02-flux-automatisation.png" alt="Flux complet automatisation recrutement — 11 étapes" loading="lazy">
-      <div class="gallery-caption">
-        <div class="gallery-caption-label">Flux · 11 étapes</div>
-        <div class="gallery-caption-name">Flux d'automatisation complet</div>
-        <div class="gallery-caption-desc">De la réception du CV à l'intégration dans la base candidats. Traitement 100% automatisé.</div>
-      </div>
-    </div>
-
-    <!-- Rapport candidat -->
-    <div class="gallery-card" data-lb="2">
-      <img src="../assets/rebecca/03-rapport-candidat.png" alt="Rapport d'analyse candidat généré par IA" loading="lazy">
-      <div class="gallery-caption">
-        <div class="gallery-caption-label">Output · Rapport IA</div>
-        <div class="gallery-caption-name">Rapport d'analyse candidat</div>
-        <div class="gallery-caption-desc">Score global /100, compétences identifiées, adéquation au poste, résumé IA et recommandation — généré automatiquement.</div>
-      </div>
-    </div>
-
-    <!-- Base candidats -->
-    <div class="gallery-card" data-lb="3">
-      <img src="../assets/rebecca/04-base-candidats.png" alt="Base candidats mise à jour automatiquement — 842 candidats" loading="lazy">
-      <div class="gallery-caption">
-        <div class="gallery-caption-label">Output · Base de données</div>
-        <div class="gallery-caption-name">Base candidats automatisée</div>
-        <div class="gallery-caption-desc">842 candidats synchronisés. Score, expérience, source, statut — 0 saisie manuelle.</div>
-      </div>
-    </div>
-
-    <!-- Résultats — full width -->
-    <div class="gallery-card wide" data-lb="4">
-      <img src="../assets/rebecca/05-resultats.png" alt="Résultats Rebecca AI — 35h économisées, 100% automatisé, 12s par CV" loading="lazy">
-      <div class="gallery-caption">
-        <div class="gallery-caption-label">Impact · Résultats</div>
-        <div class="gallery-caption-name">Résultats mesurables</div>
-        <div class="gallery-caption-desc">35h économisées/semaine · 842 candidatures traitées · 100% automatisé · 12s par CV · 92% précision IA.</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
+<!-- ═══════ LIENS -->
 <div class="s-wrap s-alt fade-up" id="links">
   <p class="s-eyebrow">Liens</p>
-  <div class="links-row"><a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="btn-lime">💼 LinkedIn — discuter du projet</a><a href="../index.html#contact"  class="btn-outline">✉️ Me contacter</a></div>
-</div>
-
-<!-- LIGHTBOX -->
-<div class="lb" id="lb" role="dialog" aria-modal="true">
-  <button class="lb-close" id="lbClose">✕</button>
-  <button class="lb-prev" id="lbPrev">‹</button>
-  <img id="lbImg" src="" alt="">
-  <button class="lb-next" id="lbNext">›</button>
+  <div class="links-row">
+    <a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="btn-lime">💼 LinkedIn — discuter du projet</a>
+    <a href="../index.html#contact" class="btn-outline">✉️ Me contacter</a>
+  </div>
 </div>
 
 <footer>
@@ -324,41 +782,11 @@ par le pipeline</span>
 <script>
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
-const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }), {threshold:.08,rootMargin:'0px 0px -28px 0px'});
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }),
+  {threshold:.08, rootMargin:'0px 0px -28px 0px'}
+);
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-
-/* LIGHTBOX */
-const lb = document.getElementById('lb');
-const lbImg = document.getElementById('lbImg');
-const cards = () => Array.from(document.querySelectorAll('.gallery-card[data-lb]'));
-let lbIdx = 0;
-
-function openLb(idx) {
-  const c = cards();
-  if (!c.length) return;
-  lbIdx = (idx + c.length) % c.length;
-  const img = c[lbIdx].querySelector('img');
-  lbImg.src = img.src;
-  lbImg.alt = img.alt;
-  lb.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closeLb() {
-  lb.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-cards().forEach((card, i) => card.addEventListener('click', () => openLb(i)));
-document.getElementById('lbClose').addEventListener('click', closeLb);
-document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); openLb(lbIdx - 1); });
-document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); openLb(lbIdx + 1); });
-lb.addEventListener('click', e => { if (e.target === lb || e.target === lbImg) closeLb(); });
-document.addEventListener('keydown', e => {
-  if (!lb.classList.contains('active')) return;
-  if (e.key === 'Escape') closeLb();
-  if (e.key === 'ArrowLeft') openLb(lbIdx - 1);
-  if (e.key === 'ArrowRight') openLb(lbIdx + 1);
-});
 </script>
 </body>
 </html>
