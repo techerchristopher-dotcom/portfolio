@@ -103,6 +103,34 @@ nav.scrolled{padding:13px 64px;}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border2);color:var(--text2);font-weight:700;font-size:.9rem;padding:13px 24px;border-radius:50px;transition:all .2s;}
 .btn-outline:hover{border-color:var(--text2);color:var(--text);}
 
+/* GALLERY */
+.gallery-section{padding:80px 64px;background:var(--surface);}
+.gallery-grid-full{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;}
+.gallery-grid-full .wide{grid-column:1/-1;}
+.gallery-card{
+  position:relative;border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;cursor:zoom-in;
+  transition:border-color .25s,transform .25s;
+  background:var(--bg);
+}
+.gallery-card:hover{border-color:rgba(200,252,0,0.28);transform:translateY(-2px);}
+.gallery-card img{width:100%;height:auto;display:block;}
+.gallery-caption{
+  padding:14px 18px;border-top:1px solid var(--border);
+  background:var(--surface2);
+}
+.gallery-caption-label{font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin-bottom:4px;}
+.gallery-caption-name{font-size:.85rem;font-weight:700;color:var(--text);}
+.gallery-caption-desc{font-size:.75rem;color:var(--text2);margin-top:3px;line-height:1.4;}
+
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.93);display:none;align-items:center;justify-content:center;padding:24px;}
+.lb.active{display:flex;}
+.lb img{max-width:min(94vw,1100px);max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 40px 100px rgba(0,0,0,0.6);}
+.lb-close{position:fixed;top:20px;right:24px;width:40px;height:40px;border:1px solid rgba(255,255,255,0.15);border-radius:50%;background:rgba(255,255,255,0.06);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);width:44px;height:44px;border:1px solid rgba(255,255,255,0.15);border-radius:50%;background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lb-prev{left:16px;}.lb-next{right:16px;}
+
 /* FOOTER */
 footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .footer-logo{font-weight:800;font-size:.9rem;}
@@ -116,7 +144,7 @@ footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-i
 
 /* RESPONSIVE */
 @media(max-width:1024px){nav,#hero,.s-wrap,footer{padding-left:32px;padding-right:32px;}.metric-item{padding:36px 32px;}}
-@media(max-width:768px){nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}#hero{padding:0 24px 56px;}.s-wrap{padding:60px 24px;}.two-col{grid-template-columns:1fr;gap:40px;}.metrics-row{grid-template-columns:1fr;}.metric-item{border-right:none;border-bottom:1px solid var(--border);padding:28px 24px;}.metric-item:last-child{border-bottom:none;}footer{padding:20px 24px;}}
+@media(max-width:768px){nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}#hero{padding:0 24px 56px;}.s-wrap{padding:60px 24px;}.two-col{grid-template-columns:1fr;gap:40px;}.metrics-row{grid-template-columns:1fr;}.metric-item{border-right:none;border-bottom:1px solid var(--border);padding:28px 24px;}.metric-item:last-child{border-bottom:none;}footer{padding:20px 24px;}.gallery-section{padding:60px 24px;}.gallery-grid-full{grid-template-columns:1fr;}.gallery-grid-full .wide{grid-column:auto;}}
 </style>
 </head>
 <body>
@@ -217,9 +245,75 @@ par le pipeline</span>
 
 
 
+<section class="gallery-section fade-up" id="gallery">
+  <p class="s-eyebrow">Aperçu</p>
+  <h2 class="s-title">Le système en images</h2>
+  <div class="gallery-grid-full">
+
+    <!-- Workflow n8n — full width -->
+    <div class="gallery-card wide" data-lb="0">
+      <img src="../assets/rebecca/01-workflow-n8n.png" alt="Workflow n8n Agent Rebecca — pipeline complet" loading="lazy">
+      <div class="gallery-caption">
+        <div class="gallery-caption-label">Pipeline · n8n</div>
+        <div class="gallery-caption-name">Workflow n8n complet</div>
+        <div class="gallery-caption-desc">Vue du pipeline de bout en bout — Google Drive → iLovePDF → GPT-Vision → Google Docs → Sheets → Notification email.</div>
+      </div>
+    </div>
+
+    <!-- Flux infographie -->
+    <div class="gallery-card" data-lb="1">
+      <img src="../assets/rebecca/02-flux-automatisation.png" alt="Flux complet automatisation recrutement — 11 étapes" loading="lazy">
+      <div class="gallery-caption">
+        <div class="gallery-caption-label">Flux · 11 étapes</div>
+        <div class="gallery-caption-name">Flux d'automatisation complet</div>
+        <div class="gallery-caption-desc">De la réception du CV à l'intégration dans la base candidats. Traitement 100% automatisé.</div>
+      </div>
+    </div>
+
+    <!-- Rapport candidat -->
+    <div class="gallery-card" data-lb="2">
+      <img src="../assets/rebecca/03-rapport-candidat.png" alt="Rapport d'analyse candidat généré par IA" loading="lazy">
+      <div class="gallery-caption">
+        <div class="gallery-caption-label">Output · Rapport IA</div>
+        <div class="gallery-caption-name">Rapport d'analyse candidat</div>
+        <div class="gallery-caption-desc">Score global /100, compétences identifiées, adéquation au poste, résumé IA et recommandation — généré automatiquement.</div>
+      </div>
+    </div>
+
+    <!-- Base candidats -->
+    <div class="gallery-card" data-lb="3">
+      <img src="../assets/rebecca/04-base-candidats.png" alt="Base candidats mise à jour automatiquement — 842 candidats" loading="lazy">
+      <div class="gallery-caption">
+        <div class="gallery-caption-label">Output · Base de données</div>
+        <div class="gallery-caption-name">Base candidats automatisée</div>
+        <div class="gallery-caption-desc">842 candidats synchronisés. Score, expérience, source, statut — 0 saisie manuelle.</div>
+      </div>
+    </div>
+
+    <!-- Résultats — full width -->
+    <div class="gallery-card wide" data-lb="4">
+      <img src="../assets/rebecca/05-resultats.png" alt="Résultats Rebecca AI — 35h économisées, 100% automatisé, 12s par CV" loading="lazy">
+      <div class="gallery-caption">
+        <div class="gallery-caption-label">Impact · Résultats</div>
+        <div class="gallery-caption-name">Résultats mesurables</div>
+        <div class="gallery-caption-desc">35h économisées/semaine · 842 candidatures traitées · 100% automatisé · 12s par CV · 92% précision IA.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <div class="s-wrap s-alt fade-up" id="links">
   <p class="s-eyebrow">Liens</p>
   <div class="links-row"><a href="https://www.linkedin.com/in/christopher-techer/" target="_blank" class="btn-lime">💼 LinkedIn — discuter du projet</a><a href="../index.html#contact"  class="btn-outline">✉️ Me contacter</a></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-prev" id="lbPrev">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-next" id="lbNext">›</button>
 </div>
 
 <footer>
@@ -232,6 +326,39 @@ const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
 const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }), {threshold:.08,rootMargin:'0px 0px -28px 0px'});
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+/* LIGHTBOX */
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lbImg');
+const cards = () => Array.from(document.querySelectorAll('.gallery-card[data-lb]'));
+let lbIdx = 0;
+
+function openLb(idx) {
+  const c = cards();
+  if (!c.length) return;
+  lbIdx = (idx + c.length) % c.length;
+  const img = c[lbIdx].querySelector('img');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+cards().forEach((card, i) => card.addEventListener('click', () => openLb(i)));
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); openLb(lbIdx - 1); });
+document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); openLb(lbIdx + 1); });
+lb.addEventListener('click', e => { if (e.target === lb || e.target === lbImg) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') openLb(lbIdx - 1);
+  if (e.key === 'ArrowRight') openLb(lbIdx + 1);
+});
 </script>
 </body>
 </html>
