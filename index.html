@@ -205,24 +205,40 @@ nav.scrolled { padding:14px 64px; }
   max-width:600px; margin-bottom:48px;
 }
 
-/* ─── PROBLÈMES ───────────────────────────────── */
-#problems { background:var(--bg); }
-.problems-grid {
+/* ─── OBJECTIFS (parcours client) ─────────────── */
+#objectifs {
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.objectifs-grid {
   display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
 }
-.problem-card {
+.objectif-card {
   padding:28px 24px; border-radius:16px;
   background:var(--surface); border:1px solid var(--border);
-  transition:border-color .2s, background .2s;
+  transition:border-color .25s, transform .25s, background .25s;
+  display:flex; flex-direction:column;
+  height:100%;
 }
-.problem-card:hover { border-color:var(--border2); background:var(--surface2); }
-.problem-icon { font-size:1.4rem; margin-bottom:14px; }
-.problem-title { font-size:1rem; font-weight:800; margin-bottom:10px; line-height:1.3; }
-.problem-pain { font-size:.82rem; color:var(--text2); line-height:1.65; margin-bottom:14px; }
-.problem-result {
-  font-size:.78rem; font-weight:700; color:var(--lime);
-  line-height:1.5; padding-top:14px; border-top:1px solid var(--border);
+.objectif-card:hover {
+  border-color:var(--lime-b); background:var(--surface2);
+  transform:translateY(-3px);
 }
+.objectif-emoji { font-size:1.75rem; margin-bottom:14px; line-height:1; }
+.objectif-title { font-size:1.05rem; font-weight:800; margin-bottom:10px; line-height:1.3; }
+.objectif-desc { font-size:.82rem; color:var(--text2); line-height:1.65; flex:1; margin-bottom:16px; }
+.objectif-kpi {
+  font-size:.72rem; font-weight:800; color:var(--lime);
+  margin-bottom:18px; padding:8px 12px;
+  background:var(--lime-dim); border-radius:8px; display:inline-block;
+  align-self:flex-start;
+}
+.objectif-link {
+  font-size:.85rem; font-weight:800; color:var(--text);
+  display:flex; align-items:center; gap:6px;
+  transition:gap .2s, color .2s; margin-top:auto;
+}
+.objectif-card:hover .objectif-link { color:var(--lime); gap:10px; }
 .section-cta-link {
   display:inline-flex; align-items:center; gap:6px;
   margin-top:40px; font-size:.9rem; font-weight:800; color:var(--lime);
@@ -521,7 +537,7 @@ footer {
   #hero { padding:100px 32px 64px; }
   .trust-bar { padding:20px 32px; }
   .section-pad, #work, #method, #ocean-indien, #about, #contact { padding-left:32px; padding-right:32px; }
-  .problems-grid { grid-template-columns:repeat(2,1fr); }
+  .objectifs-grid { grid-template-columns:repeat(2,1fr); }
   .geo-grid { grid-template-columns:repeat(2,1fr); }
   .approach-wrap { grid-template-columns:1fr; }
   .approach-left { border-right:none; border-bottom:1px solid var(--border); }
@@ -538,7 +554,7 @@ footer {
   .numbers-row { grid-template-columns:repeat(2,1fr); }
   .num-item { padding:32px 24px; }
   .cases-grid { grid-template-columns:1fr; }
-  .problems-grid { grid-template-columns:1fr; }
+  .objectifs-grid { grid-template-columns:1fr; }
   .geo-grid { grid-template-columns:1fr; }
   .approach-left { padding:32px 24px; }
   .principle { padding:24px; }
@@ -561,7 +577,8 @@ footer {
 <nav id="nav">
   <a href="index.html" class="nav-logo" aria-label="Accueil">CT<span>.</span></a>
   <ul class="nav-links">
-    <li><a href="#expertises">Expertises</a></li>
+    <li><a href="#objectifs">Objectifs</a></li>
+    <li><a href="#expertises">Comment j'y arrive</a></li>
     <li><a href="#work">Cas clients</a></li>
     <li><a href="#ocean-indien">Océan Indien</a></li>
     <li><a href="a-propos.html">À propos</a></li>
@@ -572,7 +589,8 @@ footer {
   </button>
 </nav>
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-  <a href="#expertises">Expertises</a>
+  <a href="#objectifs">Objectifs</a>
+  <a href="#expertises">Comment j'y arrive</a>
   <a href="#work">Cas clients</a>
   <a href="#ocean-indien">Océan Indien</a>
   <a href="a-propos.html">À propos</a>
@@ -611,7 +629,7 @@ footer {
     </div>
     <div class="hero-actions">
       <a href="mailto:techerchristopher@gmail.com?subject=Audit%20automatisation%20IA%20(30%20min)&amp;body=Bonjour%20Christopher%2C%20je%20souhaite%20r%C3%A9server%20un%20audit%20gratuit%20de%2030%20minutes." class="hero-cta">Réserver un audit gratuit (30 min)</a>
-      <a href="#work" class="hero-cta-secondary">Voir les preuves ↓</a>
+      <a href="#objectifs" class="hero-cta-secondary">Choisir mon objectif ↓</a>
     </div>
   </div>
 </section>
@@ -631,45 +649,48 @@ footer {
   </div>
 </div>
 
-<!-- ── PROBLÈMES ────────────────────────────────── -->
-<section id="problems" class="section-pad">
-  <p class="s-eyebrow">Enjeux</p>
-  <h2 class="section-h2">Vous reconnaissez ces situations&nbsp;?</h2>
-  <p class="section-lead">Des problèmes métier que j'ai déjà résolus en production.</p>
-  <div class="problems-grid">
-    <article class="problem-card fade-up">
-      <div class="problem-icon">📞</div>
-      <h3 class="problem-title">Commercial</h3>
-      <p class="problem-pain">Vos commerciaux perdent 20 minutes après chaque appel. CRM incomplet, relances oubliées, impossible de scaler sans embaucher.</p>
-      <p class="problem-result">Compte rendu post-call et tâche CRM en moins de 10 secondes — workflow Maestro.</p>
-    </article>
-    <article class="problem-card fade-up">
-      <div class="problem-icon">👥</div>
-      <h3 class="problem-title">RH</h3>
-      <p class="problem-pain">Les candidatures s'accumulent plus vite que votre équipe ne peut trier. Tri manuel, délais longs, erreurs de classification.</p>
-      <p class="problem-result">35h/semaine économisées, +60&nbsp;% de réactivité — Agent Rebecca.</p>
-    </article>
-    <article class="problem-card fade-up">
-      <div class="problem-icon">📊</div>
-      <h3 class="problem-title">PME</h3>
-      <p class="problem-pain">Excel, WhatsApp et emails remplacent vos vrais outils. Données dispersées, double saisie, aucune vision centralisée.</p>
-      <p class="problem-result">Process centralisé, workflows n8n/Make — scale sans recruter.</p>
-    </article>
-    <article class="problem-card fade-up">
-      <div class="problem-icon">🎯</div>
-      <h3 class="problem-title">Direction</h3>
-      <p class="problem-pain">Vous voulez digitaliser sans recruter une équipe IT. Pas de DSI, budgets serrés, besoin de ROI rapide.</p>
-      <p class="problem-result">Audit → forfait clair → système en prod en 2 à 6 semaines avec KPI suivis.</p>
-    </article>
+<!-- ── OBJECTIFS (parcours client) ──────────────── -->
+<section id="objectifs" class="section-pad">
+  <p class="s-eyebrow">Votre objectif</p>
+  <h2 class="section-h2">Quel est votre objectif principal&nbsp;?</h2>
+  <p class="section-lead">Choisissez votre situation — je vous montre les solutions, les preuves et le chemin le plus rapide pour avancer.</p>
+  <div class="objectifs-grid">
+    <a href="objectifs/generer-plus-de-prospects.html" class="objectif-card fade-up">
+      <span class="objectif-emoji" aria-hidden="true">🚀</span>
+      <h3 class="objectif-title">Générer plus de prospects</h3>
+      <p class="objectif-desc">Plus de visibilité, plus de demandes, sans recruter.</p>
+      <span class="objectif-kpi">1 200/sem · CEFORA</span>
+      <span class="objectif-link">Voir le parcours →</span>
+    </a>
+    <a href="objectifs/vendre-plus-efficacement.html" class="objectif-card fade-up">
+      <span class="objectif-emoji" aria-hidden="true">📈</span>
+      <h3 class="objectif-title">Vendre plus efficacement</h3>
+      <p class="objectif-desc">Même équipe, plus de deals — moins d'administratif.</p>
+      <span class="objectif-kpi">&lt;10s post-call · Maestro</span>
+      <span class="objectif-link">Voir le parcours →</span>
+    </a>
+    <a href="objectifs/liberer-mes-equipes.html" class="objectif-card fade-up">
+      <span class="objectif-emoji" aria-hidden="true">👥</span>
+      <h3 class="objectif-title">Libérer mes équipes</h3>
+      <p class="objectif-desc">Récupérer des heures perdues sur les tâches répétitives.</p>
+      <span class="objectif-kpi">35h/sem · Rebecca</span>
+      <span class="objectif-link">Voir le parcours →</span>
+    </a>
+    <a href="objectifs/digitaliser-mon-activite.html" class="objectif-card fade-up">
+      <span class="objectif-emoji" aria-hidden="true">💻</span>
+      <h3 class="objectif-title">Digitaliser mon activité</h3>
+      <p class="objectif-desc">Un vrai outil métier, sans recruter une équipe IT.</p>
+      <span class="objectif-kpi">rentanoo.com live</span>
+      <span class="objectif-link">Voir le parcours →</span>
+    </a>
   </div>
-  <a href="#expertises" class="section-cta-link">Voir comment j'y réponds →</a>
 </section>
 
-<!-- ── EXPERTISES ───────────────────────────────── -->
+<!-- ── EXPERTISES (comment j'y arrive) ──────────── -->
 <section id="expertises" class="section-pad">
-  <p class="s-eyebrow">Expertises</p>
-  <h2 class="section-h2">Ce que je mets en place pour vos équipes</h2>
-  <p class="section-lead">Cinq types de missions. Un seul objectif : du temps récupéré, mesuré, en production.</p>
+  <p class="s-eyebrow">Comment j'y arrive</p>
+  <h2 class="section-h2">Comment j'atteins ces objectifs</h2>
+  <p class="section-lead">Derrière chaque objectif, je combine automatisation, IA, outils métier et expérience terrain.</p>
   <div class="expertises-grid">
     <a href="expertise/automatisation-commerciale-ia.html" class="expertise-card fade-up">
       <span class="expertise-num">01</span>
@@ -959,6 +980,10 @@ footer {
   <span>Expert IA · Automatisation · Océan Indien</span>
   <p class="footer-links">
     <a href="a-propos.html">À propos</a>
+    <a href="objectifs/generer-plus-de-prospects.html">Générer des prospects</a>
+    <a href="objectifs/vendre-plus-efficacement.html">Vendre efficacement</a>
+    <a href="objectifs/liberer-mes-equipes.html">Libérer mes équipes</a>
+    <a href="objectifs/digitaliser-mon-activite.html">Digitaliser</a>
     <a href="ocean-indien/expert-ia-ocean-indien.html">Expert IA Océan Indien</a>
     <a href="expertise/expert-n8n.html">Expert n8n</a>
     <a href="expertise/automatisation-commerciale-ia.html">Automatisation commerciale</a>
