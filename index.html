@@ -295,7 +295,7 @@ nav.scrolled { padding:14px 64px; }
 /* ─── WORK / RÉSULTATS ────────────────────────── */
 #work { padding:100px 64px; }
 .cases-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
 }
 .case-card {
   border-radius:20px;
@@ -315,8 +315,7 @@ nav.scrolled { padding:14px 64px; }
 }
 .case-card:hover .case-thumb img { transform:scale(1.03); }
 .case-body { padding:28px 24px; display:flex; flex-direction:column; flex:1; }
-.case-category { font-size:.72rem; font-weight:800; color:var(--lime); margin-bottom:6px; display:block; }
-.case-title { font-size:1.1rem; font-weight:800; letter-spacing:-.03em; margin-bottom:16px; }
+.case-title { font-size:1rem; font-weight:800; letter-spacing:-.02em; margin-bottom:16px; line-height:1.4; }
 .case-pr {
   border-top:1px solid var(--border); padding-top:16px;
   margin-bottom:20px; flex:1;
@@ -529,7 +528,6 @@ footer {
   .section-pad, #work, #method, #ocean-indien, #about, #contact { padding-left:32px; padding-right:32px; }
   .objectifs-grid { grid-template-columns:repeat(2,1fr); }
   .expertises-grid { grid-template-columns:1fr; }
-  .cases-grid { grid-template-columns:1fr; }
   .geo-grid { grid-template-columns:repeat(2,1fr); }
   .approach-wrap { grid-template-columns:1fr; }
   .approach-left { border-right:none; border-bottom:1px solid var(--border); }
@@ -760,11 +758,11 @@ footer {
   </div>
 </section>
 
-<!-- ── RÉSULTATS ─────────────────────────────────── -->
+<!-- ── CAS CLIENTS ────────────────────────────────── -->
 <section id="work">
-  <p class="s-eyebrow">Résultats</p>
-  <h2 class="section-h2">Quelques résultats obtenus</h2>
-  <p class="section-lead">Des projets en production qui illustrent concrètement ce que je peux mettre en place pour une entreprise.</p>
+  <p class="s-eyebrow">Cas clients</p>
+  <h2 class="section-h2">Des problèmes réels. Des solutions concrètes.</h2>
+  <p class="section-lead">Des situations rencontrées sur le terrain et les solutions mises en place pour y répondre.</p>
 
   <div class="cases-grid">
     <article class="case-card fade-up">
@@ -772,13 +770,14 @@ footer {
         <img src="assets/maestro/maestro-workflow-preview.png" alt="Maestro AI — automatisation post-call" width="800" height="450" loading="lazy">
       </div>
       <div class="case-body">
-        <span class="case-category">📈 Vendre plus efficacement</span>
-        <h3 class="case-title">Maestro</h3>
+        <h3 class="case-title">📈 Les commerciaux perdent du temps après chaque appel</h3>
         <dl class="case-pr">
-          <dt>Problème</dt>
-          <dd>Les commerciaux perdaient du temps après chaque appel.</dd>
+          <dt>Situation</dt>
+          <dd>Les comptes-rendus sont saisis manuellement et les actions commerciales sont parfois oubliées.</dd>
+          <dt>Solution</dt>
+          <dd>Maestro automatise la création des comptes-rendus, tâches et suivis commerciaux.</dd>
           <dt>Résultat</dt>
-          <dd class="outcome">Compte-rendu et actions générés automatiquement en moins de 10 secondes.</dd>
+          <dd class="outcome">Compte-rendu et actions disponibles en moins de 10 secondes.</dd>
         </dl>
         <a href="etudes-de-cas/maestro-automatisation-commerciale-n8n.html" class="case-cta">Voir le cas client →</a>
       </div>
@@ -789,11 +788,12 @@ footer {
         <img src="assets/rebecca/rebecca-rapport-preview.png" alt="Agent Rebecca — analyse CV automatisée" width="800" height="450" loading="lazy">
       </div>
       <div class="case-body">
-        <span class="case-category">👥 Libérer mes équipes</span>
-        <h3 class="case-title">Rebecca</h3>
+        <h3 class="case-title">👥 Le recrutement prend trop de temps</h3>
         <dl class="case-pr">
-          <dt>Problème</dt>
-          <dd>Le tri des candidatures mobilisait plusieurs heures chaque semaine.</dd>
+          <dt>Situation</dt>
+          <dd>Le tri des candidatures mobilise plusieurs heures chaque semaine.</dd>
+          <dt>Solution</dt>
+          <dd>Rebecca analyse automatiquement les CV et aide à prioriser les profils.</dd>
           <dt>Résultat</dt>
           <dd class="outcome">35 heures économisées par semaine.</dd>
         </dl>
@@ -803,18 +803,37 @@ footer {
 
     <article class="case-card fade-up">
       <div class="case-thumb">
-        <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — plateforme SaaS de location" width="800" height="450" loading="lazy">
+        <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — catalogue de location en ligne" width="800" height="450" loading="lazy">
       </div>
       <div class="case-body">
-        <span class="case-category">💻 Digitaliser mon activité</span>
-        <h3 class="case-title">Rentanoo</h3>
+        <h3 class="case-title">🌍 Les loueurs manquent de visibilité en ligne</h3>
         <dl class="case-pr">
-          <dt>Problème</dt>
-          <dd>Gestion manuelle des réservations et des disponibilités.</dd>
+          <dt>Situation</dt>
+          <dd>Les offres sont dispersées entre Facebook, WhatsApp et différents canaux.</dd>
+          <dt>Solution</dt>
+          <dd>Rentanoo centralise les offres et permet la réservation en ligne.</dd>
           <dt>Résultat</dt>
-          <dd class="outcome">Plateforme SaaS en production utilisée pour les réservations.</dd>
+          <dd class="outcome">Une plateforme dédiée à la réservation de véhicules et hébergements.</dd>
         </dl>
         <a href="rentanoo.html" class="case-cta">Voir le projet →</a>
+      </div>
+    </article>
+
+    <article class="case-card fade-up">
+      <div class="case-thumb">
+        <img src="assets/rentanoo/04-agency-planning-display.png" alt="Rentanoo — planning et back-office loueur" width="800" height="450" loading="lazy">
+      </div>
+      <div class="case-body">
+        <h3 class="case-title">🛵 La gestion des locations est encore manuelle</h3>
+        <dl class="case-pr">
+          <dt>Situation</dt>
+          <dd>Planning, maintenance, cautions et suivi client sont gérés sur papier ou Excel.</dd>
+          <dt>Solution</dt>
+          <dd>Rentanoo fournit un back-office métier dédié aux loueurs.</dd>
+          <dt>Résultat</dt>
+          <dd class="outcome">Planning, cautions CB, maintenance et CRM centralisés dans un seul outil.</dd>
+        </dl>
+        <a href="rentanoo.html" class="case-cta">Voir le module →</a>
       </div>
     </article>
   </div>
