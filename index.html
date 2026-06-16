@@ -292,89 +292,67 @@ nav.scrolled { padding:14px 64px; }
 }
 .expertise-card:hover .expertise-link { color:var(--lime); gap:10px; }
 
-/* ─── WORK / CASES ────────────────────────────── */
+/* ─── WORK / RÉSULTATS ────────────────────────── */
 #work { padding:100px 64px; }
 .cases-grid {
-  display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
 }
 .case-card {
-  padding:32px 28px; border-radius:20px;
+  border-radius:20px;
   background:var(--surface); border:1px solid var(--border);
-  transition:border-color .25s;
+  transition:border-color .25s, transform .2s;
   display:flex; flex-direction:column;
+  overflow:hidden;
 }
-.case-card:hover { border-color:var(--lime-b); }
+.case-card:hover { border-color:var(--lime-b); transform:translateY(-2px); }
 .case-thumb {
-  width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden;
-  margin-bottom:18px; border:1px solid var(--border); background:var(--bg);
+  width:100%; aspect-ratio:16/9; overflow:hidden;
+  background:var(--bg);
 }
 .case-thumb img {
   width:100%; height:100%; object-fit:cover; object-position:top center; display:block;
+  transition:transform .4s;
 }
-.case-thumb-kpi {
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  background:linear-gradient(135deg, rgba(200,252,0,0.06) 0%, var(--bg) 100%);
-  aspect-ratio:16/9;
+.case-card:hover .case-thumb img { transform:scale(1.03); }
+.case-body { padding:28px 24px; display:flex; flex-direction:column; flex:1; }
+.case-category { font-size:.72rem; font-weight:800; color:var(--lime); margin-bottom:6px; display:block; }
+.case-title { font-size:1.1rem; font-weight:800; letter-spacing:-.03em; margin-bottom:16px; }
+.case-pr {
+  border-top:1px solid var(--border); padding-top:16px;
+  margin-bottom:20px; flex:1;
 }
-.case-thumb-num {
-  font-size:clamp(2rem, 5vw, 3rem); font-weight:800; letter-spacing:-.04em;
-  color:var(--lime); line-height:1;
+.case-pr dt {
+  font-size:.65rem; font-weight:800; color:var(--text3);
+  text-transform:uppercase; letter-spacing:.08em;
+  margin-bottom:4px; margin-top:14px;
 }
-.case-thumb-lbl {
-  font-size:.75rem; color:var(--text2); font-weight:600; margin-top:8px; text-align:center;
-}
-.case-badges { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
-.case-title {
-  font-size:clamp(1.4rem, 2.5vw, 1.9rem);
-  font-weight:800; letter-spacing:-.03em; margin-bottom:10px;
-}
-.case-sub { font-size:.88rem; color:var(--text2); line-height:1.65; margin-bottom:20px; flex:1; }
-.case-metrics {
-  display:flex; gap:24px; flex-wrap:wrap;
-  padding:20px 0; border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border); margin-bottom:20px;
-}
-.case-metric .m-num {
-  display:block; font-size:1.6rem; font-weight:800;
-  letter-spacing:-.03em; line-height:1; margin-bottom:4px;
-}
-.case-metric.hi .m-num { color:var(--lime); }
-.case-metric .m-lbl { font-size:.68rem; color:var(--text2); font-weight:600; }
-.case-stack { font-size:.72rem; color:var(--text3); margin-bottom:16px; }
-.case-lnks { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-.lnk-main {
+.case-pr dt:first-child { margin-top:0; }
+.case-pr dd { font-size:.87rem; color:var(--text2); line-height:1.65; margin:0; }
+.case-pr dd.outcome { color:var(--text); font-weight:600; }
+.case-cta {
   font-size:.85rem; font-weight:800; color:var(--lime);
-  display:flex; align-items:center; gap:6px; transition:gap .2s;
+  display:flex; align-items:center; gap:6px; transition:gap .2s; margin-top:auto;
 }
-.lnk-main:hover { gap:10px; }
-.lnk-ghost {
-  font-size:.85rem; font-weight:600; color:var(--text2); transition:color .2s;
+.case-card:hover .case-cta { gap:10px; }
+/* Bottom CTA */
+.work-cta { margin-top:52px; text-align:center; }
+.work-all summary {
+  cursor:pointer; list-style:none;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.85rem; font-weight:800; color:var(--text2);
+  padding:14px 28px; border-radius:12px;
+  border:1px solid var(--border); background:var(--surface);
+  transition:border-color .2s, color .2s;
 }
-.lnk-ghost:hover { color:var(--text); }
-
-/* Badges */
-.bd {
-  font-size:.62rem; font-weight:800; letter-spacing:1.5px;
-  text-transform:uppercase; padding:5px 12px; border-radius:50px;
+.work-all summary::-webkit-details-marker { display:none; }
+.work-all summary::after { content:' ↓'; color:var(--lime); }
+.work-all[open] summary::after { content:' ↑'; }
+.work-all summary:hover { border-color:var(--lime-b); color:var(--text); }
+.projects-compact {
+  padding-top:24px; text-align:left;
+  display:flex; flex-direction:column; gap:12px;
+  max-width:520px; margin:0 auto;
 }
-.bd-ia     { background:rgba(196,181,253,0.1);  color:var(--violet); }
-.bd-saas   { background:rgba(200,252,0,0.08);   color:var(--lime);  border:1px solid var(--lime-b); }
-.bd-live   { background:rgba(200,252,0,0.07); color:var(--lime); }
-.bd-b2b    { background:rgba(232,201,106,0.1); color:var(--gold); }
-
-/* All projects collapsible */
-.all-projects { margin-top:56px; }
-.all-projects summary {
-  cursor:pointer; font-size:.85rem; font-weight:800; color:var(--text2);
-  padding:16px 0; border-top:1px solid var(--border);
-  list-style:none; display:flex; align-items:center; gap:10px;
-  transition:color .2s;
-}
-.all-projects summary::-webkit-details-marker { display:none; }
-.all-projects summary::before { content:'+'; font-size:1.1rem; color:var(--lime); font-weight:800; }
-.all-projects[open] summary::before { content:'−'; }
-.all-projects summary:hover { color:var(--text); }
-.projects-compact { padding-top:24px; display:flex; flex-direction:column; gap:12px; }
 .proj-compact {
   display:flex; align-items:center; justify-content:space-between; gap:16px;
   padding:16px 20px; border-radius:12px;
@@ -551,6 +529,7 @@ footer {
   .section-pad, #work, #method, #ocean-indien, #about, #contact { padding-left:32px; padding-right:32px; }
   .objectifs-grid { grid-template-columns:repeat(2,1fr); }
   .expertises-grid { grid-template-columns:1fr; }
+  .cases-grid { grid-template-columns:1fr; }
   .geo-grid { grid-template-columns:repeat(2,1fr); }
   .approach-wrap { grid-template-columns:1fr; }
   .approach-left { border-right:none; border-bottom:1px solid var(--border); }
@@ -781,32 +760,27 @@ footer {
   </div>
 </section>
 
-<!-- ── ÉTUDES DE CAS (id=work) ──────────────────── -->
+<!-- ── RÉSULTATS ─────────────────────────────────── -->
 <section id="work">
-  <p class="s-eyebrow">Études de cas</p>
-  <h2 class="section-h2">Des résultats en production, pas des POC</h2>
-  <p class="section-lead">Quatre projets qui illustrent ce que je livre.</p>
+  <p class="s-eyebrow">Résultats</p>
+  <h2 class="section-h2">Quelques résultats obtenus</h2>
+  <p class="section-lead">Des projets en production qui illustrent concrètement ce que je peux mettre en place pour une entreprise.</p>
 
   <div class="cases-grid">
     <article class="case-card fade-up">
       <div class="case-thumb">
-        <img src="assets/maestro/maestro-workflow-preview.png" alt="Maestro AI — workflow post-call n8n" width="800" height="450" loading="lazy">
+        <img src="assets/maestro/maestro-workflow-preview.png" alt="Maestro AI — automatisation post-call" width="800" height="450" loading="lazy">
       </div>
-      <div class="case-badges">
-        <span class="bd bd-live">● Live</span>
-        <span class="bd bd-ia">🤖 Automatisation commerciale</span>
-      </div>
-      <h3 class="case-title">Maestro AI</h3>
-      <p class="case-sub">Appel terminé → tâche CRM créée en moins de 10 secondes. Workflow n8n 8 nœuds natifs, zéro intervention humaine.</p>
-      <div class="case-metrics">
-        <div class="case-metric hi"><span class="m-num">&lt;10s</span><span class="m-lbl">post-call</span></div>
-        <div class="case-metric"><span class="m-num">0</span><span class="m-lbl">relances oubliées</span></div>
-        <div class="case-metric"><span class="m-num">8</span><span class="m-lbl">nœuds n8n</span></div>
-      </div>
-      <p class="case-stack">n8n · Claude · GoHighLevel · Modjo · Slack</p>
-      <div class="case-lnks">
-        <a href="maestro.html" class="lnk-main">Voir la démo →</a>
-        <a href="etudes-de-cas/maestro-automatisation-commerciale-n8n.html" class="lnk-ghost">Étude de cas →</a>
+      <div class="case-body">
+        <span class="case-category">📈 Vendre plus efficacement</span>
+        <h3 class="case-title">Maestro</h3>
+        <dl class="case-pr">
+          <dt>Problème</dt>
+          <dd>Les commerciaux perdaient du temps après chaque appel.</dd>
+          <dt>Résultat</dt>
+          <dd class="outcome">Compte-rendu et actions générés automatiquement en moins de 10 secondes.</dd>
+        </dl>
+        <a href="etudes-de-cas/maestro-automatisation-commerciale-n8n.html" class="case-cta">Voir le cas client →</a>
       </div>
     </article>
 
@@ -814,89 +788,64 @@ footer {
       <div class="case-thumb">
         <img src="assets/rebecca/rebecca-rapport-preview.png" alt="Agent Rebecca — analyse CV automatisée" width="800" height="450" loading="lazy">
       </div>
-      <div class="case-badges">
-        <span class="bd bd-live">● Live</span>
-        <span class="bd bd-ia">🤖 Automatisation RH</span>
-      </div>
-      <h3 class="case-title">Agent Rebecca</h3>
-      <p class="case-sub">Agent IA d'analyse de CV en production chez CEFORA — tri automatisé, scoring et classification des candidatures.</p>
-      <div class="case-metrics">
-        <div class="case-metric hi"><span class="m-num">35h</span><span class="m-lbl">/ semaine</span></div>
-        <div class="case-metric"><span class="m-num">+60%</span><span class="m-lbl">réactivité</span></div>
-        <div class="case-metric"><span class="m-num">−40%</span><span class="m-lbl">délai traitement</span></div>
-      </div>
-      <p class="case-stack">GPT-Vision · MAKE · Airtable · Email automation</p>
-      <div class="case-lnks">
-        <a href="projects/agent-rebecca.html" class="lnk-main">Voir le projet →</a>
-      </div>
-    </article>
-
-    <article class="case-card fade-up">
-      <div class="case-thumb case-thumb-kpi" aria-label="1 200 entreprises contactées par semaine">
-        <span class="case-thumb-num">1&nbsp;200</span>
-        <span class="case-thumb-lbl">entreprises / semaine · CEFORA</span>
-      </div>
-      <div class="case-badges">
-        <span class="bd bd-live">● Live</span>
-        <span class="bd bd-b2b">📈 Prospection B2B</span>
-      </div>
-      <h3 class="case-title">Prospection CEFORA</h3>
-      <p class="case-sub">Automatisation prospection IA — 1&nbsp;200 entreprises contactées par semaine, 2 ETP automatisés, +70&nbsp;% de volume.</p>
-      <div class="case-metrics">
-        <div class="case-metric hi"><span class="m-num">1&nbsp;200</span><span class="m-lbl">/ semaine</span></div>
-        <div class="case-metric"><span class="m-num">2</span><span class="m-lbl">ETP automatisés</span></div>
-        <div class="case-metric"><span class="m-num">+70%</span><span class="m-lbl">volume</span></div>
-      </div>
-      <p class="case-stack">n8n · MAKE · CRM · Enrichissement données</p>
-      <div class="case-lnks">
-        <a href="etudes-de-cas/automatisation-prospection-ia-cefora.html" class="lnk-main">Étude de cas →</a>
+      <div class="case-body">
+        <span class="case-category">👥 Libérer mes équipes</span>
+        <h3 class="case-title">Rebecca</h3>
+        <dl class="case-pr">
+          <dt>Problème</dt>
+          <dd>Le tri des candidatures mobilisait plusieurs heures chaque semaine.</dd>
+          <dt>Résultat</dt>
+          <dd class="outcome">35 heures économisées par semaine.</dd>
+        </dl>
+        <a href="projects/agent-rebecca.html" class="case-cta">Voir le cas client →</a>
       </div>
     </article>
 
     <article class="case-card fade-up">
       <div class="case-thumb">
-        <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — plateforme de location en ligne" width="800" height="450" loading="lazy">
+        <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — plateforme SaaS de location" width="800" height="450" loading="lazy">
       </div>
-      <div class="case-badges">
-        <span class="bd bd-live">● Live</span>
-        <span class="bd bd-saas">📦 SaaS</span>
-      </div>
-      <h3 class="case-title">Rentanoo</h3>
-      <p class="case-sub">Plateforme SaaS de location véhicules &amp; hébergements — back-office, réservations, Stripe, 4 langues, déployée sur Railway.</p>
-      <div class="case-metrics">
-        <div class="case-metric hi"><span class="m-num">live</span><span class="m-lbl">rentanoo.com</span></div>
-        <div class="case-metric"><span class="m-num">3</span><span class="m-lbl">modules métier</span></div>
-        <div class="case-metric"><span class="m-num">4</span><span class="m-lbl">langues</span></div>
-      </div>
-      <p class="case-stack">React · TypeScript · Supabase · Stripe · Railway</p>
-      <div class="case-lnks">
-        <a href="rentanoo.html" class="lnk-main">Étude de cas →</a>
-        <a href="https://rentanoo.com" class="lnk-ghost" target="_blank" rel="noopener noreferrer">Site live ↗</a>
+      <div class="case-body">
+        <span class="case-category">💻 Digitaliser mon activité</span>
+        <h3 class="case-title">Rentanoo</h3>
+        <dl class="case-pr">
+          <dt>Problème</dt>
+          <dd>Gestion manuelle des réservations et des disponibilités.</dd>
+          <dt>Résultat</dt>
+          <dd class="outcome">Plateforme SaaS en production utilisée pour les réservations.</dd>
+        </dl>
+        <a href="rentanoo.html" class="case-cta">Voir le projet →</a>
       </div>
     </article>
   </div>
 
-  <details class="all-projects fade-up">
-    <summary>Tous les projets (7)</summary>
-    <div class="projects-compact">
-      <div class="proj-compact">
-        <div><div class="proj-compact-title">TSplus RAG Supabase</div><div class="proj-compact-meta">🤖 IA · RAG · pgvector · Live</div></div>
-        <a href="projects/tsplus-rag.html">Voir →</a>
+  <div class="work-cta">
+    <details class="work-all fade-up">
+      <summary>Voir tous les projets</summary>
+      <div class="projects-compact">
+        <div class="proj-compact">
+          <div><div class="proj-compact-title">Prospection CEFORA</div><div class="proj-compact-meta">📈 B2B · 1 200 entreprises/semaine · Live</div></div>
+          <a href="etudes-de-cas/automatisation-prospection-ia-cefora.html">Voir →</a>
+        </div>
+        <div class="proj-compact">
+          <div><div class="proj-compact-title">TSplus RAG Supabase</div><div class="proj-compact-meta">🤖 IA · RAG · pgvector · Live</div></div>
+          <a href="projects/tsplus-rag.html">Voir →</a>
+        </div>
+        <div class="proj-compact">
+          <div><div class="proj-compact-title">AlloResa AI</div><div class="proj-compact-meta">📞 Agent vocal · MAKE · En cours</div></div>
+          <a href="projects/alloresa.html">Voir →</a>
+        </div>
+        <div class="proj-compact">
+          <div><div class="proj-compact-title">Tukme</div><div class="proj-compact-meta">📱 VTC mobile · React Native · En cours</div></div>
+          <a href="projects/tukme.html">Voir →</a>
+        </div>
+        <div class="proj-compact">
+          <div><div class="proj-compact-title">Astra App</div><div class="proj-compact-meta">🤖 IA · Mobile · MVP</div></div>
+          <a href="projects/astra-app.html">Voir →</a>
+        </div>
       </div>
-      <div class="proj-compact">
-        <div><div class="proj-compact-title">AlloResa AI</div><div class="proj-compact-meta">📞 Agent vocal · MAKE · En cours</div></div>
-        <a href="projects/alloresa.html">Voir →</a>
-      </div>
-      <div class="proj-compact">
-        <div><div class="proj-compact-title">Tukme</div><div class="proj-compact-meta">📱 VTC mobile · React Native · En cours</div></div>
-        <a href="projects/tukme.html">Voir →</a>
-      </div>
-      <div class="proj-compact">
-        <div><div class="proj-compact-title">Astra App</div><div class="proj-compact-meta">🤖 IA · Mobile · MVP</div></div>
-        <a href="projects/astra-app.html">Voir →</a>
-      </div>
-    </div>
-  </details>
+    </details>
+  </div>
 </section>
 
 <!-- ── MÉTHODOLOGIE ─────────────────────────────── -->
