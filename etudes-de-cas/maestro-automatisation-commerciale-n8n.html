@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Étude de cas — Maestro automatisation commerciale n8n · &lt;10s · Christopher TECHER</title>
+<meta name="description" content="Étude de cas Maestro : automatisation post-appel n8n, compte rendu en moins de 10 secondes, email relance Claude, CRM sync. Demo interactive maestro.html.">
+<link rel="canonical" href="https://techerchristopher-dotcom.github.io/portfolio/etudes-de-cas/maestro-automatisation-commerciale-n8n.html">
+<meta property="og:title" content="Maestro — Automatisation commerciale n8n">
+<meta property="og:description" content="Post-appel IA en &lt;10s : transcription, synthèse, email, CRM. Workflow n8n production Maestro Media. Demo live.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://techerchristopher-dotcom.github.io/portfolio/assets/profile.png">
+<meta property="og:url" content="https://techerchristopher-dotcom.github.io/portfolio/etudes-de-cas/maestro-automatisation-commerciale-n8n.html">
+<link rel="stylesheet" href="../assets/seo-page.css">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">CT</a>
+  <div class="nav-links">
+    <a href="../a-propos.html">À propos</a>
+    <a href="../ocean-indien/expert-ia-ocean-indien.html">Océan Indien hub</a>
+    <a href="../freelance.html">Collaborer</a>
+  </div>
+  <a href="../index.html" class="nav-back">← Portfolio</a>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="badge">Maestro Media · n8n · Post-call IA</span>
+    <h1>Maestro — automatisation commerciale <span>n8n</span></h1>
+    <p class="lead">Maestro transforme chaque appel commercial en actions concrètes en moins de 10 secondes : transcription, synthèse structurée, email de relance rédigé par Claude dans le ton Maestro Media, mise à jour CRM — le commercial valide, n'écrit plus from scratch. Workflow n8n en production.</p>
+    <div class="hero-btns">
+      <a href="../maestro.html" class="btn-primary">Demo interactive →</a>
+      <a href="../expertise/expert-n8n.html" class="btn-secondary">Expert n8n</a>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="content-inner">
+
+    <div class="metrics">
+      <div class="metric"><div class="metric-num">&lt;10s</div><div class="metric-label">Pipeline complet</div></div>
+      <div class="metric"><div class="metric-num">100%</div><div class="metric-label">Compte rendu auto</div></div>
+      <div class="metric"><div class="metric-num">Humain</div><div class="metric-label">Validation avant envoi</div></div>
+      <div class="metric"><div class="metric-num">n8n</div><div class="metric-label">Orchestration</div></div>
+      <div class="metric"><div class="metric-num">Claude</div><div class="metric-label">Rédaction relance</div></div>
+      <div class="metric"><div class="metric-num">Prod</div><div class="metric-label">Maestro Media</div></div>
+    </div>
+
+    <h2>Le problème post-appel</h2>
+    <p>Chez Maestro Media, agence connectant grandes écoles et entreprises, chaque appel commercial générait 15–20 minutes d'administratif : notes dans le CRM, rédaction email de suivi, planification relance. Multiplié par des dizaines d'appels hebdomadaires, le coût caché dépassait une demi-journée par commercial. Les comptes rendus incomplets ou tardifs faisaient perdre la chaleur du contact — surtout en B2B formation où la décision est collective et lente.</p>
+    <p>L'objectif Maestro : zéro rédaction manuelle post-appel, qualité constante des comptes rendus, humain gardant le contrôle validation avant tout envoi client.</p>
+
+    <h2>Architecture workflow n8n</h2>
+    <ol>
+      <li><strong>Trigger post-appel</strong> — webhook téléphonie ou saisie fin d'appel (durée, contact, enregistrement)</li>
+      <li><strong>Transcription</strong> — audio → texte structuré par segment</li>
+      <li><strong>Analyse Claude</strong> — extraction décisions, objections, next steps, sentiment</li>
+      <li><strong>Génération CR</strong> — template Maestro Media, sections standardisées pour le CRM</li>
+      <li><strong>Email relance</strong> — rédaction personnalisée style agence, prêt à envoyer</li>
+      <li><strong>Sync CRM</strong> — mise à jour fiche, tâche relance datée, notification commercial</li>
+      <li><strong>Validation humaine</strong> — one-click approve/edit avant envoi externe</li>
+    </ol>
+    <p>Temps bout-en-bout mesuré : <strong>moins de 10 secondes</strong> entre fin d'appel et CR disponible. Demo visuelle du parcours : <a href="../maestro.html">maestro.html</a> (page interactive du portfolio).</p>
+
+    <h2>Résultats business</h2>
+    <ul>
+      <li>Élimination quasi-totale du temps rédaction post-appel</li>
+      <li>Homogénéité qualité des comptes rendus — plus de CR vides ou tardifs</li>
+      <li>Relances plus rapides — momentum appel préservé</li>
+      <li>Direction commerciale : visibilité pipeline améliorée via data structurée</li>
+      <li>Modèle réplicable pour toute équipe B2B téléphone-intensive</li>
+    </ul>
+
+    <div class="link-grid">
+      <a href="../maestro.html">→ Demo interactive Maestro</a>
+      <a href="../expertise/automatisation-commerciale-ia.html">Automatisation commerciale IA</a>
+      <a href="../expertise/expert-n8n.html">Expert n8n</a>
+      <a href="../etudes-de-cas/automatisation-prospection-ia-cefora.html">Étude CEFORA</a>
+    </div>
+
+    <h2>Stack technique</h2>
+    <ul>
+      <li><strong>n8n</strong> — orchestration multi-étapes, error handling, sub-workflows</li>
+      <li><strong>Claude API</strong> — synthèse, rédaction email ton de marque</li>
+      <li><strong>Transcription</strong> — API speech-to-text intégrée pipeline</li>
+      <li><strong>CRM</strong> — webhook bidirectionnel fiche contact + activité</li>
+      <li><strong>UI validation</strong> — interface légère approve/edit (demo portfolio)</li>
+    </ul>
+
+    <h2>Transposer Maestro chez vous</h2>
+    <p>Le pattern Maestro s'applique à toute organisation avec volume d'appels sortants/entrants : ESN, formation, immobilier commercial, services B2B. J'adapte templates CR, ton email, champs CRM à votre métier. Déploiement pilote 2 semaines sur un commercial, extension équipe après validation KPI temps gagné.</p>
+    <p>Tarif : 25 €/h. Voir aussi prospection automatisée CEFORA pour combiner post-appel + top-of-funnel.</p>
+
+    <h2>Extraits workflow — ce qui se passe en &lt;10 secondes</h2>
+    <p>Seconde 0–2 : webhook reçoit fin d'appel + URL enregistrement. Seconde 2–5 : transcription ASR → texte brut segmenté par speaker. Seconde 5–8 : Claude extrait faits, objections, next step, rédige CR structuré + draft email relance ton Maestro. Seconde 8–10 : push CRM + notification commercial « valider envoi ». Le commercial lit, ajuste une phrase si besoin, clique envoyer. Total rédaction manuelle évité : 12–18 minutes par appel en moyenne observée avant Maestro.</p>
+    <p>Testez le parcours visuel sur <a href="../maestro.html">maestro.html</a> — la demo portfolio reproduit ces étapes avec animation des nodes n8n.</p>
+
+    <h2>Intégration avec prospection CEFORA</h2>
+    <p>Maestro optimise le bas du funnel (post-appel) ; le pipeline CEFORA optimise le haut (prospection sortante). Combinés, ils forment une machine commerciale cohérente : plus de RDV bookés ET zero friction admin après chaque call. Si vous déployez l'un, planifiez l'autre — les ROI se multiplient, pas s'additionnent seulement. Voir <a href="automatisation-prospection-ia-cefora.html">étude CEFORA</a> pour le volet prospection.</p>
+    <p>La demo <a href="../maestro.html">maestro.html</a> est la meilleure façon de comprendre le parcours avant un call. Ensuite : email ou WhatsApp avec volume appels/semaine et stack CRM — devis pilote sous 48 h, 25 €/h en régie.</p>
+    <p>Rappel : pipeline complet en moins de 10 secondes, humain garde le contrôle validation, workflow n8n production Maestro Media. Expert n8n : <a href="../expertise/expert-n8n.html">expert-n8n.html</a>.</p>
+    <p>15 ans business · 6+ systèmes prod · demo interactive obligatoire avant tout devis.</p>
+
+    <div class="proof-bar">
+      <span class="proof-pill">&lt;10s post-call</span>
+      <span class="proof-pill">n8n production</span>
+      <span class="proof-pill">Demo live</span>
+      <span class="proof-pill">Humain in the loop</span>
+    </div>
+
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details>
+        <summary>Où voir la demo Maestro ?</summary>
+        <p>Page interactive : <a href="../maestro.html">../maestro.html</a> — parcours post-appel simulé step-by-step.</p>
+      </details>
+      <details>
+        <summary>Maestro envoie-t-il sans validation humaine ?</summary>
+        <p>Non. Principe « humain garde le contrôle » — validation explicite avant email client ou sync CRM externe.</p>
+      </details>
+      <details>
+        <summary>Compatible quelle téléphonie ?</summary>
+        <p>Tout système exposant webhook fin d'appel + enregistrement. Audit compatibilité en phase 1.</p>
+      </details>
+      <details>
+        <summary>Quelle langue transcription / CR ?</summary>
+        <p>Français natif. Autres langues selon API transcription — configurable.</p>
+      </details>
+      <details>
+        <summary>Différence avec Otter/Fireflies seul ?</summary>
+        <p>Maestro = transcription + action : email, CRM, relance datée. Pas seulement notes passives.</p>
+      </details>
+      <details>
+        <summary>Délai déploiement client ?</summary>
+        <p>Pilote 2 semaines. Production équipe 4–6 semaines selon CRM et téléphonie.</p>
+      </details>
+      <details>
+        <summary>Coût APIs IA ?</summary>
+        <p>Marginal vs temps commercial économisé. Estimation mensuelle fournie au devis.</p>
+      </details>
+      <details>
+        <summary>Comment démarrer ?</summary>
+        <p>Testez la <a href="../maestro.html">demo</a>, puis email/WhatsApp avec volume appels/semaine et CRM actuel.</p>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-block">
+  <h2>Déployez Maestro chez vous</h2>
+  <p>&lt;10s post-appel · n8n · Demo live disponible</p>
+  <div class="hero-btns" style="justify-content:center">
+    <a href="mailto:techerchristopher@gmail.com" class="btn-primary">techerchristopher@gmail.com</a>
+    <a href="https://wa.me/33633707569" class="btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Christopher TECHER · Étude de cas Maestro</p>
+  <div class="footer-links">
+    <a href="../index.html">Portfolio</a>
+    <a href="../maestro.html">Demo Maestro</a>
+    <a href="../expertise/expert-n8n.html">Expert n8n</a>
+    <a href="../freelance.html">Collaborer</a>
+  </div>
+</footer>
+
+</body>
+</html>
