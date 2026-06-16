@@ -3,359 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TSplus RAG Supabase — Christopher TECHER</title>
+<title>TSplus RAG Supabase — Recherche Sémantique — Christopher TECHER</title>
+<meta name="description" content="Architecture RAG complète avec pgvector sur Supabase. Vectorisation et recherche sémantique sur documents internes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy: #1F4E79;
-  --blue: #2E75B6;
-  --light-blue: #BDD7EE;
-  --accent: #41A8F0;
-  --dark: #0D1B2A;
-  --dark2: #112233;
-  --white: #FFFFFF;
-  --grey: #8B9AB0;
-  --green: #22C55E;
-  --card-bg: rgba(30,60,100,0.35);
-  --glass: rgba(255,255,255,0.05);
+  --bg:#0D0D0D; --surface:#141414; --surface2:#1C1C1C;
+  --border:#222; --border2:#333;
+  --text:#EEEEEE; --text2:#666; --text3:#3A3A3A;
+  --lime:#C8FC00; --lime-dim:rgba(200,252,0,0.07); --lime-b:rgba(200,252,0,0.18);
 }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+::selection{background:rgba(200,252,0,0.2);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--lime);}
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: var(--dark);
-  color: var(--white);
-  overflow-x: hidden;
-}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 64px;background:rgba(13,13,13,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:padding .3s;}
+nav.scrolled{padding:13px 64px;}
+.nav-logo{font-size:1rem;font-weight:800;letter-spacing:-.01em;}
+.nav-logo span{color:var(--lime);}
+.nav-back{font-size:.85rem;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:8px;padding:8px 18px;border:1px solid var(--border2);border-radius:50px;transition:all .2s;}
+.nav-back:hover{color:var(--text);border-color:var(--text2);}
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--dark); }
-::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+/* HERO */
+#hero{min-height:72vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 72px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 10% 70%, rgba(200,252,0,0.035) 0%,transparent 65%);pointer-events:none;}
+.hero-grain{position:absolute;inset:0;opacity:.3;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
+.hero-content{position:relative;z-index:2;}
+.hero-breadcrumb{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text2);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.hero-breadcrumb::before{content:'';width:24px;height:1px;background:var(--text3);}
+.hero-num{font-size:.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
+.hero-title{font-size:clamp(3rem,7vw,6rem);font-weight:800;line-height:.92;letter-spacing:-.04em;margin-bottom:32px;}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
+.bd{font-size:.62rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:50px;}
+.bd-ia{background:rgba(196,181,253,0.1);color:#c4b5fd;}
+.bd-saas{background:rgba(200,252,0,0.08);color:var(--lime);}
+.bd-mobile{background:rgba(134,239,172,0.1);color:#86efac;}
+.bd-live{background:rgba(200,252,0,0.07);color:var(--lime);}
+.bd-wip{background:rgba(251,191,36,0.1);color:#fbbf24;}
+.hero-desc{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--text2);max-width:600px;line-height:1.65;font-weight:500;}
 
-nav {
-  position: fixed; top:0; left:0; right:0; z-index:100;
-  display:flex; align-items:center; justify-content:space-between;
-  padding: 16px 60px;
-  background: rgba(13,27,42,0.9);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(65,168,240,0.15);
-}
-.nav-logo { font-size:1.1rem; font-weight:700; color:var(--accent); letter-spacing:1px; text-decoration:none; }
-.nav-back {
-  display:inline-flex; align-items:center; gap:7px;
-  color: var(--grey); text-decoration:none; font-size:.88rem; font-weight:600;
-  border:1px solid rgba(65,168,240,0.2); border-radius:50px; padding:7px 16px;
-  transition: all .2s;
-}
-.nav-back:hover { color:var(--accent); border-color:var(--accent); background:rgba(65,168,240,0.07); }
+/* METRICS STRIP */
+#metrics{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);}
+.metric-item{padding:48px 52px;border-right:1px solid var(--border);transition:background .2s;}
+.metric-item:last-child{border-right:none;}
+.metric-item:hover{background:rgba(200,252,0,0.02);}
+.metric-num{display:block;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:8px;}
+.metric-lbl{font-size:.8rem;color:var(--text2);font-weight:500;line-height:1.4;}
 
-#hero {
-  min-height: 70vh;
-  display:flex; align-items:center;
-  padding: 120px 60px 80px;
-  position:relative; overflow:hidden;
-}
-.hero-bg {
-  position:absolute; inset:0;
-  background: radial-gradient(ellipse 80% 60% at 40% 50%, rgba(46,117,182,0.2) 0%, transparent 70%),
-              linear-gradient(180deg, #0D1B2A 0%, #0a1520 100%);
-}
-.hero-inner { position:relative; z-index:2; max-width:860px; margin:0 auto; width:100%; }
-.proj-badge-hero {
-  display:inline-flex; align-items:center; gap:8px;
-  background: rgba(65,168,240,0.12); border:1px solid rgba(65,168,240,0.3);
-  border-radius:50px; padding:6px 16px; margin-bottom:24px;
-  font-size:.8rem; color:var(--accent); font-weight:700; letter-spacing:.5px;
-}
-.hero-inner h1 { font-size:clamp(2rem,5vw,3.4rem); font-weight:800; line-height:1.1; margin-bottom:16px; }
-.hero-inner h1 span { color:var(--accent); }
-.hero-tagline { font-size:1.1rem; color:var(--grey); line-height:1.7; margin-bottom:36px; max-width:620px; }
-.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+/* CONTENT SECTIONS */
+.s-wrap{padding:80px 64px;}
+.s-eyebrow{font-size:.68rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+.s-eyebrow::after{content:'';flex:1;height:1px;background:var(--border);}
+.s-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px;}
+.s-desc{font-size:.95rem;color:var(--text2);line-height:1.75;max-width:680px;}
+.s-alt{background:var(--surface);}
 
-.btn-primary {
-  display:inline-flex; align-items:center; gap:8px;
-  background: linear-gradient(135deg, var(--blue), var(--accent));
-  color:#fff; text-decoration:none; padding:13px 26px;
-  border-radius:50px; font-weight:700; font-size:.93rem;
-  transition: all .3s; box-shadow: 0 8px 28px rgba(65,168,240,0.3);
-}
-.btn-primary:hover { transform:translateY(-3px); box-shadow:0 14px 38px rgba(65,168,240,0.45); }
-.btn-ghost {
-  display:inline-flex; align-items:center; gap:8px;
-  background:transparent; color:var(--accent);
-  border:1.5px solid rgba(65,168,240,0.4); text-decoration:none;
-  padding:12px 24px; border-radius:50px; font-weight:600; font-size:.93rem;
-  transition: all .3s;
-}
-.btn-ghost:hover { background:rgba(65,168,240,0.1); transform:translateY(-3px); }
+/* Two-col layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:48px;}
 
-section { padding: 90px 60px; }
-.section-inner { max-width:960px; margin:0 auto; }
-.section-label { font-size:.72rem; font-weight:700; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:10px; }
-.section-title { font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; margin-bottom:14px; line-height:1.2; }
-.section-desc { color:var(--grey); font-size:1rem; line-height:1.75; }
+/* Feature list */
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.feat-list li{display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--text2);line-height:1.6;}
+.feat-list li::before{content:'→';color:var(--lime);font-weight:700;flex-shrink:0;margin-top:1px;}
+.feat-list li strong{color:var(--text);}
 
-#about { background: var(--dark2); }
-.about-content { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
-.about-text p { color:var(--grey); line-height:1.8; margin-bottom:16px; font-size:.98rem; }
-.about-text p strong { color:var(--white); }
-.features-list { list-style:none; display:flex; flex-direction:column; gap:11px; margin-top:8px; }
-.features-list li { display:flex; align-items:flex-start; gap:10px; color:var(--grey); font-size:.9rem; line-height:1.5; }
-.features-list li::before { content:"→"; color:var(--accent); font-weight:700; flex-shrink:0; margin-top:1px; }
+/* Pipeline flow */
+.flow{display:flex;flex-direction:column;gap:2px;}
+.flow-step{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);transition:border-color .2s;}
+.flow-step:hover{border-color:var(--border2);}
+.flow-icon{font-size:1.2rem;flex-shrink:0;width:36px;text-align:center;}
+.flow-body h4{font-size:.85rem;font-weight:700;margin-bottom:2px;}
+.flow-body p{font-size:.75rem;color:var(--text2);line-height:1.35;}
+.flow-arrow{text-align:center;color:var(--text3);font-size:.9rem;padding:4px 0;}
 
-/* Pipeline RAG flow */
-.rag-flow { display:flex; flex-direction:column; gap:0; }
-.rag-step {
-  display:flex; align-items:center; gap:14px;
-  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
-  border-radius:14px; padding:16px 20px; backdrop-filter:blur(10px);
-}
-.rag-step .step-icon { font-size:1.4rem; flex-shrink:0; }
-.rag-step .step-body h4 { font-size:.88rem; font-weight:700; color:var(--white); margin-bottom:3px; }
-.rag-step .step-body p { font-size:.78rem; color:var(--grey); line-height:1.4; }
-.rag-arrow { text-align:center; color:rgba(65,168,240,0.4); font-size:1.2rem; padding:4px 0; }
+/* Stack — simple list, not card soup */
+.stack-table{display:flex;flex-direction:column;gap:0;margin-top:36px;border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.stack-row{display:flex;align-items:center;gap:24px;padding:18px 24px;border-bottom:1px solid var(--border);transition:background .2s;}
+.stack-row:last-child{border-bottom:none;}
+.stack-row:hover{background:var(--surface);}
+.stack-cat{font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text3);min-width:110px;flex-shrink:0;}
+.stack-items{display:flex;flex-wrap:wrap;gap:8px;}
+.stack-tag{font-size:.75rem;font-weight:600;color:var(--text2);}
+.stack-tag+.stack-tag::before{content:'·';margin-right:4px;color:var(--text3);}
 
-#stack { background: var(--dark); }
-.stack-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.stack-card {
-  background:var(--card-bg); border:1px solid rgba(65,168,240,0.15);
-  border-radius:20px; padding:26px; backdrop-filter:blur(10px); transition:all .3s;
-}
-.stack-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 18px 38px rgba(65,168,240,0.1); }
-.stack-card-icon { font-size:1.8rem; margin-bottom:12px; }
-.stack-card h3 { font-size:.95rem; font-weight:700; color:var(--white); margin-bottom:14px; }
-.tags { display:flex; flex-wrap:wrap; gap:7px; }
-.tag {
-  background:rgba(65,168,240,0.1); border:1px solid rgba(65,168,240,0.2);
-  border-radius:6px; padding:4px 10px; font-size:.73rem; color:var(--light-blue); font-weight:600;
-}
+/* Links section */
+.links-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;}
+.btn-lime{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#0D0D0D;font-weight:800;font-size:.9rem;padding:14px 28px;border-radius:50px;transition:all .2s;}
+.btn-lime:hover{opacity:.9;transform:translateY(-2px);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border2);color:var(--text2);font-weight:700;font-size:.9rem;padding:13px 24px;border-radius:50px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--text2);color:var(--text);}
 
-#screenshots { background: var(--dark2); }
-.screenshots-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px; }
-.screenshot-item { position:relative; border-radius:16px; overflow:hidden; cursor:pointer; }
-.screenshot-img { width:100%; height:100%; object-fit:cover; transition: transform .3s, filter .3s; border:1px solid rgba(65,168,240,0.15); border-radius:16px; }
-.screenshot-item:hover .screenshot-img { transform:scale(1.03); filter:brightness(1.06); }
-.placeholder-img {
-  background: linear-gradient(135deg, rgba(31,78,121,0.4), rgba(13,27,42,0.8));
-  display:flex; align-items:center; justify-content:center;
-  min-height:200px; border:1.5px dashed rgba(65,168,240,0.3); border-radius:16px;
-}
-.placeholder-label { font-size:.78rem; color:rgba(65,168,240,0.5); text-align:center; padding:16px; line-height:1.6; pointer-events:none; }
-.screenshots-note { margin-top:20px; font-size:.82rem; color:rgba(65,168,240,0.5); font-style:italic; }
+/* FOOTER */
+footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-weight:800;font-size:.9rem;}
+.footer-logo span{color:var(--lime);}
+.footer-back{font-size:.8rem;font-weight:600;color:var(--text2);transition:color .2s;}
+.footer-back:hover{color:var(--lime);}
 
-#links { background: var(--dark); }
+/* ANIM */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
 
-footer {
-  background:var(--dark2); border-top:1px solid rgba(65,168,240,0.1);
-  padding:28px 60px; display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:12px;
-}
-footer .logo { font-weight:800; color:var(--accent); font-size:1rem; }
-footer p { color:var(--grey); font-size:.83rem; }
-footer a { color:var(--accent); text-decoration:none; font-weight:600; font-size:.85rem; }
-footer a:hover { text-decoration:underline; }
-
-.fade-in { opacity:0; transform:translateY(28px); transition:opacity .65s ease, transform .65s ease; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
-
-@media(max-width:900px) {
-  nav { padding:14px 20px; }
-  section { padding:70px 24px; }
-  #hero { padding:110px 24px 70px; }
-  .about-content { grid-template-columns:1fr; gap:36px; }
-  .stack-grid { grid-template-columns:1fr 1fr; }
-  .screenshots-grid { grid-template-columns:1fr 1fr; }
-}
-@media(max-width:600px) {
-  .stack-grid { grid-template-columns:1fr; }
-  .screenshots-grid { grid-template-columns:1fr; }
-  footer { flex-direction:column; text-align:center; }
-}
+/* RESPONSIVE */
+@media(max-width:1024px){nav,#hero,.s-wrap,footer{padding-left:32px;padding-right:32px;}.metric-item{padding:36px 32px;}}
+@media(max-width:768px){nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}#hero{padding:0 24px 56px;}.s-wrap{padding:60px 24px;}.two-col{grid-template-columns:1fr;gap:40px;}.metrics-row{grid-template-columns:1fr;}.metric-item{border-right:none;border-bottom:1px solid var(--border);padding:28px 24px;}.metric-item:last-child{border-bottom:none;}footer{padding:20px 24px;}}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="../index.html" class="nav-logo">CT/</a>
-  <a href="../index.html#projects" class="nav-back">← Portfolio</a>
+  <a href="../index.html" class="nav-logo">CT<span>.</span></a>
+  <a href="../index.html#work" class="nav-back">← Portfolio</a>
 </nav>
 
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-inner fade-in">
-    <div class="proj-badge-hero">🧠 Recherche Sémantique · RAG · pgvector</div>
-    <h1><span>TSplus RAG</span> Supabase</h1>
-    <p class="hero-tagline">
-      Application de vectorisation et de recherche sémantique sur documents avec une architecture RAG (Retrieval-Augmented Generation) et pgvector hébergé sur Supabase.
-    </p>
-    <div class="hero-btns">
-      <a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="btn-primary">⭐ Voir sur GitHub</a>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-breadcrumb">Projet 04</div>
+    <h1 class="hero-title">TSplus
+RAG</h1>
+    <div class="hero-badges">
+      <span class="bd bd-ia">🤖 IA</span><span class="bd bd-ia">RAG · Supabase</span>
+      <span class="bd bd-live">● Live</span>
     </div>
+    <p class="hero-desc">Architecture RAG complète pour vectorisation et recherche sémantique sur documents internes. Déployé en production pour TSplus — les documents sont transformés en vecteurs, stockés dans pgvector, et requêtables par similarité sémantique.</p>
   </div>
 </section>
 
-<section id="about">
-  <div class="section-inner">
-    <div class="about-content fade-in">
-      <div class="about-text">
-        <p class="section-label">À propos du projet</p>
-        <h2 class="section-title">Recherche sémantique sur documents</h2>
-
-        <!-- 📝 PLACEHOLDER : remplace ces paragraphes par une description détaillée -->
-        <p>TSplus RAG Supabase est une application de <strong>vectorisation de documents</strong> et de <strong>recherche sémantique</strong> basée sur une architecture RAG (Retrieval-Augmented Generation). Les documents sont transformés en vecteurs et stockés dans <strong>pgvector sur Supabase</strong>.</p>
-
-        <!-- 📝 PLACEHOLDER : contexte, cas d'usage, décisions architecturales -->
-        <p>[ Description détaillée à compléter — cas d'usage concret, type de documents traités, modèle d'embedding utilisé, comment fonctionne la requête sémantique, performances observées. ]</p>
-
-        <ul class="features-list">
-          <li>Vectorisation de documents via un modèle d'embedding</li>
-          <li>Stockage vectoriel avec pgvector sur Supabase</li>
-          <li>Recherche sémantique par similarité cosinus</li>
-          <li>Architecture RAG pour la génération de réponses contextualisées</li>
-          <!-- 📝 PLACEHOLDER : complète avec les vraies fonctionnalités -->
-          <li>[ Fonctionnalité à compléter ]</li>
-        </ul>
+<section id="metrics">
+  <div class="metrics-row">
+      <div class="metric-item fade-up">
+        <span class="metric-num">RAG</span>
+        <span class="metric-lbl">architecture
+complète</span>
       </div>
+      <div class="metric-item fade-up">
+        <span class="metric-num">pgvector</span>
+        <span class="metric-lbl">recherche
+sémantique</span>
+      </div>
+      <div class="metric-item fade-up">
+        <span class="metric-num">∞</span>
+        <span class="metric-lbl">documents
+indexables</span>
+      </div></div>
+</section>
 
-      <!-- Pipeline RAG -->
-      <div class="rag-flow">
-        <div class="rag-step">
-          <span class="step-icon">📄</span>
-          <div class="step-body">
-            <h4>Ingestion du document</h4>
+<div class="s-wrap s-alt fade-up" id="about">
+  <p class="s-eyebrow">Projet</p>
+  <div class="two-col">
+    <div>
+      <h2 class="s-title">Ce que ça fait</h2>
+      <ul class="feat-list"><li><strong>Ingestion flexible</strong> — tout type de document découpé en chunks indexables</li><li><strong>Embeddings OpenAI</strong> — vectorisation via API, stockage permanent dans pgvector</li><li><strong>Recherche sémantique</strong> — similarité cosinus, pas de keyword matching</li><li><strong>Architecture RAG</strong> — le LLM reçoit le contexte pertinent avant de répondre</li><li><strong>Supabase infra</strong> — PostgreSQL + pgvector, scalable, pas de vector DB tiers</li></ul>
+    </div>
+    <div>
+      <p class="s-eyebrow">Pipeline</p>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-icon">📄</span>
+          <div class="flow-body">
+            <h4>Ingestion document</h4>
             <p>Chargement et découpage en chunks</p>
           </div>
-        </div>
-        <div class="rag-arrow">↓</div>
-        <div class="rag-step">
-          <span class="step-icon">🔢</span>
-          <div class="step-body">
-            <h4>Vectorisation (Embedding)</h4>
-            <p>Transformation en vecteurs numériques</p>
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">🔢</span>
+          <div class="flow-body">
+            <h4>Vectorisation</h4>
+            <p>Transformation en embeddings numériques</p>
           </div>
-        </div>
-        <div class="rag-arrow">↓</div>
-        <div class="rag-step">
-          <span class="step-icon">🗄️</span>
-          <div class="step-body">
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">🗄️</span>
+          <div class="flow-body">
             <h4>Stockage pgvector</h4>
-            <p>Indexation dans Supabase</p>
+            <p>Indexation dans Supabase PostgreSQL</p>
           </div>
-        </div>
-        <div class="rag-arrow">↓</div>
-        <div class="rag-step">
-          <span class="step-icon">🔍</span>
-          <div class="step-body">
-            <h4>Recherche sémantique</h4>
-            <p>Similarité cosinus sur la requête</p>
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">🔍</span>
+          <div class="flow-body">
+            <h4>Requête sémantique</h4>
+            <p>Similarité cosinus sur la requête utilisateur</p>
           </div>
-        </div>
-        <div class="rag-arrow">↓</div>
-        <div class="rag-step">
-          <span class="step-icon">💬</span>
-          <div class="step-body">
-            <h4>Génération de réponse</h4>
-            <p>LLM + contexte récupéré</p>
+        </div><div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <span class="flow-icon">💬</span>
+          <div class="flow-body">
+            <h4>Génération réponse</h4>
+            <p>LLM + contexte récupéré (RAG)</p>
           </div>
-        </div>
-      </div>
+        </div></div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="stack">
-  <div class="section-inner">
-    <p class="section-label">Stack technique</p>
-    <h2 class="section-title">Technologies utilisées</h2>
-    <p class="section-desc" style="margin-bottom:36px;">Backend TypeScript avec Supabase comme infrastructure vectorielle et un LLM pour la génération de réponses contextualisées.</p>
-    <div class="stack-grid fade-in">
-      <div class="stack-card">
-        <div class="stack-card-icon">⚙️</div>
-        <h3>Back-end</h3>
-        <div class="tags">
-          <span class="tag">TypeScript</span>
-          <span class="tag">Node.js</span>
-        </div>
-      </div>
-      <div class="stack-card">
-        <div class="stack-card-icon">🗄️</div>
-        <h3>Base de données vectorielle</h3>
-        <div class="tags">
-          <span class="tag">Supabase</span>
-          <span class="tag">pgvector</span>
-          <span class="tag">PostgreSQL</span>
-        </div>
-      </div>
-      <div class="stack-card">
-        <div class="stack-card-icon">🧠</div>
-        <h3>Architecture IA</h3>
-        <div class="tags">
-          <span class="tag">RAG</span>
-          <span class="tag">OpenAI API</span>
-          <span class="tag">Embeddings</span>
-          <!-- 📝 PLACEHOLDER : ajuste les outils IA réellement utilisés -->
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="s-wrap fade-up" id="stack">
+  <p class="s-eyebrow">Stack</p>
+  <h2 class="s-title">Technologies</h2>
+  <div class="stack-table"><div class="stack-row"><span class="stack-cat">Back-end</span><div class="stack-items"><span class="stack-tag">TypeScript</span><span class="stack-tag">Node.js</span></div></div><div class="stack-row"><span class="stack-cat">Base vectorielle</span><div class="stack-items"><span class="stack-tag">Supabase</span><span class="stack-tag">pgvector</span><span class="stack-tag">PostgreSQL</span></div></div><div class="stack-row"><span class="stack-cat">IA</span><div class="stack-items"><span class="stack-tag">OpenAI Embeddings</span><span class="stack-tag">RAG architecture</span><span class="stack-tag">Prompt Engineering</span></div></div></div>
+</div>
 
-<section id="screenshots">
-  <div class="section-inner">
-    <p class="section-label">Captures d'écran</p>
-    <h2 class="section-title">Le projet en images</h2>
-    <p class="section-desc">Aperçu de l'interface et des résultats de recherche sémantique.</p>
 
-    <div class="screenshots-grid fade-in">
-      <!-- 📸 PLACEHOLDER screenshot 1 — nommer: tsplus-screen-1.jpg -->
-      <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 1<br>tsplus-screen-1.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
-      </div>
-      <!-- 📸 PLACEHOLDER screenshot 2 — nommer: tsplus-screen-2.jpg -->
-      <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 2<br>tsplus-screen-2.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
-      </div>
-      <!-- 📸 PLACEHOLDER screenshot 3 — nommer: tsplus-screen-3.jpg -->
-      <div class="screenshot-item">
-        <div class="placeholder-img">
-          <span class="placeholder-label">📸 Screenshot 3<br>tsplus-screen-3.jpg<br><small>Déposer dans projects/screenshots/</small></span>
-        </div>
-      </div>
-    </div>
-    <p class="screenshots-note">💡 Images à insérer : remplace les placeholders par des balises &lt;img src="./screenshots/tsplus-screen-N.jpg"&gt;</p>
-  </div>
-</section>
 
-<section id="links">
-  <div class="section-inner fade-in">
-    <p class="section-label">Liens</p>
-    <h2 class="section-title">Accéder au projet</h2>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;">
-      <a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="btn-primary">⭐ Voir sur GitHub</a>
-    </div>
-  </div>
-</section>
+<div class="s-wrap s-alt fade-up" id="links">
+  <p class="s-eyebrow">Liens</p>
+  <div class="links-row"><a href="https://github.com/techerchristopher-dotcom/tsplus-rag-supabase" target="_blank" class="btn-lime">⭐ Voir sur GitHub</a><a href="../index.html#contact"  class="btn-outline">✉️ Me contacter</a></div>
+</div>
 
 <footer>
-  <div class="logo">Christopher TECHER</div>
-  <p>Fullstack Developer · IA · Automatisation</p>
-  <a href="../index.html">← Retour au portfolio</a>
+  <span class="footer-logo">CT<span>.</span></span>
+  <a href="../index.html#work" class="footer-back">← Retour au portfolio</a>
 </footer>
 
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  nav.style.background = window.scrollY > 50 ? 'rgba(13,27,42,0.98)' : 'rgba(13,27,42,0.9)';
-});
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
+const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }), {threshold:.08,rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
