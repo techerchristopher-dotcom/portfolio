@@ -259,29 +259,36 @@ nav.scrolled { padding:14px 64px; }
 }
 .section-cta-link:hover { gap:10px; }
 
-/* ─── EXPERTISES ──────────────────────────────── */
+/* ─── EXPERTISES / OFFRES ─────────────────────── */
 #expertises { background:var(--surface); border-top:1px solid var(--border); }
 .expertises-grid {
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
 }
 .expertise-card {
-  padding:28px 24px; border-radius:16px;
+  padding:32px 28px; border-radius:16px;
   background:var(--bg); border:1px solid var(--border);
   transition:border-color .2s, transform .2s;
   display:flex; flex-direction:column;
 }
 .expertise-card:hover { border-color:var(--lime-b); transform:translateY(-2px); }
-.expertise-num { font-size:.6rem; font-weight:800; letter-spacing:2px; color:var(--text3); margin-bottom:12px; }
-.expertise-title { font-size:1.05rem; font-weight:800; margin-bottom:8px; }
-.expertise-hook { font-size:.82rem; color:var(--text2); line-height:1.65; flex:1; margin-bottom:16px; }
-.expertise-kpi {
-  font-size:.75rem; font-weight:800; color:var(--lime);
-  margin-bottom:16px; padding:8px 12px;
-  background:var(--lime-dim); border-radius:8px; display:inline-block;
+.expertise-emoji { font-size:2rem; line-height:1; display:block; margin-bottom:14px; }
+.expertise-title { font-size:1.1rem; font-weight:800; margin-bottom:10px; letter-spacing:-.02em; }
+.expertise-hook { font-size:.85rem; color:var(--text2); line-height:1.65; flex:1; margin-bottom:18px; }
+.expertise-subs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.expertise-sub {
+  font-size:.72rem; font-weight:700; color:var(--text2);
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; padding:4px 10px;
+}
+.expertise-proofs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+.expertise-proof {
+  font-size:.68rem; font-weight:800; color:var(--lime);
+  background:var(--lime-dim); border-radius:6px; padding:4px 10px;
 }
 .expertise-link {
-  font-size:.82rem; font-weight:800; color:var(--text);
+  font-size:.85rem; font-weight:800; color:var(--text);
   display:flex; align-items:center; gap:6px; transition:gap .2s, color .2s;
+  margin-top:auto;
 }
 .expertise-card:hover .expertise-link { color:var(--lime); gap:10px; }
 
@@ -543,6 +550,7 @@ footer {
   .trust-bar { padding:20px 32px; }
   .section-pad, #work, #method, #ocean-indien, #about, #contact { padding-left:32px; padding-right:32px; }
   .objectifs-grid { grid-template-columns:repeat(2,1fr); }
+  .expertises-grid { grid-template-columns:1fr; }
   .geo-grid { grid-template-columns:repeat(2,1fr); }
   .approach-wrap { grid-template-columns:1fr; }
   .approach-left { border-right:none; border-bottom:1px solid var(--border); }
@@ -558,6 +566,7 @@ footer {
   .trust-bar { padding:16px 24px; }
   .cases-grid { grid-template-columns:1fr; }
   .objectifs-grid { grid-template-columns:1fr; }
+  .expertises-grid { grid-template-columns:1fr; }
   .geo-grid { grid-template-columns:1fr; }
   .approach-left { padding:32px 24px; }
   .principle { padding:24px; }
@@ -708,54 +717,67 @@ footer {
   </div>
 </section>
 
-<!-- ── EXPERTISES (comment j'y arrive) ──────────── -->
+<!-- ── OFFRES (comment je vous aide) ──────────────── -->
 <section id="expertises" class="section-pad">
-  <p class="s-eyebrow">Comment j'y arrive</p>
-  <h2 class="section-h2">Comment j'atteins ces objectifs</h2>
-  <p class="section-lead">Derrière chaque objectif, je combine automatisation, IA, outils métier et expérience terrain.</p>
+  <p class="s-eyebrow">Mes offres</p>
+  <h2 class="section-h2">Comment je vous aide</h2>
+  <p class="section-lead">Trois offres complémentaires pour automatiser, digitaliser et développer votre activité.</p>
   <div class="expertises-grid">
+
     <a href="expertise/automatisation-commerciale-ia.html" class="expertise-card fade-up">
-      <span class="expertise-num">01</span>
-      <h3 class="expertise-title">Automatisation commerciale</h3>
-      <p class="expertise-hook">Post-call, prospection B2B, injection CRM — de l'appel au lead qualifié sans saisie manuelle.</p>
-      <span class="expertise-kpi">&lt;10s post-call · 1&nbsp;200/sem</span>
-      <span class="expertise-link">En savoir plus →</span>
-    </a>
-    <a href="expertise/automatisation-rh-ia.html" class="expertise-card fade-up">
-      <span class="expertise-num">02</span>
-      <h3 class="expertise-title">Automatisation RH</h3>
-      <p class="expertise-hook">Tri CV, scoring, classification — pipeline candidatures automatisé.</p>
-      <span class="expertise-kpi">35h/sem · −40&nbsp;% délai</span>
-      <span class="expertise-link">En savoir plus →</span>
-    </a>
-    <a href="expertise/automatisation-commerciale-ia.html" class="expertise-card fade-up">
-      <span class="expertise-num">03</span>
-      <h3 class="expertise-title">Agents IA sur mesure</h3>
-      <p class="expertise-hook">Vocaux, analyse documents, qualification — agents déployés chez clients réels.</p>
-      <span class="expertise-kpi">0 intervention humaine</span>
-      <span class="expertise-link">En savoir plus →</span>
-    </a>
-    <a href="rentanoo.html" class="expertise-card fade-up">
-      <span class="expertise-num">04</span>
-      <h3 class="expertise-title">Développement SaaS</h3>
-      <p class="expertise-hook">MVP à produit live — réservation, CRM, paiement Stripe, de A à Z.</p>
-      <span class="expertise-kpi">rentanoo.com live</span>
-      <span class="expertise-link">Voir Rentanoo →</span>
-    </a>
-    <a href="expertise/expert-n8n.html" class="expertise-card fade-up">
-      <span class="expertise-num">05</span>
-      <h3 class="expertise-title">n8n &amp; Make.com</h3>
-      <p class="expertise-hook">Orchestration workflows, intégrations API, maintenance — MAKE certifié.</p>
-      <span class="expertise-kpi">8 nœuds natifs · 6+ systèmes</span>
-      <span class="expertise-link">En savoir plus →</span>
-    </a>
-    <a href="expertise/marketing-visuel-ia.html" class="expertise-card fade-up">
-      <span class="expertise-num">06</span>
-      <h3 class="expertise-title">Marketing visuel assisté par IA</h3>
-      <p class="expertise-hook">Création de contenus marketing, identités visuelles et supports de communication pour renforcer votre visibilité et attirer davantage de prospects.</p>
-      <span class="expertise-kpi">Visibilité · crédibilité · acquisition</span>
+      <span class="expertise-emoji" aria-hidden="true">🤖</span>
+      <h3 class="expertise-title">Automatisation &amp; Agents IA</h3>
+      <p class="expertise-hook">Je connecte vos outils, j'automatise vos process répétitifs et je déploie des agents IA qui travaillent à votre place — 24h/24.</p>
+      <div class="expertise-subs">
+        <span class="expertise-sub">Commercial</span>
+        <span class="expertise-sub">RH</span>
+        <span class="expertise-sub">Administratif</span>
+        <span class="expertise-sub">Support client</span>
+      </div>
+      <div class="expertise-proofs">
+        <span class="expertise-proof">Maestro</span>
+        <span class="expertise-proof">Rebecca</span>
+        <span class="expertise-proof">CEFORA</span>
+      </div>
       <span class="expertise-link">Découvrir →</span>
     </a>
+
+    <a href="rentanoo.html" class="expertise-card fade-up">
+      <span class="expertise-emoji" aria-hidden="true">💻</span>
+      <h3 class="expertise-title">Logiciels &amp; SaaS sur mesure</h3>
+      <p class="expertise-hook">Je conçois et développe des plateformes métier, CRM, applications web et outils de réservation — clés en main, en production.</p>
+      <div class="expertise-subs">
+        <span class="expertise-sub">Plateforme métier</span>
+        <span class="expertise-sub">CRM</span>
+        <span class="expertise-sub">Réservation</span>
+        <span class="expertise-sub">Application web</span>
+      </div>
+      <div class="expertise-proofs">
+        <span class="expertise-proof">Rentanoo</span>
+        <span class="expertise-proof">Tukme</span>
+        <span class="expertise-proof">AlloResa</span>
+      </div>
+      <span class="expertise-link">Voir Rentanoo →</span>
+    </a>
+
+    <a href="expertise/marketing-visuel-ia.html" class="expertise-card fade-up">
+      <span class="expertise-emoji" aria-hidden="true">🎨</span>
+      <h3 class="expertise-title">Marketing &amp; Visibilité</h3>
+      <p class="expertise-hook">Je crée votre identité visuelle, vos contenus réseaux sociaux, vos publicités et vos vidéos pour rendre votre entreprise visible et crédible.</p>
+      <div class="expertise-subs">
+        <span class="expertise-sub">Logo</span>
+        <span class="expertise-sub">Réseaux sociaux</span>
+        <span class="expertise-sub">Publicité</span>
+        <span class="expertise-sub">Vidéo</span>
+      </div>
+      <div class="expertise-proofs">
+        <span class="expertise-proof">Rentanoo</span>
+        <span class="expertise-proof">Next Level</span>
+        <span class="expertise-proof">Supports marketing</span>
+      </div>
+      <span class="expertise-link">Découvrir →</span>
+    </a>
+
   </div>
 </section>
 
