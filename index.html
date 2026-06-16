@@ -285,33 +285,6 @@ nav.scrolled { padding:14px 64px; }
 }
 .expertise-card:hover .expertise-link { color:var(--lime); gap:10px; }
 
-/* ─── NUMBERS STRIP (6 KPI) ───────────────────── */
-#numbers {
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:0;
-}
-.numbers-row {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:1px; background:var(--border);
-}
-.num-item {
-  padding:48px 40px;
-  background:var(--surface);
-  transition:background .25s;
-}
-.num-item:hover { background:rgba(200,252,0,0.02); }
-.num-big {
-  display:block;
-  font-size:clamp(2.4rem, 5vw, 3.8rem);
-  font-weight:800; letter-spacing:-.05em; line-height:1;
-  color:var(--text); margin-bottom:10px;
-}
-.num-big.hi { color:var(--lime); }
-.num-lbl { font-size:.8rem; color:var(--text2); font-weight:500; line-height:1.5; }
-.num-src { display:block; font-size:.68rem; color:var(--text3); margin-top:4px; font-weight:600; }
-
 /* ─── WORK / CASES ────────────────────────────── */
 #work { padding:100px 64px; }
 .cases-grid {
@@ -583,8 +556,6 @@ footer {
   #hero { padding:88px 24px 56px; min-height:auto; }
   .section-pad, #work, #method, #ocean-indien, #about, #contact { padding:72px 24px; }
   .trust-bar { padding:16px 24px; }
-  .numbers-row { grid-template-columns:repeat(2,1fr); }
-  .num-item { padding:32px 24px; }
   .cases-grid { grid-template-columns:1fr; }
   .objectifs-grid { grid-template-columns:1fr; }
   .geo-grid { grid-template-columns:1fr; }
@@ -596,7 +567,6 @@ footer {
 }
 @media (max-width:480px) {
   .hero-h1 { letter-spacing:-.03em; }
-  .numbers-row { grid-template-columns:1fr; }
   .contact-h { font-size:clamp(2.2rem, 11vw, 3.5rem); }
   .hero-kpis { gap:8px; }
   .hero-kpi { min-width:calc(50% - 4px); flex:1; }
@@ -786,36 +756,6 @@ footer {
       <span class="expertise-kpi">Visibilité · crédibilité · acquisition</span>
       <span class="expertise-link">Découvrir →</span>
     </a>
-  </div>
-</section>
-
-<!-- ── KPI STRIP (6) ────────────────────────────── -->
-<section id="numbers">
-  <div class="numbers-row">
-    <div class="num-item fade-up">
-      <span class="num-big hi">35h</span>
-      <span class="num-lbl">économisées / semaine<span class="num-src">→ Agent Rebecca</span></span>
-    </div>
-    <div class="num-item fade-up">
-      <span class="num-big hi">&lt;10s</span>
-      <span class="num-lbl">post-call automatisé<span class="num-src">→ Maestro AI</span></span>
-    </div>
-    <div class="num-item fade-up">
-      <span class="num-big">1&nbsp;200</span>
-      <span class="num-lbl">entreprises / semaine<span class="num-src">→ Prospection CEFORA</span></span>
-    </div>
-    <div class="num-item fade-up">
-      <span class="num-big">2 ETP</span>
-      <span class="num-lbl">automatisés<span class="num-src">→ Workflows N8N + MAKE</span></span>
-    </div>
-    <div class="num-item fade-up">
-      <span class="num-big">15+</span>
-      <span class="num-lbl">ans terrain business<span class="num-src">→ SUNTORY · CEFORA · PME</span></span>
-    </div>
-    <div class="num-item fade-up">
-      <span class="num-big">6+</span>
-      <span class="num-lbl">systèmes en production<span class="num-src">→ Écosystème complet</span></span>
-    </div>
   </div>
 </section>
 
