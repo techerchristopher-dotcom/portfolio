@@ -211,7 +211,11 @@ nav.scrolled { padding:14px 64px; }
   border-bottom:1px solid var(--border);
 }
 .objectifs-grid {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+  display:grid; grid-template-columns:repeat(5,1fr); gap:16px;
+}
+.objectif-thumb--art {
+  background:linear-gradient(135deg, rgba(200,252,0,0.06) 0%, rgba(200,252,0,0.02) 100%);
+  display:flex; align-items:center; justify-content:center; font-size:2.8rem;
 }
 .objectif-card {
   padding:28px 24px; border-radius:16px;
@@ -721,6 +725,14 @@ footer {
       <h3 class="objectif-title">Digitaliser mon activité</h3>
       <p class="objectif-desc">Un vrai outil métier, sans recruter une équipe IT.</p>
       <span class="objectif-kpi">rentanoo.com live</span>
+      <span class="objectif-link">Voir le parcours →</span>
+    </a>
+    <a href="expertise/marketing-visuel-ia.html" class="objectif-card fade-up">
+      <div class="objectif-thumb objectif-thumb--art" aria-hidden="true">🎨</div>
+      <span class="objectif-emoji" aria-hidden="true">🎨</span>
+      <h3 class="objectif-title">Créer mon image et mes contenus</h3>
+      <p class="objectif-desc">Logo, visuels, réseaux sociaux et vidéos pour rendre mon entreprise plus professionnelle et attirer plus de clients.</p>
+      <span class="objectif-kpi">Image pro · contenus · vidéos</span>
       <span class="objectif-link">Voir le parcours →</span>
     </a>
   </div>
