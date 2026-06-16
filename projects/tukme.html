@@ -110,13 +110,20 @@ footer{padding:24px 64px;border-top:1px solid var(--border);display:flex;align-i
 .footer-back{font-size:.8rem;font-weight:600;color:var(--text2);transition:color .2s;}
 .footer-back:hover{color:var(--lime);}
 
+/* Gallery */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px;}
+.gallery-item{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--surface2);transition:border-color .2s,transform .2s;}
+.gallery-item:hover{border-color:var(--lime-b);transform:translateY(-2px);}
+.gallery-item img{width:100%;height:auto;display:block;vertical-align:middle;}
+.gallery-cap{padding:10px 14px;font-size:.72rem;color:var(--text2);font-weight:600;border-top:1px solid var(--border);}
+
 /* ANIM */
 .fade-up{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
 .fade-up.visible{opacity:1;transform:translateY(0);}
 
 /* RESPONSIVE */
 @media(max-width:1024px){nav,#hero,.s-wrap,footer{padding-left:32px;padding-right:32px;}.metric-item{padding:36px 32px;}}
-@media(max-width:768px){nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}#hero{padding:0 24px 56px;}.s-wrap{padding:60px 24px;}.two-col{grid-template-columns:1fr;gap:40px;}.metrics-row{grid-template-columns:1fr;}.metric-item{border-right:none;border-bottom:1px solid var(--border);padding:28px 24px;}.metric-item:last-child{border-bottom:none;}footer{padding:20px 24px;}}
+@media(max-width:768px){nav{padding:16px 24px;}nav.scrolled{padding:12px 24px;}#hero{padding:0 24px 56px;}.s-wrap{padding:60px 24px;}.two-col{grid-template-columns:1fr;gap:40px;}.metrics-row{grid-template-columns:1fr;}.metric-item{border-right:none;border-bottom:1px solid var(--border);padding:28px 24px;}.metric-item:last-child{border-bottom:none;}footer{padding:20px 24px;}.gallery-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -208,7 +215,35 @@ in-app</span>
   </div>
 </div>
 
-<div class="s-wrap fade-up" id="stack">
+<div class="s-wrap fade-up" id="screenshots">
+  <p class="s-eyebrow">Interface</p>
+  <h2 class="s-title">Captures d'écran · application mobile</h2>
+  <p class="s-desc">Écrans réels de l'app passager — géolocalisation, commande et suivi de course en temps réel.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="./screenshots/tukme-screen-1.jpeg" alt="Tukme — écran d'accueil passager" width="390" height="844" loading="lazy">
+      <div class="gallery-cap">Accueil · commander un tuk-tuk</div>
+    </div>
+    <div class="gallery-item">
+      <img src="./screenshots/tukme-screen-2.jpg" alt="Tukme — sélection destination" width="390" height="844" loading="lazy">
+      <div class="gallery-cap">Destination · carte interactive</div>
+    </div>
+    <div class="gallery-item">
+      <img src="./screenshots/tukme-screen-3.jpg" alt="Tukme — suivi course en cours" width="390" height="844" loading="lazy">
+      <div class="gallery-cap">Course en cours · temps réel</div>
+    </div>
+    <div class="gallery-item">
+      <img src="./screenshots/tukme-screen-4.jpg" alt="Tukme — confirmation et paiement" width="390" height="844" loading="lazy">
+      <div class="gallery-cap">Confirmation · paiement Stripe</div>
+    </div>
+    <div class="gallery-item">
+      <img src="./screenshots/tukme-screen-6.jpg" alt="Tukme — profil chauffeur" width="390" height="844" loading="lazy">
+      <div class="gallery-cap">App chauffeur · gestion courses</div>
+    </div>
+  </div>
+</div>
+
+<div class="s-wrap s-alt fade-up" id="stack">
   <p class="s-eyebrow">Stack</p>
   <h2 class="s-title">Technologies</h2>
   <div class="stack-table"><div class="stack-row"><span class="stack-cat">Mobile</span><div class="stack-items"><span class="stack-tag">React Native</span><span class="stack-tag">Expo</span><span class="stack-tag">TypeScript</span></div></div><div class="stack-row"><span class="stack-cat">Back-end</span><div class="stack-items"><span class="stack-tag">Supabase</span><span class="stack-tag">Supabase Realtime</span><span class="stack-tag">Edge Functions (Deno)</span></div></div><div class="stack-row"><span class="stack-cat">Paiement</span><div class="stack-items"><span class="stack-tag">Stripe PaymentSheet</span></div></div><div class="stack-row"><span class="stack-cat">Géoloc</span><div class="stack-items"><span class="stack-tag">Google Maps API</span><span class="stack-tag">Routes API</span></div></div><div class="stack-row"><span class="stack-cat">Admin</span><div class="stack-items"><span class="stack-tag">Next.js</span></div></div></div>

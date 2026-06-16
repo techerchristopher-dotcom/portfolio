@@ -224,6 +224,15 @@ nav.scrolled { padding:14px 64px; }
   border-color:var(--lime-b); background:var(--surface2);
   transform:translateY(-3px);
 }
+.objectif-thumb {
+  width:100%; aspect-ratio:16/10; border-radius:10px; overflow:hidden;
+  margin-bottom:16px; border:1px solid var(--border); background:var(--bg);
+}
+.objectif-thumb img {
+  width:100%; height:100%; object-fit:cover; object-position:top center;
+  display:block; transition:transform .35s ease;
+}
+.objectif-card:hover .objectif-thumb img { transform:scale(1.04); }
 .objectif-emoji { font-size:1.75rem; margin-bottom:14px; line-height:1; }
 .objectif-title { font-size:1.05rem; font-weight:800; margin-bottom:10px; line-height:1.3; }
 .objectif-desc { font-size:.82rem; color:var(--text2); line-height:1.65; flex:1; margin-bottom:16px; }
@@ -311,6 +320,25 @@ nav.scrolled { padding:14px 64px; }
   display:flex; flex-direction:column;
 }
 .case-card:hover { border-color:var(--lime-b); }
+.case-thumb {
+  width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden;
+  margin-bottom:18px; border:1px solid var(--border); background:var(--bg);
+}
+.case-thumb img {
+  width:100%; height:100%; object-fit:cover; object-position:top center; display:block;
+}
+.case-thumb-kpi {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:linear-gradient(135deg, rgba(200,252,0,0.06) 0%, var(--bg) 100%);
+  aspect-ratio:16/9;
+}
+.case-thumb-num {
+  font-size:clamp(2rem, 5vw, 3rem); font-weight:800; letter-spacing:-.04em;
+  color:var(--lime); line-height:1;
+}
+.case-thumb-lbl {
+  font-size:.75rem; color:var(--text2); font-weight:600; margin-top:8px; text-align:center;
+}
 .case-badges { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
 .case-title {
   font-size:clamp(1.4rem, 2.5vw, 1.9rem);
@@ -656,6 +684,9 @@ footer {
   <p class="section-lead">Choisissez votre situation — je vous montre les solutions, les preuves et le chemin le plus rapide pour avancer.</p>
   <div class="objectifs-grid">
     <a href="objectifs/generer-plus-de-prospects.html" class="objectif-card fade-up">
+      <div class="objectif-thumb">
+        <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — catalogue en ligne" width="640" height="400" loading="lazy">
+      </div>
       <span class="objectif-emoji" aria-hidden="true">🚀</span>
       <h3 class="objectif-title">Générer plus de prospects</h3>
       <p class="objectif-desc">Plus de visibilité, plus de demandes, sans recruter.</p>
@@ -663,6 +694,9 @@ footer {
       <span class="objectif-link">Voir le parcours →</span>
     </a>
     <a href="objectifs/vendre-plus-efficacement.html" class="objectif-card fade-up">
+      <div class="objectif-thumb">
+        <img src="assets/maestro/maestro-workflow-preview.png" alt="Maestro AI — workflow post-call" width="640" height="400" loading="lazy">
+      </div>
       <span class="objectif-emoji" aria-hidden="true">📈</span>
       <h3 class="objectif-title">Vendre plus efficacement</h3>
       <p class="objectif-desc">Même équipe, plus de deals — moins d'administratif.</p>
@@ -670,6 +704,9 @@ footer {
       <span class="objectif-link">Voir le parcours →</span>
     </a>
     <a href="objectifs/liberer-mes-equipes.html" class="objectif-card fade-up">
+      <div class="objectif-thumb">
+        <img src="assets/rebecca/rebecca-rapport-preview.png" alt="Agent Rebecca — rapport candidat IA" width="640" height="400" loading="lazy">
+      </div>
       <span class="objectif-emoji" aria-hidden="true">👥</span>
       <h3 class="objectif-title">Libérer mes équipes</h3>
       <p class="objectif-desc">Récupérer des heures perdues sur les tâches répétitives.</p>
@@ -677,6 +714,9 @@ footer {
       <span class="objectif-link">Voir le parcours →</span>
     </a>
     <a href="objectifs/digitaliser-mon-activite.html" class="objectif-card fade-up">
+      <div class="objectif-thumb">
+        <img src="assets/rentanoo/03-vehicle-detail-display.png" alt="Rentanoo — fiche véhicule SaaS" width="640" height="400" loading="lazy">
+      </div>
       <span class="objectif-emoji" aria-hidden="true">💻</span>
       <h3 class="objectif-title">Digitaliser mon activité</h3>
       <p class="objectif-desc">Un vrai outil métier, sans recruter une équipe IT.</p>
@@ -768,6 +808,9 @@ footer {
 
   <div class="cases-grid">
     <article class="case-card fade-up">
+      <div class="case-thumb">
+        <img src="assets/maestro/maestro-workflow-preview.png" alt="Maestro AI — workflow post-call n8n" width="800" height="450" loading="lazy">
+      </div>
       <div class="case-badges">
         <span class="bd bd-live">● Live</span>
         <span class="bd bd-ia">🤖 Automatisation commerciale</span>
@@ -787,6 +830,9 @@ footer {
     </article>
 
     <article class="case-card fade-up">
+      <div class="case-thumb">
+        <img src="assets/rebecca/rebecca-rapport-preview.png" alt="Agent Rebecca — analyse CV automatisée" width="800" height="450" loading="lazy">
+      </div>
       <div class="case-badges">
         <span class="bd bd-live">● Live</span>
         <span class="bd bd-ia">🤖 Automatisation RH</span>
@@ -805,6 +851,10 @@ footer {
     </article>
 
     <article class="case-card fade-up">
+      <div class="case-thumb case-thumb-kpi" aria-label="1 200 entreprises contactées par semaine">
+        <span class="case-thumb-num">1&nbsp;200</span>
+        <span class="case-thumb-lbl">entreprises / semaine · CEFORA</span>
+      </div>
       <div class="case-badges">
         <span class="bd bd-live">● Live</span>
         <span class="bd bd-b2b">📈 Prospection B2B</span>
@@ -823,6 +873,9 @@ footer {
     </article>
 
     <article class="case-card fade-up">
+      <div class="case-thumb">
+        <img src="assets/rentanoo/01-catalog-search-display.png" alt="Rentanoo — plateforme de location en ligne" width="800" height="450" loading="lazy">
+      </div>
       <div class="case-badges">
         <span class="bd bd-live">● Live</span>
         <span class="bd bd-saas">📦 SaaS</span>
